@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 // eslint-disable-next-line import/extensions
 import Qna from './components/QnA/QnA.jsx';
