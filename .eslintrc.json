@@ -8,11 +8,9 @@
     "extends": [
         "eslint:recommended",
         "plugin:import/errors",
-        "plugin:react/jsx-runtime",
+        "plugin:react/recommended",
         "plugin:jsx-a11y/recommended",
-        "airbnb",
-        "react-app",
-        "react-app/jest"
+        "airbnb"
     ],
     "overrides": [
     ],
@@ -33,6 +31,7 @@
             "version": "detect"
         }
     },
+    "ignorePatterns": ["bundle.js"],
     "rules": {
         "react/prop-types": 0,
         "indent": ["error", 2],
