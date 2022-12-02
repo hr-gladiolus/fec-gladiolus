@@ -4,6 +4,7 @@ import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import Example from './Example';
 
+// DOCS: https://testing-library.com/docs/react-testing-library/intro/
 describe('Example', () => {
   // `async` functions are a way to use promises without `.then()`
   it('renders the component correctly', () => {
