@@ -16,7 +16,7 @@
     "start": "webpack --mode=development",
     "build": "webpack --mode=production",
     "dev": "webpack serve --open",
-    "test": "npx jest",
+    "test": "jest",
     "prepare": "husky install",
     "server": "nodemon server/index.js"
   },

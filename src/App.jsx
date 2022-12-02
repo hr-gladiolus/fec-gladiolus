@@ -1,4 +1,8 @@
 import React from 'react';
+// eslint-disable-next-line import/extensions
+import Qna from './components/QnA/QnA.jsx';
+// eslint-disable-next-line import/extensions
+import RelatedList from './components/related/RelatedList.jsx';
 
 function App() {
   return (
@@ -6,6 +10,8 @@ function App() {
       <header className="App-header">
         Logo Here
       </header>
+      <RelatedList />
+      <Qna />
     </div>
   );
 }
