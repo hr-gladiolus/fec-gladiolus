@@ -1,12 +1,26 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
+import styled from 'styled-components';
+import GlobalStyle from './styles/GlobalStyles.jsx';
+import Qna from './components/QnA/QnA.jsx';
+import RelatedList from './components/related/RelatedList.jsx';
+
+// replace header tag with a styled header
+const Header = styled.header`
+  background: #313457;
+  color: white;
+  width: 100vw;
+`;
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      {/* Import the global styles */}
+      <GlobalStyle />
+      <Header>
         Logo Here
-      </header>
+      </Header>
+      <RelatedList />
+      <Qna />
     </div>
   );
 }
