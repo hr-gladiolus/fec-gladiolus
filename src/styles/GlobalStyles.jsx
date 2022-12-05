@@ -8,6 +8,11 @@ const GlobalStyle = createGlobalStyle`
     /* Please change this color lol */
     background: #fff2cf;
   }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 export default GlobalStyle;

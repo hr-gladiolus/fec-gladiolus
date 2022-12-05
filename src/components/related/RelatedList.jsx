@@ -13,7 +13,7 @@ export default function RelatedList() {
   return (
     <div className="related">
       {/* temporarily render a random product card */}
-      <Card id={37312} />
+      <Card id={37313} />
     </div>
   );
 }
