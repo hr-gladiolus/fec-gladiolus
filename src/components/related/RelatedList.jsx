@@ -1,10 +1,10 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
+import Card from './Card.jsx';
 
 export default function RelatedList() {
   return (
     <div className="related">
-      <h1>Related</h1>
+      <Card id={37312} />
     </div>
   );
 }
