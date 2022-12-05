@@ -30,3 +30,15 @@ export function getProductRating() {
     })
     .catch((err) => err);
 }
+
+export function getReviews() {
+  return instance.get('/reviews/', {
+    params: {
+      page: 1,
+      count: 5,
+      sort: 'newest',
+      product_id: 37313,
+    },
+  })
+    .then((response) => response.data.results);
+}
