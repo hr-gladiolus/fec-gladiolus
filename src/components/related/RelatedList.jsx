@@ -1,10 +1,19 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getRelated } from './api.js';
+import Card from './Card.jsx';
 
 export default function RelatedList() {
+  const [related, setRelated] = useState([]);
+
+  useEffect(() => {
+    // get related products for a random product
+    getRelated(37311).then((res) => setRelated(res));
+  }, []);
+
   return (
     <div className="related">
-      <h1>Related</h1>
+      {/* temporarily render a random product card */}
+      <Card id={37312} />
     </div>
   );
 }
