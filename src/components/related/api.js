@@ -9,7 +9,7 @@ const axios = require('axios').create({
 });
 
 // GET product info based on ID, format data for use by Card component
-export default function getProductCard(id) {
+export function getProductCard(id) {
   let result = {};
   return axios.get(`/products/${id}`).then((res) => {
     result = {
@@ -18,6 +18,7 @@ export default function getProductCard(id) {
       price: res.data.default_price,
     };
   }).then(() => axios.get(`/reviews/meta?product_id=${id}`)).then((res) => {
+    // calculate average rating
     const { ratings } = res.data;
     let total = 0;
     let average = 0;
@@ -33,4 +34,9 @@ export default function getProductCard(id) {
       ...result,
       image: res.data.results[0].photos[0].thumbnail_url,
     }));
+}
+
+// GET related products given an ID
+export function getRelated(id) {
+  return axios.get(`/products/${id}/related`).then((res) => res.data);
 }
