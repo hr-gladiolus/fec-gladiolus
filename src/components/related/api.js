@@ -25,11 +25,13 @@ export function getProductCard(id) {
     let total = 0;
     let average = 0;
     for (let i = 1; i < 6; i += 1) {
-      total += parseInt(ratings[i], 10);
-      average += parseInt(ratings[i], 10) * i;
+      if (ratings[i]) {
+        total += parseInt(ratings[i], 10);
+        average += parseInt(ratings[i], 10) * i;
+      }
     }
-    average /= total;
-    result.rating = average;
+    // format rating, handle case where there are no ratings
+    result.rating = total ? (average / total).toFixed(2) : null;
   })
     .then(() => axios.get(`/products/${id}/styles`))
     .then((res) => ({
