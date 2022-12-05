@@ -8,10 +8,12 @@ const axios = require('axios').create({
   headers: { Authorization: config.API_TOKEN },
 });
 
-// GET product info based on ID, format data for use by Card component
+// GET product info based on ID, return formatted data for use by Card component
 export function getProductCard(id) {
+  // variable to store formatted data
   let result = {};
   return axios.get(`/products/${id}`).then((res) => {
+    // store the product name, category, and price
     result = {
       name: res.data.name,
       category: res.data.category,

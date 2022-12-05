@@ -6,11 +6,13 @@ export default function RelatedList() {
   const [related, setRelated] = useState([]);
 
   useEffect(() => {
+    // get related products for a random product
     getRelated(37311).then((res) => setRelated(res));
   }, []);
 
   return (
     <div className="related">
+      {/* temporarily render a random product card */}
       <Card id={37312} />
     </div>
   );
