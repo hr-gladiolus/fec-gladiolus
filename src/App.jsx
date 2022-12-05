@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import GlobalStyle from './styles/GlobalStyles.jsx';
 import Qna from './components/QnA/QnA.jsx';
 import RelatedList from './components/related/RelatedList.jsx';
+import RatingsAndReviews from './components/reviews/RatingsAndReviews.jsx';
 
 // replace header tag with a styled header
 const Header = styled.header`
@@ -21,6 +22,7 @@ function App() {
       </Header>
       <RelatedList />
       <Qna />
+      <RatingsAndReviews />
     </div>
   );
 }
