@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import useModal from '../shared/useModal.js';
+import Modal from '../shared/Modal.jsx';
 
 function AddReview() {
   const productId = 37324;
@@ -14,6 +16,7 @@ function AddReview() {
     photos: [],
     characteristics: {},
   };
+  const { visible, toggle } = useModal();
   const [reviewInput, setReviewInput] = useState(blankForm);
   const [charCount, setCharCount] = useState(0);
 
@@ -22,8 +25,11 @@ function AddReview() {
       <form>
         <h2>Write Your Review</h2>
         <h3>About the INSERT PRODUCT NAME HERE</h3>
+
         {/* insert star rating here - will add after we get it figured out */}
         <p>star rating</p>
+
+        {/* do you reccomend product */}
         <p>Do You Recommend This Product?</p>
         <label>
           <input type="radio" value="yes" />
@@ -33,14 +39,19 @@ function AddReview() {
           <input type="radio" value="no" />
           No
         </label>
+
         <p>characteristics here</p>
         {/* need GET request to reviews/meta for characteristics */}
+
+        {/* review summary */}
         <label>
           Review Summary
           <br />
           <input type="text" placeholder="Example: Best Purchase Ever!" maxLength="60" />
         </label>
         <br />
+
+        {/* review */}
         <label>
           Review
           <br />
@@ -58,17 +69,32 @@ function AddReview() {
             </p>
           ) : <p>Minimum Reached</p> }
         </label>
+
         {/* insert images */}
+        <button
+          type="button"
+          onClick={toggle}
+        >
+          Upload Photos
+        </button>
+        <br />
+        {/* nickname */}
         <label>
           What is your nickname?
+          <br />
           <input type="text" placeholder="Example: jackson11!" />
         </label>
         <p>For privacy reasons, do not use your full name or email address</p>
+
+        {/* email address */}
         <label>
           Email Address
+          <br />
           <input type="text" placeholder="Example: jackson11@email.com" />
         </label>
         <p>For authentication reasons, you will not be emailed</p>
+
+        {/* submit button */}
         <button type="submit">Submit Review</button>
       </form>
     </div>
