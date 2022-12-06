@@ -20,7 +20,7 @@ function ReviewsList() {
       <div>
         {reviews.map((review) => (
           <SingleReview
-            review={JSON.stringify(review)}
+            review={review}
             key={review.review_id}
             id={review.review_id}
           />

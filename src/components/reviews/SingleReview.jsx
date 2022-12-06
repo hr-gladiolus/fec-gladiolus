@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 
 function SingleReview(props) {
   const { review } = props;
-  const parseReview = JSON.parse(review);
 
   const [showMore, setShowMore] = useState(false);
   // this is my example review - leaving it in for future use
-  // const parseReview = {
+  // const review = {
   //   review_id: 1277210,
   //   rating: 3,
   //   summary: 'Such a great product!',
@@ -20,8 +19,8 @@ function SingleReview(props) {
   // };
 
   function summaryOverflow() {
-    const under60 = parseReview.summary.slice(0, 61);
-    const over60 = parseReview.summary.slice(61);
+    const under60 = review.summary.slice(0, 61);
+    const over60 = review.summary.slice(61);
     return (
       <div>
         <h2>{under60}</h2>
@@ -33,7 +32,7 @@ function SingleReview(props) {
   function bodyOverflow() {
     return (
       <div>
-        {showMore ? parseReview.body : parseReview.body.slice(0, 251)}
+        {showMore ? review.body : review.body.slice(0, 251)}
         <button
           type="button"
           onClick={
@@ -52,15 +51,15 @@ function SingleReview(props) {
   return (
     <div>
       <p>stars</p>
-      <p>{parseReview.reviewer_name}</p>
-      {parseReview.summary.length > 60 ? summaryOverflow() : <h2>{parseReview.summary}</h2>}
-      {parseReview.body.length > 250 ? bodyOverflow() : <p>{parseReview.body}</p>}
+      <p>{review.reviewer_name}</p>
+      {review.summary.length > 60 ? summaryOverflow() : <h2>{review.summary}</h2>}
+      {review.body.length > 250 ? bodyOverflow() : <p>{review.body}</p>}
       {/* images here  */}
-      {parseReview.recommend === true ? <p>I recommend this product</p> : null}
-      {parseReview.response && (
+      {review.recommend === true ? <p>I recommend this product</p> : null}
+      {review.response && (
         <p>
           Response:
-          {parseReview.response}
+          {review.response}
         </p>
       )}
       {/* was this review helpful */}
