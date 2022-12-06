@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { getProductCard } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
+import Table from './Table.jsx';
 
 const CardContainer = styled.div`
   position: relative;
@@ -27,7 +28,7 @@ const Button = styled.button`
   right: 10px;
 `;
 
-export default function Card({ id }) {
+export default function Card({ id, parent }) {
   const [product, setProduct] = useState({});
 
   const { visible, toggle } = useModal();
@@ -46,7 +47,7 @@ export default function Card({ id }) {
       <Button type="button" onClick={toggle}>?</Button>
       <Modal visible={visible} toggle={toggle}>
         {/* Modal renders its children, so place content between tags */}
-        <h1>Card modal!</h1>
+        <Table currentId={parent} target={product} />
       </Modal>
       <h4>{product.category}</h4>
       <h3>{product.name}</h3>
