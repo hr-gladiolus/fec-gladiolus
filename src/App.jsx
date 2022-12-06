@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import GlobalStyle from './styles/GlobalStyles.jsx';
+import Overview from './components/overview/Overview.jsx';
 import Qna from './components/QnA/QnA.jsx';
 import RelatedList from './components/related/RelatedList.jsx';
 
@@ -19,8 +20,9 @@ function App() {
       <Header>
         Logo Here
       </Header>
-      <RelatedList />
-      <Qna />
+      <Overview />
+      {/* <RelatedList />
+      <Qna /> */}
     </div>
   );
 }
