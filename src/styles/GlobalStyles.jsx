@@ -6,7 +6,16 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     /* Please change this color lol */
-    background: #fff2cf;
+    background: white;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  td, th {
+    border: 1px solid black;
   }
 `;
 
