@@ -1,6 +1,8 @@
 import React from 'react';
 import SingleAns from './SingleAns.jsx';
 import AListStyle from '../styles/AListStyle.styled';
+import OuterAListStyle from '../styles/OuterAListStyle.styled';
+import Aletter from '../styles/Aletter.styled';
 
 function Alist({ answers }) {
   const answerKeys = Object.keys(answers);
@@ -12,9 +14,12 @@ function Alist({ answers }) {
   ));
 
   return (
-    <AListStyle>
-      { mappedAnswers }
-    </AListStyle>
+    <OuterAListStyle>
+      <Aletter>A:</Aletter>
+      <AListStyle>
+        { mappedAnswers }
+      </AListStyle>
+    </OuterAListStyle>
   );
 }
 
