@@ -35,7 +35,7 @@ export function getReviews() {
   return instance.get('/reviews/', {
     params: {
       page: 1,
-      count: 1,
+      count: 5,
       sort: 'newest',
       product_id: 37313,
     },
