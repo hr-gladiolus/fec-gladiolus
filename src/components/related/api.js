@@ -18,6 +18,7 @@ export function getProductCard(id) {
       name: res.data.name,
       category: res.data.category,
       price: res.data.default_price,
+      features: res.data.features,
     };
   }).then(() => axios.get(`/reviews/meta?product_id=${id}`)).then((res) => {
     // calculate average rating

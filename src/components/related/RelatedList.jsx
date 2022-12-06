@@ -23,7 +23,7 @@ export default function RelatedList() {
       <div className="related">
         <h1>Related Items:</h1>
         <ListContainer>
-          {related.map((product) => <Card key={product} id={product} />)}
+          {related.map((product) => <Card key={product} id={product} parent={37311} />)}
         </ListContainer>
       </div>
       <div className="outfit">
