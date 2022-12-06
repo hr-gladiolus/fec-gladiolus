@@ -4,6 +4,7 @@ import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 
 function AddReview() {
+  // productId will be gotten through state whenever we figure it out
   const productId = 37324;
   const blankForm = {
     product_id: productId,
@@ -19,6 +20,16 @@ function AddReview() {
   const { visible, toggle } = useModal();
   const [reviewInput, setReviewInput] = useState(blankForm);
   const [charCount, setCharCount] = useState(0);
+  const [recommend, setRecommend] = useState(false);
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+
+    setReviewInput({
+      ...reviewInput,
+      [name]: value,
+    });
+  };
 
   return (
     <div>
@@ -32,11 +43,31 @@ function AddReview() {
         {/* do you reccomend product */}
         <p>Do You Recommend This Product?</p>
         <label>
-          <input type="radio" value="yes" />
+          <input
+            type="radio"
+            value={reviewInput.recommend}
+            name="recommend"
+            onChange={
+              (evt) => {
+                setRecommend(true);
+                handleChange(evt);
+              }
+            }
+          />
           Yes
         </label>
         <label>
-          <input type="radio" value="no" />
+          <input
+            type="radio"
+            value={reviewInput.recommend}
+            name="recommend"
+            onChange={
+              (evt) => {
+                setRecommend(false);
+                handleChange(evt);
+              }
+            }
+          />
           No
         </label>
 
@@ -47,7 +78,18 @@ function AddReview() {
         <label>
           Review Summary
           <br />
-          <input type="text" placeholder="Example: Best Purchase Ever!" maxLength="60" />
+          <input
+            type="text"
+            placeholder="Example: Best Purchase Ever!"
+            maxLength="60"
+            value={reviewInput.summary}
+            name="summary"
+            onChange={
+              (evt) => {
+                handleChange(evt);
+              }
+            }
+          />
         </label>
         <br />
 
@@ -59,7 +101,14 @@ function AddReview() {
             type="text"
             placeholder="Why did you like the product or not?"
             maxLength="1000"
-            onChange={(evt) => setCharCount(evt.target.value.length)}
+            value={reviewInput.body}
+            name="body"
+            onChange={
+              (evt) => {
+                setCharCount(evt.target.value.length);
+                handleChange(evt);
+              }
+            }
           />
           {charCount < 50 ? (
             <p>
@@ -78,11 +127,22 @@ function AddReview() {
           Upload Photos
         </button>
         <br />
+
         {/* nickname */}
         <label>
           What is your nickname?
           <br />
-          <input type="text" placeholder="Example: jackson11!" />
+          <input
+            type="text"
+            placeholder="Example: jackson11!"
+            value={reviewInput.name}
+            name="name"
+            onChange={
+              (evt) => {
+                handleChange(evt);
+              }
+            }
+          />
         </label>
         <p>For privacy reasons, do not use your full name or email address</p>
 
@@ -90,7 +150,17 @@ function AddReview() {
         <label>
           Email Address
           <br />
-          <input type="text" placeholder="Example: jackson11@email.com" />
+          <input
+            type="text"
+            placeholder="Example: jackson11@email.com"
+            value={reviewInput.email}
+            name="email"
+            onChange={
+              (evt) => {
+                handleChange(evt);
+              }
+            }
+          />
         </label>
         <p>For authentication reasons, you will not be emailed</p>
 
