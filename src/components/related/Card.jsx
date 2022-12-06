@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { getProductCard } from './api.js';
+import useModal from '../shared/useModal.js';
+import Modal from '../shared/Modal.jsx';
 
 const CardContainer = styled.div`
   position: relative;
@@ -28,6 +30,8 @@ const Button = styled.button`
 export default function Card({ id }) {
   const [product, setProduct] = useState({});
 
+  const { visible, toggle } = useModal();
+
   // get product info based on the id prop
   useEffect(() => {
     getProductCard(id).then((res) => setProduct(res));
@@ -39,7 +43,11 @@ export default function Card({ id }) {
       <Img src={product.image ? product.image : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
 
       {/* functionality will be determined by which list the card is in */}
-      <Button type="button">?</Button>
+      <Button type="button" onClick={toggle}>?</Button>
+      <Modal visible={visible} toggle={toggle}>
+        {/* Modal renders its children, so place content between tags */}
+        <h1>Card modal!</h1>
+      </Modal>
       <h4>{product.category}</h4>
       <h3>{product.name}</h3>
       <p>
