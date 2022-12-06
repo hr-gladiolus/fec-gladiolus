@@ -9,20 +9,24 @@ import TopQA from './styles/TopQA.styled.js';
 import NoQues from './styles/NoQues.styled.js';
 import sampleData from './sampleData';
 
-function Qna({ environment }) {
+function Qna({ environment, API }) {
   const [product, setProduct] = React.useState(1);
   const [showMoreModal, setShowMoreModal] = React.useState(false);
   const [queList, setQueList] = React.useState([]);
   const [staticList, setStaticList] = React.useState([]);
 
   React.useEffect(() => {
-    axios.get('http://127.0.0.1:3000/questions', {
+    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {
+      headers: {
+        Authorization: API,
+      },
       params: {
         product_id: product,
       },
     })
       .then((value) => {
-        // value.data.results
+        // value.data.results will have the real data to load once everything
+        // is working and data has been submitted to the API.
         setQueList(sampleData);
         setStaticList(sampleData);
         // setQueList(value.data.results);
