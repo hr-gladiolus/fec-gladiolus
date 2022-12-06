@@ -6,11 +6,14 @@ import QueButtons from './QueButtons.jsx';
 // styles
 import SingleQuest from '../styles/SingleQuest.styled.js';
 
-function SingleQue({ question }) {
+function SingleQue({ question, toggle }) {
   return (
     <SingleQuest>
       <QueView question={question} />
-      <QueButtons helpfulness={question.question_helpfulness} />
+      <QueButtons
+        helpfulness={question.question_helpfulness}
+        toggle={toggle}
+      />
     </SingleQuest>
   );
 }

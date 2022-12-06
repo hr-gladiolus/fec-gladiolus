@@ -1,9 +1,9 @@
 import React from 'react';
 import { SlMagnifier } from 'react-icons/sl';
-import Comp from '../styles/Comp.styled.js';
-import Searchform from '../styles/Searchform.styled.js';
-import Searchinput from '../styles/Searchinput.styled.js';
-import Searchbutton from '../styles/Searchbutton.styled.js';
+import Comp from './styles/Comp.styled.js';
+import Searchform from './styles/Searchform.styled.js';
+import Searchinput from './styles/Searchinput.styled.js';
+import Searchbutton from './styles/Searchbutton.styled.js';
 
 function Search({ staticList, setQueList }) {
   const [input, setInput] = React.useState('');
