@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import GlobalStyle from './styles/GlobalStyles.jsx';
+import Overview from './components/overview/Overview.jsx';
 import Qna from './components/QnA/QnA.jsx';
 import RelatedList from './components/related/RelatedList.jsx';
 import RatingsAndReviews from './components/reviews/RatingsAndReviews.jsx';
@@ -26,6 +27,7 @@ function App() {
       <Header>
         Logo Here
       </Header>
+      <Overview />
       <RelatedList />
       <Qna API={API_TOKEN.API_TOKEN} />
       <RatingsAndReviews />
