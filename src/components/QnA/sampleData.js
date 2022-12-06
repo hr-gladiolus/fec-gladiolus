@@ -46,7 +46,7 @@ const sampleData = [{
 // ...
 {
   question_id: 40,
-  question_body: 'yada yada yada yadel',
+  question_body: 'yada yada yada yada',
   question_date: '2019-06-28T00:00:00.000Z',
   asker_name: 'funguy',
   question_helpfulness: 5,
