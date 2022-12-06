@@ -4,13 +4,13 @@ import MoreAnsQues from '../styles/MoreAnsQues.styled.js';
 import AddAQue from '../styles/AddAQue.styled.js';
 import FlexRow from '../styles/FlexRow.styled.js';
 
-function More({ toggleModal, queList }) {
+function More({ queList }) {
   const [show, setShow] = React.useState(true);
   return (
     <Comp>
       <FlexRow>
         { queList.length > 2 ? <MoreAnsQues>MORE ANSWERED QUESTIONS</MoreAnsQues> : null }
-        <AddAQue onClick={toggleModal}>ADD QUESTION +</AddAQue>
+        <AddAQue>ADD QUESTION +</AddAQue>
       </FlexRow>
     </Comp>
   );
