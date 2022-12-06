@@ -4,9 +4,12 @@ import ProductFactors from './ProductFactors.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
 import { getProductRating } from './api.js';
+import useModal from '../shared/useModal.js';
+import Modal from '../shared/Modal.jsx';
 
 function RatingsAndReviews() {
   const [rating, setRating] = useState();
+  const { visible, toggle } = useModal();
 
   useEffect(() => {
     getProductRating()
@@ -25,7 +28,10 @@ function RatingsAndReviews() {
       <p>search for keyword</p>
       <ReviewsList />
       <button type="button">More Reviews</button>
-      <button type="button">Add A Review +</button>
+      <button type="button" onClick={toggle}>Add Review +</button>
+      <Modal visible={visible} toggle={toggle}>
+        <AddReview />
+      </Modal>
     </div>
   );
 }
