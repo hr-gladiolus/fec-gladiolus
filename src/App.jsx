@@ -12,6 +12,10 @@ const Header = styled.header`
   background: #313457;
   color: white;
   width: 100vw;
+  max-width: 100%;
+  font-size: 1.5em;
+  padding: 0.5em;
+  box-sizing: border-box;
 `;
 
 function App() {

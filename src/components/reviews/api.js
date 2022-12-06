@@ -36,8 +36,8 @@ export function getReviews() {
     params: {
       page: 1,
       count: 5,
-      sort: 'newest',
-      product_id: 37313,
+      sort: 'helpful',
+      product_id: 37324,
     },
   })
     .then((response) => response.data.results);
