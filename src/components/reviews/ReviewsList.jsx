@@ -12,13 +12,15 @@ function ReviewsList() {
         setReviews(newReviews);
       });
   }, []);
-  console.log(reviews);
+  // if no reviews
+
   return (
     <div>
       <h3>Reviews List</h3>
       <div>
         {reviews.map((review) => (
           <SingleReview
+            review={JSON.stringify(review)}
             key={review.review_id}
             id={review.review_id}
           />
