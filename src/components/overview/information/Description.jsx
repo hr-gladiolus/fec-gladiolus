@@ -7,7 +7,7 @@ function Description({ slogan, description }) {
   return (
     <div>
       <div>
-        <h3>{slogan}</h3>
+        <h4>{slogan}</h4>
         <p>{description}</p>
       </div>
     </div>

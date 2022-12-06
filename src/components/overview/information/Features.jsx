@@ -13,8 +13,9 @@ function Features({ features }) {
 
   return (
     <div>
-      {features.map((feature) => (
-        <div>
+      {features.map((feature, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <div key={i}>
           <span>&#10003;</span>
           <span>{feature.value}</span>
         </div>
