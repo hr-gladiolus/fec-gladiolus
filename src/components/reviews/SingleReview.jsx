@@ -10,12 +10,12 @@ function SingleReview(props) {
   const parseReview = {
     review_id: 1277210,
     rating: 3,
-    summary: 'fsafsafsafsafs',
+    summary: 'Such a great product!',
     recommend: true,
     response: null,
-    body: 'safafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsafsa?????????',
+    body: 'wow I really loved this product. It was perfect',
     date: '2022-10-25T00:00:00.000Z',
-    reviewer_name: 'fsafsafsa',
+    reviewer_name: 'cordelia',
     helpfulness: 2,
     photos: [],
   };
@@ -32,21 +32,19 @@ function SingleReview(props) {
   }
 
   function bodyOverflow() {
-    const under250 = parseReview.body.slice(0, 251);
-    const over250 = parseReview.body.slice(251);
     return (
       <div>
-        {showMore ? parseReview.body : under250}
+        {showMore ? parseReview.body : parseReview.body.slice(0, 251)}
         <button
           type="button"
           onClick={
             (evt) => {
               evt.preventDefault();
-              setShowMore(true);
+              setShowMore(!showMore);
             }
           }
         >
-          Show More
+          {showMore ? 'Show Less' : 'Show More'}
         </button>
       </div>
     );
@@ -60,10 +58,15 @@ function SingleReview(props) {
       {parseReview.body.length > 250 ? bodyOverflow() : <p>{parseReview.body}</p>}
       {/* images here  */}
       {parseReview.recommend === true && <p>I recommend this product</p>}
-      {parseReview.response && <p>{parseReview.response}</p>}
+      {parseReview.response && (
+        <p>
+          Response:
+          {parseReview.response}
+        </p>
+      )}
       {/* was this review helpful */}
       <button type="button">Report</button>
-      <p />
+      {/* report button functionality */}
     </div>
   );
 }
