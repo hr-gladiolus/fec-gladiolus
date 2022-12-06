@@ -10,8 +10,7 @@ import Details from './details/Details.jsx';
 import exampleData from './exampleData.jsx';
 
 function Overview() {
-  const [currentProduct, setCurrentProduct] = useState(exampleData[0]);
-  const [styles, setStyles] = useState([
+  const styleData = [
     {
       style_id: 1,
       name: 'Forest Green & Black',
@@ -43,7 +42,10 @@ function Overview() {
         },
       },
     },
-  ]);
+  ];
+
+  const [currentProduct, setCurrentProduct] = useState(exampleData[0]);
+  const [styles, setStyles] = useState(styleData);
   const [currentStyle, setCurrentStyle] = useState(0);
   const [currentPhoto, setCurrentPhoto] = useState('');
   // const [loaded, setLoaded] = useState(0);

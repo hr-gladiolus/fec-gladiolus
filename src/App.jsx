@@ -21,8 +21,8 @@ function App() {
         Logo Here
       </Header>
       <Overview />
-      {/* <RelatedList />
-      <Qna /> */}
+      <RelatedList />
+      <Qna />
     </div>
   );
 }
