@@ -20,8 +20,8 @@ const Img = styled.img`
 `;
 
 const Button = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   position: absolute;
   top: 10px;
@@ -44,7 +44,7 @@ export default function Card({ id, parent }) {
       <Img src={product.image ? product.image : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
 
       {/* functionality will be determined by which list the card is in */}
-      <Button type="button" onClick={toggle}>?</Button>
+      <Button type="button" onClick={toggle}>☆</Button>
       <Modal visible={visible} toggle={toggle}>
         {/* Modal renders its children, so place content between tags */}
         <Table currentId={parent} target={product} />
