@@ -8,10 +8,10 @@ const instance = axios.create({
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export function getProductRating() {
+export function getProductRating(productId) {
   return instance.get('/reviews/meta', {
     params: {
-      product_id: 37313,
+      product_id: productId,
     },
   })
     .then((response) => {
@@ -31,13 +31,13 @@ export function getProductRating() {
     .catch((err) => err);
 }
 
-export function getReviews() {
+export function getReviews(productId) {
   return instance.get('/reviews/', {
     params: {
       page: 1,
       count: 5,
       sort: 'helpful',
-      product_id: 37324,
+      product_id: productId,
     },
   })
     .then((response) => response.data.results);

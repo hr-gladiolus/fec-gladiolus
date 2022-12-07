@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import SingleReview from './SingleReview.jsx';
 import { getReviews } from './api.js';
 
 function ReviewsList() {
   const [reviews, setReviews] = useState([]);
+  const product = useSelector((state) => state.product.productId);
 
   useEffect(() => {
-    getReviews()
+    getReviews(product)
       .then((result) => {
         const newReviews = result;
         setReviews(newReviews);
