@@ -56,7 +56,7 @@ export default function Card({ id, parent, offset }) {
         <Table currentId={parent} target={product} />
       </Modal>
       <h4>{product.category}</h4>
-      {/* temp button to demonstrate dispatch */}
+      {/* future refactor: reset offset when button gets clicked */}
       <h3><button type="button" onClick={() => dispatch(changeProduct(id))}>{product.name}</button></h3>
       <p>
         $

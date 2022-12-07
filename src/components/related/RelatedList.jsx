@@ -33,6 +33,20 @@ export default function RelatedList() {
     getRelated(id).then((res) => setRelated(res));
   }, [id]);
 
+  // carousel nav handlers
+  const navLeft = () => {
+    if (relatedOffset > 0) {
+      setRelatedOffset(relatedOffset - 1);
+    }
+  };
+
+  const navRight = () => {
+    // this should not be hardcoded, refactor later
+    if (relatedOffset <= related.length - 2) {
+      setRelatedOffset(relatedOffset + 1);
+    }
+  };
+
   return (
     <>
       <div className="related">
@@ -41,8 +55,8 @@ export default function RelatedList() {
           {related.map((product) => (
             <Card key={product} id={product} parent={id} offset={relatedOffset} />
           ))}
-          <CarouselNav type="button" onClick={() => setRelatedOffset(relatedOffset - 1)} left>&lt;</CarouselNav>
-          <CarouselNav type="button" onClick={() => setRelatedOffset(relatedOffset + 1)}>&gt;</CarouselNav>
+          <CarouselNav type="button" onClick={navLeft} left>&lt;</CarouselNav>
+          <CarouselNav type="button" onClick={navRight}>&gt;</CarouselNav>
         </ListContainer>
       </div>
       <div className="outfit">
