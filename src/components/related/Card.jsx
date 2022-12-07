@@ -13,7 +13,8 @@ const CardContainer = styled.div`
   height: 400px;
   border: 1px solid black;
   margin: 30px;
-  /* transform: translateX(-230px); */
+  transition: all 0.2s ease-out;
+  transform: translateX(${(props) => props.offset}px);
 `;
 
 const Img = styled.img`
@@ -31,7 +32,7 @@ const Button = styled.button`
   right: 10px;
 `;
 
-export default function Card({ id, parent }) {
+export default function Card({ id, parent, offset }) {
   const [product, setProduct] = useState({});
 
   const { visible, toggle } = useModal();
@@ -44,7 +45,7 @@ export default function Card({ id, parent }) {
   }, []);
 
   return (
-    <CardContainer>
+    <CardContainer offset={offset * -250}>
       {/* temp placeholder image :) */}
       <Img src={product.image ? product.image : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
 
