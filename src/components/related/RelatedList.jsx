@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getRelated } from './api.js';
 import Card from './Card.jsx';
 
@@ -60,13 +60,18 @@ export default function RelatedList() {
     }
   };
 
+  const removeItem = (target) => {
+    const newOutfit = outfit.filter((product) => product !== target);
+    setOutfit(newOutfit);
+  };
+
   return (
     <>
       <div className="related">
         <h1>Related Items:</h1>
         <ListContainer>
           {related.map((product) => (
-            <Card key={product} id={product} parent={id} offset={relatedOffset} />
+            <Card key={product} id={product} offset={relatedOffset} icon="☆" />
           ))}
           <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>
           <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>
@@ -86,7 +91,9 @@ export default function RelatedList() {
           >
             Add to Outfit
           </AddOutfit>
-          {outfit.map((product) => <Card key={product} id={product} offset={outfitOffset} />)}
+          {outfit.map((product) => (
+            <Card key={product} id={product} offset={outfitOffset} icon="✖" remove={removeItem} />
+          ))}
           <CarouselNav type="button" onClick={() => outfitNav(-1)} left>&lt;</CarouselNav>
           <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>
         </ListContainer>
