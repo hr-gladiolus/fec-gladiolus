@@ -18,6 +18,10 @@ const exampleData = [
         "feature": "Material",
         "value": "FullControlSkin"
       },
+      {
+        "feature": "comfort",
+        "value": "100% comfortable"
+      }
     ],
   },
   {
