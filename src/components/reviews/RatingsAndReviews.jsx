@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import FilterRatings from './FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
 import ReviewsList from './ReviewsList.jsx';
@@ -10,9 +11,10 @@ import Modal from '../shared/Modal.jsx';
 function RatingsAndReviews() {
   const [rating, setRating] = useState();
   const { visible, toggle } = useModal();
+  const product = useSelector((state) => state.product.productId);
 
   useEffect(() => {
-    getProductRating()
+    getProductRating(product)
       .then((result) => {
         setRating(result);
       });
