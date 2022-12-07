@@ -20,14 +20,14 @@ export default function Table({ currentId, target }) {
       // GET data for current item, push characteristics into obj
       product.features.forEach((f) => {
         if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
-        obj[f.feature][0] = f.value;
+        obj[f.feature][0] = f.value === null ? '✓' : f.value;
       });
       setCurrent(product);
     }).then(() => {
       // push target characteristics into obj
       target.features.forEach((f) => {
         if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
-        obj[f.feature][1] = f.value;
+        obj[f.feature][1] = f.value === null ? '✓' : f.value;
       });
       setFeatures(obj);
     });
