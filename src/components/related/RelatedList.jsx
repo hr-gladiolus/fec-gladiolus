@@ -21,10 +21,20 @@ const CarouselNav = styled.button`
   left: ${(props) => (props.left ? '0px' : 'calc(100% - 1.5rem)')};
 `;
 
+const AddOutfit = styled.button`
+  width: 200px;
+  height: 400px;
+  border: 1px solid black;
+  margin: 30px;
+  transition: all 0.2s ease-out;
+  transform: translateX(${(props) => props.offset}px);
+`;
+
 export default function RelatedList() {
   const [related, setRelated] = useState([]);
   const [outfit, setOutfit] = useState([]);
   const [relatedOffset, setRelatedOffset] = useState(0);
+  const [outfitOffset, setOutfitOffset] = useState(0);
 
   const id = useSelector((state) => state.product.productId);
 
@@ -34,16 +44,19 @@ export default function RelatedList() {
   }, [id]);
 
   // carousel nav handlers
-  const navLeft = () => {
-    if (relatedOffset > 0) {
+  const relatedNav = (inc) => {
+    if (relatedOffset > 0 && inc === -1) {
       setRelatedOffset(relatedOffset - 1);
+    } else if (relatedOffset <= related.length - 2 && inc === 1) {
+      setRelatedOffset(relatedOffset + 1);
     }
   };
 
-  const navRight = () => {
-    // this should not be hardcoded, refactor later
-    if (relatedOffset <= related.length - 2) {
-      setRelatedOffset(relatedOffset + 1);
+  const outfitNav = (inc) => {
+    if (outfitOffset > 0 && inc === -1) {
+      setOutfitOffset(outfitOffset - 1);
+    } else if (outfitOffset <= outfit.length - 2 && inc === 1) {
+      setOutfitOffset(outfitOffset + 1);
     }
   };
 
@@ -55,14 +68,27 @@ export default function RelatedList() {
           {related.map((product) => (
             <Card key={product} id={product} parent={id} offset={relatedOffset} />
           ))}
-          <CarouselNav type="button" onClick={navLeft} left>&lt;</CarouselNav>
-          <CarouselNav type="button" onClick={navRight}>&gt;</CarouselNav>
+          <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>
+          <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>
         </ListContainer>
       </div>
       <div className="outfit">
         <h1>Your Outfit:</h1>
         <ListContainer>
-          {outfit.map((product) => <Card key={product} id={product} />)}
+          <AddOutfit
+            type="button"
+            onClick={() => {
+              if (!outfit.includes(id)) {
+                setOutfit([id, ...outfit]);
+              }
+            }}
+            offset={outfitOffset * -250}
+          >
+            Add to Outfit
+          </AddOutfit>
+          {outfit.map((product) => <Card key={product} id={product} offset={outfitOffset} />)}
+          <CarouselNav type="button" onClick={() => outfitNav(-1)} left>&lt;</CarouselNav>
+          <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>
         </ListContainer>
       </div>
     </>
