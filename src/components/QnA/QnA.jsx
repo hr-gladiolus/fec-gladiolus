@@ -46,9 +46,8 @@ function Qna({ environment, API }) {
           setQueList={(e) => setQueList(e)}
         />
       ) : <NoQues>{ noneText }</NoQues> }
-      { staticList.length ? <Qlist queList={queList} /> : null }
       { staticList.length && !queList.length ? <NoQues>{ noMatches }</NoQues> : null }
-      <More queList={queList} />
+      { staticList.length ? <Qlist queList={queList} /> : null }
     </Container>
   );
 }
