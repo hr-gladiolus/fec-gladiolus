@@ -1,66 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-function Details({
-  category,
-  name,
-  currentStyle,
-  productId,
-}) {
-  if (!currentStyle) {
-    return (
-      <div>
-        <div>
-          Render styles
-        </div>
-        <div>
-          {category}
-        </div>
-        <div>
-          {name}
-        </div>
-        <div>
-          Render price
-        </div>
-      </div>
-    );
-  }
+const Div = styled.div`
+  border: 1px solid gray;
+  padding: 28px 32px 16px 32px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  margin: 32px 12px 24px 12px;
+  max-width: 500px;
+  background: linear-gradient(0deg, #ebd3af, #ffc9b3);
+`;
 
-  const onSale = currentStyle.sale_price !== '0';
+function Details(
+  {
+    ratings,
+    category,
+    name,
+    price,
+    sale,
+  },
+) {
+  const [numOfReviews, setNumOfReviews] = useState(0);
+  const [avgRating, setAvgRating] = useState(0);
+
+  const calculateRating = () => {
+  };
+
+  useEffect(() => {
+    calculateRating();
+  });
 
   return (
-    <div>
-      {/* <div>
-        <StarRating productId={productId}/>
-      </div> */}
-      <div>
-        {category}
-      </div>
-      <div>
-        {name}
-      </div>
-      {onSale ? (
-        <div>
-          <span>
-            $
-            {currentStyle.original_price}
-          </span>
-          <span>{' '}</span>
-          <span>
-            $
-            {currentStyle.sale_price}
-          </span>
-        </div>
-      ) : (
-        <div>
-          <span>
-            $
-            {currentStyle.original_price}
-          </span>
-        </div>
+    <Div>
+      <h5>Add avgRating and numOfReviews here!</h5>
+      <h3>{category}</h3>
+      <h1>{name}</h1>
+      {parseInt(sale, 10) > 0 && (
+        <h4>
+          <b style={{ textDecoration: 'line-through' }}>{`$${price}`}</b>
+          <b style={{ color: 'red' }}>{` $${sale}`}</b>
+        </h4>
       )}
-    </div>
+      {parseInt(sale, 10) === 0 && (
+        <h4>{`$${price}`}</h4>
+      )}
+    </Div>
   );
 }
 

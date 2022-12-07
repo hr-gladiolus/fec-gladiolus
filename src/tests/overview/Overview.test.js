@@ -6,7 +6,6 @@ import '@testing-library/jest-dom';
 test('renders basic App structure', () => {
   render(<Overview />);
 
-  // query DOM for text
   const linkElement = screen.getByText(/Overview/i);
   expect(linkElement).toBeInTheDocument();
 });

@@ -7,6 +7,12 @@ import Style from './style/Style.jsx';
 import Gallery from './gallery/Gallery.jsx';
 import Cart from './cart/Cart.jsx';
 import Details from './details/Details.jsx';
+import {
+  getProducts,
+  getProduct,
+  getStyles,
+  result,
+} from './helpers/productAPI.js';
 import exampleData from './exampleData.jsx';
 
 function Overview() {
@@ -48,7 +54,6 @@ function Overview() {
   const [styles, setStyles] = useState(styleData);
   const [currentStyle, setCurrentStyle] = useState(0);
   const [currentPhoto, setCurrentPhoto] = useState('');
-  // const [loaded, setLoaded] = useState(0);
 
   const handleStyleOnClick = () => {
   };
@@ -64,8 +69,8 @@ function Overview() {
       <div>
         <h3>Gallery</h3>
         <Gallery
-          key={currentStyle.style_id}
-          photos={currentStyle.photos}
+          key={styles[currentStyle].style_id}
+          photos={styles[currentStyle].photos}
           selectPhoto={selectPhoto}
         />
         <h3>Details</h3>
@@ -73,8 +78,8 @@ function Overview() {
           // ratings={ratings}
           category={currentProduct.category}
           name={currentProduct.name}
-          price={currentStyle.original_price}
-          sale={currentStyle.sale_price}
+          price={styles[currentStyle].original_price}
+          sale={styles[currentStyle].sale_price}
         />
         <h3>Style Selector</h3>
         <Style
@@ -84,8 +89,8 @@ function Overview() {
         />
         <h3>Add to Cart</h3>
         <Cart
-          id={currentStyle.style_id}
-          skus={currentStyle.skus}
+          id={styles[currentStyle].style_id}
+          skus={styles[currentStyle].skus}
         />
         <h3>Product Information</h3>
         <Information

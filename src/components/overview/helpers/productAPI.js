@@ -10,27 +10,46 @@ const instance = axios.create({
   },
 });
 
-// function getStyles(productId) {
-//   return instance.get(`/${productId}/styles`)
-//     .then((res) => {
-//       console.log('Here are my styles:', res.data);
-//     })
+// async function getStyles(productId) {
+//   return instance.get(`/products/${productId}/styles`)
+//     .then((results) => results.data.results)
 //     .catch((err) => {
 //       Error('Error with productAPI getStyle', err);
 //     });
 // }
+async function getStyles(productId) {
+  return instance.get(`/products/${productId}/styles`)
+    .then((results) => results.data.results)
+    .catch((err) => {
+      Error('Error with productAPI getStyle', err);
+    });
+}
 
 function getProducts() {
-  console.log('I am here in API');
   return instance.get('/products')
-    .then((res) => {
-      console.log('Here is my data: ', res.data);
-      res.status(200).send(res);
-    })
+    .then((results) => results.data)
     .catch((err) => {
-      console.log('error in productAPI', err.response);
       Error('Error with productAPI getProducts', err);
     });
 }
 
-module.exports = { getProducts };
+function getProduct(productId) {
+  console.log('I am inside getProduct API');
+  return instance.get(`/products/${productId}`)
+    .then((result) => result.data)
+    .catch((err) => {
+      Error('Error with productAPI getProduct', err);
+    });
+}
+
+// getProducts();
+// getProduct(37313);
+const styleData = getStyles(37313);
+const result = styleData.then((data) => console.log(data));
+
+module.exports = {
+  getProducts,
+  getProduct,
+  getStyles,
+  result,
+};
