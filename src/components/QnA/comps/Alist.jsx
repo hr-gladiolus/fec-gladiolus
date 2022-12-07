@@ -9,7 +9,7 @@ const LoadAnswers = styled.button`
   display: flex;
   background-color: white;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 11px;
   justify-content: start;
   border-width: 0;
   margin: 0 0 10px 0;
@@ -21,6 +21,18 @@ function Alist({ answers }) {
   const content = React.useRef(null);
 
   const answerKeys = Object.keys(answers);
+
+  function toggleAccordion() {
+    setHeight(height !== '0px' ? '0px' : `${content.current.scrollHeight}px`);
+  }
+
+  let innerText;
+
+  if (height === '0px') {
+    innerText = 'MORE';
+  } else {
+    innerText = 'LESS';
+  }
 
   const mappedAnswers = answerKeys.map((ansID) => (
     <SingleAns
@@ -44,7 +56,17 @@ function Alist({ answers }) {
             { mappedAnswers.slice(2) }
           </div>
         ) : null }
-        { mappedAnswers.length > 2 ? <LoadAnswers>Load more answers</LoadAnswers> : null }
+        { mappedAnswers.length > 2 ? (
+          <LoadAnswers
+            onClick={toggleAccordion}
+          >
+            LOAD
+            {' '}
+            {innerText}
+            {' '}
+            ANSWERS
+          </LoadAnswers>
+        ) : null }
       </AListStyle>
     </OuterAListStyle>
   );

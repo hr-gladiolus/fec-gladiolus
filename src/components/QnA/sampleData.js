@@ -42,7 +42,7 @@ const sampleData = [{
       photos: [],
     },
     83: {
-      id: 78,
+      id: 83,
       body: '9 lives',
       date: '2019-11-12T00:00:00.000Z',
       answerer_name: 'iluvdogz',
@@ -50,7 +50,7 @@ const sampleData = [{
       photos: [],
     },
     89: {
-      id: 78,
+      id: 89,
       body: '9 lives',
       date: '2019-11-12T00:00:00.000Z',
       answerer_name: 'iluvdogz',
@@ -84,10 +84,18 @@ const sampleData = [{
       helpfulness: 31,
       photos: [],
     },
+    108: {
+      id: 108,
+      body: '9 lives',
+      date: '2019-11-12T00:00:00.000Z',
+      answerer_name: 'iluvcatz',
+      helpfulness: 31,
+      photos: [],
+    },
   },
 },
 {
-  question_id: 40,
+  question_id: 53,
   question_body: 'yada yada yada yada',
   question_date: '2019-06-28T00:00:00.000Z',
   asker_name: 'funguy',
