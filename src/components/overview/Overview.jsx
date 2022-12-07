@@ -54,6 +54,7 @@ function Overview() {
   const [styles, setStyles] = useState(styleData);
   const [currentStyle, setCurrentStyle] = useState(0);
   const [currentPhoto, setCurrentPhoto] = useState('');
+  // const [loaded, setLoaded] = useState(0);
 
   const handleStyleOnClick = () => {
   };

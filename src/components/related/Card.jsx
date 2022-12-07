@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { getProductCard } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 import Table from './Table.jsx';
+import { changeProduct } from '../../store/productReducer.js';
 
 const CardContainer = styled.div`
   position: relative;
   width: 200px;
   height: 400px;
   border: 1px solid black;
-  margin: 10px;
+  margin: 30px;
+  transition: all 0.2s ease-out;
+  transform: translateX(${(props) => props.offset}px);
 `;
 
 const Img = styled.img`
@@ -28,10 +32,12 @@ const Button = styled.button`
   right: 10px;
 `;
 
-export default function Card({ id, parent }) {
+export default function Card({ id, parent, offset }) {
   const [product, setProduct] = useState({});
 
   const { visible, toggle } = useModal();
+
+  const dispatch = useDispatch();
 
   // get product info based on the id prop
   useEffect(() => {
@@ -39,7 +45,7 @@ export default function Card({ id, parent }) {
   }, []);
 
   return (
-    <CardContainer>
+    <CardContainer offset={offset * -250}>
       {/* temp placeholder image :) */}
       <Img src={product.image ? product.image : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
 
@@ -50,7 +56,8 @@ export default function Card({ id, parent }) {
         <Table currentId={parent} target={product} />
       </Modal>
       <h4>{product.category}</h4>
-      <h3>{product.name}</h3>
+      {/* future refactor: reset offset when button gets clicked */}
+      <h3><button type="button" onClick={() => dispatch(changeProduct(id))}>{product.name}</button></h3>
       <p>
         $
         {product.price}

@@ -10,13 +10,6 @@ const instance = axios.create({
   },
 });
 
-// async function getStyles(productId) {
-//   return instance.get(`/products/${productId}/styles`)
-//     .then((results) => results.data.results)
-//     .catch((err) => {
-//       Error('Error with productAPI getStyle', err);
-//     });
-// }
 async function getStyles(productId) {
   return instance.get(`/products/${productId}/styles`)
     .then((results) => results.data.results)
@@ -53,3 +46,4 @@ module.exports = {
   getStyles,
   result,
 };
+
