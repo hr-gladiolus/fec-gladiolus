@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { getProductCard } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 import Table from './Table.jsx';
+import { changeProduct } from '../../store/productReducer.js';
 
 const CardContainer = styled.div`
   position: relative;
@@ -33,6 +35,8 @@ export default function Card({ id, parent }) {
 
   const { visible, toggle } = useModal();
 
+  const dispatch = useDispatch();
+
   // get product info based on the id prop
   useEffect(() => {
     getProductCard(id).then((res) => setProduct(res));
@@ -50,7 +54,8 @@ export default function Card({ id, parent }) {
         <Table currentId={parent} target={product} />
       </Modal>
       <h4>{product.category}</h4>
-      <h3>{product.name}</h3>
+      {/* temp button to demonstrate dispatch */}
+      <h3><button type="button" onClick={() => dispatch(changeProduct(id))}>{product.name}</button></h3>
       <p>
         $
         {product.price}

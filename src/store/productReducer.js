@@ -1,14 +1,20 @@
-import { createReducer } from '@reduxjs/toolkit';
-import changeProduct from './productAction.js';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  productId: 37324,
-};
-
-const productReducer = createReducer(initialState, (builder) => {
-  builder.addCase(changeProduct, (state, action) => {
-    initialState.productId = action.payload;
-  });
+// the changeProduct reducer changes the state to a new productId
+const productSlice = createSlice({
+  name: 'product',
+  initialState: {
+    productId: 37324,
+  },
+  reducers: {
+    changeProduct: (state, action) => ({
+      productId: action.payload,
+    }),
+  },
 });
 
-export default productReducer;
+// export function that will be called by dispatch
+export const { changeProduct } = productSlice.actions;
+
+// export reducer to be used by store
+export default productSlice.reducer;
