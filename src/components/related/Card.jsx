@@ -12,7 +12,8 @@ const CardContainer = styled.div`
   width: 200px;
   height: 400px;
   border: 1px solid black;
-  margin: 10px;
+  margin: 30px;
+  /* transform: translateX(-230px); */
 `;
 
 const Img = styled.img`
