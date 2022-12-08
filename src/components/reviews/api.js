@@ -33,7 +33,7 @@ export function getProductRating(productId) {
     .catch((err) => err);
 }
 
-// product ratings and number of ratings
+// gets product ratings and number of ratings
 export function getRatings(productId) {
   return instance.get('/reviews/meta', {
     params: {
@@ -55,6 +55,7 @@ export function getRatings(productId) {
         const currentRating = parseInt(Object.values(ratings)[i], 10);
         numberOfRatings += currentRating;
       }
+
       const result = {
         number: numberOfRatings,
         ratings,
