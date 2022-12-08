@@ -12,7 +12,7 @@ const API_TOKEN = require('./config');
 // replace header tag with a styled header
 const Header = styled.header`
   background: ${({ theme }) => theme.header};
-  color: ${({ theme }) => theme.color};
+  color: ${({ theme }) => theme.fg};
   width: 100vw;
   max-width: 100%;
   font-size: 1.5em;
@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       {/* Import the global styles */}
-      <ThemeProvider theme={green}>
+      <ThemeProvider theme={purple}>
         <GlobalStyle />
         <Header>
           Logo Here
