@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Row = styled.div`
-  width: 100px;
+  width: 150px;
   display: flex;
   flex-direction: row;
 
