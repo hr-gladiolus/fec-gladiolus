@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productReducer from './productReducer.js';
+import metaReducer from './metaReducer.js';
 
 const store = configureStore({
-  reducer: { product: productReducer },
+  reducer: { product: productReducer, meta: metaReducer },
 });
 export default store;
 

@@ -17,7 +17,7 @@ export function getMetaData(productId) {
     },
   })
     .then((response) => {
-      console.log('resposnse', response.data);
+      console.log('response', response.data);
       return response.data;
     })
     .catch((err) => err);

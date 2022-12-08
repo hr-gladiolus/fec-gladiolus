@@ -14,14 +14,17 @@ function FilterRatings(props) {
   const { selectedFilters, setSelectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
+  const meta = useSelector((state) => state.meta.data);
 
   // get producr rating on render
   useEffect(() => {
-    getProductRating(metaData)
-      .then((result) => {
-        setRating(result);
-      });
-  }, [product]);
+    if (meta) {
+      getProductRating(metaData)
+        .then((result) => {
+          setRating(result);
+        });
+    }
+  }, [metaData]);
 
   // current filters component
   const currentFilters = () => (

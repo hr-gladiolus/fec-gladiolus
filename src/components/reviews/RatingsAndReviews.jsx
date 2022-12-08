@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import FilterRatings from './FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
 import ReviewsList from './ReviewsList.jsx';
@@ -20,28 +20,23 @@ function RatingsAndReviews() {
     one: false,
   };
   const [selectedFilters, setSelectedFilters] = useState(filters);
-  const [metaData, setMetaData] = useState();
+
   const product = useSelector((state) => state.product.productId);
+  const meta = useSelector((state) => state.meta.data);
+  const dispatch = useDispatch();
 
   const { visible, toggle } = useModal();
-
-  useEffect(() => {
-    getMetaData(product)
-      .then((result) => {
-        setMetaData(result);
-      });
-  }, [product]);
 
   return (
     <div>
       <h1>Ratings & Reviews</h1>
 
       {/* filter ratings */}
-      <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} metaData={metaData} />
+      <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
       <br />
 
       {/* product factors */}
-      <ProductFactors metaData={metaData} />
+      <ProductFactors />
 
       {/* number of reviews, sort selector */}
 
@@ -56,7 +51,7 @@ function RatingsAndReviews() {
 
       {/* add reviews button and modal */}
       <button type="button" onClick={toggle}>Add Review +</button>
-      <Modal visible={visible} toggle={toggle} metaData={metaData}>
+      <Modal visible={visible} toggle={toggle}>
         <AddReview />
       </Modal>
     </div>

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 import GlobalStyle from './styles/GlobalStyles.jsx';
 import Overview from './components/overview/Overview.jsx';
 import Qna from './components/QnA/QnA.jsx';
 import RelatedList from './components/related/RelatedList.jsx';
 import RatingsAndReviews from './components/reviews/RatingsAndReviews.jsx';
+import fetchMeta from './store/metaReducer.js';
 
 const API_TOKEN = require('./config');
 // replace header tag with a styled header
@@ -20,6 +22,12 @@ const Header = styled.header`
 `;
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMeta());
+  }, []);
+
   return (
     <div className="App">
       {/* Import the global styles */}
