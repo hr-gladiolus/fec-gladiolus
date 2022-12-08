@@ -19,7 +19,7 @@ function FilterRatings(props) {
       .then((result) => {
         setRating(result);
       });
-  }, []);
+  }, [product]);
 
   // current filters component
   const currentFilters = () => (

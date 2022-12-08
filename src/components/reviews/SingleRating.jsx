@@ -76,7 +76,7 @@ function SingleRating(props) {
         setNumberOfRatings(result.number);
         setAllRatings(result.ratings);
       });
-  }, []);
+  }, [product]);
 
   const handleClick = (currentNumber) => {
     setSelectedFilters({
