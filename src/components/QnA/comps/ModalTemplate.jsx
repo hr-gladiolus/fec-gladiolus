@@ -3,13 +3,18 @@ import styled from 'styled-components';
 import FlexColumn from '../styles/FlexColumn.styled';
 
 const OuterFlexColumn = styled.div`
-  display: block;
-  margin-left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 `;
 
 const FlexForm = styled.form`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: none;
 `;
 
 const ModalTitle = styled.div`
@@ -28,8 +33,13 @@ const Label = styled.label`
   position: relative;
 `;
 
-const FirstInput = styled.input.attrs({ maxLength: '1000', required: 'required' })`
+const FirstInput = styled.textarea.attrs({ maxLength: '1000', required: 'required' })`
+display: block;
 padding: 0 0 15px 0;
+width: 100%;
+overflow: auto;
+height: 65px;
+line-height: 1.2;
 `;
 
 const SecondInput = styled.input.attrs({ maxLength: '60', required: 'required' })`
@@ -44,20 +54,27 @@ const SubmitModal = styled.button`
 
 `;
 
-const SixtyCharsParagraph = styled.p`
+const NicknameParagraph = styled.p`
   opacity: 50%;
   color: black;
   position: absolute;
-  bottom: 10%;
-  right 10%;
+  bottom: 25%;
+  right 0.5%;
+`;
+
+const EmailParagraph = styled.p`
+  opacity: 50%;
+  color: black;
+  position: absolute;
+  bottom: 26%;
+  right 0.5%;
 `;
 
 const ThousandCharsParagraph = styled.p`
   opacity: 50%;
   color: black;
-  position: absolute;
-  bottom: 10%;
-  right 10%;
+  display: flex;
+  place-content: end;
 `;
 
 function ModalTemplate({
@@ -99,38 +116,36 @@ function ModalTemplate({
   return (
     <OuterFlexColumn>
       <FlexColumn>
-        <FlexColumn>
-          <ModalTitle>{title}</ModalTitle>
-          <ModalSubtitle>{subtitle}</ModalSubtitle>
-        </FlexColumn>
+        <ModalTitle>{title}</ModalTitle>
+        <ModalSubtitle>{subtitle}</ModalSubtitle>
         <FlexColumn>
           <FlexForm>
             <Label>
               {firstInputLabel}
+              <FirstInput placeholder={firstInputName} onChange={firstChange} />
               <ThousandCharsParagraph>
                 Characters left:
                 {' '}
                 {1000 - firstValue.length}
               </ThousandCharsParagraph>
-              <FirstInput placeholder={firstInputName} onChange={firstChange} />
             </Label>
             <Label>
               What is your nickname?
-              <SixtyCharsParagraph>
+              <NicknameParagraph>
                 Characters left:
                 {' '}
                 {60 - secondValue.length}
-              </SixtyCharsParagraph>
+              </NicknameParagraph>
               <SecondInput placeholder={secondInputName} onChange={secondChange} />
               {secondInputText}
             </Label>
             <Label>
               What is your email?
-              <SixtyCharsParagraph>
+              <EmailParagraph>
                 Characters left:
                 {' '}
                 {60 - thirdValue.length}
-              </SixtyCharsParagraph>
+              </EmailParagraph>
               <ThirdInput placeholder={thirdInputName} onChange={thirdChange} />
               {thirdInputText}
             </Label>
