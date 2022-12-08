@@ -40,10 +40,12 @@ const Middle = styled.div`
   width: 70%;
 `;
 
+// number of ratings on far right
 const Right = styled.div`
   text-align: right;
 `;
 
+// grey bar background
 const BottomBar = styled.div`
   width: 100%;
   background-color: #858080;
@@ -51,6 +53,7 @@ const BottomBar = styled.div`
   color: white;
 `;
 
+// green bar on top - width dependent on number of reviews
 const TopBar = styled.div`
   width: ${(props) => props.width}%;
   height: 18px;
@@ -76,10 +79,9 @@ function SingleRating(props) {
   }, []);
 
   const handleClick = (currentNumber) => {
-    console.log(allRatings[number]);
     setSelectedFilters({
       ...selectedFilters,
-      [currentNumber]: !selectedFilters.currentNumber,
+      [currentNumber]: !selectedFilters[currentNumber],
     });
     setFilter(true);
   };
@@ -97,10 +99,11 @@ function SingleRating(props) {
         {number === 'four' ? <u>4 stars</u> : null}
         {number === 'three' ? <u>3 stars</u> : null}
         {number === 'two' ? <u>2 stars</u> : null}
-        {number === 'one' ? <u>1 stars</u> : null}
+        {number === 'one' ? <u>1 star</u> : null}
       </Button>
       <Middle>
         <BottomBar>
+          {/* sets width based on number of current star rating diviced by total # of ratings */}
           <TopBar width={allRatings ? (allRatings[number] / numberOfRatings) * 100 : 0} />
         </BottomBar>
       </Middle>
