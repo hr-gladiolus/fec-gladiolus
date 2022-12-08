@@ -25,11 +25,11 @@ function FilterRatings(props) {
   const currentFilters = () => (
     <div>
       <p>Current Filters</p>
-      {selectedFilters.five ? <p>5 stars</p> : null}
-      {selectedFilters.four ? <p>4 stars</p> : null}
-      {selectedFilters.three ? <p>3 stars</p> : null}
-      {selectedFilters.two ? <p>2 stars</p> : null}
-      {selectedFilters.one ? <p>1 stars</p> : null}
+      {selectedFilters.five && <p>5 stars</p>}
+      {selectedFilters.four && <p>4 stars</p>}
+      {selectedFilters.three && <p>3 stars</p>}
+      {selectedFilters.two && <p>2 stars</p>}
+      {selectedFilters.one && <p>1 stars</p>}
     </div>
   );
 
@@ -59,10 +59,10 @@ function FilterRatings(props) {
       <p>stars</p>
 
       {/* current filter */}
-      {filter === true ? currentFilters() : null}
+      {filter === true && currentFilters()}
 
       {/* remove all filters button */}
-      {filter === true ? removeFilterButton() : null}
+      {filter === true && removeFilterButton()}
 
       {/* filters */}
       <div>
