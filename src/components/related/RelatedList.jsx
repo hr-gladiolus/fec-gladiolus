@@ -96,6 +96,7 @@ export default function RelatedList() {
               }
             }}
             offset={outfitOffset * -250}
+            data-testid="add-outfit"
           >
             Add to Outfit
           </AddOutfit>

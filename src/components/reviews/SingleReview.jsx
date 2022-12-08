@@ -50,7 +50,7 @@ function SingleReview(props) {
 
   return (
     <div>
-      <p>stars</p>
+      <p>{review.rating}</p>
       <p>{review.reviewer_name}</p>
       {review.summary.length > 60 ? summaryOverflow() : <h2>{review.summary}</h2>}
       {review.body.length > 250 ? bodyOverflow() : <p>{review.body}</p>}
