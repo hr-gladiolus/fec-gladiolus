@@ -2,20 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { getProductRating, getRatings } from './api.js';
+import { getProductRating } from './metaFunctions.js';
 import SingleRating from './SingleRating.jsx';
 
 function FilterRatings(props) {
   const [rating, setRating] = useState();
 
-  const { filter, setFilter, filters } = props;
+  const {
+    filter, setFilter, filters, metaData,
+  } = props;
   const { selectedFilters, setSelectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
 
   // get producr rating on render
   useEffect(() => {
-    getProductRating(product)
+    getProductRating(metaData)
       .then((result) => {
         setRating(result);
       });

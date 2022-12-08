@@ -5,7 +5,7 @@ import FilterRatings from './FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
-import { getProductRating } from './api.js';
+import { getMetaData } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 
@@ -20,19 +20,28 @@ function RatingsAndReviews() {
     one: false,
   };
   const [selectedFilters, setSelectedFilters] = useState(filters);
+  const [metaData, setMetaData] = useState();
+  const product = useSelector((state) => state.product.productId);
 
   const { visible, toggle } = useModal();
+
+  useEffect(() => {
+    getMetaData(product)
+      .then((result) => {
+        setMetaData(result);
+      });
+  }, [product]);
 
   return (
     <div>
       <h1>Ratings & Reviews</h1>
 
       {/* filter ratings */}
-      <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
+      <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} metaData={metaData} />
       <br />
 
       {/* product factors */}
-      <ProductFactors />
+      <ProductFactors metaData={metaData} />
 
       {/* number of reviews, sort selector */}
 
@@ -47,7 +56,7 @@ function RatingsAndReviews() {
 
       {/* add reviews button and modal */}
       <button type="button" onClick={toggle}>Add Review +</button>
-      <Modal visible={visible} toggle={toggle}>
+      <Modal visible={visible} toggle={toggle} metaData={metaData}>
         <AddReview />
       </Modal>
     </div>

@@ -9,6 +9,20 @@ const instance = axios.create({
 
 // eslint-disable-next-line import/prefer-default-export
 
+// get product reviews meta data
+export function getMetaData(productId) {
+  return instance.get('/reviews/meta', {
+    params: {
+      product_id: productId,
+    },
+  })
+    .then((response) => {
+      console.log('resposnse', response.data);
+      return response.data;
+    })
+    .catch((err) => err);
+}
+
 // gets product id
 export function getProductRating(productId) {
   return instance.get('/reviews/meta', {
