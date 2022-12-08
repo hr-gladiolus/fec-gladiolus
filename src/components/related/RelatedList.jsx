@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { getRelated } from './api.js';
@@ -38,10 +39,18 @@ export default function RelatedList() {
 
   const id = useSelector((state) => state.product.productId);
 
+  const { ref, inView, entry } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+
   useEffect(() => {
     // get related products for a random product
-    getRelated(id).then((res) => setRelated(res));
-  }, [id]);
+    if (inView) {
+      // only send API call if related list is on screen
+      getRelated(id).then((res) => setRelated(res));
+    }
+  }, [inView, id]);
 
   // carousel nav handlers
   const relatedNav = (inc) => {
@@ -67,7 +76,7 @@ export default function RelatedList() {
 
   return (
     <>
-      <div className="related">
+      <div className="related" ref={ref}>
         <h1>Related Items:</h1>
         <ListContainer>
           {related.map((product) => (
