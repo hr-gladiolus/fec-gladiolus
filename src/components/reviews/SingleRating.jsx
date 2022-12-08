@@ -101,10 +101,10 @@ function SingleRating(props) {
       </Button>
       <Middle>
         <BottomBar>
-          <TopBar width={allRatings ? (parseInt(allRatings.number, 10) / numberOfRatings) * 100 : 0} />
+          <TopBar width={allRatings ? (allRatings[number] / numberOfRatings) * 100 : 0} />
         </BottomBar>
       </Middle>
-      <Right>{allRatings ? allRatings.number : null}</Right>
+      <Right>{allRatings ? allRatings[number] : null}</Right>
     </Row>
   );
 }
