@@ -25,17 +25,17 @@ const metaSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
-    // [fetchMeta.pending.type]: (state, action) => {
-    //   state.loading = true;
-    // },
-    // [fetchMeta.fulfilled.type]: (state, action) => {
-    //   state.metaData = action.payload;
-    //   state.loading = false;
-    // },
-    // [fetchMeta.rejected.type]: (state, action) => {
-    //   state.loading = false;
-    //   state.err = action.payload;
-    // },
+  //   [fetchMeta.pending.type]: (state, action) => {
+  //     state.loading = true;
+  //   },
+  //   [fetchMeta.fulfilled.type]: (state, action) => {
+  //     state.metaData = action.payload;
+  //     state.loading = false;
+  //   },
+  //   [fetchMeta.rejected.type]: (state, action) => {
+  //     state.loading = false;
+  //     state.err = action.payload;
+  //   },
   },
 });
 
