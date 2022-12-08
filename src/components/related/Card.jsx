@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductCard } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
+import Stars from '../shared/Stars.jsx';
 import Table from './Table.jsx';
 import { changeProduct } from '../../store/productReducer.js';
 
@@ -74,6 +75,7 @@ export default function Card({
         $
         {product.price}
       </p>
+      <Stars rating={product.rating} />
       <p>
         {product.rating}
         {' '}
