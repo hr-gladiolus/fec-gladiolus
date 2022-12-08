@@ -9,6 +9,7 @@ import Table from './Table.jsx';
 import { changeProduct } from '../../store/productReducer.js';
 
 const CardContainer = styled.div`
+  background: ${({ theme }) => theme.fg};
   position: relative;
   width: 200px;
   height: 400px;
