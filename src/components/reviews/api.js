@@ -8,6 +8,8 @@ const instance = axios.create({
 });
 
 // eslint-disable-next-line import/prefer-default-export
+
+// gets product id
 export function getProductRating(productId) {
   return instance.get('/reviews/meta', {
     params: {
@@ -31,6 +33,39 @@ export function getProductRating(productId) {
     .catch((err) => err);
 }
 
+// gets product ratings and number of ratings
+export function getRatings(productId) {
+  return instance.get('/reviews/meta', {
+    params: {
+      product_id: productId,
+    },
+  })
+    .then((response) => {
+      const oldFormatRatings = response.data.ratings;
+      const ratings = {
+        five: oldFormatRatings['5'],
+        four: oldFormatRatings['4'],
+        three: oldFormatRatings['3'],
+        two: oldFormatRatings['2'],
+        one: oldFormatRatings['1'],
+      };
+      let numberOfRatings = 0;
+
+      for (let i = 0; i < Object.values(ratings).length; i += 1) {
+        const currentRating = parseInt(Object.values(ratings)[i], 10);
+        numberOfRatings += currentRating;
+      }
+
+      const result = {
+        number: numberOfRatings,
+        ratings,
+      };
+      return result;
+    })
+    .catch((err) => err);
+}
+
+// gets reviews
 export function getReviews(productId) {
   return instance.get('/reviews/', {
     params: {
