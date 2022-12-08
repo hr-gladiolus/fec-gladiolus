@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import axios from 'axios';
 
 const config = require('../../config.js');
@@ -8,10 +9,12 @@ const instance = axios.create({
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export function getProductRating() {
+
+// gets product id
+export function getProductRating(productId) {
   return instance.get('/reviews/meta', {
     params: {
-      product_id: 37313,
+      product_id: productId,
     },
   })
     .then((response) => {
@@ -31,13 +34,46 @@ export function getProductRating() {
     .catch((err) => err);
 }
 
-export function getReviews() {
+// gets product ratings and number of ratings
+export function getRatings(productId) {
+  return instance.get('/reviews/meta', {
+    params: {
+      product_id: productId,
+    },
+  })
+    .then((response) => {
+      const oldFormatRatings = response.data.ratings;
+      const ratings = {
+        five: oldFormatRatings['5'],
+        four: oldFormatRatings['4'],
+        three: oldFormatRatings['3'],
+        two: oldFormatRatings['2'],
+        one: oldFormatRatings['1'],
+      };
+      let numberOfRatings = 0;
+
+      for (let i = 0; i < Object.values(ratings).length; i += 1) {
+        const currentRating = parseInt(Object.values(ratings)[i], 10);
+        numberOfRatings += currentRating;
+      }
+
+      const result = {
+        number: numberOfRatings,
+        ratings,
+      };
+      return result;
+    })
+    .catch((err) => err);
+}
+
+// gets reviews
+export function getReviews(productId) {
   return instance.get('/reviews/', {
     params: {
       page: 1,
       count: 5,
       sort: 'helpful',
-      product_id: 37324,
+      product_id: productId,
     },
   })
     .then((response) => response.data.results);

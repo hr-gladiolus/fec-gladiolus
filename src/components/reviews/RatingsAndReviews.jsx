@@ -1,4 +1,6 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import FilterRatings from './FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
 import ReviewsList from './ReviewsList.jsx';
@@ -8,26 +10,42 @@ import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 
 function RatingsAndReviews() {
-  const [rating, setRating] = useState();
-  const { visible, toggle } = useModal();
+  const [filter, setFilter] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState({});
+  const filters = {
+    five: false,
+    four: false,
+    three: false,
+    two: false,
+    one: false,
+  };
+  const [selectedFilters, setSelectedFilters] = useState(filters);
 
-  useEffect(() => {
-    getProductRating()
-      .then((result) => {
-        setRating(result);
-      });
-  }, []);
+  const { visible, toggle } = useModal();
 
   return (
     <div>
       <h1>Ratings & Reviews</h1>
-      <p>{rating}</p>
-      <p>star rating (insert when we actually get it done)</p>
-      <FilterRatings />
+
+      {/* filter ratings */}
+      <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
+      <br />
+
+      {/* product factors */}
       <ProductFactors />
+
+      {/* number of reviews, sort selector */}
+
+      {/* serarch for keyword */}
       <p>search for keyword</p>
-      <ReviewsList />
+
+      {/* reviews list */}
+      <ReviewsList filter={filter} currentFilters={currentFilters} />
+
+      {/* more reviews button */}
       <button type="button">More Reviews</button>
+
+      {/* add reviews button and modal */}
       <button type="button" onClick={toggle}>Add Review +</button>
       <Modal visible={visible} toggle={toggle}>
         <AddReview />

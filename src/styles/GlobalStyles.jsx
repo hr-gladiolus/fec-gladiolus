@@ -6,7 +6,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     /* Please change this color lol */
-    background: white;
+    background: ${({ theme }) => theme.bg};
+    color: ${({ theme }) => theme.color};
   }
 
   * {

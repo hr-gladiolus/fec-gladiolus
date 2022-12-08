@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import { getProductCard } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
+import Stars from '../shared/Stars.jsx';
 import Table from './Table.jsx';
+import { changeProduct } from '../../store/productReducer.js';
 
 const CardContainer = styled.div`
+  background: ${({ theme }) => theme.fg};
   position: relative;
   width: 200px;
   height: 400px;
   border: 1px solid black;
-  margin: 10px;
+  margin: 30px;
+  transition: all 0.2s ease-out;
+  transform: translateX(${(props) => props.offset * -250}px);
 `;
 
 const Img = styled.img`
@@ -28,33 +35,56 @@ const Button = styled.button`
   right: 10px;
 `;
 
-export default function Card({ id, parent }) {
+export default function Card({
+  id, offset, icon, remove,
+}) {
   const [product, setProduct] = useState({});
 
   const { visible, toggle } = useModal();
 
+  const parent = useSelector((state) => state.product.productId);
+  const dispatch = useDispatch();
+
+  const { ref, inView, entry } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+
   // get product info based on the id prop
   useEffect(() => {
-    getProductCard(id).then((res) => setProduct(res));
-  }, []);
+    // only send API call if Card is on the screen
+    if (inView) {
+      getProductCard(id).then((res) => setProduct(res));
+    }
+  }, [inView]);
+
+  const handleClick = () => {
+    if (icon === '☆') {
+      toggle();
+      return;
+    }
+    remove(id);
+  };
 
   return (
-    <CardContainer>
+    <CardContainer offset={offset} ref={ref}>
       {/* temp placeholder image :) */}
       <Img src={product.image ? product.image : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
 
       {/* functionality will be determined by which list the card is in */}
-      <Button type="button" onClick={toggle}>☆</Button>
+      <Button type="button" onClick={handleClick}>{icon}</Button>
       <Modal visible={visible} toggle={toggle}>
         {/* Modal renders its children, so place content between tags */}
         <Table currentId={parent} target={product} />
       </Modal>
       <h4>{product.category}</h4>
-      <h3>{product.name}</h3>
+      {/* future refactor: reset offset when button gets clicked */}
+      <h3><button type="button" onClick={() => dispatch(changeProduct(id))}>{product.name}</button></h3>
       <p>
         $
         {product.price}
       </p>
+      <Stars rating={product.rating} />
       <p>
         {product.rating}
         {' '}
