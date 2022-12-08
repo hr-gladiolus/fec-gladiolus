@@ -17,46 +17,6 @@ const Row = styled.div`
   }
 `;
 
-// const Button = styled.button`
-//   float: left;
-//   width: 15%;
-//   margin-top:10px;
-//   background-color: inherit;
-//   font-size: 12px;
-//   border: none;
-//   padding: 10px;
-//   &:hover {
-//     color: #982929;
-//   }
-//   &:active {
-//     color: #4e0881;
-//   }
-// `;
-
-// // div that holds bars
-// const Middle = styled.div`
-//   margin-top:10px;
-//   float: left;
-//   width: 70%;
-// `;
-
-// const Right = styled.div`
-//   text-align: right;
-// `;
-
-// const BottomBar = styled.div`
-//   width: 100%;
-//   background-color: #858080;
-//   text-align: center;
-//   color: white;
-// `;
-
-// const Five = styled.div`
-//   width: ${(props) => props.width}%;
-//   height: 18px;
-//   background-color: #04AA6D;
-// `;
-
 function FilterRatings(props) {
   const [rating, setRating] = useState();
   const [allRatings, setAllRatings] = useState();
@@ -141,7 +101,7 @@ function FilterRatings(props) {
 
       {/* filters */}
       <Row>
-        {['five', 'four', 'three', 'two', 'one'].map((number) => <SingleRating {...childProps} number={number} key={number} />)}
+        {['five', 'four', 'three', 'two', 'one'].map((number) => <SingleRating {...childProps} setSelectedFilters={selectedFilters} number={number} key={number} />)}
       </Row>
       {/* <Row>
         <Button

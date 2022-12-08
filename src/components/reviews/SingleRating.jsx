@@ -10,7 +10,7 @@ const Button = styled.button`
   background-color: inherit;
   font-size: 12px;
   border: none;
-  padding: 10px;
+  padding: 20px;
   &:hover {
     color: #982929;
   }
@@ -55,15 +55,6 @@ function SingleRating(props) {
     setFilter(true);
   };
 
-  // function buttonText() {
-  //   number === 'five' ? <u>5 stars</u>
-  //     : number === 'four' ? <u>4 stars</u>
-  //       : number === 'three' ? <u>3 stars</u>
-  //         : number === 'two' ? <u>2 stars</u>
-  //           : number === 'one' ? <u>1 stars</u>
-  //             : null;
-  // }
-
   return (
     <Button
       type="button"
@@ -72,12 +63,6 @@ function SingleRating(props) {
         handleClick(number);
       }}
     >
-      {/* {number === 'five' ? <u>5 stars</u>
-        : number === 'four' ? <u>4 stars</u>
-          : number === 'three' ? <u>3 stars</u>
-            : number === 'two' ? <u>2 stars</u>
-              : number === 'one' ? <u>1 stars</u>
-                : null} */}
       {number === 'five' ? <u>5 stars</u> : null}
       {number === 'four' ? <u>4 stars</u> : null}
       {number === 'three' ? <u>3 stars</u> : null}
