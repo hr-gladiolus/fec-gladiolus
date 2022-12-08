@@ -52,6 +52,7 @@ export default function Card({
 
   // get product info based on the id prop
   useEffect(() => {
+    // only send API call if Card is on the screen
     if (inView) {
       getProductCard(id).then((res) => setProduct(res));
     }
@@ -62,7 +63,6 @@ export default function Card({
       toggle();
       return;
     }
-    //
     remove(id);
   };
 

@@ -47,6 +47,7 @@ export default function RelatedList() {
   useEffect(() => {
     // get related products for a random product
     if (inView) {
+      // only send API call if related list is on screen
       getRelated(id).then((res) => setRelated(res));
     }
   }, [inView, id]);
