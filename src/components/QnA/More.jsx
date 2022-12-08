@@ -35,7 +35,7 @@ function More({ queList, toggleAccordion, showAccordion }) {
       </FlexRow>
       <Modal visible={visible} toggle={toggle}>
         <ModalContainer>
-          <ModalTemplate title="Ask Your Question" subtitle="About the [Product Name Here]" firstInputLabel="Your Question" firstInputName="Your Question" secondInputName="Example: jackson11!" thirdInputName="Your email" buttonName="Submit Question" />
+          <ModalTemplate title="Ask Your Question" subtitle="About the [Product Name Here]" firstInputLabel="Your Question" firstInputName="Your Question" secondInputName="Example: jackson11!" thirdInputName="Your email" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" />
         </ModalContainer>
       </Modal>
     </Comp>

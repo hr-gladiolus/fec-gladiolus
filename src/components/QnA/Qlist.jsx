@@ -9,6 +9,8 @@ import ModalTemplate from './comps/ModalTemplate.jsx';
 
 const Spacer = styled.div`
   margin: 0 0 10px 0;
+  overflow: auto;
+  max-height: 500px;
 `;
 
 function Qlist({ queList }) {

@@ -29,9 +29,9 @@ function Alist({ answers }) {
   let innerText;
 
   if (height === '0px') {
-    innerText = 'MORE';
+    innerText = 'SEE MORE';
   } else {
-    innerText = 'LESS';
+    innerText = 'COLLAPSE';
   }
 
   const mappedAnswers = answerKeys.map((ansID) => (
@@ -60,8 +60,6 @@ function Alist({ answers }) {
           <LoadAnswers
             onClick={toggleAccordion}
           >
-            LOAD
-            {' '}
             {innerText}
             {' '}
             ANSWERS
