@@ -5,49 +5,21 @@ import { useSelector } from 'react-redux';
 import { getProductRating, getRatings } from './api.js';
 import SingleRating from './SingleRating.jsx';
 
-const Row = styled.div`
-  width: 100px;
-  display: flex;
-  flex-direction: row;
-
-  &:after {
-  content: "";
-  display: table;
-  clear: both;
-  }
-`;
-
 function FilterRatings(props) {
   const [rating, setRating] = useState();
-  const [allRatings, setAllRatings] = useState();
-  const [numberOfRatings, setNumberOfRatings] = useState(0);
 
   const { filter, setFilter, filters } = props;
   const { selectedFilters, setSelectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
 
+  // get producr rating on render
   useEffect(() => {
     getProductRating(product)
       .then((result) => {
         setRating(result);
       });
-    getRatings(product)
-      .then((result) => {
-        setNumberOfRatings(result.number);
-        setAllRatings(result.ratings);
-      });
   }, []);
-
-  // set clicked rating in selected filters to true
-  // passes filters to parent, to pass to reviews list
-  // const handleClick = (number) => {
-  //   setSelectedFilters({
-  //     ...selectedFilters,
-  //     [number]: !selectedFilters.number,
-  //   });
-  //   setFilter(true);
-  // };
 
   // current filters component
   const currentFilters = () => (
@@ -78,13 +50,6 @@ function FilterRatings(props) {
     </div>
   );
 
-  const childProps = {
-    allRatings,
-    numberOfRatings,
-    selectedFilters,
-    setSelectedFilters,
-  };
-
   return (
     <div>
       {/* rating */}
@@ -100,28 +65,9 @@ function FilterRatings(props) {
       {filter === true ? removeFilterButton() : null}
 
       {/* filters */}
-      <Row>
-        {['five', 'four', 'three', 'two', 'one'].map((number) => <SingleRating {...childProps} setSelectedFilters={selectedFilters} number={number} key={number} />)}
-      </Row>
-      {/* <Row>
-        <Button
-          type="button"
-          onClick={
-            (evt) => {
-              evt.preventDefault();
-              handleClick('five');
-            }
-          }
-        >
-          <u>5 stars</u>
-        </Button>
-        <Middle>
-          <BottomBar>
-            <Five width={allRatings ? (allRatings.five / numberOfRatings) * 100 : 0} />
-          </BottomBar>
-        </Middle>
-        <Right>{allRatings ? allRatings.five : null}</Right>
-      </Row> */}
+      <div>
+        {['five', 'four', 'three', 'two', 'one'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
+      </div>
 
       {/* percentage of reviews that recommend */}
     </div>
