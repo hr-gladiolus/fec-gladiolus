@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getProductCard } from './api.js';
+import getProduct from '../shared/productAPI.js';
 
 // center table within modal
 const TableContainer = styled.div`
@@ -9,28 +10,27 @@ const TableContainer = styled.div`
   justify-content: center;
 `;
 
-export default function Table({ currentId, target }) {
-  const [current, setCurrent] = useState({});
+export default function Table({ target }) {
   const [features, setFeatures] = useState({});
 
-  // can be refactored later, this data should be stored somewhere already...
+  // get product data from redux store
+  const product = useSelector((state) => state.product.productData);
+
   useEffect(() => {
     const obj = {};
-    getProductCard(currentId).then((product) => {
-      // GET data for current item, push characteristics into obj
-      product.features.forEach((f) => {
-        if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
-        obj[f.feature][0] = f.value === null ? '✓' : f.value;
-      });
-      setCurrent(product);
-    }).then(() => {
-      // push target characteristics into obj
-      target.features.forEach((f) => {
-        if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
-        obj[f.feature][1] = f.value === null ? '✓' : f.value;
-      });
-      setFeatures(obj);
+
+    // push current product features into obj
+    product.features.forEach((f) => {
+      if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
+      obj[f.feature][0] = f.value === null ? '✓' : f.value;
     });
+
+    // push target characteristics into obj
+    target.features.forEach((f) => {
+      if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
+      obj[f.feature][1] = f.value === null ? '✓' : f.value;
+    });
+    setFeatures(obj);
   }, []);
 
   return (
@@ -38,7 +38,7 @@ export default function Table({ currentId, target }) {
       <table>
         <thead>
           <tr>
-            <th>{current.name}</th>
+            <th>{product.name}</th>
             <th>Characteristics</th>
             <th>{target.name}</th>
           </tr>

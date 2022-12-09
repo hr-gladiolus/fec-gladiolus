@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { getRelated } from './api.js';
 import Card from './Card.jsx';
+import getProduct from '../shared/productAPI.js';
 
 const ListContainer = styled.div`
   display: inline-flex;
