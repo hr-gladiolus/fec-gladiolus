@@ -41,6 +41,7 @@ export default function getProduct(id) {
       }
 
       result.average_rating = total ? (average / total).toFixed(2) : null;
+      result.total_ratings = total;
 
       return result;
     });
