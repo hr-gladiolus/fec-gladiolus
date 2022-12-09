@@ -8,7 +8,9 @@ import TopQA from './styles/TopQA.styled.js';
 import NoQues from './styles/NoQues.styled.js';
 import sampleData from './sampleData';
 
-function Qna({ environment, API }) {
+const API = require('../../config');
+
+function Qna({ environment }) {
   const [product, setProduct] = React.useState(1);
   const [queList, setQueList] = React.useState([]);
   const [staticList, setStaticList] = React.useState([]);

@@ -9,7 +9,6 @@ import RelatedList from './components/related/RelatedList.jsx';
 import RatingsAndReviews from './components/reviews/RatingsAndReviews.jsx';
 import { purple, green } from './styles/theme.js';
 
-const API_TOKEN = require('./config');
 // replace header tag with a styled header
 const Header = styled.header`
   background: ${({ theme }) => theme.header};
@@ -32,7 +31,7 @@ function App() {
         </Header>
         <Overview />
         <RelatedList />
-        <Qna API={API_TOKEN.API_TOKEN} />
+        <Qna />
         <RatingsAndReviews />
       </ThemeProvider>
     </div>

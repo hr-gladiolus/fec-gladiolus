@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 const config = require('../../config.js');
 
 // pass default options into axios

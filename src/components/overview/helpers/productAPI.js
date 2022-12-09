@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/newline-after-import
 /* eslint-disable no-console */
 const axios = require('axios');
