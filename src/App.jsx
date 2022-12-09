@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import axios from 'axios';
@@ -11,7 +12,6 @@ import { purple, green } from './styles/theme.js';
 import { changeData } from './store/productReducer.js';
 import getProduct from './components/shared/productAPI.js';
 
-const API_TOKEN = require('./config');
 // replace header tag with a styled header
 const Header = styled.header`
   background: ${({ theme }) => theme.header};
@@ -46,7 +46,7 @@ function App() {
         </Header>
         <Overview />
         <RelatedList />
-        <Qna API={API_TOKEN.API_TOKEN} />
+        <Qna />
         <RatingsAndReviews />
       </ThemeProvider>
     </div>
