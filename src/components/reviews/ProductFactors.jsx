@@ -3,9 +3,13 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Row = styled.div`
-  width: 150px;
+  display: flex;
+`;
+const SingleCharacteristic = styled.div`
+  /* width: 150px;
   display: flex;
   flex-direction: row;
+  justify-content: center; */
 
   &:after {
   content: "";
@@ -13,28 +17,28 @@ const Row = styled.div`
   clear: both;
   }
 `;
-const SingleCharacteristic = styled.div`
-`;
 
 const CharacteristicName = styled.p`
 `;
 
 const Bar = styled.div`
- width: 100%;
+  width: 100%;
   background-color: #858080;
   text-align: center;
   color: white;
+  height: 10px;
 `;
 
 const LowerText = styled.div`
 `;
 
 const One = styled.div`
-  /* float: left; */
+  float: left;
+  padding: 5px;
 `;
 
 const Five = styled.div`
-  /* float: right; */
+  float: right;
 `;
 
 function ProductFactors() {
@@ -43,7 +47,7 @@ function ProductFactors() {
   const product = useSelector((state) => state.product.productId);
   const fakeExample = {
     Fit: 3,
-    // Length: 3,
+    Length: 3,
     // Comfort: 3,
     // Quality: 4,
   };
