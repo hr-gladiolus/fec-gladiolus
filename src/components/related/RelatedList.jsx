@@ -51,7 +51,6 @@ export default function RelatedList() {
       // only send API call if related list is on screen
       getRelated(id).then((res) => setRelated(res));
     }
-    getProduct(id).then((res) => console.log('PRODUCT: ', res));
   }, [inView, id]);
 
   // carousel nav handlers
