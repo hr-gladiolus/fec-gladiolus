@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// need to add vertical bar between description and features
-
 function Description({ slogan, description }) {
   return (
     <div>
-      <div>
-        <h4>{slogan}</h4>
-        <p>{description}</p>
-      </div>
+      <h4 style={{ paddingBottom: '12px', paddingTop: '4px' }}>{slogan}</h4>
+      <p style={{ paddingBottom: '6px' }}>{description}</p>
     </div>
   );
 }

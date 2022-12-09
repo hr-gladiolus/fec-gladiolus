@@ -1,19 +1,22 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { getReviews } from '../helpers/productAPI.js';
 
 const Div = styled.div`
   border: 1px solid gray;
-  padding: 28px 32px 16px 32px;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  margin: 32px 12px 24px 12px;
-  max-width: 500px;
-  background: linear-gradient(0deg, #ebd3af, #ffc9b3);
+  background: linear-gradient(0deg, #eed8b8, #ffc9b3);
+  padding: 24px 30px 20px 30px;
+  box-shadow: 3px 3px 7px #531a007d;
+  margin: 30px 10px 20px 10px;
+  max-width: 600px;
 `;
 
 function Details(
   {
     ratings,
+    id,
     category,
     name,
     price,
@@ -23,22 +26,36 @@ function Details(
   const [numOfReviews, setNumOfReviews] = useState(0);
   const [avgRating, setAvgRating] = useState(0);
 
-  const calculateRating = () => {
-  };
-
   useEffect(() => {
-    calculateRating();
+    getReviews(id)
+      .then((results) => {
+        const arr = Object.values(results.ratings);
+        const total = arr.reduce((acc, val) => Number(acc) + Number(val), 0);
+        setNumOfReviews(total);
+      })
+      .catch((err) => {
+        Error('Error in Details getReviews', err);
+      });
   });
 
   return (
     <Div>
-      <h5>Add avgRating and numOfReviews here!</h5>
-      <h3>{category}</h3>
-      <h1>{name}</h1>
+      {numOfReviews >= 0 && (
+        <div>
+          <h5 style={{ float: 'right', marginTop: '3px' }}>
+            <a href="#readReviews" style={{ fontSize: '12px', color: '#002346' }}>
+              {`Read All ${numOfReviews} Reviews`}
+            </a>
+          </h5>
+          <h5 style={{ marginTop: '3px', fontSize: '12px', color: '#002346' }}>Add star ratings here!</h5>
+        </div>
+      )}
+      <h3 style={{ paddingTop: '7px' }}>{category}</h3>
+      <h1 style={{ paddingBottom: '7px' }}>{name}</h1>
       {parseInt(sale, 10) > 0 && (
         <h4>
-          <b style={{ textDecoration: 'line-through' }}>{`$${price}`}</b>
-          <b style={{ color: 'red' }}>{` $${sale}`}</b>
+          <span style={{ textDecoration: 'line-through' }}>{`$${price}`}</span>
+          <span style={{ color: 'red' }}>{` $${sale}`}</span>
         </h4>
       )}
       {parseInt(sale, 10) === 0 && (

@@ -2,7 +2,6 @@ import React from 'react';
 import { format, parseISO } from 'date-fns';
 import AnsRow from '../styles/AnsRow.styled';
 import AnsColumn from '../styles/AnsColumn.styled';
-import Aletter from '../styles/Aletter.styled';
 import AnsText from '../styles/AnsText.styled';
 import AnsInfo from '../styles/AnsInfo.styled';
 import FlexRow from '../styles/FlexRow.styled';
@@ -13,7 +12,6 @@ import ReportButton from '../styles/ReportButton.styled';
 function SingleAns({ answer }) {
   return (
     <AnsRow>
-      <Aletter>A:</Aletter>
       <AnsColumn>
         <AnsText>
           {answer.body}
