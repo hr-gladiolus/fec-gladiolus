@@ -13,6 +13,12 @@ const Spacer = styled.div`
   max-height: 500px;
 `;
 
+const TestDiv = styled.div`
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 1s ease;
+`;
+
 function Qlist({ queList }) {
   const { visible, toggle } = useModal();
 
@@ -41,13 +47,13 @@ function Qlist({ queList }) {
         <Comp>
           { mappedList.length > 2 ? mappedList.slice(0, 2) : mappedList }
           { mappedList.length > 2 ? (
-            <div
+            <TestDiv
               className="questionlisthidden"
               ref={content}
               style={{ maxHeight: height }}
             >
               { mappedList.slice(2) }
-            </div>
+            </TestDiv>
           ) : null }
           <Modal visible={visible} toggle={toggle}>
             {/* Modal renders its children, so place content between tags */}

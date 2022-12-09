@@ -15,6 +15,12 @@ const LoadAnswers = styled.button`
   margin: 0 0 10px 0;
 `;
 
+const TestDiv = styled.div`
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 1s ease;
+`;
+
 function Alist({ answers }) {
   const [height, setHeight] = React.useState('0px');
 
@@ -48,13 +54,13 @@ function Alist({ answers }) {
       <AListStyle>
         { mappedAnswers.length > 2 ? mappedAnswers.slice(0, 2) : mappedAnswers }
         { mappedAnswers.length > 2 ? (
-          <div
+          <TestDiv
             className="answerlisthidden"
             ref={content}
             style={{ maxHeight: height }}
           >
             { mappedAnswers.slice(2) }
-          </div>
+          </TestDiv>
         ) : null }
         { mappedAnswers.length > 2 ? (
           <LoadAnswers

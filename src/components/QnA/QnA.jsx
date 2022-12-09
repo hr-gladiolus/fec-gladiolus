@@ -8,7 +8,7 @@ import TopQA from './styles/TopQA.styled.js';
 import NoQues from './styles/NoQues.styled.js';
 import sampleData from './sampleData';
 
-const API = require('../../config');
+const API = require('../../config').API_TOKEN;
 
 function Qna({ environment }) {
   const [product, setProduct] = React.useState(1);
