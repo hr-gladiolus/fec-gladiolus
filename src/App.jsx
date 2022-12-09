@@ -24,8 +24,13 @@ const Header = styled.header`
 function App() {
   const dispatch = useDispatch();
 
+  const product = useSelector((state) => state.product.productId);
+
   useEffect(() => {
-    dispatch(fetchMeta());
+    console.log('before dispatch');
+    console.log('fetch', fetchMeta());
+    dispatch(fetchMeta(product));
+    console.log('after dispatch');
   }, []);
 
   return (

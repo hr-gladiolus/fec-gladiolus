@@ -14,17 +14,18 @@ function FilterRatings(props) {
   const { selectedFilters, setSelectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
-  const meta = useSelector((state) => state.meta.data);
+  const meta = useSelector((state) => state.meta);
 
   // get producr rating on render
-  useEffect(() => {
-    if (meta) {
-      getProductRating(metaData)
-        .then((result) => {
-          setRating(result);
-        });
-    }
-  }, [metaData]);
+  // useEffect(() => {
+  //   console.log('meta in filter ratings', meta.metaData)
+  //   if (meta) {
+  //     getProductRating(metaData)
+  //       .then((result) => {
+  //         setRating(result);
+  //       });
+  //   }
+  // }, [product]);
 
   // current filters component
   const currentFilters = () => (

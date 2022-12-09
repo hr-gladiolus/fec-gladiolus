@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 export function getProductRating(data) {
-  console.log('meta func', data);
   const { ratings } = data;
   let total = 0;
   let average = 0;

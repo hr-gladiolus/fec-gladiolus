@@ -22,7 +22,7 @@ function RatingsAndReviews() {
   const [selectedFilters, setSelectedFilters] = useState(filters);
 
   const product = useSelector((state) => state.product.productId);
-  const meta = useSelector((state) => state.meta.data);
+  const meta = useSelector((state) => state.meta);
   const dispatch = useDispatch();
 
   const { visible, toggle } = useModal();

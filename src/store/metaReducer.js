@@ -8,37 +8,58 @@ const instance = axios.create({
   headers: { Authorization: config.API_TOKEN },
 });
 
-const fetchMeta = createAsyncThunk('reviews/meta', async (payload, { rejectWithValue, getState, dispatch }) => {
+const fetchMeta = createAsyncThunk('meta/fetchMeta', async (payload, thunkAPI) => {
+  console.log('fetch meta', productId);
   try {
     const response = await instance.get('/reviews/meta');
     console.log('asynsthunk', response.data);
     return response.data;
   } catch (err) {
-    return err;
+    return rejectWithValue(err);
   }
 });
 
 const metaSlice = createSlice({
   name: 'meta',
   initialState: {
-    metaData: { loading: false },
+    loading: false,
+    metaData: {},
   },
-  reducers: {},
+  reducer: {},
   extraReducers: {
-  //   [fetchMeta.pending.type]: (state, action) => {
-  //     state.loading = true;
-  //   },
-  //   [fetchMeta.fulfilled.type]: (state, action) => {
-  //     state.metaData = action.payload;
-  //     state.loading = false;
-  //   },
-  //   [fetchMeta.rejected.type]: (state, action) => {
-  //     state.loading = false;
-  //     state.err = action.payload;
-  //   },
+    // [fetchMeta.pending]: (state, action) => {
+    //   state.loading = true;
+    // },
+    // [fetchMeta.fulfilled]: (state, { payload }) => {
+    //   state.metaData = payload;
+    //   state.loading = false;
+    // },
+    // [fetchMeta.rejected]: (state, { payload }) => {
+    //   state.loading = false;
+    //   state.err = action.payload;
+    // },
   },
 });
 
 // export const { updateMetaData } = metaSlice.actions;
 
 export default metaSlice.reducer;
+
+// const fetchMeta = createAsyncThunk(
+//   '/reviews/meta',
+//   async (productId, dispatch) => {
+//     console.log('new func');
+//     const response = await instance.get('/reviews/meta');
+//     return response.data;
+//   },
+// );
+
+// const fetchMeta = createAsyncThunk(
+//   '/reviews/meta',
+//   async (thunkAPI) => {
+//     const res = await fetch('https://jsonplaceholder.typicode.com/posts').then(
+//       (data) => data.json(),
+//     );
+//     return res;
+//   },
+// );
