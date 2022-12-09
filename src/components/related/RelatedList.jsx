@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getRelated } from './api.js';
 import Card from './Card.jsx';
 import getProduct from '../shared/productAPI.js';
+import { addToOutfit, removeFromOutfit } from '../../store/productReducer.js';
 
 const ListContainer = styled.div`
   display: inline-flex;
@@ -25,6 +26,7 @@ const CarouselNav = styled.button`
 
 const AddOutfit = styled.button`
   width: 200px;
+  min-width: 200px;
   height: 400px;
   border: 1px solid black;
   margin: 30px;
@@ -34,11 +36,12 @@ const AddOutfit = styled.button`
 
 export default function RelatedList() {
   const [related, setRelated] = useState([]);
-  const [outfit, setOutfit] = useState([]);
   const [relatedOffset, setRelatedOffset] = useState(0);
   const [outfitOffset, setOutfitOffset] = useState(0);
 
   const id = useSelector((state) => state.product.productId);
+  const outfit = useSelector((state) => state.product.outfit);
+  const dispatch = useDispatch();
 
   const { ref, inView, entry } = useInView({
     threshold: 0,
@@ -71,8 +74,7 @@ export default function RelatedList() {
   };
 
   const removeItem = (target) => {
-    const newOutfit = outfit.filter((product) => product !== target);
-    setOutfit(newOutfit);
+    dispatch(removeFromOutfit(target));
   };
 
   return (
@@ -93,9 +95,7 @@ export default function RelatedList() {
           <AddOutfit
             type="button"
             onClick={() => {
-              if (!outfit.includes(id)) {
-                setOutfit([id, ...outfit]);
-              }
+              dispatch(addToOutfit());
             }}
             offset={outfitOffset * -250}
             data-testid="add-outfit"
