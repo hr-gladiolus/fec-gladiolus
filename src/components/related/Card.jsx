@@ -6,7 +6,7 @@ import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 import Stars from '../shared/Stars.jsx';
 import Table from './Table.jsx';
-import { changeProduct } from '../../store/productReducer.js';
+import { changeProduct, addProduct } from '../../store/productReducer.js';
 import getProduct from '../shared/productAPI.js';
 
 const CardContainer = styled.div`
@@ -42,7 +42,7 @@ export default function Card({
 
   const { visible, toggle } = useModal();
 
-  const parent = useSelector((state) => state.product.productId);
+  const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
 
   const { ref, inView, entry } = useInView({
@@ -52,9 +52,14 @@ export default function Card({
 
   // get product info based on the id prop
   useEffect(() => {
-    // only send API call if Card is on the screen
-    if (inView) {
-      getProduct(id).then((res) => setProduct(res));
+    // only send API call if Card is on the screen and not cached
+    if (products[id] !== undefined) {
+      setProduct(products[id]);
+    } else if (inView) {
+      getProduct(id).then((res) => {
+        setProduct(res);
+        dispatch(addProduct(res));
+      });
     }
   }, [inView]);
 
@@ -82,7 +87,7 @@ export default function Card({
       >
         <Modal visible={visible} toggle={toggle}>
           {/* Modal renders its children, so place content between tags */}
-          <Table currentId={parent} target={product} />
+          <Table target={product} />
         </Modal>
         <h4>{product.category}</h4>
         {/* future refactor: reset offset when button gets clicked */}

@@ -26,14 +26,18 @@ const Header = styled.header`
 function App() {
   // we need to watch `id` in case it changes
   const id = useSelector((state) => state.product.productId);
+  const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
 
   useEffect(() => {
     // send GET requests, then add them to the redux state
-    getProduct(id).then((product) => {
-      console.log('GOT PRODUCT: ', product);
-      dispatch(changeData(product));
-    });
+    if (products[id] === undefined) {
+      getProduct(id).then((product) => {
+        dispatch(changeData(product));
+      });
+    } else {
+      dispatch(changeData(products[id]));
+    }
   }, [id]);
 
   return (

@@ -30,12 +30,16 @@ const productSlice = createSlice({
       ...state,
       outfit: state.outfit.filter((product) => product !== action.payload),
     }),
+    addProduct: (state, action) => {
+      state.products[action.payload.id] = action.payload;
+      return state;
+    },
   },
 });
 
 // export function that will be called by dispatch
 export const {
-  changeProduct, changeData, addToOutfit, removeFromOutfit,
+  changeProduct, changeData, addToOutfit, removeFromOutfit, addProduct,
 } = productSlice.actions;
 
 // export reducer to be used by store
