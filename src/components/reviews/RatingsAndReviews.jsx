@@ -11,7 +11,6 @@ import Modal from '../shared/Modal.jsx';
 
 function RatingsAndReviews() {
   const [filter, setFilter] = useState(false);
-  const [currentFilters, setCurrentFilters] = useState({});
   const filters = {
     five: false,
     four: false,
@@ -34,13 +33,11 @@ function RatingsAndReviews() {
       {/* product factors */}
       <ProductFactors />
 
-      {/* number of reviews, sort selector */}
-
       {/* serarch for keyword */}
       <p>search for keyword</p>
 
       {/* reviews list */}
-      <ReviewsList filter={filter} currentFilters={currentFilters} />
+      <ReviewsList filter={filter} />
 
       {/* more reviews button */}
       <button type="button">More Reviews</button>
