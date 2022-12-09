@@ -76,6 +76,7 @@ function ModalTemplate({
   buttonName,
   secondInputText,
   thirdInputText,
+  isAnswer,
 }) {
   const [firstValue, setFirstValue] = useState('');
 
