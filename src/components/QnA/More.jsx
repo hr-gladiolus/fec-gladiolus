@@ -32,7 +32,7 @@ function More({
         <AddAQue onClick={toggle}>ADD QUESTION +</AddAQue>
       </FlexRow>
       <Modal visible={visible} toggle={toggle}>
-        <ModalTemplate title="Ask Your Question" subtitle={`About the ${productName}`} firstInputLabel="Your Question" firstInputName="Your Question" secondInputName="Example: jackson11!" thirdInputName="Your email" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" isAnswer={false} />
+        <ModalTemplate title="Ask Your Question" subtitle={`About the ${productName}`} firstInputLabel="Your Question" firstInputName="Your Question" secondInputName="Example: jackson11!" thirdInputName="Your email" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" />
       </Modal>
     </Comp>
   );

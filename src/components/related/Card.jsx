@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductCard } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 import Stars from '../shared/Stars.jsx';
 import Table from './Table.jsx';
 import { changeProduct } from '../../store/productReducer.js';
+import getProduct from '../shared/productAPI.js';
 
 const CardContainer = styled.div`
   background: ${({ theme }) => theme.fg};
@@ -54,7 +54,7 @@ export default function Card({
   useEffect(() => {
     // only send API call if Card is on the screen
     if (inView) {
-      getProductCard(id).then((res) => setProduct(res));
+      getProduct(id).then((res) => setProduct(res));
     }
   }, [inView]);
 
@@ -69,7 +69,7 @@ export default function Card({
   return (
     <CardContainer offset={offset} ref={ref}>
       {/* temp placeholder image :) */}
-      <Img src={product.image ? product.image : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
+      <Img src={product.styles ? product.styles[0].photos[0].thumbnail_url : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
 
       {/* functionality will be determined by which list the card is in */}
       <Button type="button" onClick={handleClick}>{icon}</Button>
@@ -84,7 +84,7 @@ export default function Card({
         $
         {product.price}
       </p>
-      <Stars rating={product.rating} />
+      <Stars rating={product.average_rating} />
       <p>
         {product.rating}
         {' '}

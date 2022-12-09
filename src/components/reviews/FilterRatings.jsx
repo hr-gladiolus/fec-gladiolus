@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { getProductRating, getRatings } from './api.js';
+// import { getProductRating, getRatings } from './api.js';
 import SingleRating from './SingleRating.jsx';
 
 function FilterRatings(props) {
@@ -12,14 +12,15 @@ function FilterRatings(props) {
   const { selectedFilters, setSelectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
+  const data = useSelector((state) => state.product.productData);
 
   // get producr rating on render
-  useEffect(() => {
-    getProductRating(product)
-      .then((result) => {
-        setRating(result);
-      });
-  }, [product]);
+  // useEffect(() => {
+  //   getProductRating(product)
+  //     .then((result) => {
+  //       setRating(result);
+  //     });
+  // }, [product]);
 
   // current filters component
   const currentFilters = () => (
@@ -53,7 +54,7 @@ function FilterRatings(props) {
   return (
     <div>
       {/* rating */}
-      <p>{rating}</p>
+      <p>rating (need to round)</p>
 
       {/* star rating */}
       <p>stars</p>
