@@ -53,6 +53,8 @@ function ProductFactors() {
   const [currentFactors, setCurrentFactors] = useState();
   const [currentValues, setCurrentValues] = useState();
   const product = useSelector((state) => state.product.productId);
+  const data = useSelector((state) => state.product.productData);
+
   const fakeExample = {
     Fit: 0.34,
     Length: 0.78,
