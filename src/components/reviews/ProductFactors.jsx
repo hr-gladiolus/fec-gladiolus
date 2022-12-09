@@ -39,13 +39,13 @@ const LowerText = styled.div`
 
 const One = styled.div`
   float: left;
-  padding-top: 5px;
+  padding-top: 8px;
   padding-bottom: 5px;
 `;
 
 const Five = styled.div`
   float: right;
-  padding-top: 5px;
+  padding-top: 8px;
   padding-bottom: 5px;
 `;
 
