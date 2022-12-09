@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 const Row = styled.div`
   display: flex;
+  flex-direction: row;
+
 `;
 const SingleCharacteristic = styled.div`
   /* width: 150px;
