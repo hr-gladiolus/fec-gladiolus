@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -17,8 +18,8 @@ function SelectQty({
           <option>OUT OF STOCK</option>
         )}
         {currentSKU[1].quantity > 0 && (
-          range(currentSKU[1].quantity, 15).map((qty) => (
-            <option>{qty + 1}</option>
+          range(currentSKU[1].quantity, 15).map((qty, i) => (
+            <option key={i + 1}>{qty + 1}</option>
           ))
         )}
       </Select>
