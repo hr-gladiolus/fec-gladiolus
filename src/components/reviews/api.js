@@ -42,7 +42,7 @@ export function getRatings(productId) {
   })
     .then((response) => {
       const oldFormatRatings = response.data.ratings;
-      const ratings = {
+      const ratingsString = {
         five: oldFormatRatings['5'],
         four: oldFormatRatings['4'],
         three: oldFormatRatings['3'],

@@ -28,7 +28,6 @@ export default function getProduct(id) {
       result.ratings = data.ratings;
       result.recommended = data.recommended;
       result.characteristics = data.characteristics;
-      console.log('productAPI', result.characteristics);
 
       // calculate average rating
       const { ratings } = data;

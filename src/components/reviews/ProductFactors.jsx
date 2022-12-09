@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -17,6 +18,7 @@ const SingleCharacteristic = styled.div`
 `;
 
 const CharacteristicName = styled.p`
+  padding: 5px;
 `;
 
 const Bar = styled.div`
@@ -24,6 +26,7 @@ const Bar = styled.div`
   background-color: #858080;
   text-align: center;
   height: 10px;
+  position: relative;
 `;
 
 const Triangle = styled.div`
@@ -31,7 +34,9 @@ const Triangle = styled.div`
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 13px solid black;
+  border-top: 14px solid black;
+  position: absolute;
+  left: calc(${(props) => props.left}% - 7px) ;
 `;
 
 const LowerText = styled.div`
@@ -50,17 +55,8 @@ const Five = styled.div`
 `;
 
 function ProductFactors() {
-  const [currentFactors, setCurrentFactors] = useState();
-  const [currentValues, setCurrentValues] = useState();
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
-
-  const fakeExample = {
-    Fit: 0.34,
-    Length: 0.78,
-    Comfort: 0.89,
-    Quality: 0.45,
-  };
 
   const allFactors = {
     Size: { one: 'A size too small', five: 'A size too wide' },
@@ -76,7 +72,7 @@ function ProductFactors() {
       <CharacteristicName>
         {factor}
       </CharacteristicName>
-      <Bar><Triangle left={fakeExample[factor]} /></Bar>
+      <Bar><Triangle left={Math.round(data.characteristics[factor].value) * 20} /></Bar>
       <LowerText>
         <One>{allFactors[factor].one}</One>
         <Five>{allFactors[factor].five}</Five>
@@ -85,7 +81,7 @@ function ProductFactors() {
   );
   return (
     <Row>
-      {Object.keys(fakeExample).map((factor) => singleFactor(factor))}
+      {data.characteristics && Object.keys(data.characteristics).map((factor) => singleFactor(factor))}
     </Row>
   );
 }
