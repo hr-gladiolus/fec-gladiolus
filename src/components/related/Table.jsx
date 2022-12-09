@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { getProductCard } from './api.js';
+import getProduct from '../shared/productAPI.js';
 
 // center table within modal
 const TableContainer = styled.div`
@@ -16,7 +16,7 @@ export default function Table({ currentId, target }) {
   // can be refactored later, this data should be stored somewhere already...
   useEffect(() => {
     const obj = {};
-    getProductCard(currentId).then((product) => {
+    getProduct(currentId).then((product) => {
       // GET data for current item, push characteristics into obj
       product.features.forEach((f) => {
         if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
