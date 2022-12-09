@@ -3,17 +3,24 @@ import styled from 'styled-components';
 
 function SelectQty({
   Select,
-  skus,
-  handleChange,
+  currentSKU,
   handleQty,
+  range,
 }) {
   return (
     <div>
-      <Select onChange={handleChange}>
-        <option>Select quantity</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
+      <Select onChange={handleQty}>
+        {currentSKU[1].quantity === -1 && (
+          <option>Select Quantity</option>
+        )}
+        {currentSKU[1].quantity === 0 && (
+          <option>OUT OF STOCK</option>
+        )}
+        {currentSKU[1].quantity > 0 && (
+          range(currentSKU[1].quantity, 15).map((qty) => (
+            <option>{qty + 1}</option>
+          ))
+        )}
       </Select>
     </div>
   );
