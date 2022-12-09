@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import More from './More.jsx';
 import Container from './styles/Container.styled.js';
@@ -11,9 +11,9 @@ import sampleData from './sampleData';
 const API = require('../../config').API_TOKEN;
 
 function Qna({ environment }) {
-  const [product, setProduct] = React.useState(1);
-  const [queList, setQueList] = React.useState([]);
-  const [staticList, setStaticList] = React.useState([]);
+  const [product, setProduct] = useState(1);
+  const [queList, setQueList] = useState([]);
+  const [staticList, setStaticList] = useState([]);
 
   React.useEffect(() => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {
@@ -49,7 +49,7 @@ function Qna({ environment }) {
         />
       ) : <NoQues>{ noneText }</NoQues> }
       { staticList.length && !queList.length ? <NoQues>{ noMatches }</NoQues> : null }
-      { staticList.length ? <Qlist queList={queList} /> : null }
+      { staticList.length && <Qlist queList={queList} /> }
     </Container>
   );
 }

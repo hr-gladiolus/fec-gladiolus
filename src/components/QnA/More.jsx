@@ -20,13 +20,13 @@ function More({ queList, toggleAccordion, showAccordion }) {
   return (
     <Comp>
       <FlexRow>
-        { queList.length > 2 ? (
+        { queList.length > 2 && (
           <MoreAnsQues onClick={toggleAccordion}>
             {innerText}
             {' '}
             ANSWERED QUESTIONS
           </MoreAnsQues>
-        ) : null }
+        ) }
         <AddAQue onClick={toggle}>ADD QUESTION +</AddAQue>
       </FlexRow>
       <Modal visible={visible} toggle={toggle}>

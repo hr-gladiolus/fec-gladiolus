@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import More from './More.jsx';
 import SingleQue from './comps/SingleQue.jsx';
@@ -15,18 +15,18 @@ const Spacer = styled.div`
 
 const TestDiv = styled.div`
   overflow: hidden;
-  max-height: 0px;
+  max-height: ${({ height }) => height};
   transition: max-height 1s ease;
 `;
 
 function Qlist({ queList }) {
   const { visible, toggle } = useModal();
 
-  const [height, setHeight] = React.useState('0px');
+  const [height, setHeight] = useState('0px');
 
-  const [showAccordion, setShowAccordion] = React.useState(false);
+  const [showAccordion, setShowAccordion] = useState(false);
 
-  const content = React.useRef(null);
+  const content = useRef(null);
 
   const mappedList = queList.map((question) => (
     <SingleQue
@@ -46,15 +46,14 @@ function Qlist({ queList }) {
       <Spacer>
         <Comp>
           { mappedList.length > 2 ? mappedList.slice(0, 2) : mappedList }
-          { mappedList.length > 2 ? (
+          { mappedList.length > 2 && (
             <TestDiv
-              className="questionlisthidden"
+              height={height}
               ref={content}
-              style={{ maxHeight: height }}
             >
               { mappedList.slice(2) }
             </TestDiv>
-          ) : null }
+          ) }
           <Modal visible={visible} toggle={toggle}>
             {/* Modal renders its children, so place content between tags */}
             <ModalTemplate />

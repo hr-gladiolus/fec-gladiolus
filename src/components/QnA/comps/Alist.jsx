@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import SingleAns from './SingleAns.jsx';
 import AListStyle from '../styles/AListStyle.styled';
@@ -6,25 +6,24 @@ import OuterAListStyle from '../styles/OuterAListStyle.styled';
 import Aletter from '../styles/Aletter.styled';
 
 const LoadAnswers = styled.button`
-  display: flex;
   background-color: white;
   font-weight: bold;
   font-size: 11px;
-  justify-content: start;
+  text-align: left;
   border-width: 0;
   margin: 0 0 10px 0;
 `;
 
 const TestDiv = styled.div`
   overflow: hidden;
-  max-height: 0px;
+  max-height: ${({ height }) => height};
   transition: max-height 1s ease;
 `;
 
 function Alist({ answers }) {
-  const [height, setHeight] = React.useState('0px');
+  const [height, setHeight] = useState('0px');
 
-  const content = React.useRef(null);
+  const content = useRef(null);
 
   const answerKeys = Object.keys(answers);
 
@@ -53,16 +52,15 @@ function Alist({ answers }) {
         : <div style={{ fontSize: '13px', marginLeft: '17px' }}>There are currently no answers to this question.</div> }
       <AListStyle>
         { mappedAnswers.length > 2 ? mappedAnswers.slice(0, 2) : mappedAnswers }
-        { mappedAnswers.length > 2 ? (
+        { mappedAnswers.length > 2 && (
           <TestDiv
-            className="answerlisthidden"
+            height={height}
             ref={content}
-            style={{ maxHeight: height }}
           >
             { mappedAnswers.slice(2) }
           </TestDiv>
-        ) : null }
-        { mappedAnswers.length > 2 ? (
+        ) }
+        { mappedAnswers.length > 2 && (
           <LoadAnswers
             onClick={toggleAccordion}
           >
@@ -70,7 +68,7 @@ function Alist({ answers }) {
             {' '}
             ANSWERS
           </LoadAnswers>
-        ) : null }
+        ) }
       </AListStyle>
     </OuterAListStyle>
   );

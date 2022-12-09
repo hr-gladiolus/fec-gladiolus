@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import FlexColumn from '../styles/FlexColumn.styled';
 
@@ -46,27 +46,15 @@ const SecondInput = styled.input.attrs({ maxLength: '60', required: 'required' }
 padding: 0 0 15px 0;
 `;
 
-const ThirdInput = styled.input.attrs({ maxLength: '60', required: 'required', type: 'email' })`
-  padding: 0 0 15px 0;
-`;
-
 const SubmitModal = styled.button`
 
 `;
 
-const NicknameParagraph = styled.p`
+const CharsParagraph = styled.p`
   opacity: 50%;
   color: black;
   position: absolute;
-  bottom: 25%;
-  right 0.5%;
-`;
-
-const EmailParagraph = styled.p`
-  opacity: 50%;
-  color: black;
-  position: absolute;
-  bottom: 26%;
+  bottom: ${({ bottom }) => bottom}%;
   right 0.5%;
 `;
 
@@ -87,11 +75,11 @@ function ModalTemplate({
   secondInputText,
   thirdInputText,
 }) {
-  const [firstValue, setFirstValue] = React.useState('');
+  const [firstValue, setFirstValue] = useState('');
 
-  const [secondValue, setSecondValue] = React.useState('');
+  const [secondValue, setSecondValue] = useState('');
 
-  const [thirdValue, setThirdValue] = React.useState('');
+  const [thirdValue, setThirdValue] = useState('');
 
   function firstChange(e) {
     setFirstValue(e.target.value);
@@ -131,22 +119,22 @@ function ModalTemplate({
             </Label>
             <Label>
               What is your nickname?
-              <NicknameParagraph>
+              <CharsParagraph bottom="25">
                 Characters left:
                 {' '}
                 {60 - secondValue.length}
-              </NicknameParagraph>
+              </CharsParagraph>
               <SecondInput placeholder={secondInputName} onChange={secondChange} />
               {secondInputText}
             </Label>
             <Label>
               What is your email?
-              <EmailParagraph>
+              <CharsParagraph bottom="26">
                 Characters left:
                 {' '}
                 {60 - thirdValue.length}
-              </EmailParagraph>
-              <ThirdInput placeholder={thirdInputName} onChange={thirdChange} />
+              </CharsParagraph>
+              <SecondInput placeholder={thirdInputName} type="email" onChange={thirdChange} />
               {thirdInputText}
             </Label>
             <SubmitModal onClick={handleSubmitModal}>{buttonName}</SubmitModal>

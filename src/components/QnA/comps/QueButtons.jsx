@@ -9,10 +9,6 @@ import AddAnswerButton from '../styles/AddAnswerButton.styled';
 import QueButtonsOuter from '../styles/QueButtonsOuter.styled';
 
 function QueButtons({ helpfulness, toggle }) {
-  const handleClick = (e) => {
-    toggle();
-  };
-
   return (
     <QueButtonsOuter>
       <QueButtonsStyles>
@@ -22,7 +18,7 @@ function QueButtons({ helpfulness, toggle }) {
           <HelpfulButton>Yes</HelpfulButton>
           {` (${helpfulness})`}
         </HelpfulSentence>
-        <AddAnswerButton onClick={handleClick}>Add Answer</AddAnswerButton>
+        <AddAnswerButton onClick={toggle}>Add Answer</AddAnswerButton>
       </QueButtonsStyles>
     </QueButtonsOuter>
   );
