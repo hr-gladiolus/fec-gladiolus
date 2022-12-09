@@ -9,6 +9,7 @@ font-size: 11px;
 place-content: center;
 opacity: 85%;
 text-decoration: underline;
+margin 0 5px;
 `;
 
 export default HelpfulButton;

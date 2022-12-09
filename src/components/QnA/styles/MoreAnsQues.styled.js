@@ -7,6 +7,9 @@ const MoreAnsQues = styled.button`
   padding: 2.04% 1.5%;
   background-color: white;
   margin-right: 2.5%;
+  min-width: 216px;
+  place-content: center;
+  text-align: center;
 `;
 
 export default MoreAnsQues;
