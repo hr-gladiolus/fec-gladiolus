@@ -10,11 +10,11 @@ const instance = axios.create({
   },
 });
 
-async function getStyles(productId) {
+function getStyles(productId) {
   return instance.get(`/products/${productId}/styles`)
     .then((results) => results.data.results)
     .catch((err) => {
-      Error('Error with productAPI getStyle', err);
+      Error('Error with productAPI getStyles', err);
     });
 }
 
@@ -27,7 +27,6 @@ function getProducts() {
 }
 
 function getProduct(productId) {
-  console.log('I am inside getProduct API');
   return instance.get(`/products/${productId}`)
     .then((result) => result.data)
     .catch((err) => {
@@ -35,14 +34,18 @@ function getProduct(productId) {
     });
 }
 
-// getProducts();
-// getProduct(37313);
-const styleData = getStyles(37313);
-const result = styleData.then((data) => console.log(data));
+function getReviews(productId) {
+  return instance.get(`/reviews/meta?product_id=${productId}`)
+    .then((results) => results.data)
+    .catch((err) => {
+      Error('Error with productAPI getReviews', err);
+    });
+}
 
 module.exports = {
   getProducts,
   getProduct,
   getStyles,
-  result,
+  getReviews,
+  instance,
 };
