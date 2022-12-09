@@ -4,14 +4,10 @@ import styled from 'styled-components';
 
 const Row = styled.div`
   display: flex;
-  flex-direction: row;
-
+  flex-direction: column;
 `;
 const SingleCharacteristic = styled.div`
-  /* width: 150px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center; */
+  width: 300px;
 
   &:after {
   content: "";
@@ -27,8 +23,15 @@ const Bar = styled.div`
   width: 100%;
   background-color: #858080;
   text-align: center;
-  color: white;
   height: 10px;
+`;
+
+const Triangle = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 13px solid black;
 `;
 
 const LowerText = styled.div`
@@ -36,11 +39,14 @@ const LowerText = styled.div`
 
 const One = styled.div`
   float: left;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 `;
 
 const Five = styled.div`
   float: right;
+  padding-top: 5px;
+  padding-bottom: 5px;
 `;
 
 function ProductFactors() {
@@ -48,10 +54,10 @@ function ProductFactors() {
   const [currentValues, setCurrentValues] = useState();
   const product = useSelector((state) => state.product.productId);
   const fakeExample = {
-    Fit: 3,
-    Length: 3,
-    // Comfort: 3,
-    // Quality: 4,
+    Fit: 0.34,
+    Length: 0.78,
+    Comfort: 0.89,
+    Quality: 0.45,
   };
 
   const allFactors = {
@@ -68,7 +74,7 @@ function ProductFactors() {
       <CharacteristicName>
         {factor}
       </CharacteristicName>
-      <Bar>bar</Bar>
+      <Bar><Triangle left={fakeExample[factor]} /></Bar>
       <LowerText>
         <One>{allFactors[factor].one}</One>
         <Five>{allFactors[factor].five}</Five>
