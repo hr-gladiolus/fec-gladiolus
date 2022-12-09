@@ -28,6 +28,7 @@ export default function getProduct(id) {
       result.ratings = data.ratings;
       result.recommended = data.recommended;
       result.characteristics = data.characteristics;
+      console.log('productAPI', result.characteristics);
 
       // calculate average rating
       const { ratings } = data;
@@ -41,7 +42,7 @@ export default function getProduct(id) {
       }
 
       result.average_rating = total ? (average / total).toFixed(2) : null;
-      result.total_ratings = total;
+      result.average_rating_tenth = Math.round(result.average_rating * 10) / 10;
 
       return result;
     });
