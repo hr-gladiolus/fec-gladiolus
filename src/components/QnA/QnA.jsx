@@ -11,7 +11,13 @@ import sampleData from './sampleData';
 const API = require('../../config').API_TOKEN;
 
 function Qna({ environment }) {
-  const [product, setProduct] = useState(1);
+  // I will need to get either the full product object or jsut the product name and ID
+  // passed into the component as props
+  // but for now I will just have name and ID be placeholders.
+  // I will need the full product object and can take the name and ID from that
+
+  const [productName, setProductName] = useState('generic name');
+  const [productID, setProductID] = useState(37324);
   const [queList, setQueList] = useState([]);
   const [staticList, setStaticList] = useState([]);
 
@@ -21,14 +27,14 @@ function Qna({ environment }) {
         Authorization: API,
       },
       params: {
-        product_id: product,
+        product_id: productID,
       },
     })
       .then((value) => {
         // value.data.results will have the real data to load once everything
         // is working and data has been submitted to the API.
-        setQueList(sampleData);
-        setStaticList(sampleData);
+        setQueList(value.data.results);
+        setStaticList(value.data.results);
         // setQueList(value.data.results);
         // this will set the data for the question list.
         // However, how their API starts, it has no data currently so use sample data instead.
@@ -49,7 +55,13 @@ function Qna({ environment }) {
         />
       ) : <NoQues>{ noneText }</NoQues> }
       { staticList.length && !queList.length ? <NoQues>{ noMatches }</NoQues> : null }
-      { staticList.length && <Qlist queList={queList} /> }
+      { staticList.length && (
+        <Qlist
+          queList={queList}
+          productID={productID}
+          productName={productName}
+        />
+      ) }
     </Container>
   );
 }
