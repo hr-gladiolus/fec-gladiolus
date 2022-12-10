@@ -151,8 +151,8 @@ function SingleReview(props) {
       {/* images here  */}
       <ImageContainer>
         { review.photos && review.photos.map((photo) => (
-          <SingleImage>
-            <Image src={photo} alt="" key={photo} onClick={toggle} />
+          <SingleImage key={photo}>
+            <Image src={photo} alt="" onClick={toggle} />
             <Modal visible={visible} toggle={toggle}>
               <ModalImage src={photo} alt="" />
             </Modal>
@@ -160,6 +160,12 @@ function SingleReview(props) {
 
         ))}
       </ImageContainer>
+      {/*
+      <ImageContainer>
+        {review.photos && review.photos.map((photo) => {
+          <SingleImage key={photo} link={photo} />
+        })}
+      </ImageContainer> */}
 
       {review.recommend === true && (
         <Recommend>
