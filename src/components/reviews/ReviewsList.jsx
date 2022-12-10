@@ -41,7 +41,6 @@ function ReviewsList(props) {
       <p>search for keyword</p>
 
       {/* review list */}
-      {}
       {reviews.map((review) => (
         <SingleReview
           review={review}
