@@ -1,6 +1,5 @@
 // modules
 import React, { useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 // components
 import QueView from './QueView.jsx';
@@ -9,8 +8,6 @@ import useModal from '../../shared/useModal.js';
 import Modal from '../../shared/Modal.jsx';
 import ModalTemplate from './ModalTemplate.jsx';
 import { submitHelpful } from '../requestHelpers';
-
-const API = require('../../../config').API_TOKEN;
 
 const SingleQuest = styled.div`
   display: flex;

@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
-import axios from 'axios';
 import styled from 'styled-components';
 import FlexRow from '../styles/FlexRow.styled';
 import HelpfulSentence from '../styles/HelpfulSentence.styled';
 import HelpfulButton from '../styles/HelpfulButton.styled';
 import { submitHelpful, submitReport } from '../requestHelpers';
-
-const API = require('../../../config').API_TOKEN;
 
 const AnsRow = styled.div`
   min-width: 305px;
