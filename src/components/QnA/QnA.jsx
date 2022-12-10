@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import More from './More.jsx';
 import Container from './styles/Container.styled.js';
 import Search from './Search.jsx';
 import Qlist from './Qlist.jsx';
-import TopQA from './styles/TopQA.styled.js';
-import NoQues from './styles/NoQues.styled.js';
-import sampleData from './sampleData';
 
 const API = require('../../config').API_TOKEN;
+
+const NoQues = styled.div`
+  margin-bottom: 15px;
+  font-size: 14px;
+`;
+
+const TopQA = styled.div`
+  margin-bottom: 10px;
+  font-size: 14px;
+`;
 
 function Qna({ environment }) {
   // I will need to get either the full product object or jsut the product name and ID

@@ -7,6 +7,7 @@ const OuterFlexColumn = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
+  max-width: 407px;
 `;
 
 const FlexForm = styled.form`
@@ -76,7 +77,8 @@ function ModalTemplate({
   buttonName,
   secondInputText,
   thirdInputText,
-  isAnswer,
+  isQuestion,
+  identification,
 }) {
   const [firstValue, setFirstValue] = useState('');
 
@@ -99,9 +101,15 @@ function ModalTemplate({
   function handleSubmitModal(e) {
     e.preventDefault();
     console.log('submitting modal with the values:');
-    console.log('Question value, ', firstValue);
+    console.log('Question/answer value, ', firstValue);
     console.log('Nickname value, ', secondValue);
     console.log('Email value, ', thirdValue);
+    console.log('Identification, ', identification);
+    if (isQuestion) {
+      console.log('This is a question');
+    } else {
+      console.log('This is an answer');
+    }
   }
 
   return (
@@ -110,7 +118,7 @@ function ModalTemplate({
         <ModalTitle>{title}</ModalTitle>
         <ModalSubtitle>{subtitle}</ModalSubtitle>
         <FlexColumn>
-          <FlexForm>
+          <FlexForm onSubmit={handleSubmitModal}>
             <Label>
               {firstInputLabel}
               <FirstInput placeholder={firstInputName} onChange={firstChange} />
@@ -140,7 +148,7 @@ function ModalTemplate({
               <SecondInput placeholder={thirdInputName} type="email" onChange={thirdChange} />
               {thirdInputText}
             </Label>
-            <SubmitModal onClick={handleSubmitModal}>{buttonName}</SubmitModal>
+            <SubmitModal>{buttonName}</SubmitModal>
           </FlexForm>
         </FlexColumn>
       </FlexColumn>
