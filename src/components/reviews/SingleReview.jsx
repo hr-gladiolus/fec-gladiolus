@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { format, parseISO } from 'date-fns';
 import Stars from '../shared/Stars.jsx';
 
+const UserDate = styled.div``;
+
 function SingleReview(props) {
   const { review } = props;
 
@@ -57,7 +59,15 @@ function SingleReview(props) {
       {/* star rating */}
       <Stars rating={review.rating} />
 
-      <p>{review.reviewer_name}</p>
+      {/* username and post date */}
+      <UserDate>
+        {review.reviewer_name}
+        ,
+        {' '}
+        {format(parseISO(review.date), 'MMMM d, yyyy')}
+        {' '}
+      </UserDate>
+
       {review.summary.length > 60 ? summaryOverflow() : <h2>{review.summary}</h2>}
       {review.body.length > 250 ? bodyOverflow() : <p>{review.body}</p>}
       {/* images here  */}
