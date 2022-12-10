@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import { format, parseISO } from 'date-fns';
+import Stars from '../shared/Stars.jsx';
 
 function SingleReview(props) {
   const { review } = props;
@@ -50,7 +53,10 @@ function SingleReview(props) {
 
   return (
     <div>
-      <p>{review.rating}</p>
+
+      {/* star rating */}
+      <Stars rating={review.rating} />
+
       <p>{review.reviewer_name}</p>
       {review.summary.length > 60 ? summaryOverflow() : <h2>{review.summary}</h2>}
       {review.body.length > 250 ? bodyOverflow() : <p>{review.body}</p>}
