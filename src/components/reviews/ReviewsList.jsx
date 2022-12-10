@@ -8,29 +8,44 @@ import SortReviews from './SortReviews.jsx';
 const ReviewsListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  max-height: 300px;
 `;
 
 const SearchBar = styled.input`
 `;
 
+const ShowMoreButton = styled.div``;
+
 function ReviewsList(props) {
   const [reviews, setReviews] = useState([]);
   const [sortOption, setSortOption] = useState('Relevant');
+  // reviews currently shown on page
+  const [currentReviews, setCurrentReviews] = useState([]);
+  // index for slicing reviews array
+  const [index, setIndex] = useState(2);
 
   const { filter } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
+  const numberOfReviews = data.total_reviews;
 
   const sortReviews = () => {
 
   };
 
+  const showMoreReviews = () => {
+    setCurrentReviews(reviews.slice(0, index));
+    setIndex(index + 2);
+  };
+
   // pulls reviews when product changes
   useEffect(() => {
-    getReviews(product, sortOption)
+    getReviews(product, sortOption, numberOfReviews)
       .then((result) => {
         setReviews(result);
+        setCurrentReviews(result.slice(0, 2));
       });
   }, []);
 
@@ -42,23 +57,33 @@ function ReviewsList(props) {
   return (
     <div>
 
-      {/* number of reviews, sort selector */}
       <SortReviews sortOption={sortOption} setSortOption={setSortOption} />
 
-      {/* serarch for keyword */}
       <SearchBar placeholder="Search for a Keyword" />
 
-      {/* review list */}
-      {reviews.map((review) => (
-        <SingleReview
-          review={review}
-          key={review.review_id}
-          id={review.review_id}
-        />
-      ))}
+      <ReviewsListContainer>
+        {currentReviews.map((review) => (
+          <SingleReview
+            review={review}
+            key={review.review_id}
+            id={review.review_id}
+          />
+        ))}
+      </ReviewsListContainer>
 
       {/* more reviews button */}
-      <button type="button">More Reviews</button>
+      {numberOfReviews > 2
+      && currentReviews.length < reviews.length
+      && (
+        <ShowMoreButton
+          onClick={(evt) => {
+            evt.preventDefault();
+            showMoreReviews();
+          }}
+        >
+          More Reviews
+        </ShowMoreButton>
+      )}
 
     </div>
   );
