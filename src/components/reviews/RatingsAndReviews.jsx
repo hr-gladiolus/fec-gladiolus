@@ -19,6 +19,7 @@ function RatingsAndReviews() {
     one: false,
   };
   const [selectedFilters, setSelectedFilters] = useState(filters);
+  const data = useSelector((state) => state.product.productData);
 
   const { visible, toggle } = useModal();
 
@@ -33,11 +34,8 @@ function RatingsAndReviews() {
       {/* product factors */}
       <ProductFactors />
 
-      {/* serarch for keyword */}
-      <p>search for keyword</p>
-
       {/* reviews list */}
-      <ReviewsList filter={filter} />
+      {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} />}
 
       {/* more reviews button */}
       <button type="button">More Reviews</button>
