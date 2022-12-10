@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import SingleAns from './SingleAns.jsx';
 
@@ -30,28 +30,35 @@ const LoadAnswers = styled.button`
 `;
 
 const AccordionDiv = styled.div`
+  overflow: ${({ overflow }) => overflow};
+  height: ${({ height }) => height};
+  max-height: 325px;
+  transition: height 1s ease;
+`;
+
+const ReferencePoint = styled.div`
   overflow: hidden;
-  max-height: ${({ height }) => height};
-  transition: max-height 1s ease;
+  max-height 0;
 `;
 
 function Alist({ answers }) {
-  const [height, setHeight] = useState('0px');
+  const [height, setHeight] = useState('100px');
+  const [overflow, setOverflow] = useState('hidden');
+  const [innerText, setInnerText] = useState('SEE MORE');
 
   const content = useRef(null);
+  const referenceHeight = useRef(null);
 
   const answerKeys = Object.keys(answers);
 
+  useEffect(() => {
+    setHeight(`${referenceHeight.current.scrollHeight}px`);
+  }, []);
+
   function toggleAccordion() {
-    setHeight(height !== '0px' ? '0px' : `${content.current.scrollHeight}px`);
-  }
-
-  let innerText;
-
-  if (height === '0px') {
-    innerText = 'SEE MORE';
-  } else {
-    innerText = 'COLLAPSE';
+    setHeight(height !== `${referenceHeight.current.scrollHeight}px` ? `${referenceHeight.current.scrollHeight}px` : `${content.current.scrollHeight}px`);
+    setOverflow(overflow !== 'hidden' ? 'hidden' : 'scroll');
+    setInnerText(innerText !== 'SEE MORE' ? 'SEE MORE' : 'COLLAPSE');
   }
 
   const mappedAnswers = answerKeys.map((ansID) => (
@@ -66,15 +73,16 @@ function Alist({ answers }) {
       {mappedAnswers.length !== 0 ? <Aletter>A:</Aletter>
         : <div style={{ fontSize: '13px', marginLeft: '17px' }}>There are currently no answers to this question.</div> }
       <AListStyle>
-        { mappedAnswers.length > 2 ? mappedAnswers.slice(0, 2) : mappedAnswers }
-        { mappedAnswers.length > 2 && (
-          <AccordionDiv
-            height={height}
-            ref={content}
-          >
-            { mappedAnswers.slice(2) }
-          </AccordionDiv>
-        ) }
+        <ReferencePoint ref={referenceHeight}>
+          {mappedAnswers.slice(0, 2)}
+        </ReferencePoint>
+        <AccordionDiv
+          overflow={overflow}
+          height={height}
+          ref={content}
+        >
+          { mappedAnswers }
+        </AccordionDiv>
         { mappedAnswers.length > 2 && (
           <LoadAnswers
             onClick={toggleAccordion}
