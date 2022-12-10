@@ -77,3 +77,15 @@ export function getReviews(productId, sortOption) {
   })
     .then((response) => response.data.results);
 }
+
+// marks review as helpful
+export function markHelpful(reviewId) {
+  return instance.put(`/reviews/${reviewId}/helpful`)
+    .then((response) => response);
+}
+
+// reports review
+export function reportReview(reviewId) {
+  return instance.put(`/reviews/${reviewId}/report`)
+    .then((response) => response);
+}

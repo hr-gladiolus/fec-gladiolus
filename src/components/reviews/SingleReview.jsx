@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { format, parseISO } from 'date-fns';
 import { GrCheckmark } from 'react-icons/gr';
 import Stars from '../shared/Stars.jsx';
+import { markHelpful, reportReview } from './api.js';
 
 const Review = styled.div`
   display: flex;
@@ -43,23 +44,34 @@ const HelpfulReportButton = styled.div`
   text-decoration: underline;
 `;
 
+const Line = styled.hr`
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid white;
+  margin: 1em 0;
+  padding: 0;
+`;
+
 function SingleReview(props) {
-  // const { review } = props;
+  const { review } = props;
 
   const [showMore, setShowMore] = useState(false);
+  const [helpful, setHelpful] = useState(review.helpfulness);
+
   // this is my example review - leaving it in for future use
-  const review = {
-    review_id: 1277210,
-    rating: 3,
-    summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
-    recommend: true,
-    response: 'dfhkjdahskfhdaskjhjk',
-    body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
-    date: '2022-10-25T00:00:00.000Z',
-    reviewer_name: 'cordelia',
-    helpfulness: 2,
-    photos: [],
-  };
+  // const review = {
+  //   review_id: 1277210,
+  //   rating: 3,
+  //   summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
+  //   recommend: true,
+  //   response: 'dfhkjdahskfhdaskjhjk',
+  //   body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
+  //   date: '2022-10-25T00:00:00.000Z',
+  //   reviewer_name: 'cordelia',
+  //   helpfulness: 2,
+  //   photos: [],
+  // };
 
   // handles summary with length over 60 char
   function summaryOverflow() {
@@ -94,13 +106,18 @@ function SingleReview(props) {
     );
   }
 
+  const helpfulClick = () => {
+    markHelpful(review.review_id)
+      .then(() => {
+        setHelpful(helpful + 1);
+      });
+  };
+
   return (
     <Review>
 
-      {/* star rating */}
       <Stars rating={review.rating} />
 
-      {/* username and post date */}
       <UserDate>
         {review.reviewer_name}
         ,
@@ -109,15 +126,12 @@ function SingleReview(props) {
         {' '}
       </UserDate>
 
-      {/* review summary */}
       {review.summary.length > 60 ? summaryOverflow() : <ReviewSummary>{review.summary}</ReviewSummary>}
 
-      {/* review body */}
       {review.body.length > 250 ? bodyOverflow() : <ReviewBody>{review.body}</ReviewBody>}
 
       {/* images here  */}
 
-      {/* recommend this product */}
       {review.recommend === true && (
         <Recommend>
           {' '}
@@ -127,7 +141,6 @@ function SingleReview(props) {
         </Recommend>
       )}
 
-      {/* response */}
       {review.response && (
         <ResponseContainer>
           <ResponseHeader>Response:</ResponseHeader>
@@ -135,18 +148,30 @@ function SingleReview(props) {
         </ResponseContainer>
       )}
 
-      {/* was this review helpful */}
       <HelpfulReportContainer>
         Was this review helpful?
-        <HelpfulReportButton>Yes</HelpfulReportButton>
+        <HelpfulReportButton
+          onClick={(evt) => {
+            evt.preventDefault();
+            helpfulClick();
+          }}
+        >
+          Yes
+        </HelpfulReportButton>
         (
-        {review.helpfulness}
+        {helpful}
         )  |
-        <HelpfulReportButton>Report</HelpfulReportButton>
+        <HelpfulReportButton
+          onClick={(evt) => {
+            evt.preventDefault();
+            reportReview(review.review_id);
+          }}
+        >
+          Report
+        </HelpfulReportButton>
       </HelpfulReportContainer>
 
-      <button type="button">Report</button>
-      {/* report button functionality */}
+      <Line />
     </Review>
   );
 }
