@@ -5,23 +5,10 @@ import SingleReview from './SingleReview.jsx';
 
 const SelectContainer = styled.div`
   position: relative;
-  margin: 0;
+  display: inline-block;
 `;
 
 const NumberReviews = styled.div``;
-
-const SelectButton = styled.button`
-  background-color: #fff;
-  border: none;
-  color: #111;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: 0.3s ease;
-  &:hover {
-    background-color: #eee;
-  }
-`;
 
 const Dropdown = styled.div`
   position: absolute;
@@ -29,19 +16,20 @@ const Dropdown = styled.div`
   left: 0;
   display: flex;
   flex-direction: column;
-  transition: max-height 0.2s ease;
-  visibility: hidden;
+`;
+
+const SelectButton = styled.button`
+  background-color: #fff;
+  border: none;
+  color: #111;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.3s ease;
 `;
 
 const DropdownOption = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
-  &:hover, :focus, :focus:hover {
-    background-color: #166edc;
-    color: #fafafa;
-    outline: none;
-  }
 `;
 
 function SortReviews(props) {
@@ -52,27 +40,32 @@ function SortReviews(props) {
   const options = ['Relevant', 'Newest', 'Helpful'];
 
   const handleClick = (option) => {
-    setIsOpen(false);
+    setIsOpen(!isOpen);
     setSelectedOption(option);
   };
+
+  const dropdownMenu = () => (
+    <div>
+      {options.map((option) => (
+        <DropdownOption
+          key={option}
+          value={option}
+          onClick={(evt) => {
+            evt.preventDefault();
+            handleClick(option);
+          }}
+        />
+      ))}
+    </div>
+
+  );
 
   return (
     <SelectContainer>
       <NumberReviews>reviews</NumberReviews>
-      <SelectButton onClick={handleClick}>{selectedOption}</SelectButton>
-      <Dropdown isVisible={isOpen}>
-        {options.map((option) => (
-          <DropdownOption
-            key={option}
-            value={option}
-            onClick={(evt) => {
-              evt.preventDefault();
-              handleClick(option);
-            }}
-          >
-            {option}
-          </DropdownOption>
-        ))}
+      <SelectButton onClick={toggle}>selected option</SelectButton>
+      <Dropdown>
+        {isOpen && dropdownMenu()}
       </Dropdown>
     </SelectContainer>
   );
