@@ -15,30 +15,38 @@ const SearchBar = styled.input`
 
 function ReviewsList(props) {
   const [reviews, setReviews] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('Relevant');
+  const [sortOption, setSortOption] = useState('Relevant');
 
   const { filter } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
+  const sortReviews = () => {
+
+  };
+
+  // pulls reviews when product changes
   useEffect(() => {
-    getReviews(product)
+    getReviews(product, sortOption)
       .then((result) => {
-        const newReviews = result;
-        setReviews(newReviews);
+        setReviews(result);
       });
   }, []);
+
+  // changes sort of reviews when new sort option is chosen
+  useEffect(() => {
+    sortReviews();
+  }, [sortOption]);
 
   return (
     <div>
 
       {/* number of reviews, sort selector */}
-      <SortReviews selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <SortReviews sortOption={sortOption} setSortOption={setSortOption} />
 
       {/* serarch for keyword */}
       <SearchBar placeholder="Search for a Keyword" />
-      <p>search for keyword</p>
 
       {/* review list */}
       {reviews.map((review) => (
@@ -48,6 +56,10 @@ function ReviewsList(props) {
           id={review.review_id}
         />
       ))}
+
+      {/* more reviews button */}
+      <button type="button">More Reviews</button>
+
     </div>
   );
 }

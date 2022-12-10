@@ -66,12 +66,12 @@ export function getRatings(productId) {
 }
 
 // gets reviews
-export function getReviews(productId) {
+export function getReviews(productId, sortOption) {
   return instance.get('/reviews/', {
     params: {
       page: 1,
       count: 5,
-      sort: 'helpful',
+      sort: sortOption,
       product_id: productId,
     },
   })

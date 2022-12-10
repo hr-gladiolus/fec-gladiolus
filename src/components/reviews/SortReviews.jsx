@@ -20,13 +20,13 @@ const DropdownMenu = styled.select`
 const DropdownOption = styled.option``;
 
 function SortReviews(props) {
-  const { selectedOption, setSelectedOption } = props;
+  const { sortOption, setSortOption } = props;
   const data = useSelector((state) => state.product.productData);
 
   const options = ['Relevant', 'Newest', 'Helpful'];
 
   const handleClick = (option) => {
-    setSelectedOption(option);
+    setSortOption(option);
   };
 
   return (
@@ -38,9 +38,9 @@ function SortReviews(props) {
         {' '}
       </NumberReviews>
       <DropdownMenu>
-        <DropdownOption>{selectedOption}</DropdownOption>
+        <DropdownOption>{sortOption}</DropdownOption>
         {options.map((option) => (
-          option !== selectedOption
+          option !== sortOption
           && (
             <DropdownOption
               key={option}

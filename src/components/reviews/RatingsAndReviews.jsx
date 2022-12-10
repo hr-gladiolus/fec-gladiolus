@@ -37,9 +37,6 @@ function RatingsAndReviews() {
       {/* reviews list */}
       {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} />}
 
-      {/* more reviews button */}
-      <button type="button">More Reviews</button>
-
       {/* add reviews button and modal */}
       <button type="button" onClick={toggle}>Add Review +</button>
       <Modal visible={visible} toggle={toggle}>
