@@ -1,13 +1,18 @@
 // modules
 import React, { useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 // components
 import QueView from './QueView.jsx';
 import QueButtons from './QueButtons.jsx';
-// styles
-import SingleQuest from '../styles/SingleQuest.styled.js';
 
 const API = require('../../../config').API_TOKEN;
+
+const SingleQuest = styled.div`
+  display: flex;
+  flex-direction: row;
+  font-family: futura, sans-serif;
+`;
 
 function SingleQue({ question, toggle }) {
   // set state to keep track of helpfulness to change when clicked so I don't have to rerender

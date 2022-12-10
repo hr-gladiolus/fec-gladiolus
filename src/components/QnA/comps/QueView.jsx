@@ -1,10 +1,17 @@
-// modules
 import React from 'react';
+import styled from 'styled-components';
 // components
 import Alist from './Alist.jsx';
-// styles
-import QueComp from '../styles/QueComp.styled.js';
-import ActualQue from '../styles/ActualQue.styled.js';
+
+const QueComp = styled.div`
+  width: 80%;
+`;
+
+const ActualQue = styled.h5`
+  display: flex;
+  margin: 1% 0;
+  font-size: 15px;
+`;
 
 function QueView({ question }) {
   return (

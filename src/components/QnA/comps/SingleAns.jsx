@@ -2,16 +2,47 @@ import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import axios from 'axios';
 import styled from 'styled-components';
-import AnsRow from '../styles/AnsRow.styled';
-import AnsColumn from '../styles/AnsColumn.styled';
-import AnsText from '../styles/AnsText.styled';
-import AnsInfo from '../styles/AnsInfo.styled';
 import FlexRow from '../styles/FlexRow.styled';
 import HelpfulSentence from '../styles/HelpfulSentence.styled';
 import HelpfulButton from '../styles/HelpfulButton.styled';
-import ReportButton from '../styles/ReportButton.styled';
 
 const API = require('../../../config').API_TOKEN;
+
+const AnsRow = styled.div`
+  min-width: 305px;
+  display: flex;
+  margin 0 0 10px 0;
+`;
+
+const AnsText = styled.p`
+  display: flex;
+  font-size 13px;
+  place-content: center start;
+  margin 0 0 8px 0;
+`;
+
+const AnsInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  opacity: 75%;
+  margin: 0;
+  padding 0 10px 0 0;
+  border: solid;
+  border-width: 0 1px 0 0;
+`;
+
+const ReportButton = styled.button`
+background-color: white;
+border-width: 0;
+display: flex;
+flex-direction: row;
+font-size: 11px;
+place-content: center;
+padding: 0 0 0 10px;
+opacity: 75%;
+text-decoration: underline;
+`;
 
 const StaticReport = styled.div`
   border-width: 0;
@@ -63,7 +94,7 @@ function SingleAns({ answer }) {
 
   return (
     <AnsRow>
-      <AnsColumn>
+      <div>
         <AnsText>
           {answer.body}
         </AnsText>
@@ -81,7 +112,7 @@ function SingleAns({ answer }) {
             ? <ReportButton onClick={handleReport}>Report</ReportButton>
             : <StaticReport>Reported</StaticReport>}
         </FlexRow>
-      </AnsColumn>
+      </div>
     </AnsRow>
   );
 }

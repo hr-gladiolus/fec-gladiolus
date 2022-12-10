@@ -1,9 +1,24 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import SingleAns from './SingleAns.jsx';
-import AListStyle from '../styles/AListStyle.styled';
-import OuterAListStyle from '../styles/OuterAListStyle.styled';
-import Aletter from '../styles/Aletter.styled';
+
+const OuterAListStyle = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin 1% 0 0 0;
+  `;
+
+const AListStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 5px;
+`;
+
+const Aletter = styled.div`
+  display: flex;
+  font-weight: bold;
+  place-content: center;
+`;
 
 const LoadAnswers = styled.button`
   background-color: white;
