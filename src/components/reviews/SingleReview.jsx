@@ -5,6 +5,8 @@ import { format, parseISO } from 'date-fns';
 import { GrCheckmark } from 'react-icons/gr';
 import Stars from '../shared/Stars.jsx';
 import { markHelpful, reportReview } from './api.js';
+import useModal from '../shared/useModal.js';
+import Modal from '../shared/Modal.jsx';
 
 const Review = styled.div`
   display: flex;
@@ -24,6 +26,22 @@ const ReviewSummaryOverflow = styled.div``;
 const ReviewBody = styled.div``;
 
 const ShowMoreButton = styled.div``;
+
+const ImageContainer = styled.div`
+  display: flex;
+`;
+
+const SingleImage = styled.div``;
+
+const Image = styled.img`
+  width: 45px;
+  height: auto;
+  padding: 10px;
+`;
+
+const ModalContainer = styled.div``;
+
+const ModalImage = styled.img``;
 
 const Recommend = styled.div``;
 
@@ -54,27 +72,26 @@ const Line = styled.hr`
 `;
 
 function SingleReview(props) {
-  const { review } = props;
-
+  // const { review } = props;
+// this is my example review - leaving it in for future use
+  const review = {
+    review_id: 1277210,
+    rating: 3,
+    summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
+    recommend: true,
+    response: 'dfhkjdahskfhdaskjhjk',
+    body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
+    date: '2022-10-25T00:00:00.000Z',
+    reviewer_name: 'cordelia',
+    helpfulness: 2,
+    photos: ['https://candicehern.com/WP/wp-content/uploads/2013/04/evening_dress3.jpg', 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/carriage--ball-dresses-print-collector.jpg', 'https://thegraphicsfairy.com/wp-content/uploads/2020/07/Edwardian-Fashion-Image-GraphicsFairy.jpg'],
+  };
   const [showMore, setShowMore] = useState(false);
   const [helpful, setHelpful] = useState(review.helpfulness);
-
-  // this is my example review - leaving it in for future use
-  // const review = {
-  //   review_id: 1277210,
-  //   rating: 3,
-  //   summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
-  //   recommend: true,
-  //   response: 'dfhkjdahskfhdaskjhjk',
-  //   body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
-  //   date: '2022-10-25T00:00:00.000Z',
-  //   reviewer_name: 'cordelia',
-  //   helpfulness: 2,
-  //   photos: [],
-  // };
+  const { visible, toggle } = useModal();
 
   // handles summary with length over 60 char
-  function summaryOverflow() {
+  const summaryOverflow = () => {
     const under60 = review.summary.slice(0, 61);
     const over60 = review.summary.slice(61);
     return (
@@ -83,28 +100,29 @@ function SingleReview(props) {
         <ReviewSummaryOverflow>{over60}</ReviewSummaryOverflow>
       </div>
     );
-  }
+  };
 
   // handles show/hide button and functionality for body over 250 char
-  function bodyOverflow() {
-    return (
-      <div>
-        {showMore
-          ? <ReviewBody>{review.body}</ReviewBody>
-          : <ReviewBody>{review.body.slice(0, 251)}</ReviewBody>}
-        <ShowMoreButton
-          onClick={
-            (evt) => {
-              evt.preventDefault();
-              setShowMore(!showMore);
-            }
+  const bodyOverflow = () => (
+    <div>
+      {showMore
+        ? <ReviewBody>{review.body}</ReviewBody>
+        : <ReviewBody>{review.body.slice(0, 251)}</ReviewBody>}
+      <ShowMoreButton
+        onClick={
+          (evt) => {
+            evt.preventDefault();
+            setShowMore(!showMore);
           }
-        >
-          {showMore ? 'Show Less' : 'Show More'}
-        </ShowMoreButton>
-      </div>
-    );
-  }
+        }
+      >
+        {showMore ? 'Show Less' : 'Show More'}
+      </ShowMoreButton>
+    </div>
+  );
+
+  const openImageModal = () => {
+  };
 
   const helpfulClick = () => {
     markHelpful(review.review_id)
@@ -131,6 +149,17 @@ function SingleReview(props) {
       {review.body.length > 250 ? bodyOverflow() : <ReviewBody>{review.body}</ReviewBody>}
 
       {/* images here  */}
+      <ImageContainer>
+        { review.photos && review.photos.map((photo) => (
+          <SingleImage>
+            <Image src={photo} alt="" key={photo} onClick={toggle} />
+            <Modal visible={visible} toggle={toggle}>
+              <ModalImage src={photo} alt="" />
+            </Modal>
+          </SingleImage>
+
+        ))}
+      </ImageContainer>
 
       {review.recommend === true && (
         <Recommend>
