@@ -5,7 +5,6 @@ import More from './More.jsx';
 import Container from './styles/Container.styled.js';
 import Search from './Search.jsx';
 import Qlist from './Qlist.jsx';
-import sampleData from './sampleData';
 
 const API = require('../../config').API_TOKEN;
 

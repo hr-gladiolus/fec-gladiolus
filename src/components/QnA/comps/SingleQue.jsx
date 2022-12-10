@@ -5,16 +5,19 @@ import styled from 'styled-components';
 // components
 import QueView from './QueView.jsx';
 import QueButtons from './QueButtons.jsx';
+import useModal from '../../shared/useModal.js';
+import Modal from '../../shared/Modal.jsx';
+import ModalTemplate from './ModalTemplate.jsx';
 
 const API = require('../../../config').API_TOKEN;
 
 const SingleQuest = styled.div`
   display: flex;
   flex-direction: row;
-  font-family: futura, sans-serif;
 `;
 
-function SingleQue({ question, toggle }) {
+function SingleQue({ question, productName, productID }) {
+  const { visible, toggle } = useModal();
   // set state to keep track of helpfulness to change when clicked so I don't have to rerender
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
   // set state to keep track of if the yes has been clicked or not
@@ -46,7 +49,22 @@ function SingleQue({ question, toggle }) {
         helpfulness={helpfulness}
         toggle={toggle}
         handleYesClick={() => handleClick()}
+        question={question}
       />
+      <Modal visible={visible} toggle={toggle}>
+        <ModalTemplate
+          title="Submit Your Answer"
+          subtitle={`${productName}: ${question.question_body}`}
+          firstInputLabel="Your Answer"
+          firstInputName="Your Answer"
+          secondInputName="Example: jack543!"
+          thirdInputName="Example: jack@email.com"
+          buttonName="Submit Question"
+          secondInputText="For privacy reasons, do not use your full name or email address"
+          thirdInputText="For authentication reasons, you will not be emailed"
+          identification={`${question.question_id}`}
+        />
+      </Modal>
     </SingleQuest>
   );
 }

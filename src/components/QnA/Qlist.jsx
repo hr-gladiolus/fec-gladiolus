@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import More from './More.jsx';
 import SingleQue from './comps/SingleQue.jsx';
 import Comp from './styles/Comp.styled.js';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
-import ModalTemplate from './comps/ModalTemplate.jsx';
 
 const Spacer = styled.div`
   margin: 0 0 10px 0;
@@ -20,8 +17,6 @@ const AccordionDiv = styled.div`
 `;
 
 function Qlist({ queList, productID, productName }) {
-  const { visible, toggle } = useModal();
-
   const [height, setHeight] = useState('0px');
 
   const [showAccordion, setShowAccordion] = useState(false);
@@ -31,8 +26,9 @@ function Qlist({ queList, productID, productName }) {
   const mappedList = queList.map((question) => (
     <SingleQue
       question={question}
-      toggle={toggle}
       key={question.question_id}
+      productName={productName}
+      productID={productID}
     />
   ));
 
@@ -54,9 +50,6 @@ function Qlist({ queList, productID, productName }) {
               { mappedList.slice(4) }
             </AccordionDiv>
           ) }
-          <Modal visible={visible} toggle={toggle}>
-            <ModalTemplate title="Submit Your Answer" subtitle={`${productName}: [question body](To Do)`} firstInputLabel="Your Answer" firstInputName="Your Answer" secondInputName="Example: jack543!" thirdInputName="Example: jack@email.com" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" />
-          </Modal>
         </Comp>
       </Spacer>
       <More
