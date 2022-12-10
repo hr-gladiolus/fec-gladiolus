@@ -23,7 +23,7 @@ function RatingsAndReviews() {
   const { visible, toggle } = useModal();
 
   return (
-    <div>
+    <div id="#readReviews">
       <h1>Ratings & Reviews</h1>
 
       {/* filter ratings */}
