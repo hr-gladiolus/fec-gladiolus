@@ -1,45 +1,69 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { format, parseISO } from 'date-fns';
+import { GrCheckmark } from 'react-icons/gr';
 import Stars from '../shared/Stars.jsx';
 
-const UserDate = styled.div``;
+const Review = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const UserDate = styled.div`
+  margin-left: auto;
+`;
+
+const ReviewSummary = styled.div`
+  font-weight: bold;
+`;
+
+const ReviewSummaryOverflow = styled.div``;
+
+const ReviewBody = styled.div``;
+
+const ShowMoreButton = styled.div``;
+
+const Recommend = styled.div``;
 
 function SingleReview(props) {
-  const { review } = props;
+  // const { review } = props;
 
   const [showMore, setShowMore] = useState(false);
   // this is my example review - leaving it in for future use
-  // const review = {
-  //   review_id: 1277210,
-  //   rating: 3,
-  //   summary: 'Such a great product!',
-  //   recommend: true,
-  //   response: null,
-  //   body: 'wow I really loved this product. It was perfect',
-  //   date: '2022-10-25T00:00:00.000Z',
-  //   reviewer_name: 'cordelia',
-  //   helpfulness: 2,
-  //   photos: [],
-  // };
+  const review = {
+    review_id: 1277210,
+    rating: 3,
+    summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
+    recommend: true,
+    response: null,
+    body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
+    date: '2022-10-25T00:00:00.000Z',
+    reviewer_name: 'cordelia',
+    helpfulness: 2,
+    photos: [],
+  };
 
+  // handles summary with length over 60 char
   function summaryOverflow() {
     const under60 = review.summary.slice(0, 61);
     const over60 = review.summary.slice(61);
     return (
       <div>
-        <h2>{under60}</h2>
-        <h3>{over60}</h3>
+        <ReviewSummary>{under60}</ReviewSummary>
+        <ReviewSummaryOverflow>{over60}</ReviewSummaryOverflow>
       </div>
     );
   }
 
+  // handles show/hide button and functionality for body over 250 char
   function bodyOverflow() {
     return (
       <div>
-        {showMore ? review.body : review.body.slice(0, 251)}
-        <button
-          type="button"
+        {showMore
+          ? <ReviewBody>{review.body}</ReviewBody>
+          : <ReviewBody>{review.body.slice(0, 251)}</ReviewBody>}
+        <ShowMoreButton
           onClick={
             (evt) => {
               evt.preventDefault();
@@ -48,13 +72,13 @@ function SingleReview(props) {
           }
         >
           {showMore ? 'Show Less' : 'Show More'}
-        </button>
+        </ShowMoreButton>
       </div>
     );
   }
 
   return (
-    <div>
+    <Review>
 
       {/* star rating */}
       <Stars rating={review.rating} />
@@ -68,10 +92,23 @@ function SingleReview(props) {
         {' '}
       </UserDate>
 
-      {review.summary.length > 60 ? summaryOverflow() : <h2>{review.summary}</h2>}
-      {review.body.length > 250 ? bodyOverflow() : <p>{review.body}</p>}
+      {/* review summary */}
+      {review.summary.length > 60 ? summaryOverflow() : <ReviewSummary>{review.summary}</ReviewSummary>}
+
+      {/* review body */}
+      {review.body.length > 250 ? bodyOverflow() : <ReviewBody>{review.body}</ReviewBody>}
+
       {/* images here  */}
-      {review.recommend === true ? <p>I recommend this product</p> : null}
+
+      {/* recommend this product */}
+      {review.recommend === true && (
+        <Recommend>
+          {' '}
+          <GrCheckmark />
+          {' '}
+          I recommend this product
+        </Recommend>
+      )}
       {review.response && (
         <p>
           Response:
@@ -81,7 +118,7 @@ function SingleReview(props) {
       {/* was this review helpful */}
       <button type="button">Report</button>
       {/* report button functionality */}
-    </div>
+    </Review>
   );
 }
 
