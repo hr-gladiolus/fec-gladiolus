@@ -8,7 +8,9 @@ import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 import ModalTemplate from './comps/ModalTemplate.jsx';
 
-function More({ queList, toggleAccordion, showAccordion }) {
+function More({
+  queList, toggleAccordion, showAccordion, productName, productID,
+}) {
   const { visible, toggle } = useModal();
   let innerText;
   if (showAccordion) {
@@ -20,7 +22,7 @@ function More({ queList, toggleAccordion, showAccordion }) {
   return (
     <Comp>
       <FlexRow>
-        { queList.length > 2 && (
+        { queList.length > 4 && (
           <MoreAnsQues onClick={toggleAccordion}>
             {innerText}
             {' '}
@@ -30,7 +32,7 @@ function More({ queList, toggleAccordion, showAccordion }) {
         <AddAQue onClick={toggle}>ADD QUESTION +</AddAQue>
       </FlexRow>
       <Modal visible={visible} toggle={toggle}>
-        <ModalTemplate title="Ask Your Question" subtitle="About the [Product Name Here]" firstInputLabel="Your Question" firstInputName="Your Question" secondInputName="Example: jackson11!" thirdInputName="Your email" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" />
+        <ModalTemplate title="Ask Your Question" subtitle={`About the ${productName}`} firstInputLabel="Your Question" firstInputName="Your Question" secondInputName="Example: jackson11!" thirdInputName="Your email" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" />
       </Modal>
     </Comp>
   );

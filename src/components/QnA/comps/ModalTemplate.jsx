@@ -15,6 +15,7 @@ const FlexForm = styled.form`
   flex-wrap: wrap;
   width: 100%;
   max-width: none;
+  place-content: center;
 `;
 
 const ModalTitle = styled.div`
@@ -47,7 +48,8 @@ padding: 0 0 15px 0;
 `;
 
 const SubmitModal = styled.button`
-
+  width: fit-content;
+  margin: auto;
 `;
 
 const CharsParagraph = styled.p`
@@ -74,6 +76,7 @@ function ModalTemplate({
   buttonName,
   secondInputText,
   thirdInputText,
+  isAnswer,
 }) {
   const [firstValue, setFirstValue] = useState('');
 

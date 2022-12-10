@@ -19,7 +19,7 @@ const TestDiv = styled.div`
   transition: max-height 1s ease;
 `;
 
-function Qlist({ queList }) {
+function Qlist({ queList, productID, productName }) {
   const { visible, toggle } = useModal();
 
   const [height, setHeight] = useState('0px');
@@ -45,18 +45,17 @@ function Qlist({ queList }) {
     <div>
       <Spacer>
         <Comp>
-          { mappedList.length > 2 ? mappedList.slice(0, 2) : mappedList }
-          { mappedList.length > 2 && (
+          { mappedList.length > 4 ? mappedList.slice(0, 4) : mappedList }
+          { mappedList.length > 4 && (
             <TestDiv
               height={height}
               ref={content}
             >
-              { mappedList.slice(2) }
+              { mappedList.slice(4) }
             </TestDiv>
           ) }
           <Modal visible={visible} toggle={toggle}>
-            {/* Modal renders its children, so place content between tags */}
-            <ModalTemplate />
+            <ModalTemplate title="Submit Your Answer" subtitle={`${productName}: [question body](To Do)`} firstInputLabel="Your Answer" firstInputName="Your Answer" secondInputName="Example: jack543!" thirdInputName="Example: jack@email.com" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" />
           </Modal>
         </Comp>
       </Spacer>
@@ -64,6 +63,8 @@ function Qlist({ queList }) {
         queList={queList}
         toggleAccordion={() => toggleAccordion()}
         showAccordion={showAccordion}
+        productName={productName}
+        productID={productID}
       />
     </div>
   );
