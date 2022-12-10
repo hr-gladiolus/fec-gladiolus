@@ -7,7 +7,7 @@ import Comp from './styles/Comp.styled.js';
 const Spacer = styled.div`
   margin: 0 0 10px 0;
   overflow: auto;
-  max-height: 500px;
+  max-height: 515px;
 `;
 
 const AccordionDiv = styled.div`
@@ -41,13 +41,13 @@ function Qlist({ queList, productID, productName }) {
     <div>
       <Spacer>
         <Comp>
-          { mappedList.length > 4 ? mappedList.slice(0, 4) : mappedList }
-          { mappedList.length > 4 && (
+          { mappedList.length > 2 ? mappedList.slice(0, 2) : mappedList }
+          { mappedList.length > 2 && (
             <AccordionDiv
               height={height}
               ref={content}
             >
-              { mappedList.slice(4) }
+              { mappedList.slice(2) }
             </AccordionDiv>
           ) }
         </Comp>

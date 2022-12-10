@@ -36,6 +36,8 @@ function Qna({ environment }) {
       },
       params: {
         product_id: productID,
+        page: 1,
+        count: 22,
       },
     })
       .then((value) => {

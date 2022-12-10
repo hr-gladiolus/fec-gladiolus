@@ -29,7 +29,7 @@ const LoadAnswers = styled.button`
   margin: 0 0 10px 0;
 `;
 
-const TestDiv = styled.div`
+const AccordionDiv = styled.div`
   overflow: hidden;
   max-height: ${({ height }) => height};
   transition: max-height 1s ease;
@@ -68,12 +68,12 @@ function Alist({ answers }) {
       <AListStyle>
         { mappedAnswers.length > 2 ? mappedAnswers.slice(0, 2) : mappedAnswers }
         { mappedAnswers.length > 2 && (
-          <TestDiv
+          <AccordionDiv
             height={height}
             ref={content}
           >
             { mappedAnswers.slice(2) }
-          </TestDiv>
+          </AccordionDiv>
         ) }
         { mappedAnswers.length > 2 && (
           <LoadAnswers

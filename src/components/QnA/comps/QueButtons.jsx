@@ -22,7 +22,9 @@ place-content: center;
 padding: 0 10px;
 `;
 
-function QueButtons({ helpfulness, toggle, handleYesClick }) {
+function QueButtons({
+  helpfulness, toggle, handleYesClick, question,
+}) {
   return (
     <QueButtonsOuter>
       <FlexRow>

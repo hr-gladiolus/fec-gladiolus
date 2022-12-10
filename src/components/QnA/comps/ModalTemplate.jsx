@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import FlexColumn from '../styles/FlexColumn.styled';
+import { submitQorA } from '../requestHelpers';
 
 const OuterFlexColumn = styled.div`
   display: flex;
@@ -100,16 +101,10 @@ function ModalTemplate({
 
   function handleSubmitModal(e) {
     e.preventDefault();
-    console.log('submitting modal with the values:');
-    console.log('Question/answer value, ', firstValue);
-    console.log('Nickname value, ', secondValue);
-    console.log('Email value, ', thirdValue);
-    console.log('Identification, ', identification);
-    if (isQuestion) {
-      console.log('This is a question');
-    } else {
-      console.log('This is an answer');
-    }
+    submitQorA(isQuestion, firstValue, secondValue, thirdValue, identification)
+      .then((value) => {
+        console.log(value);
+      });
   }
 
   return (
