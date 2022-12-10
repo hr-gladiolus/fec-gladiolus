@@ -13,7 +13,7 @@ const Spacer = styled.div`
   max-height: 500px;
 `;
 
-const TestDiv = styled.div`
+const AccordionDiv = styled.div`
   overflow: hidden;
   max-height: ${({ height }) => height};
   transition: max-height 1s ease;
@@ -47,12 +47,12 @@ function Qlist({ queList, productID, productName }) {
         <Comp>
           { mappedList.length > 4 ? mappedList.slice(0, 4) : mappedList }
           { mappedList.length > 4 && (
-            <TestDiv
+            <AccordionDiv
               height={height}
               ref={content}
             >
               { mappedList.slice(4) }
-            </TestDiv>
+            </AccordionDiv>
           ) }
           <Modal visible={visible} toggle={toggle}>
             <ModalTemplate title="Submit Your Answer" subtitle={`${productName}: [question body](To Do)`} firstInputLabel="Your Answer" firstInputName="Your Answer" secondInputName="Example: jack543!" thirdInputName="Example: jack@email.com" buttonName="Submit Question" secondInputText="For privacy reasons, do not use your full name or email address" thirdInputText="For authentication reasons, you will not be emailed" />
