@@ -6,7 +6,7 @@ import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 import Stars from '../shared/Stars.jsx';
 import Table from './Table.jsx';
-import { changeProduct } from '../../store/productReducer.js';
+import { changeProduct, addProduct } from '../../store/productReducer.js';
 import getProduct from '../shared/productAPI.js';
 
 const CardContainer = styled.div`
@@ -42,7 +42,7 @@ export default function Card({
 
   const { visible, toggle } = useModal();
 
-  const parent = useSelector((state) => state.product.productId);
+  const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
 
   const { ref, inView, entry } = useInView({
@@ -52,9 +52,14 @@ export default function Card({
 
   // get product info based on the id prop
   useEffect(() => {
-    // only send API call if Card is on the screen
-    if (inView) {
-      getProduct(id).then((res) => setProduct(res));
+    // only send API call if Card is on the screen and not cached
+    if (products[id] !== undefined) {
+      setProduct(products[id]);
+    } else if (inView) {
+      getProduct(id).then((res) => {
+        setProduct(res);
+        dispatch(addProduct(res));
+      });
     }
   }, [inView]);
 
@@ -70,26 +75,29 @@ export default function Card({
     <CardContainer offset={offset} ref={ref}>
       {/* temp placeholder image :) */}
       <Img src={product.styles ? product.styles[0].photos[0].thumbnail_url : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
-
       {/* functionality will be determined by which list the card is in */}
       <Button type="button" onClick={handleClick}>{icon}</Button>
-      <Modal visible={visible} toggle={toggle}>
-        {/* Modal renders its children, so place content between tags */}
-        <Table currentId={parent} target={product} />
-      </Modal>
-      <h4>{product.category}</h4>
-      {/* future refactor: reset offset when button gets clicked */}
-      <h3><button type="button" onClick={() => dispatch(changeProduct(id))}>{product.name}</button></h3>
-      <p>
-        $
-        {product.price}
-      </p>
-      <Stars rating={product.average_rating} />
-      <p>
-        {product.rating}
-        {' '}
-        stars
-      </p>
+
+      {/* Only change if modal isn't visible */}
+      <div
+        onClick={() => !visible && dispatch(changeProduct(id))}
+        onKeyDown={() => !visible && dispatch(changeProduct(id))}
+        role="button"
+        tabIndex="0"
+      >
+        <Modal visible={visible} toggle={toggle}>
+          {/* Modal renders its children, so place content between tags */}
+          <Table target={product} />
+        </Modal>
+        <h4>{product.category}</h4>
+        {/* future refactor: reset offset when button gets clicked */}
+        <h3>{product.name}</h3>
+        <p>
+          $
+          {product.default_price}
+        </p>
+        <Stars rating={product.average_rating} />
+      </div>
     </CardContainer>
   );
 }
