@@ -72,20 +72,20 @@ const Line = styled.hr`
 `;
 
 function SingleReview(props) {
-  // const { review } = props;
-// this is my example review - leaving it in for future use
-  const review = {
-    review_id: 1277210,
-    rating: 3,
-    summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
-    recommend: true,
-    response: 'dfhkjdahskfhdaskjhjk',
-    body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
-    date: '2022-10-25T00:00:00.000Z',
-    reviewer_name: 'cordelia',
-    helpfulness: 2,
-    photos: ['https://candicehern.com/WP/wp-content/uploads/2013/04/evening_dress3.jpg', 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/carriage--ball-dresses-print-collector.jpg', 'https://thegraphicsfairy.com/wp-content/uploads/2020/07/Edwardian-Fashion-Image-GraphicsFairy.jpg'],
-  };
+  const { review } = props;
+  // this is my example review - leaving it in for future use
+  // const review = {
+  //   review_id: 1277210,
+  //   rating: 3,
+  //   summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
+  //   recommend: true,
+  //   response: 'dfhkjdahskfhdaskjhjk',
+  //   body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
+  //   date: '2022-10-25T00:00:00.000Z',
+  //   reviewer_name: 'cordelia',
+  //   helpfulness: 2,
+  //   photos: ['https://candicehern.com/WP/wp-content/uploads/2013/04/evening_dress3.jpg', 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/carriage--ball-dresses-print-collector.jpg', 'https://thegraphicsfairy.com/wp-content/uploads/2020/07/Edwardian-Fashion-Image-GraphicsFairy.jpg'],
+  // };
   const [showMore, setShowMore] = useState(false);
   const [helpful, setHelpful] = useState(review.helpfulness);
   const { visible, toggle } = useModal();
@@ -121,9 +121,6 @@ function SingleReview(props) {
     </div>
   );
 
-  const openImageModal = () => {
-  };
-
   const helpfulClick = () => {
     markHelpful(review.review_id)
       .then(() => {
@@ -151,19 +148,19 @@ function SingleReview(props) {
       {/* images here  */}
       <ImageContainer>
         { review.photos && review.photos.map((photo) => (
-          <SingleImage key={photo}>
-            <Image src={photo} alt="" onClick={toggle} />
+          <SingleImage key={photo.url}>
+            <Image src={photo.url} alt="" onClick={toggle} />
             <Modal visible={visible} toggle={toggle}>
-              <ModalImage src={photo} alt="" />
+              <ModalImage src={photo.url} alt="" />
             </Modal>
           </SingleImage>
 
         ))}
       </ImageContainer>
-      {/*
-      <ImageContainer>
+
+      {/* <ImageContainer>
         {review.photos && review.photos.map((photo) => {
-          <SingleImage key={photo} link={photo} />
+          <SingleImage key={photo.url} link={photo.url} />;
         })}
       </ImageContainer> */}
 
