@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import FlexRow from '../styles/FlexRow.styled';
 import HelpfulSentence from '../styles/HelpfulSentence.styled';
 import HelpfulButton from '../styles/HelpfulButton.styled';
+import { submitHelpful, submitReport } from '../requestHelpers';
 
 const API = require('../../../config').API_TOKEN;
 
@@ -61,14 +62,7 @@ function SingleAns({ answer }) {
   function handleClick() {
     if (notClicked) {
       setNotClicked(false);
-      axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${answer.id}/helpful`, null, {
-        headers: {
-          Authorization: API,
-        },
-        params: {
-          answer_id: answer.id,
-        },
-      })
+      submitHelpful(false, answer.id)
         .then(() => {
           setHelpfulness(helpfulness + 1);
         });
@@ -78,14 +72,7 @@ function SingleAns({ answer }) {
   function handleReport() {
     if (notReported) {
       setNotReported(false);
-      axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/answers/${answer.id}/report`, null, {
-        headers: {
-          Authorization: API,
-        },
-        params: {
-          answer_id: answer.id,
-        },
-      })
+      submitReport(answer.id)
         .then((val) => {
           console.log(val);
         });

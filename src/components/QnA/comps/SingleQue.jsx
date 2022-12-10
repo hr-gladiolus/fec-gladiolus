@@ -8,6 +8,7 @@ import QueButtons from './QueButtons.jsx';
 import useModal from '../../shared/useModal.js';
 import Modal from '../../shared/Modal.jsx';
 import ModalTemplate from './ModalTemplate.jsx';
+import { submitHelpful } from '../requestHelpers';
 
 const API = require('../../../config').API_TOKEN;
 
@@ -28,17 +29,10 @@ function SingleQue({ question, productName, productID }) {
     // But I will probably need to instialize state to have it rerender on the change.
     // send an axios put request to /qa/questions/:question_id/helpful and the response is 204.
     if (notClicked) {
-      axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions/${question.question_id}/helpful`, null, {
-        headers: {
-          Authorization: API,
-        },
-        params: {
-          question_id: question.question_id,
-        },
-      })
+      setNotClicked(false);
+      submitHelpful(true, question.question_id)
         .then(() => {
           setHelpfulness(helpfulness + 1);
-          setNotClicked(false);
         });
     }
   }
