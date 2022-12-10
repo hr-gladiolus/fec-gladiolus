@@ -26,6 +26,23 @@ const ShowMoreButton = styled.div``;
 
 const Recommend = styled.div``;
 
+const ResponseContainer = styled.div``;
+
+const ResponseHeader = styled.div`
+  font-weight: bold;
+`;
+
+const ResponseBody = styled.div``;
+
+const HelpfulReportContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const HelpfulReportButton = styled.div`
+  text-decoration: underline;
+`;
+
 function SingleReview(props) {
   // const { review } = props;
 
@@ -36,7 +53,7 @@ function SingleReview(props) {
     rating: 3,
     summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
     recommend: true,
-    response: null,
+    response: 'dfhkjdahskfhdaskjhjk',
     body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
     date: '2022-10-25T00:00:00.000Z',
     reviewer_name: 'cordelia',
@@ -109,13 +126,25 @@ function SingleReview(props) {
           I recommend this product
         </Recommend>
       )}
+
+      {/* response */}
       {review.response && (
-        <p>
-          Response:
-          {review.response}
-        </p>
+        <ResponseContainer>
+          <ResponseHeader>Response:</ResponseHeader>
+          <ResponseBody>{review.response}</ResponseBody>
+        </ResponseContainer>
       )}
+
       {/* was this review helpful */}
+      <HelpfulReportContainer>
+        Was this review helpful?
+        <HelpfulReportButton>Yes</HelpfulReportButton>
+        (
+        {review.helpfulness}
+        )  |
+        <HelpfulReportButton>Report</HelpfulReportButton>
+      </HelpfulReportContainer>
+
       <button type="button">Report</button>
       {/* report button functionality */}
     </Review>
