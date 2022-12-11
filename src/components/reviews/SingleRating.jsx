@@ -69,6 +69,7 @@ function SingleRating(props) {
   const [numberOfRatings, setNumberOfRatings] = useState(0);
 
   const product = useSelector((state) => state.product.productId);
+  const data = useSelector((state) => state.product.productData);
 
   useEffect(() => {
     getRatings(product)
@@ -95,18 +96,20 @@ function SingleRating(props) {
           handleClick(number);
         }}
       >
-        {number === 'five' ? <u>5 stars</u> : null}
-        {number === 'four' ? <u>4 stars</u> : null}
-        {number === 'three' ? <u>3 stars</u> : null}
-        {number === 'two' ? <u>2 stars</u> : null}
-        {number === 'one' ? <u>1 star</u> : null}
+        {number === 'five' && <u>5 stars</u>}
+        {number === 'four' && <u>4 stars</u>}
+        {number === 'three' && <u>3 stars</u>}
+        {number === 'two' && <u>2 stars</u>}
+        {number === 'one' && <u>1 star</u>}
       </Button>
+
       <Middle>
         <BottomBar>
           {/* sets width based on number of current star rating diviced by total # of ratings */}
           <TopBar width={allRatings ? (allRatings[number] / numberOfRatings) * 100 : 0} />
         </BottomBar>
       </Middle>
+
       <Right>{allRatings ? allRatings[number] : null}</Right>
     </Row>
   );

@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-// import { getProductRating, getRatings } from './api.js';
 import SingleRating from './SingleRating.jsx';
+import Stars from '../shared/Stars.jsx';
+
+const Rating = styled.div``;
 
 function FilterRatings(props) {
   const [rating, setRating] = useState();
@@ -13,14 +15,6 @@ function FilterRatings(props) {
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
-
-  // get producr rating on render
-  // useEffect(() => {
-  //   getProductRating(product)
-  //     .then((result) => {
-  //       setRating(result);
-  //     });
-  // }, [product]);
 
   // current filters component
   const currentFilters = () => (
@@ -53,11 +47,10 @@ function FilterRatings(props) {
 
   return (
     <div>
-      {/* rating */}
-      <p>rating (need to round)</p>
 
-      {/* star rating */}
-      <p>stars</p>
+      <Rating>{data.average_rating_tenth}</Rating>
+
+      <Stars rating={data.average_rating} />
 
       {/* current filter */}
       {filter === true && currentFilters()}

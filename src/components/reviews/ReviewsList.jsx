@@ -25,7 +25,9 @@ function ReviewsList(props) {
   // index for slicing reviews array
   const [index, setIndex] = useState(2);
 
-  const { filter } = props;
+  // filter is toggle for rating filter
+  // selectedFilters are current ratings to show
+  const { filter, selectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
