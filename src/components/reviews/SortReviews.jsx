@@ -36,7 +36,7 @@ const DropdownOption = styled.div`
 `;
 
 function SortReviews(props) {
-  const { sortOption, setSortOption } = props;
+  const { sortOption, setSortOption, numberOfReviews } = props;
   const [display, setDisplay] = useState(false);
   const data = useSelector((state) => state.product.productData);
 
@@ -75,7 +75,7 @@ function SortReviews(props) {
     <SelectContainer>
 
       <NumberReviews>
-        {data.total_reviews}
+        {numberOfReviews}
         {' '}
         reviews, sorted by
         {' '}

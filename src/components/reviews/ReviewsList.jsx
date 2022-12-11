@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -18,20 +19,16 @@ const SearchBar = styled.input`
 const ShowMoreButton = styled.div``;
 
 function ReviewsList(props) {
-  const [reviews, setReviews] = useState([]);
   const [sortOption, setSortOption] = useState('Relevant');
-  // reviews currently shown on page
+  const [reviews, setReviews] = useState([]);
   const [currentReviews, setCurrentReviews] = useState([]);
-  // index for slicing reviews array
   const [index, setIndex] = useState(2);
+  const [numberOfReviews, setNumberOfReviews] = useState();
 
-  // filter is toggle for rating filter
-  // selectedFilters are current ratings to show
   const { filter, selectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
-  const numberOfReviews = data.total_reviews;
 
   const sortReviews = () => {
 
@@ -42,28 +39,19 @@ function ReviewsList(props) {
     setIndex(index + 2);
   };
 
-  // pulls reviews when product changes
   useEffect(() => {
-    getReviews(product, sortOption, numberOfReviews)
+    getReviews(product, sortOption)
       .then((result) => {
         setReviews(result);
         setCurrentReviews(result.slice(0, 2));
+        setNumberOfReviews(result.length);
       });
-  }, []);
-
-  // changes sort of reviews when new sort option is chosen
-  useEffect(() => {
-    getReviews(product, sortOption, numberOfReviews)
-      .then((result) => {
-        setReviews(result);
-        setCurrentReviews(result.slice(0, 2));
-      });
-  }, [sortOption]);
+  }, [product, sortOption]);
 
   return (
     <div>
 
-      <SortReviews sortOption={sortOption} setSortOption={setSortOption} />
+      <SortReviews sortOption={sortOption} setSortOption={setSortOption} numberOfReviews={numberOfReviews} />
 
       <SearchBar placeholder="Search for a Keyword" />
 
@@ -78,8 +66,8 @@ function ReviewsList(props) {
       </ReviewsListContainer>
 
       {/* more reviews button */}
-      {numberOfReviews > 2
-      && currentReviews.length < reviews.length
+      {reviews.length > 2
+      && currentReviews.length < 100
       && (
         <ShowMoreButton
           onClick={(evt) => {

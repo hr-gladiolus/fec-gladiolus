@@ -35,7 +35,7 @@ function RatingsAndReviews() {
       <ProductFactors />
 
       {/* reviews list */}
-      {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} />}
+      {data.number_of_reviews && data.number_of_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} />}
 
       {/* add reviews button and modal */}
       <button type="button" onClick={toggle}>Add Review +</button>

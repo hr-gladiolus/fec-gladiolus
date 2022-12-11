@@ -33,16 +33,19 @@ export default function getProduct(id) {
       const { ratings } = data;
       let total = 0;
       let average = 0;
+      let numberOfReviews = 0;
       for (let i = 1; i < 6; i += 1) {
         if (ratings[i]) {
           total += parseInt(ratings[i], 10);
           average += parseInt(ratings[i], 10) * i;
+          numberOfReviews += 1;
         }
       }
 
       result.average_rating = total ? (average / total).toFixed(2) : null;
       result.average_rating_tenth = Math.round(result.average_rating * 10) / 10;
       result.total_reviews = total;
+      result.number_of_reviews = numberOfReviews;
 
       return result;
     });
