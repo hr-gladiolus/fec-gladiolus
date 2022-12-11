@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { IoIosArrowDown } from 'react-icons/io';
 import SingleReview from './SingleReview.jsx';
-// import { IoIosArrowDown } from "react-icons/io";
 
 const SelectContainer = styled.div`
 display: flex;
@@ -20,17 +20,18 @@ const DropdownContent = styled.div`
 
 const DropdownMenu = styled.div`
 `;
-const DropdownButton = styled.div``;
+const DropdownButton = styled.div`
+  text-decoration: underline;
+`;
 
 const DropdownOption = styled.div`
   display: block;
   color: #000000;
   padding: 5px;
-  text-decoration: none;
 
   &:hover {
     color: #FFFFFF;
-    background-color: #00A4BD;
+    background-color: #5a6466;
   }
 `;
 
@@ -89,7 +90,7 @@ function SortReviews(props) {
         >
           {sortOption}
           {' '}
-          {/* <IoIosArrowDown /> */}
+          <IoIosArrowDown />
         </DropdownButton>
 
         {display && showMenu()}

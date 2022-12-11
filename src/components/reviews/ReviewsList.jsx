@@ -51,7 +51,11 @@ function ReviewsList(props) {
 
   // changes sort of reviews when new sort option is chosen
   useEffect(() => {
-    sortReviews();
+    getReviews(product, sortOption, numberOfReviews)
+      .then((result) => {
+        setReviews(result);
+        setCurrentReviews(result.slice(0, 2));
+      });
   }, [sortOption]);
 
   return (
