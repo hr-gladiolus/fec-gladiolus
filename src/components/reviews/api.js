@@ -66,14 +66,26 @@ export function getRatings(productId) {
 }
 
 // gets reviews
-export function getReviews(productId) {
+export function getReviews(productId, sortOption) {
   return instance.get('/reviews/', {
     params: {
       page: 1,
-      count: 5,
-      sort: 'helpful',
+      count: 1,
+      sort: sortOption,
       product_id: productId,
     },
   })
     .then((response) => response.data.results);
+}
+
+// marks review as helpful
+export function markHelpful(reviewId) {
+  return instance.put(`/reviews/${reviewId}/helpful`)
+    .then((response) => response);
+}
+
+// reports review
+export function reportReview(reviewId) {
+  return instance.put(`/reviews/${reviewId}/report`)
+    .then((response) => response);
 }
