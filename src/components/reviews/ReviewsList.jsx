@@ -31,10 +31,7 @@ function ReviewsList(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const filterReviews = () => {
-    const filtered = reviews.filter((review) => selectedFilters[review.rating] === true);
-    setCurrentReviews(filtered);
-  };
+  const filterReviews = () => filter === true && setCurrentReviews(reviews.filter((review) => selectedFilters[review.rating] === true));
 
   const showMoreReviews = () => {
     setCurrentReviews(reviews.slice(0, index));
@@ -50,7 +47,11 @@ function ReviewsList(props) {
       });
   }, [product, sortOption]);
 
-  useEffect(() => filterReviews(), [filter, selectedFilters]);
+  useEffect(() => {
+    if (filter === true) {
+      filterReviews();
+    }
+  }, [filter, selectedFilters]);
 
   return (
     <div>
@@ -60,7 +61,7 @@ function ReviewsList(props) {
       <SearchBar placeholder="Search for a Keyword" />
 
       <ReviewsListContainer>
-        {!filter && currentReviews.map((review) => (
+        {filter === false && currentReviews.map((review) => (
           <SingleReview
             review={review}
             key={review.review_id}
@@ -70,7 +71,7 @@ function ReviewsList(props) {
       </ReviewsListContainer>
 
       <ReviewsListContainer>
-        {filter === true && filteredReviews.map((review) => (
+        {filter === true && filteredReviews && filteredReviews.map((review) => (
           <SingleReview
             review={review}
             key={review.review_id}
