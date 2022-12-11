@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import More from './More.jsx';
 import SingleQue from './comps/SingleQue.jsx';
@@ -11,17 +11,20 @@ const Spacer = styled.div`
 `;
 
 const AccordionDiv = styled.div`
-  overflow: hidden;
-  max-height: ${({ height }) => height};
-  transition: max-height 1s ease;
+  height: ${({ height }) => height};
+  transition: height 1s ease;
 `;
 
 function Qlist({ queList, productID, productName }) {
   const [height, setHeight] = useState('0px');
-
-  const [showAccordion, setShowAccordion] = useState(false);
+  const [numberLoaded, setNumberLoaded] = useState(2);
+  const [showMore, setShowMore] = useState(true);
 
   const content = useRef(null);
+
+  useEffect(() => {
+    setHeight(`${content.current.scrollHeight - 5}px`);
+  });
 
   const mappedList = queList.map((question) => (
     <SingleQue
@@ -33,31 +36,30 @@ function Qlist({ queList, productID, productName }) {
   ));
 
   function toggleAccordion() {
-    setHeight(height !== '0px' ? '0px' : `${content.current.scrollHeight}px`);
-    setShowAccordion(!showAccordion);
+    setNumberLoaded(numberLoaded + 2);
+    if (numberLoaded >= queList.length - 2) {
+      setShowMore(false);
+    }
   }
 
   return (
     <div>
       <Spacer>
         <Comp>
-          { mappedList.length > 2 ? mappedList.slice(0, 2) : mappedList }
-          { mappedList.length > 2 && (
-            <AccordionDiv
-              height={height}
-              ref={content}
-            >
-              { mappedList.slice(2) }
-            </AccordionDiv>
-          ) }
+          <AccordionDiv
+            ref={content}
+            height={height}
+          >
+            { mappedList.slice(0, numberLoaded) }
+          </AccordionDiv>
         </Comp>
       </Spacer>
       <More
         queList={queList}
         toggleAccordion={() => toggleAccordion()}
-        showAccordion={showAccordion}
         productName={productName}
         productID={productID}
+        showMore={showMore}
       />
     </div>
   );

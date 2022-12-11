@@ -28,26 +28,23 @@ const MoreAnsQues = styled.button`
 `;
 
 function More({
-  queList, toggleAccordion, showAccordion, productName, productID,
+  queList, toggleAccordion, productName, productID, showMore,
 }) {
   const { visible, toggle } = useModal();
-  let innerText;
-  if (showAccordion) {
-    innerText = 'LESS';
-  } else {
-    innerText = 'MORE';
-  }
+  const innerText = 'PLACEHOLDER';
 
   return (
     <Comp>
       <FlexRow>
-        { queList.length > 4 && (
-          <MoreAnsQues onClick={toggleAccordion}>
-            {innerText}
-            {' '}
-            ANSWERED QUESTIONS
-          </MoreAnsQues>
-        ) }
+        { queList.length > 2 && showMore
+          ? (
+            <MoreAnsQues onClick={toggleAccordion}>
+              {innerText}
+              {' '}
+              ANSWERED QUESTIONS
+            </MoreAnsQues>
+          )
+          : null}
         <AddAQue onClick={toggle}>ADD QUESTION +</AddAQue>
       </FlexRow>
       <Modal visible={visible} toggle={toggle}>

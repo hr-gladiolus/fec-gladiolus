@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import More from './More.jsx';
@@ -29,7 +29,7 @@ function Qna({ environment }) {
   const [queList, setQueList] = useState([]);
   const [staticList, setStaticList] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {
       headers: {
         Authorization: API,
