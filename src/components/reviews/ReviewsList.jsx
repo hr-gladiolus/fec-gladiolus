@@ -24,14 +24,13 @@ function ReviewsList(props) {
   const [currentReviews, setCurrentReviews] = useState([]);
   const [index, setIndex] = useState(2);
   const [numberOfReviews, setNumberOfReviews] = useState();
-  const [filteredReviews, setFilteredReviews] = useState();
 
-  const { filter, selectedFilters } = props;
+  const { filter, selectedFilters, setFilter } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const filterReviews = () => filter === true && setCurrentReviews(reviews.filter((review) => selectedFilters[review.rating] === true));
+  const filterReviews = () => setCurrentReviews(reviews.filter((review) => selectedFilters[review.rating] === true));
 
   const showMoreReviews = () => {
     setCurrentReviews(reviews.slice(0, index));
@@ -48,8 +47,10 @@ function ReviewsList(props) {
   }, [product, sortOption]);
 
   useEffect(() => {
-    if (filter === true) {
+    if (filter && (Object.values(selectedFilters)).includes(true)) {
       filterReviews();
+    } else {
+      setCurrentReviews(reviews.slice(0, 2));
     }
   }, [filter, selectedFilters]);
 
@@ -61,17 +62,7 @@ function ReviewsList(props) {
       <SearchBar placeholder="Search for a Keyword" />
 
       <ReviewsListContainer>
-        {filter === false && currentReviews.map((review) => (
-          <SingleReview
-            review={review}
-            key={review.review_id}
-            id={review.review_id}
-          />
-        ))}
-      </ReviewsListContainer>
-
-      <ReviewsListContainer>
-        {filter === true && filteredReviews && filteredReviews.map((review) => (
+        {currentReviews.map((review) => (
           <SingleReview
             review={review}
             key={review.review_id}
@@ -81,7 +72,7 @@ function ReviewsList(props) {
       </ReviewsListContainer>
 
       {reviews.length > 2
-      && currentReviews.length < 100
+      && currentReviews.length < reviews.length
       && (
         <ShowMoreButton
           onClick={(evt) => {
