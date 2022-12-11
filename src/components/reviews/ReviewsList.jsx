@@ -24,14 +24,16 @@ function ReviewsList(props) {
   const [currentReviews, setCurrentReviews] = useState([]);
   const [index, setIndex] = useState(2);
   const [numberOfReviews, setNumberOfReviews] = useState();
+  const [filteredReviews, setFilteredReviews] = useState();
 
   const { filter, selectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const sortReviews = () => {
-
+  const filterReviews = () => {
+    const filtered = reviews.filter((review) => selectedFilters[review.rating] === true);
+    setCurrentReviews(filtered);
   };
 
   const showMoreReviews = () => {
@@ -48,6 +50,8 @@ function ReviewsList(props) {
       });
   }, [product, sortOption]);
 
+  useEffect(() => filterReviews(), [filter, selectedFilters]);
+
   return (
     <div>
 
@@ -56,7 +60,7 @@ function ReviewsList(props) {
       <SearchBar placeholder="Search for a Keyword" />
 
       <ReviewsListContainer>
-        {currentReviews.map((review) => (
+        {!filter && currentReviews.map((review) => (
           <SingleReview
             review={review}
             key={review.review_id}
@@ -65,7 +69,16 @@ function ReviewsList(props) {
         ))}
       </ReviewsListContainer>
 
-      {/* more reviews button */}
+      <ReviewsListContainer>
+        {filter === true && filteredReviews.map((review) => (
+          <SingleReview
+            review={review}
+            key={review.review_id}
+            id={review.review_id}
+          />
+        ))}
+      </ReviewsListContainer>
+
       {reviews.length > 2
       && currentReviews.length < 100
       && (

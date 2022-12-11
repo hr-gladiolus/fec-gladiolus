@@ -12,11 +12,11 @@ import Modal from '../shared/Modal.jsx';
 function RatingsAndReviews() {
   const [filter, setFilter] = useState(false);
   const filters = {
-    five: false,
-    four: false,
-    three: false,
-    two: false,
-    one: false,
+    5: false,
+    4: false,
+    3: false,
+    2: false,
+    1: false,
   };
   const [selectedFilters, setSelectedFilters] = useState(filters);
   const data = useSelector((state) => state.product.productData);
@@ -35,7 +35,7 @@ function RatingsAndReviews() {
       <ProductFactors />
 
       {/* reviews list */}
-      {data.number_of_reviews && data.number_of_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} />}
+      {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} />}
 
       {/* add reviews button and modal */}
       <button type="button" onClick={toggle}>Add Review +</button>

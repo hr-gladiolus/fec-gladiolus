@@ -42,13 +42,13 @@ const Middle = styled.div`
 
 // number of ratings on far right
 const Right = styled.div`
-  text-align: right;
+
 `;
 
 // grey bar background
 const BottomBar = styled.div`
   width: 100%;
-  background-color: #858080;
+  background-color: #000000;
   text-align: center;
   color: white;
 `;
@@ -65,19 +65,8 @@ function SingleRating(props) {
     number, selectedFilters, setSelectedFilters, setFilter,
   } = props;
 
-  const [allRatings, setAllRatings] = useState();
-  const [numberOfRatings, setNumberOfRatings] = useState(0);
-
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
-
-  useEffect(() => {
-    getRatings(product)
-      .then((result) => {
-        setNumberOfRatings(result.number);
-        setAllRatings(result.ratings);
-      });
-  }, [product]);
 
   const handleClick = (currentNumber) => {
     setSelectedFilters({
@@ -96,21 +85,22 @@ function SingleRating(props) {
           handleClick(number);
         }}
       >
-        {number === 'five' && <u>5 stars</u>}
-        {number === 'four' && <u>4 stars</u>}
-        {number === 'three' && <u>3 stars</u>}
-        {number === 'two' && <u>2 stars</u>}
-        {number === 'one' && <u>1 star</u>}
+        {number === '1' ? <u>1 star</u> : (
+          <u>
+            {number}
+            {' '}
+            stars
+          </u>
+        )}
       </Button>
 
       <Middle>
         <BottomBar>
-          {/* sets width based on number of current star rating diviced by total # of ratings */}
-          <TopBar width={allRatings ? (allRatings[number] / numberOfRatings) * 100 : 0} />
+          <TopBar width={data.ratings ? (data.ratings[number] / data.total_reviews) * 100 : 0} />
         </BottomBar>
       </Middle>
 
-      <Right>{allRatings ? allRatings[number] : null}</Right>
+      <Right>{data.ratings ? data.ratings[number] : null}</Right>
     </Row>
   );
 }

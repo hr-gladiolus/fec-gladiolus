@@ -20,11 +20,11 @@ function FilterRatings(props) {
   const currentFilters = () => (
     <div>
       <p>Current Filters</p>
-      {selectedFilters.five && <p>5 stars</p>}
-      {selectedFilters.four && <p>4 stars</p>}
-      {selectedFilters.three && <p>3 stars</p>}
-      {selectedFilters.two && <p>2 stars</p>}
-      {selectedFilters.one && <p>1 stars</p>}
+      {selectedFilters['5'] && <p>5 stars</p>}
+      {selectedFilters['4'] && <p>4 stars</p>}
+      {selectedFilters['3'] && <p>3 stars</p>}
+      {selectedFilters['2'] && <p>2 stars</p>}
+      {selectedFilters['1'] && <p>1 stars</p>}
     </div>
   );
 
@@ -60,7 +60,7 @@ function FilterRatings(props) {
 
       {/* filters */}
       <div>
-        {['five', 'four', 'three', 'two', 'one'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
+        {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
       </div>
 
       {/* percentage of reviews that recommend */}
