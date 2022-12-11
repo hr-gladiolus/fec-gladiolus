@@ -37,7 +37,7 @@ const Button = styled.button`
 `;
 
 export default function Card({
-  id, offset, icon, remove,
+  id, offset, icon, remove, setOffset,
 }) {
   const [product, setProduct] = useState({});
 
@@ -83,13 +83,18 @@ export default function Card({
       <div
         onClick={() => {
           if (!visible) {
-            dispatch(changeProduct(id));
             // scroll user to top of the page
             window.scrollTo({
               top: 0,
               left: 0,
               behavior: 'smooth',
             });
+
+            // change the product id
+            dispatch(changeProduct(id));
+
+            // reset cards to their default position
+            setOffset(0);
           }
         }}
         onKeyDown={() => {
@@ -100,6 +105,7 @@ export default function Card({
               left: 0,
               behavior: 'smooth',
             });
+            setOffset(0);
           }
         }}
         role="button"
