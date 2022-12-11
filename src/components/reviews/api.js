@@ -72,7 +72,7 @@ export function getReviews(productId, sortOption) {
       page: 1,
       count: 1000,
       sort: sortOption,
-      product_id: 37313,
+      product_id: productId,
     },
   })
     .then((response) => response.data.results);

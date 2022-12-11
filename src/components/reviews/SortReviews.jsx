@@ -48,7 +48,7 @@ function SortReviews(props) {
 
   const selectOption = (option) => {
     setDisplay(!display);
-    setSortOption(option);
+    setSortOption(option.toLowerCase());
   };
 
   const showMenu = () => (
