@@ -1,33 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import SingleReview from './SingleReview.jsx';
 import { getReviews } from './api.js';
+import SortReviews from './SortReviews.jsx';
 
-function ReviewsList() {
+const ReviewsListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  max-height: 300px;
+`;
+
+const SearchBar = styled.input`
+`;
+
+const ShowMoreButton = styled.div``;
+
+function ReviewsList(props) {
   const [reviews, setReviews] = useState([]);
-  const product = useSelector((state) => state.product.productId);
+  const [sortOption, setSortOption] = useState('Relevant');
+  // reviews currently shown on page
+  const [currentReviews, setCurrentReviews] = useState([]);
+  // index for slicing reviews array
+  const [index, setIndex] = useState(2);
 
+  const { filter } = props;
+
+  const product = useSelector((state) => state.product.productId);
+  const data = useSelector((state) => state.product.productData);
+  const numberOfReviews = data.total_reviews;
+
+  const sortReviews = () => {
+
+  };
+
+  const showMoreReviews = () => {
+    setCurrentReviews(reviews.slice(0, index));
+    setIndex(index + 2);
+  };
+
+  // pulls reviews when product changes
   useEffect(() => {
-    getReviews(product)
+    getReviews(product, sortOption, numberOfReviews)
       .then((result) => {
-        const newReviews = result;
-        setReviews(newReviews);
+        setReviews(result);
+        setCurrentReviews(result.slice(0, 2));
       });
   }, []);
-  // if no reviews
+
+  // changes sort of reviews when new sort option is chosen
+  useEffect(() => {
+    sortReviews();
+  }, [sortOption]);
 
   return (
     <div>
-      <h3>Reviews List</h3>
-      <div>
-        {reviews.map((review) => (
+
+      <SortReviews sortOption={sortOption} setSortOption={setSortOption} />
+
+      <SearchBar placeholder="Search for a Keyword" />
+
+      <ReviewsListContainer>
+        {currentReviews.map((review) => (
           <SingleReview
             review={review}
             key={review.review_id}
             id={review.review_id}
           />
         ))}
-      </div>
+      </ReviewsListContainer>
+
+      {/* more reviews button */}
+      {numberOfReviews > 2
+      && currentReviews.length < reviews.length
+      && (
+        <ShowMoreButton
+          onClick={(evt) => {
+            evt.preventDefault();
+            showMoreReviews();
+          }}
+        >
+          More Reviews
+        </ShowMoreButton>
+      )}
+
     </div>
   );
 }
