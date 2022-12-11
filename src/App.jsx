@@ -45,7 +45,7 @@ function App() {
       {/* Import the global styles */}
       <ThemeProvider theme={purple}>
         <GlobalStyle />
-        <Header>
+        <Header id="header">
           Logo Here
         </Header>
         <Overview />

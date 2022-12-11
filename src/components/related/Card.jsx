@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
@@ -80,8 +81,27 @@ export default function Card({
 
       {/* Only change if modal isn't visible */}
       <div
-        onClick={() => !visible && dispatch(changeProduct(id))}
-        onKeyDown={() => !visible && dispatch(changeProduct(id))}
+        onClick={() => {
+          if (!visible) {
+            dispatch(changeProduct(id));
+            // scroll user to top of the page
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }
+        }}
+        onKeyDown={() => {
+          if (!visible) {
+            dispatch(changeProduct(id));
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }
+        }}
         role="button"
         tabIndex="0"
       >
@@ -92,10 +112,19 @@ export default function Card({
         <h4>{product.category}</h4>
         {/* future refactor: reset offset when button gets clicked */}
         <h3>{product.name}</h3>
-        <p>
-          $
-          {product.default_price}
-        </p>
+
+        {product.styles && (product.styles[0].sale_price === null ? <p>{product.default_price}</p> : (
+          <p>
+            <del>
+              $
+              {product.default_price}
+            </del>
+            {' '}
+            $
+            {product.styles[0].sale_price}
+          </p>
+        ))}
+
         <Stars rating={product.average_rating} />
       </div>
     </CardContainer>
