@@ -5,8 +5,7 @@ import { format, parseISO } from 'date-fns';
 import { GrCheckmark } from 'react-icons/gr';
 import Stars from '../shared/Stars.jsx';
 import { markHelpful, reportReview } from './api.js';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
+import SingleImage from './SingleImage.jsx';
 
 const Review = styled.div`
   display: flex;
@@ -30,18 +29,6 @@ const ShowMoreButton = styled.div``;
 const ImageContainer = styled.div`
   display: flex;
 `;
-
-const SingleImage = styled.div``;
-
-const Image = styled.img`
-  width: 45px;
-  height: auto;
-  padding: 10px;
-`;
-
-const ModalContainer = styled.div``;
-
-const ModalImage = styled.img``;
 
 const Recommend = styled.div``;
 
@@ -88,7 +75,6 @@ function SingleReview(props) {
   // };
   const [showMore, setShowMore] = useState(false);
   const [helpful, setHelpful] = useState(review.helpfulness);
-  const { visible, toggle } = useModal();
 
   // handles summary with length over 60 char
   const summaryOverflow = () => {
@@ -145,24 +131,11 @@ function SingleReview(props) {
 
       {review.body.length > 250 ? bodyOverflow() : <ReviewBody>{review.body}</ReviewBody>}
 
-      {/* images here  */}
       <ImageContainer>
         { review.photos && review.photos.map((photo) => (
-          <SingleImage key={photo.url}>
-            <Image src={photo.url} alt="" onClick={toggle} />
-            <Modal visible={visible} toggle={toggle}>
-              <ModalImage src={photo.url} alt="" />
-            </Modal>
-          </SingleImage>
-
+          <SingleImage key={photo.url} url={photo.url} />
         ))}
       </ImageContainer>
-
-      {/* <ImageContainer>
-        {review.photos && review.photos.map((photo) => {
-          <SingleImage key={photo.url} link={photo.url} />;
-        })}
-      </ImageContainer> */}
 
       {review.recommend === true && (
         <Recommend>
