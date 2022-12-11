@@ -27,6 +27,7 @@ const LoadAnswers = styled.button`
   text-align: left;
   border-width: 0;
   margin: 0 0 10px 0;
+  background-color:${({ theme }) => theme.bg};
 `;
 
 const AccordionDiv = styled.div`

@@ -11,27 +11,35 @@ const AddAQue = styled.button`
   font-weight: bold;
   border-width: 1px;
   padding: 2.04% 1.5%;
-  background-color: white;
   min-width: 127px;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0);
+  border-right: 1px solid rgba(0, 0, 0);
+  box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
+  background-color:${({ theme }) => theme.bg};
 `;
 
 const MoreAnsQues = styled.button`
   display: flex;
   font-weight: bold;
-  border-width: 1px;
   padding: 2.04% 1.5%;
-  background-color: white;
   margin-right: 2.5%;
   min-width: 216px;
   place-content: center;
   text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0);
+  border-right: 1px solid rgba(0, 0, 0);
+  box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
+  background-color:${({ theme }) => theme.bg};
 `;
 
 function More({
   queList, toggleAccordion, productName, productID, showMore,
 }) {
   const { visible, toggle } = useModal();
-  const innerText = 'PLACEHOLDER';
 
   return (
     <Comp>
@@ -39,9 +47,7 @@ function More({
         { queList.length > 2 && showMore
           ? (
             <MoreAnsQues onClick={toggleAccordion}>
-              {innerText}
-              {' '}
-              ANSWERED QUESTIONS
+              MORE ANSWERED QUESTIONS
             </MoreAnsQues>
           )
           : null}

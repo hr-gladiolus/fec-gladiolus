@@ -11,7 +11,6 @@ const QueButtonsOuter = styled.div`
 
 const AddAnswerButton = styled.button`
 width: 81px;
-background-color: white;
 border-width: 0;
 display: flex;
 flex-direction: row;
@@ -20,6 +19,7 @@ opacity: 75%;
 text-decoration: underline;
 place-content: center;
 padding: 0 10px;
+background-color:${({ theme }) => theme.bg};
 `;
 
 function QueButtons({

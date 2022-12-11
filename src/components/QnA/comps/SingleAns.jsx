@@ -31,7 +31,6 @@ const AnsInfo = styled.div`
 `;
 
 const ReportButton = styled.button`
-background-color: white;
 border-width: 0;
 display: flex;
 flex-direction: row;
@@ -40,6 +39,7 @@ place-content: center;
 padding: 0 0 0 10px;
 opacity: 75%;
 text-decoration: underline;
+background-color:${({ theme }) => theme.bg};
 `;
 
 const StaticReport = styled.div`
