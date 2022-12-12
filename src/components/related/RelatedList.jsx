@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { getRelated } from './api.js';
+import getRelated from './api.js';
 import Card from './Card.jsx';
 import getProduct from '../shared/productAPI.js';
 import { addToOutfit, removeFromOutfit } from '../../store/productReducer.js';
