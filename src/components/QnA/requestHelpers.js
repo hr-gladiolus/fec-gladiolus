@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API = require('../../config').API_TOKEN;
 
-function submitQorA(isQuestion, body, name, email, id) {
+function submitQorA(isQuestion, body, name, email, id, photos) {
   let htmlParam;
   const parameters = {};
 
@@ -17,10 +17,10 @@ function submitQorA(isQuestion, body, name, email, id) {
     bodyParams.product_id = Number(id);
   } else {
     htmlParam = `/${id}/answers`;
-    bodyParams.photos = [];
+    bodyParams.photos = photos;
     parameters.question_id = id;
   }
-  console.log(id);
+  console.log(photos);
   return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions${htmlParam}`, bodyParams, {
     headers: {
       Authorization: API,

@@ -69,6 +69,27 @@ const ThousandCharsParagraph = styled.p`
   place-content: end;
 `;
 
+const PhotoInput = styled.textarea`
+display: block;
+padding: 0 0 15px 0;
+width: 100%;
+overflow: auto;
+height: 65px;
+line-height: 1.2;
+`;
+
+const SinglePhoto = styled.img`
+  max-width: 133px;
+  max-height: 133px;
+`;
+
+const DisplayPhotos = styled.div`
+  display: flex;
+  flex-direction: row;
+  max-width: 409px;
+  flex-wrap: wrap;
+`;
+
 function ModalTemplate({
   title, subtitle,
   firstInputLabel,
@@ -87,6 +108,10 @@ function ModalTemplate({
 
   const [thirdValue, setThirdValue] = useState('');
 
+  const [photos, setPhotos] = useState([]);
+
+  const [mappedPhotos, setMappedPhotos] = useState([]);
+
   function firstChange(e) {
     setFirstValue(e.target.value);
   }
@@ -99,9 +124,15 @@ function ModalTemplate({
     setThirdValue(e.target.value);
   }
 
+  function photoChange(e) {
+    setPhotos(e.target.value.split(', '));
+    setMappedPhotos(e.target.value.split(', ').map((imgSrc, i) => <SinglePhoto src={imgSrc} />));
+    console.log(photos);
+  }
+
   function handleSubmitModal(e) {
     e.preventDefault();
-    submitQorA(isQuestion, firstValue, secondValue, thirdValue, identification)
+    submitQorA(isQuestion, firstValue, secondValue, thirdValue, identification, photos)
       .then((value) => {
         console.log(value);
       });
@@ -122,6 +153,7 @@ function ModalTemplate({
                 {' '}
                 {1000 - firstValue.length}
               </ThousandCharsParagraph>
+              <DisplayPhotos>{mappedPhotos}</DisplayPhotos>
             </Label>
             <Label>
               What is your nickname?
@@ -143,6 +175,14 @@ function ModalTemplate({
               <SecondInput placeholder={thirdInputName} type="email" onChange={thirdChange} />
               {thirdInputText}
             </Label>
+            {!isQuestion
+            && (
+              <Label>
+                Input the url for any images you would like to submit
+                seperated by a comma and a space.
+                <PhotoInput placeholder="Example: https://imgsrc.com, https:secondimgsrc.com" onChange={photoChange} />
+              </Label>
+            )}
             <SubmitModal>{buttonName}</SubmitModal>
           </FlexForm>
         </FlexColumn>

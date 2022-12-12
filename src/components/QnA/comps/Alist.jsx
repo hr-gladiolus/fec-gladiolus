@@ -42,7 +42,7 @@ const ReferencePoint = styled.div`
   max-height 0;
 `;
 
-function Alist({ answers }) {
+function Alist({ answers, selectPhoto }) {
   const [height, setHeight] = useState('100px');
   const [overflow, setOverflow] = useState('hidden');
   const [innerText, setInnerText] = useState('SEE MORE');
@@ -65,6 +65,7 @@ function Alist({ answers }) {
   const mappedAnswers = answerKeys.map((ansID) => (
     <SingleAns
       answer={answers[ansID]}
+      selectPhoto={(p) => selectPhoto(p)}
       key={ansID}
     />
   ));

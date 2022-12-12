@@ -14,7 +14,9 @@ const SingleQuest = styled.div`
   flex-direction: row;
 `;
 
-function SingleQue({ question, productName, productID }) {
+function SingleQue({
+  question, productName, productID, selectPhoto,
+}) {
   const { visible, toggle } = useModal();
   // set state to keep track of helpfulness to change when clicked so I don't have to rerender
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
@@ -35,7 +37,7 @@ function SingleQue({ question, productName, productID }) {
   }
   return (
     <SingleQuest>
-      <QueView question={question} />
+      <QueView question={question} selectPhoto={(p) => selectPhoto(p)} />
       <QueButtons
         helpfulness={helpfulness}
         toggle={toggle}

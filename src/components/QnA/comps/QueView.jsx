@@ -13,7 +13,7 @@ const ActualQue = styled.h5`
   font-size: 15px;
 `;
 
-function QueView({ question }) {
+function QueView({ question, selectPhoto }) {
   return (
     <QueComp>
       <ActualQue>
@@ -21,7 +21,7 @@ function QueView({ question }) {
         {' '}
         {question.question_body}
       </ActualQue>
-      <Alist answers={question.answers} />
+      <Alist answers={question.answers} selectPhoto={(p) => selectPhoto(p)} />
     </QueComp>
   );
 }

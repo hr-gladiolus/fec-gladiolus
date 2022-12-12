@@ -52,10 +52,32 @@ const StaticReport = styled.div`
   opacity: 100%;
 `;
 
-function SingleAns({ answer }) {
+const DisplayPhotos = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const SinglePhoto = styled.img`
+  max-height: 60px;
+  max-width: 100px;
+`;
+
+function SingleAns({ answer, selectPhoto }) {
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
   const [notClicked, setNotClicked] = useState(true);
   const [notReported, setNotReported] = useState(true);
+
+  function handleImgClick(e) {
+    console.log(e);
+  }
+
+  const mappedPhotos = answer.photos.map((photoUrl) => (
+    <SinglePhoto
+      src={photoUrl}
+      onClick={() => selectPhoto(photoUrl)}
+    />
+  ));
+
   function handleClick() {
     if (notClicked) {
       setNotClicked(false);
@@ -82,6 +104,9 @@ function SingleAns({ answer }) {
         <AnsText>
           {answer.body}
         </AnsText>
+        <DisplayPhotos>
+          {mappedPhotos}
+        </DisplayPhotos>
         <FlexRow>
           <AnsInfo>
             {`by ${answer.answerer_name}, ${format(parseISO(answer.date), 'MMMM d, yyyy')}`}

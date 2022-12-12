@@ -5,6 +5,7 @@ import More from './More.jsx';
 import Container from './styles/Container.styled.js';
 import Search from './Search.jsx';
 import Qlist from './Qlist.jsx';
+import ExpandedView from './comps/ExpandedView.jsx';
 
 const API = require('../../config').API_TOKEN;
 
@@ -18,6 +19,15 @@ const TopQA = styled.div`
   font-size: 14px;
 `;
 
+const Absolute = styled.div`
+  position: absolute;
+  top: 0;
+`;
+
+const OuterDiv = styled.div`
+  position: relative;
+`;
+
 function Qna({ environment }) {
   // I will need to get either the full product object or jsut the product name and ID
   // passed into the component as props
@@ -28,6 +38,15 @@ function Qna({ environment }) {
   const [productID, setProductID] = useState(37324);
   const [queList, setQueList] = useState([]);
   const [staticList, setStaticList] = useState([]);
+  const [currentPhoto, setCurrentPhoto] = useState('');
+
+  function selectPhoto(photo) {
+    setCurrentPhoto(photo);
+  }
+
+  function unselectPhoto() {
+    setCurrentPhoto('');
+  }
 
   useEffect(() => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {
@@ -56,23 +75,29 @@ function Qna({ environment }) {
   const noMatches = 'THERE APPEAR TO BE NO QUESTIONS MATCHING YOUR SEARCH? WOULD YOU LIKE TO ADD ONE?';
 
   return (
-    <Container>
-      <TopQA>QUESTIONS &#38; ANSWERS</TopQA>
-      { staticList.length ? (
-        <Search
-          staticList={staticList}
-          setQueList={(e) => setQueList(e)}
-        />
-      ) : <NoQues>{ noneText }</NoQues> }
-      { staticList.length && !queList.length ? <NoQues>{ noMatches }</NoQues> : null }
-      { staticList.length && (
-        <Qlist
-          queList={queList}
-          productID={productID}
-          productName={productName}
-        />
-      ) }
-    </Container>
+    <OuterDiv>
+      <Container>
+        <TopQA>QUESTIONS &#38; ANSWERS</TopQA>
+        { staticList.length ? (
+          <Search
+            staticList={staticList}
+            setQueList={(e) => setQueList(e)}
+          />
+        ) : <NoQues>{ noneText }</NoQues> }
+        { staticList.length && !queList.length ? <NoQues>{ noMatches }</NoQues> : null }
+        { staticList.length && (
+          <Qlist
+            queList={queList}
+            productID={productID}
+            productName={productName}
+            selectPhoto={selectPhoto}
+          />
+        ) }
+      </Container>
+      {currentPhoto && (
+        <ExpandedView unselectPhoto={unselectPhoto} photo={currentPhoto} />
+      )}
+    </OuterDiv>
   );
 }
 

@@ -15,7 +15,13 @@ const AccordionDiv = styled.div`
   transition: height 1s ease;
 `;
 
-function Qlist({ queList, productID, productName }) {
+const OuterDiv = styled.div`
+  position: relative;
+`;
+
+function Qlist({
+  queList, productID, productName, selectPhoto,
+}) {
   const [height, setHeight] = useState('0px');
   const [numberLoaded, setNumberLoaded] = useState(2);
   const [showMore, setShowMore] = useState(true);
@@ -32,6 +38,7 @@ function Qlist({ queList, productID, productName }) {
       key={question.question_id}
       productName={productName}
       productID={productID}
+      selectPhoto={(p) => selectPhoto(p)}
     />
   ));
 
@@ -43,7 +50,7 @@ function Qlist({ queList, productID, productName }) {
   }
 
   return (
-    <div>
+    <OuterDiv>
       <Spacer>
         <Comp>
           <AccordionDiv
@@ -61,7 +68,7 @@ function Qlist({ queList, productID, productName }) {
         productID={productID}
         showMore={showMore}
       />
-    </div>
+    </OuterDiv>
   );
 }
 
