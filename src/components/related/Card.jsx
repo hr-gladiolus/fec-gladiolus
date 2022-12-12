@@ -9,11 +9,14 @@ import Stars from '../shared/Stars.jsx';
 import Table from './Table.jsx';
 import { changeProduct, addProduct } from '../../store/productReducer.js';
 import getProduct from '../shared/productAPI.js';
+import ImageCarousel from './ImageCarousel.jsx';
 
 const CardContainer = styled.div`
   background: ${({ theme }) => theme.fg};
   position: relative;
+  overflow: hidden;
   width: 200px;
+  min-width: 200px;
   height: 400px;
   margin: 30px;
   transition: all 0.2s ease-out;
@@ -124,7 +127,7 @@ export default function Card({
         <Modal visible={visible} toggle={toggle}>
           <Table target={product} />
         </Modal>
-        <Img src={product.styles ? product.styles[0].photos[0].thumbnail_url : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
+        <ImageCarousel images={product.styles ? product.styles[0].photos : [{ thumbnail_url: 'https://media.tenor.com/2roX3uxz_68AAAAM/cat-space.gif' }]} />
         <p>{product.category}</p>
         <h5>{product.name}</h5>
         {product.styles && (product.styles[0].sale_price === null ? (
