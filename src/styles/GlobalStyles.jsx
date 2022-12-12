@@ -20,10 +20,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: Fantony;
     src: url("./FANTONY-ROUGH.otf") format("opentype");
   }
-
-  td, th {
-    border: 1px solid black;
-  }
 `;
 
 export default GlobalStyle;
