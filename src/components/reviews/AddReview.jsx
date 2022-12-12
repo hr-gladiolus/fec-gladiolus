@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import useModal from '../shared/useModal.js';
 import AddReviewStar from './AddReviewStar.jsx';
+import SingleCharacteristic from './SingleCharacteristic.jsx';
+
+const CharContainer = styled.div``;
 
 function AddReview() {
   const product = useSelector((state) => state.product.productId);
@@ -46,7 +49,12 @@ function AddReview() {
         </h3>
 
         {/* insert star rating here - will add after we get it figured out */}
-        <AddReviewStar starRating={starRating} setStarRating={setStarRating} />
+        {/* <AddReviewStar
+          starRating={starRating}
+          setStarRating={setStarRating}
+          reviewInput={reviewInput}
+          setReviewInput={setReviewInput}
+        /> */}
 
         {/* do you reccomend product */}
         <p>Do You Recommend This Product?</p>
@@ -79,8 +87,17 @@ function AddReview() {
           No
         </label>
 
-        <p>characteristics here</p>
         {/* need GET request to reviews/meta for characteristics */}
+        <CharContainer>
+          Product Characteristics
+          {Object.keys(data.characteristics).map((characteristic) => (
+            <SingleCharacteristic
+              char={characteristic}
+              reviewInput={reviewInput}
+              setReviewInput={setReviewInput}
+            />
+          ))}
+        </CharContainer>
 
         {/* review summary */}
         <label>

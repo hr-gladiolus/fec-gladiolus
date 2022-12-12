@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StarContainer = styled.div``;
 
-const StarButton = styled.div`
+const OuterStar = styled.button`
   display: inline-block;
   position: relative;
   font-family: FontAwesome;
   &:before {
     content: "\f006";
   }
+  /* &:hover {
+    content: "\f005";
+    color: #f8ce0b;
+  } */
 `;
 
-const Star = styled.div`
+const InnerStar = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -27,20 +31,32 @@ const Star = styled.div`
 
 function AddReviewStar(props) {
   const { starRating, setStarRating } = props;
+  const { reviewInput, setReviewInput } = props;
 
+  const [filledIn, setFilledIn] = useState(false);
+
+  const fillInStars = (rating) => (
+    <div>
+      <InnerStar width={rating} />
+    </div>
+
+  );
   return (
     <StarContainer>
-      {[1, 2, 3, 4, 5].map((star) => (
-        <StarButton
+
+      {filledIn === false && [1, 2, 3, 4, 5].map((star) => (
+        <OuterStar
           key={star}
+          value={star}
           onClick={(evt) => {
             evt.preventDefault();
-            setStarRating(star);
+            setStarRating(evt.target.value);
+            fillInStars(evt.target.value);
+            setReviewInput(reviewInput.rating);
           }}
-        >
-          <Star rating={starRating} />
-        </StarButton>
+        />
       ))}
+      <InnerStar />
     </StarContainer>
 
   );
