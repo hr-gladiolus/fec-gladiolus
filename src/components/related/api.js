@@ -43,5 +43,6 @@ export function getProductCard(id) {
 
 // GET related products given an ID
 export function getRelated(id) {
-  return axios.get(`/products/${id}/related`).then((res) => res.data);
+  // a set is used to make sure the related products are all unique
+  return axios.get(`/products/${id}/related`).then((res) => [...new Set(res.data)]);
 }
