@@ -5,11 +5,11 @@ import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 
 function AddReview() {
-  // productId will be gotten through state whenever we figure it out
   const product = useSelector((state) => state.product.productId);
-  const productId = product;
+  const data = useSelector((state) => state.product.productData);
+
   const blankForm = {
-    product_id: productId,
+    product_id: product,
     rating: 0,
     summary: '',
     body: '',
@@ -37,7 +37,11 @@ function AddReview() {
     <div>
       <form>
         <h2>Write Your Review</h2>
-        <h3>About the INSERT PRODUCT NAME HERE</h3>
+        <h3>
+          About the
+          {' '}
+          {data.name}
+        </h3>
 
         {/* insert star rating here - will add after we get it figured out */}
         <p>star rating</p>
