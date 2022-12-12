@@ -70,7 +70,7 @@ export function getReviews(productId, sortOption) {
   return instance.get('/reviews/', {
     params: {
       page: 1,
-      count: 1,
+      count: 1000,
       sort: sortOption,
       product_id: productId,
     },

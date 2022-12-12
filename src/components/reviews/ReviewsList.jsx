@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -8,57 +9,80 @@ import SortReviews from './SortReviews.jsx';
 const ReviewsListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  max-height: 300px;
 `;
 
 const SearchBar = styled.input`
 `;
 
-function ReviewsList(props) {
-  const [reviews, setReviews] = useState([]);
-  const [sortOption, setSortOption] = useState('Relevant');
+const ShowMoreButton = styled.div``;
 
-  const { filter } = props;
+function ReviewsList(props) {
+  const [sortOption, setSortOption] = useState('Relevant');
+  const [reviews, setReviews] = useState([]);
+  const [currentReviews, setCurrentReviews] = useState([]);
+  const [index, setIndex] = useState(2);
+  const [numberOfReviews, setNumberOfReviews] = useState();
+
+  const { filter, selectedFilters, setFilter } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const sortReviews = () => {
+  const filterReviews = () => setCurrentReviews(reviews.filter((review) => selectedFilters[review.rating] === true));
 
+  const showMoreReviews = () => {
+    setCurrentReviews(reviews.slice(0, index));
+    setIndex(index + 2);
   };
 
-  // pulls reviews when product changes
   useEffect(() => {
     getReviews(product, sortOption)
       .then((result) => {
         setReviews(result);
+        setCurrentReviews(result.slice(0, 2));
+        setNumberOfReviews(result.length);
       });
-  }, []);
+  }, [product, sortOption]);
 
-  // changes sort of reviews when new sort option is chosen
   useEffect(() => {
-    sortReviews();
-  }, [sortOption]);
+    if (filter && (Object.values(selectedFilters)).includes(true)) {
+      filterReviews();
+    } else {
+      setCurrentReviews(reviews.slice(0, 2));
+    }
+  }, [filter, selectedFilters]);
 
   return (
     <div>
 
-      {/* number of reviews, sort selector */}
-      <SortReviews sortOption={sortOption} setSortOption={setSortOption} />
+      <SortReviews sortOption={sortOption} setSortOption={setSortOption} numberOfReviews={numberOfReviews} />
 
-      {/* serarch for keyword */}
       <SearchBar placeholder="Search for a Keyword" />
 
-      {/* review list */}
-      {reviews.map((review) => (
-        <SingleReview
-          review={review}
-          key={review.review_id}
-          id={review.review_id}
-        />
-      ))}
+      <ReviewsListContainer>
+        {currentReviews.map((review) => (
+          <SingleReview
+            review={review}
+            key={review.review_id}
+            id={review.review_id}
+          />
+        ))}
+      </ReviewsListContainer>
 
-      {/* more reviews button */}
-      <button type="button">More Reviews</button>
+      {reviews.length > 2
+      && currentReviews.length < reviews.length
+      && (
+        <ShowMoreButton
+          onClick={(evt) => {
+            evt.preventDefault();
+            showMoreReviews();
+          }}
+        >
+          More Reviews
+        </ShowMoreButton>
+      )}
 
     </div>
   );
