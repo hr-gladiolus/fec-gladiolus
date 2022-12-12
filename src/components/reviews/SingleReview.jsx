@@ -60,21 +60,10 @@ const Line = styled.hr`
 
 function SingleReview(props) {
   const { review } = props;
-  // this is my example review - leaving it in for future use
-  // const review = {
-  //   review_id: 1277210,
-  //   rating: 3,
-  //   summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
-  //   recommend: true,
-  //   response: 'dfhkjdahskfhdaskjhjk',
-  //   body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
-  //   date: '2022-10-25T00:00:00.000Z',
-  //   reviewer_name: 'cordelia',
-  //   helpfulness: 2,
-  //   photos: ['https://candicehern.com/WP/wp-content/uploads/2013/04/evening_dress3.jpg', 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/carriage--ball-dresses-print-collector.jpg', 'https://thegraphicsfairy.com/wp-content/uploads/2020/07/Edwardian-Fashion-Image-GraphicsFairy.jpg'],
-  // };
+
   const [showMore, setShowMore] = useState(false);
   const [helpful, setHelpful] = useState(review.helpfulness);
+  const [unhelpful, setUnhelpful] = useState(0);
 
   // handles summary with length over 60 char
   const summaryOverflow = () => {
@@ -148,7 +137,7 @@ function SingleReview(props) {
 
       {review.response && (
         <ResponseContainer>
-          <ResponseHeader>Response:</ResponseHeader>
+          <ResponseHeader>Response from seller:</ResponseHeader>
           <ResponseBody>{review.response}</ResponseBody>
         </ResponseContainer>
       )}
@@ -165,6 +154,12 @@ function SingleReview(props) {
         </HelpfulReportButton>
         (
         {helpful}
+        )
+        <HelpfulReportButton onClick={(evt) => setUnhelpful(unhelpful + 1)}>
+          No
+        </HelpfulReportButton>
+        (
+        {unhelpful}
         )  |
         <HelpfulReportButton
           onClick={(evt) => {
