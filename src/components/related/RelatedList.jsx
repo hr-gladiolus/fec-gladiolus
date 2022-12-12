@@ -60,7 +60,7 @@ export default function RelatedList() {
   const relatedNav = (inc) => {
     if (relatedOffset > 0 && inc === -1) {
       setRelatedOffset(relatedOffset - 1);
-    } else if (relatedOffset <= related.length - 2 && inc === 1) {
+    } else if (relatedOffset <= related.length - 4 && inc === 1) {
       setRelatedOffset(relatedOffset + 1);
     }
   };
@@ -68,7 +68,7 @@ export default function RelatedList() {
   const outfitNav = (inc) => {
     if (outfitOffset > 0 && inc === -1) {
       setOutfitOffset(outfitOffset - 1);
-    } else if (outfitOffset <= outfit.length - 2 && inc === 1) {
+    } else if (outfitOffset <= outfit.length - 4 && inc === 1) {
       setOutfitOffset(outfitOffset + 1);
     }
   };
@@ -85,8 +85,8 @@ export default function RelatedList() {
           {related.map((product) => (
             <Card key={product} id={product} offset={relatedOffset} setOffset={setRelatedOffset} icon="☆" />
           ))}
-          <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>
-          <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>
+          {relatedOffset > 0 && <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>}
+          {relatedOffset <= related.length - 5 && <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>}
         </ListContainer>
       </div>
       <div className="outfit">
@@ -105,8 +105,8 @@ export default function RelatedList() {
           {outfit.map((product) => (
             <Card key={product} id={product} offset={outfitOffset} setOffset={setOutfitOffset} icon="✖" remove={removeItem} />
           ))}
-          <CarouselNav type="button" onClick={() => outfitNav(-1)} left>&lt;</CarouselNav>
-          <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>
+          {outfitOffset > 0 && <CarouselNav type="button" onClick={() => outfitNav(-1)} left>&lt;</CarouselNav>}
+          {outfitOffset <= outfit.length - 5 && <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>}
         </ListContainer>
       </div>
     </>

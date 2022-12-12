@@ -14,6 +14,7 @@ import getProduct from './components/shared/productAPI.js';
 
 // replace header tag with a styled header
 const Header = styled.header`
+  font-family: 'Fantony';
   background: ${({ theme }) => theme.header};
   color: ${({ theme }) => theme.fg};
   width: 100vw;
@@ -21,6 +22,10 @@ const Header = styled.header`
   font-size: 1.5em;
   padding: 0.5em;
   box-sizing: border-box;
+  box-shadow: 0 0 0 10px ${({ theme }) => theme.highlight};
+  h1 {
+    font-size: 40px;
+  }
 `;
 
 function App() {
@@ -43,10 +48,14 @@ function App() {
   return (
     <div className="App">
       {/* Import the global styles */}
-      <ThemeProvider theme={purple}>
+      <ThemeProvider theme={green}>
         <GlobalStyle />
-        <Header id="header">
-          Logo Here
+        <Header>
+          <h1>
+            Logo Here
+            {' '}
+            <i className="fa-solid fa-gift" />
+          </h1>
         </Header>
         <Overview />
         <RelatedList />

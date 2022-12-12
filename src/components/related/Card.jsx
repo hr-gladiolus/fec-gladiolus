@@ -15,16 +15,26 @@ const CardContainer = styled.div`
   position: relative;
   width: 200px;
   height: 400px;
-  border: 1px solid black;
   margin: 30px;
   transition: all 0.2s ease-out;
   transform: translateX(${(props) => props.offset * -250}px);
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 5px ${({ theme }) => theme.highlight},
+    0 0 0 9px ${({ theme }) => theme.color},
+    0 15px 0 9px ${({ theme }) => theme.color};
+
+  &:hover {
+    transform: translate(${(props) => (props.offset * -250) + 5}px, 5px);
+    cursor: pointer;
+  }
 `;
 
 const Img = styled.img`
   height: 300px;
   width: 200px;
   object-fit: cover;
+  border-radius: 10px 10px 0 0;
 `;
 
 const Button = styled.button`
@@ -34,6 +44,8 @@ const Button = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
+  z-index: 1;
+  cursor: pointer;
 `;
 
 export default function Card({
@@ -65,23 +77,21 @@ export default function Card({
   }, [inView]);
 
   const handleClick = () => {
+    // show modal
     if (icon === '☆') {
       toggle();
       return;
     }
+    // remove item from outfit
     remove(id);
   };
 
   return (
     <CardContainer offset={offset} ref={ref}>
-      {/* temp placeholder image :) */}
-      <Img src={product.styles ? product.styles[0].photos[0].thumbnail_url : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
-      {/* functionality will be determined by which list the card is in */}
       <Button type="button" onClick={handleClick}>{icon}</Button>
-
-      {/* Only change if modal isn't visible */}
       <div
         onClick={() => {
+          // Only change if modal isn't visible
           if (!visible) {
             // scroll user to top of the page
             window.scrollTo({
@@ -99,12 +109,12 @@ export default function Card({
         }}
         onKeyDown={() => {
           if (!visible) {
-            dispatch(changeProduct(id));
             window.scrollTo({
               top: 0,
               left: 0,
               behavior: 'smooth',
             });
+            dispatch(changeProduct(id));
             setOffset(0);
           }
         }}
@@ -112,16 +122,19 @@ export default function Card({
         tabIndex="0"
       >
         <Modal visible={visible} toggle={toggle}>
-          {/* Modal renders its children, so place content between tags */}
           <Table target={product} />
         </Modal>
-        <h4>{product.category}</h4>
-        {/* future refactor: reset offset when button gets clicked */}
-        <h3>{product.name}</h3>
-
-        {product.styles && (product.styles[0].sale_price === null ? <p>{product.default_price}</p> : (
+        <Img src={product.styles ? product.styles[0].photos[0].thumbnail_url : 'https://media.istockphoto.com/id/1281804798/photo/very-closeup-view-of-amazing-domestic-pet-in-mirror-round-fashion-sunglasses-is-isolated-on.jpg?b=1&s=170667a&w=0&k=20&c=4CLWHzcFeku9olx0np2htie2cOdxWamO-6lJc-Co8Vc='} alt="" />
+        <p>{product.category}</p>
+        <h5>{product.name}</h5>
+        {product.styles && (product.styles[0].sale_price === null ? (
           <p>
-            <del>
+            $
+            {product.default_price}
+          </p>
+        ) : (
+          <p>
+            <del style={{ color: 'red' }}>
               $
               {product.default_price}
             </del>
@@ -130,7 +143,6 @@ export default function Card({
             {product.styles[0].sale_price}
           </p>
         ))}
-
         <Stars rating={product.average_rating} />
       </div>
     </CardContainer>
