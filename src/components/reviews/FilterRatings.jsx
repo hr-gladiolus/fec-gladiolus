@@ -60,11 +60,10 @@ function FilterRatings(props) {
         {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
       </div>
 
-      {/* percentage of reviews that recommend */}
       <Percentage>
-        {parseInt(data.recommended, 10) / data.total_reviews}
+        {data.percentage}
         {' '}
-        of reviews recommend this product
+        % of reviews recommend this product
       </Percentage>
     </div>
   );
