@@ -64,8 +64,8 @@ function SingleReview(props) {
   const [showMore, setShowMore] = useState(false);
   const [helpful, setHelpful] = useState(review.helpfulness);
   const [unhelpful, setUnhelpful] = useState(0);
+  const [clicked, setClicked] = useState(false);
 
-  // handles summary with length over 60 char
   const summaryOverflow = () => {
     const under60 = review.summary.slice(0, 61);
     const over60 = review.summary.slice(61);
@@ -77,31 +77,24 @@ function SingleReview(props) {
     );
   };
 
-  // handles show/hide button and functionality for body over 250 char
   const bodyOverflow = () => (
     <div>
       {showMore
         ? <ReviewBody>{review.body}</ReviewBody>
         : <ReviewBody>{review.body.slice(0, 251)}</ReviewBody>}
-      <ShowMoreButton
-        onClick={
-          (evt) => {
-            evt.preventDefault();
-            setShowMore(!showMore);
-          }
-        }
-      >
+      <ShowMoreButton onClick={(evt) => setShowMore(!showMore)}>
         {showMore ? 'Show Less' : 'Show More'}
       </ShowMoreButton>
     </div>
   );
 
-  const helpfulClick = () => {
-    markHelpful(review.review_id)
-      .then(() => {
-        setHelpful(helpful + 1);
-      });
-  };
+  const helpfulClick = () => !clicked && markHelpful(review.review_id)
+    .then(() => {
+      setHelpful(helpful + 1);
+      setClicked(true);
+    });
+
+  const unhelpfulClick = () => !clicked && setUnhelpful(unhelpful + 1) && setClicked(true);
 
   return (
     <Review>
@@ -144,31 +137,15 @@ function SingleReview(props) {
 
       <HelpfulReportContainer>
         Was this review helpful?
-        <HelpfulReportButton
-          onClick={(evt) => {
-            evt.preventDefault();
-            helpfulClick();
-          }}
-        >
-          Yes
-        </HelpfulReportButton>
+        <HelpfulReportButton onClick={(evt) => helpfulClick()}>Yes</HelpfulReportButton>
         (
         {helpful}
         )
-        <HelpfulReportButton onClick={(evt) => setUnhelpful(unhelpful + 1)}>
-          No
-        </HelpfulReportButton>
+        <HelpfulReportButton onClick={(evt) => unhelpfulClick()}>No</HelpfulReportButton>
         (
         {unhelpful}
         )  |
-        <HelpfulReportButton
-          onClick={(evt) => {
-            evt.preventDefault();
-            reportReview(review.review_id);
-          }}
-        >
-          Report
-        </HelpfulReportButton>
+        <HelpfulReportButton onClick={(evt) => reportReview(review.review_id)}>Report</HelpfulReportButton>
       </HelpfulReportContainer>
 
       <Line />
