@@ -7,6 +7,8 @@ import Stars from '../shared/Stars.jsx';
 
 const Rating = styled.div``;
 
+const Percentage = styled.div``;
+
 function FilterRatings(props) {
   const [rating, setRating] = useState();
 
@@ -16,7 +18,6 @@ function FilterRatings(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  // current filters component
   const currentFilters = () => (
     <div>
       <p>Current Filters</p>
@@ -28,7 +29,6 @@ function FilterRatings(props) {
     </div>
   );
 
-  // clears all filters
   const removeFilterButton = () => (
     <div>
       <button
@@ -52,18 +52,20 @@ function FilterRatings(props) {
 
       <Stars rating={data.average_rating} />
 
-      {/* current filter */}
       {filter === true && currentFilters()}
 
-      {/* remove all filters button */}
       {filter === true && removeFilterButton()}
 
-      {/* filters */}
       <div>
         {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
       </div>
 
       {/* percentage of reviews that recommend */}
+      <Percentage>
+        {parseInt(data.recommended, 10) / data.total_reviews}
+        {' '}
+        of reviews recommend this product
+      </Percentage>
     </div>
   );
 }

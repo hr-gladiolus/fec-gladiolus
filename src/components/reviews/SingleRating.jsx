@@ -5,32 +5,33 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { getProductRating, getRatings } from './api.js';
 
-const Row = styled.div`
+const Row = styled.button`
   width: 100px;
   display: flex;
   flex-direction: row;
+  background: transparent;
+  border: none;
 
   &:after {
   content: "";
   display: table;
   clear: both;
   }
-`;
-
-const Button = styled.button`
-  float: left;
-  width: 15%;
-  margin-top:10px;
-  background-color: inherit;
-  font-size: 12px;
-  border: none;
-  padding: 20px;
   &:hover {
-    color: #982929;
+    background-color: #f5a4a4;
   }
   &:active {
     color: #4e0881;
   }
+`;
+
+const StarRating = styled.div`
+  float: left;
+  width: 15%;
+  margin-top:10px;
+  font-size: 12px;
+  border: none;
+  padding: 20px;
 `;
 
 // div that holds bars
@@ -48,7 +49,7 @@ const Right = styled.div`
 // grey bar background
 const BottomBar = styled.div`
   width: 100%;
-  background-color: #000000;
+  background-color: #717171;
   text-align: center;
   color: white;
 `;
@@ -77,31 +78,28 @@ function SingleRating(props) {
   };
 
   return (
-    <Row>
-      <Button
-        type="button"
-        onClick={(evt) => {
-          evt.preventDefault();
-          handleClick(number);
-        }}
-      >
-        {number === '1' ? <u>1 star</u> : (
-          <u>
-            {number}
-            {' '}
-            stars
-          </u>
-        )}
-      </Button>
+    <div>
+      <Row onClick={(evt) => handleClick(number)}>
+        <StarRating>
+          {number === '1' ? <u>1 star</u> : (
+            <u>
+              {number}
+              {' '}
+              stars
+            </u>
+          )}
+        </StarRating>
 
-      <Middle>
-        <BottomBar>
-          <TopBar width={data.ratings ? (data.ratings[number] / data.total_reviews) * 100 : 0} />
-        </BottomBar>
-      </Middle>
+        <Middle>
+          <BottomBar>
+            <TopBar width={data.ratings ? (data.ratings[number] / data.total_reviews) * 100 : 0} />
+          </BottomBar>
+        </Middle>
 
-      <Right>{data.ratings ? data.ratings[number] : null}</Right>
-    </Row>
+        <Right>{data.ratings ? data.ratings[number] : null}</Right>
+      </Row>
+    </div>
+
   );
 }
 
