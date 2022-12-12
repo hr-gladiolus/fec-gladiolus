@@ -9,7 +9,7 @@ import SortReviews from './SortReviews.jsx';
 const ReviewsListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
   max-height: 300px;
 `;
 
