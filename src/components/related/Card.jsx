@@ -33,13 +33,6 @@ const CardContainer = styled.div`
   }
 `;
 
-const Img = styled.img`
-  height: 300px;
-  width: 200px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-`;
-
 const Button = styled.button`
   width: 1.5rem;
   height: 1.5rem;
