@@ -52,7 +52,7 @@ function SingleQue({
           firstInputName="Your Answer"
           secondInputName="Example: jack543!"
           thirdInputName="Example: jack@email.com"
-          buttonName="Submit Question"
+          buttonName="Submit Answer"
           secondInputText="For privacy reasons, do not use your full name or email address"
           thirdInputText="For authentication reasons, you will not be emailed"
           identification={`${question.question_id}`}

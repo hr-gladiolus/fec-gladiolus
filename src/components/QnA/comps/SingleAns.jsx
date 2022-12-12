@@ -58,8 +58,9 @@ const DisplayPhotos = styled.div`
 `;
 
 const SinglePhoto = styled.img`
-  max-height: 60px;
-  max-width: 100px;
+  max-height: 75px;
+  max-width: 75px;
+  margin: 5px 10px 5px 0;
 `;
 
 function SingleAns({ answer, selectPhoto }) {

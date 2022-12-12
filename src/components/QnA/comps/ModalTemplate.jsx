@@ -34,6 +34,7 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-bottom: ${({ margin }) => margin || '15px'};
 `;
 
 const FirstInput = styled.textarea.attrs({ maxLength: '1000', required: 'required' })`
@@ -58,7 +59,7 @@ const CharsParagraph = styled.p`
   opacity: 50%;
   color: black;
   position: absolute;
-  bottom: ${({ bottom }) => bottom}%;
+  bottom: ${({ bottom }) => bottom};
   right 0.5%;
 `;
 
@@ -79,8 +80,9 @@ line-height: 1.2;
 `;
 
 const SinglePhoto = styled.img`
-  max-width: 133px;
-  max-height: 133px;
+  max-width: 110px;
+  max-height: 110px;
+  margin: 7px 10px 0px 10px;
 `;
 
 const DisplayPhotos = styled.div`
@@ -88,6 +90,8 @@ const DisplayPhotos = styled.div`
   flex-direction: row;
   max-width: 409px;
   flex-wrap: wrap;
+  margin-bottom: 15px;
+  place-content: center;
 `;
 
 function ModalTemplate({
@@ -134,7 +138,7 @@ function ModalTemplate({
     e.preventDefault();
     submitQorA(isQuestion, firstValue, secondValue, thirdValue, identification, photos)
       .then((value) => {
-        console.log(value);
+        window.location.reload();
       });
   }
 
@@ -145,7 +149,7 @@ function ModalTemplate({
         <ModalSubtitle>{subtitle}</ModalSubtitle>
         <FlexColumn>
           <FlexForm onSubmit={handleSubmitModal}>
-            <Label>
+            <Label margin="5px">
               {firstInputLabel}
               <FirstInput placeholder={firstInputName} onChange={firstChange} />
               <ThousandCharsParagraph>

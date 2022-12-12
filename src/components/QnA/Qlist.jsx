@@ -29,7 +29,7 @@ function Qlist({
   const content = useRef(null);
 
   useEffect(() => {
-    setHeight(`${content.current.scrollHeight - 5}px`);
+    setHeight(`${content.current.scrollHeight}px`);
   });
 
   const mappedList = queList.map((question) => (
