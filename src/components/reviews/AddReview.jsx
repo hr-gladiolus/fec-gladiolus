@@ -3,30 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
-import Stars from '../shared/Stars.jsx';
-
-const Outer = styled.div`
-  display: inline-block;
-  position: relative;
-  font-family: FontAwesome;
-  &:before {
-    content: "\f006 \f006 \f006 \f006 \f006";
-  }
-`;
-
-const Inner = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  width: ${(props) => props.star}%;
-  &:before {
-    content: "\f005";
-    color: #f8ce0b;
-  }
-`;
+import AddReviewStar from './AddReviewStar.jsx';
 
 function AddReview() {
   const product = useSelector((state) => state.product.productId);
@@ -47,7 +24,7 @@ function AddReview() {
   const [reviewInput, setReviewInput] = useState(blankForm);
   const [charCount, setCharCount] = useState(0);
   const [recommend, setRecommend] = useState(false);
-  const [starValue, setStarValue] = useState(0);
+  const [starRating, setStarRating] = useState(0);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -69,11 +46,7 @@ function AddReview() {
         </h3>
 
         {/* insert star rating here - will add after we get it figured out */}
-
-        <Outer>
-          <Inner value="1" star={starValue} />
-          <Inner value="2" />
-        </Outer>
+        <AddReviewStar starRating={starRating} setStarRating={setStarRating} />
 
         {/* do you reccomend product */}
         <p>Do You Recommend This Product?</p>
