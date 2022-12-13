@@ -55,6 +55,7 @@ describe('Related Items', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('left')).toBeInTheDocument();
+      screen.getByTestId('left').click();
     });
   });
 });
@@ -103,6 +104,15 @@ describe('Related List Cards', () => {
     await waitFor(() => {
       expect(screen.getAllByTestId('carousel-image').length).toEqual(6);
       screen.getAllByTestId('carousel-image')[0].click();
+    });
+
+    // make sure nav buttons are clickable
+    await waitFor(() => {
+      screen.getByTestId('carousel-right').click();
+    });
+
+    await waitFor(() => {
+      screen.getByTestId('carousel-left').click();
     });
   });
 

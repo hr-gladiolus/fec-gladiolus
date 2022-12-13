@@ -58,6 +58,7 @@ export default function ImageCarousel({ images }) {
       && (
         <Carousel>
           <Nav
+            data-testid="carousel-left"
             left
             onClick={(e) => {
               e.stopPropagation();
@@ -69,6 +70,7 @@ export default function ImageCarousel({ images }) {
             &lt;
           </Nav>
           <Nav
+            data-testid="carousel-right"
             onClick={(e) => {
               e.stopPropagation();
               if (offset < images.length - 4) {
