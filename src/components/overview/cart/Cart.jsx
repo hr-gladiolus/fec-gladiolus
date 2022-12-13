@@ -69,9 +69,6 @@ function Cart({ skus, id }) {
     }
   };
 
-  const handleSaved = (e) => {
-  };
-
   const handleChange = (e) => {
     if (e.target.value === 'Select Size' || e.target.value === 'OUT OF STOCK') {
       setCurrentSKU(['', { quantity: -1 }]);
@@ -94,6 +91,11 @@ function Cart({ skus, id }) {
 
   const range = (n, m) => [...Array(Math.min(n, m)).keys()];
 
+  const handleSaved = (e) => {
+    e.preventDefault();
+    document.getElementById('addOutfit').click();
+  };
+
   return (
     <form>
       <FlexDiv>
@@ -113,6 +115,19 @@ function Cart({ skus, id }) {
         <CartButton Button={Button} handleSubmit={handleSubmit} handleSize={handleSize} />
         <SavedButton Button={Button} id={id} handleSaved={handleSaved} />
       </FlexDiv>
+      {
+        cartE
+          && (
+            <div style={{
+              color: 'red',
+              textAlign: 'center',
+              padding: '8px',
+            }}
+            >
+              Please select size!
+            </div>
+          )
+      }
     </form>
   );
 }

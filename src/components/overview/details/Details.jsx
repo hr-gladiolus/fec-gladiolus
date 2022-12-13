@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { getReviews } from '../helpers/productAPI.js';
+import Stars from '../../shared/Stars.jsx';
 
 const Div = styled.div`
   border: 1px solid gray;
@@ -16,6 +16,7 @@ const Div = styled.div`
 function Details(
   {
     ratings,
+    avgRating,
     id,
     category,
     name,
@@ -24,30 +25,23 @@ function Details(
   },
 ) {
   const [numOfReviews, setNumOfReviews] = useState(0);
-  const [avgRating, setAvgRating] = useState(0);
 
   useEffect(() => {
-    getReviews(id)
-      .then((results) => {
-        const arr = Object.values(results.ratings);
-        const total = arr.reduce((acc, val) => Number(acc) + Number(val), 0);
-        setNumOfReviews(total);
-      })
-      .catch((err) => {
-        Error('Error in Details getReviews', err);
-      });
-  });
+    const arr = Object.values(ratings);
+    const total = arr.reduce((acc, val) => Number(acc) + Number(val), 0);
+    setNumOfReviews(total);
+  }, []);
 
   return (
     <Div>
-      {numOfReviews >= 0 && (
+      {numOfReviews > 0 && (
         <div>
           <h5 style={{ float: 'right', marginTop: '3px' }}>
             <a href="#readReviews" style={{ fontSize: '12px', color: '#002346' }}>
               {`Read All ${numOfReviews} Reviews`}
             </a>
           </h5>
-          <h5 style={{ marginTop: '3px', fontSize: '12px', color: '#002346' }}>Add star ratings here!</h5>
+          <Stars rating={avgRating} />
         </div>
       )}
       <h3 style={{ paddingTop: '7px' }}>{category}</h3>
@@ -58,7 +52,7 @@ function Details(
           <span style={{ color: 'red' }}>{` $${sale}`}</span>
         </h4>
       )}
-      {parseInt(sale, 10) === 0 && (
+      {sale === null && (
         <h4>{`$${price}`}</h4>
       )}
     </Div>
