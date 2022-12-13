@@ -42,10 +42,6 @@ function SortReviews(props) {
 
   const options = ['Relevant', 'Newest', 'Helpful'];
 
-  const handleClick = () => {
-    setDisplay(!display);
-  };
-
   const selectOption = (option) => {
     setDisplay(!display);
     setSortOption(option.toLowerCase());
@@ -59,10 +55,7 @@ function SortReviews(props) {
             <DropdownOption
               key={option}
               value={option}
-              onClick={(evt) => {
-                evt.preventDefault();
-                selectOption(option);
-              }}
+              onClick={(evt) => selectOption(option)}
             >
               {option}
             </DropdownOption>
@@ -82,12 +75,7 @@ function SortReviews(props) {
       </NumberReviews>
 
       <DropdownMenu>
-        <DropdownButton
-          onClick={(evt) => {
-            evt.preventDefault();
-            handleClick();
-          }}
-        >
+        <DropdownButton onClick={(evt) => setDisplay(!display)}>
           {sortOption}
           {' '}
           <IoIosArrowDown />

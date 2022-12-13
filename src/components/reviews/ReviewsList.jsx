@@ -10,13 +10,17 @@ const ReviewsListContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  max-height: 300px;
+  max-height: 500px;
+  float: right;
+  padding: 15px;;
 `;
 
 const SearchBar = styled.input`
+  margin: 30px;
 `;
 
-const ShowMoreButton = styled.div``;
+const ShowMoreButton = styled.div`
+`;
 
 function ReviewsList(props) {
   const [sortOption, setSortOption] = useState('Relevant');
@@ -30,7 +34,7 @@ function ReviewsList(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const filterReviews = () => setCurrentReviews(reviews.filter((review) => selectedFilters[review.rating] === true));
+  const filterReviews = (reviewsData) => setCurrentReviews(reviewsData.filter((review) => selectedFilters[review.rating] === true));
 
   const showMoreReviews = () => {
     setCurrentReviews(reviews.slice(0, index));
@@ -41,18 +45,14 @@ function ReviewsList(props) {
     getReviews(product, sortOption)
       .then((result) => {
         setReviews(result);
-        setCurrentReviews(result.slice(0, 2));
         setNumberOfReviews(result.length);
+        return filter ? filterReviews(result) : setCurrentReviews(result.slice(0, 2));
       });
   }, [product, sortOption]);
 
-  useEffect(() => {
-    if (filter && (Object.values(selectedFilters)).includes(true)) {
-      filterReviews();
-    } else {
-      setCurrentReviews(reviews.slice(0, 2));
-    }
-  }, [filter, selectedFilters]);
+  useEffect(() => ((filter && (Object.values(selectedFilters)).includes(true))
+    ? filterReviews(reviews)
+    : setCurrentReviews(reviews.slice(0, 2))), [filter, selectedFilters]);
 
   return (
     <div>
@@ -74,12 +74,7 @@ function ReviewsList(props) {
       {reviews.length > 2
       && currentReviews.length < reviews.length
       && (
-        <ShowMoreButton
-          onClick={(evt) => {
-            evt.preventDefault();
-            showMoreReviews();
-          }}
-        >
+        <ShowMoreButton onClick={(evt) => showMoreReviews()}>
           More Reviews
         </ShowMoreButton>
       )}

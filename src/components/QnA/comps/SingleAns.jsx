@@ -31,7 +31,6 @@ const AnsInfo = styled.div`
 `;
 
 const ReportButton = styled.button`
-background-color: white;
 border-width: 0;
 display: flex;
 flex-direction: row;
@@ -40,6 +39,7 @@ place-content: center;
 padding: 0 0 0 10px;
 opacity: 75%;
 text-decoration: underline;
+background-color:${({ theme }) => theme.bg};
 `;
 
 const StaticReport = styled.div`
@@ -52,10 +52,30 @@ const StaticReport = styled.div`
   opacity: 100%;
 `;
 
-function SingleAns({ answer }) {
+const DisplayPhotos = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const SinglePhoto = styled.img`
+  max-height: 75px;
+  max-width: 75px;
+  margin: 5px 10px 5px 0;
+`;
+
+function SingleAns({ answer, selectPhoto }) {
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
   const [notClicked, setNotClicked] = useState(true);
   const [notReported, setNotReported] = useState(true);
+
+  const mappedPhotos = answer.photos.map((photoUrl, i) => (
+    <SinglePhoto
+      src={photoUrl}
+      onClick={() => selectPhoto(photoUrl)}
+      key={i}
+    />
+  ));
+
   function handleClick() {
     if (notClicked) {
       setNotClicked(false);
@@ -71,7 +91,6 @@ function SingleAns({ answer }) {
       setNotReported(false);
       submitReport(answer.id)
         .then((val) => {
-          console.log(val);
         });
     }
   }
@@ -82,6 +101,9 @@ function SingleAns({ answer }) {
         <AnsText>
           {answer.body}
         </AnsText>
+        <DisplayPhotos>
+          {mappedPhotos}
+        </DisplayPhotos>
         <FlexRow>
           <AnsInfo>
             {`by ${answer.answerer_name}, ${format(parseISO(answer.date), 'MMMM d, yyyy')}`}

@@ -13,8 +13,11 @@ const Searchinput = styled.input`
   width: 100%;
   padding: 1.95% 0% 1.95% 1.95%;
   display: inline-block;
-  border-width: 1.2px;
-  background-color: ${({ theme }) => theme.bg}
+  border-top: 1.2px solid rgba(0, 0, 0);
+  border-left: 1.2px solid rgba(0, 0, 0);
+  border-bottom: 1.2px solid rgba(0, 0, 0, .5);
+  border-right: 1.2px solid rgba(0, 0, 0, .5);
+  background-color: ${({ theme }) => theme.bg};
 
   ::placeholder {
     color: black;
@@ -25,7 +28,7 @@ const Searchinput = styled.input`
 const Searchform = styled.form`
   display: flex;
   place-content: center;
-  box-shadow: 2px 2px 2px rgb(0 0 0 / 0.1);
+  box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
   margin: 0 0 6px 0;
   position: relative;
 `;

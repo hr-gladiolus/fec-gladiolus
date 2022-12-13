@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+const FactorContainer = styled.div`
+  float: left;
+`;
+
 const Row = styled.div`
   display: flex;
   flex-direction: column;
@@ -80,9 +84,12 @@ function ProductFactors() {
     </SingleCharacteristic>
   );
   return (
-    <Row>
-      {data.characteristics && Object.keys(data.characteristics).map((factor) => singleFactor(factor))}
-    </Row>
+    <FactorContainer>
+      <Row>
+        {data.characteristics && Object.keys(data.characteristics).map((factor) => singleFactor(factor))}
+      </Row>
+    </FactorContainer>
+
   );
 }
 
