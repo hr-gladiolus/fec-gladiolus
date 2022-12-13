@@ -94,7 +94,8 @@ describe('Related List Cards', () => {
   });
 
   it('Displays a secondary carousel when hovering over a card', async () => {
-    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
+    const setOffset = jest.fn();
+    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" setOffset={setOffset} /></Provider>);
     mockAllIsIntersecting(true);
 
     await waitFor(() => {
@@ -114,6 +115,16 @@ describe('Related List Cards', () => {
     await waitFor(() => {
       screen.getByTestId('carousel-left').click();
     });
+  });
+
+  it('Changes products', async () => {
+    const setOffset = jest.fn();
+    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" setOffset={setOffset} /></Provider>);
+
+    await waitFor(() => {
+      screen.getByTestId('change-product').click();
+    });
+    expect(setOffset.mock.calls.length).toEqual(1);
   });
 
   it('Renders a card with a sale price', async () => {
