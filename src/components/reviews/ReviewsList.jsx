@@ -10,13 +10,17 @@ const ReviewsListContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  max-height: 300px;
+  max-height: 500px;
+  float: right;
+  padding: 15px;;
 `;
 
 const SearchBar = styled.input`
+  margin: 30px;
 `;
 
-const ShowMoreButton = styled.div``;
+const ShowMoreButton = styled.div`
+`;
 
 function ReviewsList(props) {
   const [sortOption, setSortOption] = useState('Relevant');

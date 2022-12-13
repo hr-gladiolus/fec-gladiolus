@@ -1,13 +1,34 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import FilterRatings from './FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
-import { getProductRating } from './api.js';
 import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
+
+const ReviewWidget = styled.div`
+  display: flex;
+  width: 80%;
+`;
+
+const LeftSide = styled.div`
+  flex: 30%;
+  margin: 50px;
+  margin-left: 200px;
+`;
+
+const RightSide = styled.div`
+  flex: 70%;
+  margin-top: 80px;
+  margin-right: 50px;
+`;
+
+const Title = styled.div`
+  font-size: 15px;
+`;
 
 function RatingsAndReviews() {
   const [filter, setFilter] = useState(false);
@@ -24,25 +45,26 @@ function RatingsAndReviews() {
   const { visible, toggle } = useModal();
 
   return (
-    <div id="#readReviews">
-      <h1>Ratings & Reviews</h1>
+    <ReviewWidget id="#readReviews">
+      <LeftSide>
+        <Title>Ratings & Reviews</Title>
 
-      {/* filter ratings */}
-      <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
-      <br />
+        <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
+        <br />
 
-      {/* product factors */}
-      <ProductFactors />
+        <ProductFactors />
+      </LeftSide>
 
-      {/* reviews list */}
-      {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} setFilter={setFilter} />}
+      <RightSide>
+        {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} setFilter={setFilter} />}
 
-      {/* add reviews button and modal */}
-      <button type="button" onClick={toggle}>Add Review +</button>
-      <Modal visible={visible} toggle={toggle}>
-        <AddReview />
-      </Modal>
-    </div>
+        <button type="button" onClick={toggle}>Add Review +</button>
+        <Modal visible={visible} toggle={toggle}>
+          <AddReview />
+        </Modal>
+      </RightSide>
+
+    </ReviewWidget>
   );
 }
 

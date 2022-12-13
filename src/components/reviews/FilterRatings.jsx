@@ -5,7 +5,14 @@ import { useSelector } from 'react-redux';
 import SingleRating from './SingleRating.jsx';
 import Stars from '../shared/Stars.jsx';
 
-const Rating = styled.div``;
+const Ratings = styled.div`
+  display: flex;
+`;
+
+const Rating = styled.div`
+  font-size: 40px;
+  padding-right: 10px;
+`;
 
 const Percentage = styled.div``;
 
@@ -48,9 +55,11 @@ function FilterRatings(props) {
   return (
     <div>
 
-      <Rating>{data.average_rating_tenth}</Rating>
+      <Ratings>
+        <Rating>{data.average_rating_tenth}</Rating>
 
-      <Stars rating={data.average_rating} />
+        <Stars rating={data.average_rating} />
+      </Ratings>
 
       {filter === true && currentFilters()}
 

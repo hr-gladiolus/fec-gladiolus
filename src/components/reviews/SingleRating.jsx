@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { getProductRating, getRatings } from './api.js';
 
 const Row = styled.button`
-  width: 100px;
   display: flex;
+  width: 300px;
+  height: auto;
   flex-direction: row;
   background: transparent;
   border: none;
@@ -27,23 +27,24 @@ const Row = styled.button`
 
 const StarRating = styled.div`
   float: left;
-  width: 15%;
+  /* width: 15%; */
   margin-top:10px;
   font-size: 12px;
   border: none;
-  padding: 20px;
+  padding: 10px;
 `;
 
 // div that holds bars
 const Middle = styled.div`
-  margin-top:10px;
-  float: left;
+  margin-top: 20px;
   width: 70%;
+  padding-left: 5px;
+  height: 5px;
 `;
 
 // number of ratings on far right
 const Right = styled.div`
-
+  padding: 4px;
 `;
 
 // grey bar background
@@ -57,7 +58,7 @@ const BottomBar = styled.div`
 // green bar on top - width dependent on number of reviews
 const TopBar = styled.div`
   width: ${(props) => props.width}%;
-  height: 18px;
+  height: 8px;
   background-color: #04AA6D;
 `;
 
@@ -81,12 +82,8 @@ function SingleRating(props) {
     <div>
       <Row onClick={(evt) => handleClick(number)}>
         <StarRating>
-          {number === '1' ? <u>1 star</u> : (
-            <u>
-              {number}
-              {' '}
-              stars
-            </u>
+          {number === '1' ? <u>1  star</u> : (
+            <u>{`${number} stars`}</u>
           )}
         </StarRating>
 
