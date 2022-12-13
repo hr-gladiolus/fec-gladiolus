@@ -42,11 +42,6 @@ describe('Related Items', () => {
 });
 
 describe('Related List Cards', () => {
-  // beforeEach(() => {
-  //   // render(<Provider store={store}><Card id="37313" icon="☆" /></Provider>);
-  //   mockAllIsIntersecting(true);
-  // });
-
   it('Renders a non-cached card', async () => {
     render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
     mockAllIsIntersecting(true);
