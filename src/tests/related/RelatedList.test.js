@@ -54,4 +54,18 @@ describe('Related List Cards', () => {
       expect(screen.getByText('Morning Joggers')).toBeInTheDocument();
     });
   });
+
+  it('Loads the table modal', async () => {
+    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
+    mockAllIsIntersecting(true);
+
+    await waitFor(() => {
+      const tableButton = screen.getByTestId('show-table');
+      tableButton.click();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('100% Cotton')).toBeInTheDocument();
+    });
+  });
 });
