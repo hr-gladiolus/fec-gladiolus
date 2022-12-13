@@ -5,6 +5,7 @@ import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import RelatedList from '../../components/related/RelatedList.jsx';
+import Card from '../../components/related/Card.jsx';
 import store from '../../store/store';
 
 describe('Related Items', () => {
@@ -23,10 +24,34 @@ describe('Related Items', () => {
     });
   });
 
-  // it('Adds an item to the outfit', async () => {
-  //   await waitFor(() => {
-  //     screen.getByTestId('add-outfit').click();
-  //     expect(screen.getAllByRole('img').length).toEqual(7);
-  //   });
+  it('Adds an item to the outfit', async () => {
+    await waitFor(() => {
+      screen.getByTestId('add-outfit').click();
+      // 6 cards should be on screen after an item is added to the outfit
+      expect(screen.getAllByTestId('card').length).toEqual(6);
+    });
+  });
+
+  it('Renders a cached card', async () => {
+    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
+    mockAllIsIntersecting(true);
+    await waitFor(() => {
+      expect(screen.getByText('Morning Joggers')).toBeInTheDocument();
+    });
+  });
+});
+
+describe('Related List Cards', () => {
+  // beforeEach(() => {
+  //   // render(<Provider store={store}><Card id="37313" icon="☆" /></Provider>);
+  //   mockAllIsIntersecting(true);
   // });
+
+  it('Renders a non-cached card', async () => {
+    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
+    mockAllIsIntersecting(true);
+    await waitFor(() => {
+      expect(screen.getByText('Morning Joggers')).toBeInTheDocument();
+    });
+  });
 });
