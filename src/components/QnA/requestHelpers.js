@@ -61,4 +61,14 @@ function submitReport(id) {
   });
 }
 
-export { submitQorA, submitHelpful, submitReport };
+function getProductById(id) {
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}`, {
+    headers: {
+      Authorization: API,
+    },
+  });
+}
+
+export {
+  submitQorA, submitHelpful, submitReport, getProductById,
+};

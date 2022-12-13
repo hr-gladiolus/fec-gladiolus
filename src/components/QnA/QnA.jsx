@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import More from './More.jsx';
 import Container from './styles/Container.styled.js';
 import Search from './Search.jsx';
 import Qlist from './Qlist.jsx';
 import ExpandedView from './comps/ExpandedView.jsx';
+import { getProductById } from './requestHelpers';
 
 const API = require('../../config').API_TOKEN;
 
@@ -33,9 +35,9 @@ function Qna({ environment }) {
   // passed into the component as props
   // but for now I will just have name and ID be placeholders.
   // I will need the full product object and can take the name and ID from that
-
+  const productID = useSelector((state) => state.product.productId);
+  console.log(productID);
   const [productName, setProductName] = useState('generic name');
-  const [productID, setProductID] = useState(37324);
   const [queList, setQueList] = useState([]);
   const [staticList, setStaticList] = useState([]);
   const [currentPhoto, setCurrentPhoto] = useState('');
@@ -56,7 +58,7 @@ function Qna({ environment }) {
       params: {
         product_id: productID,
         page: 1,
-        count: 22,
+        count: 100,
       },
     })
       .then((value) => {
@@ -67,6 +69,10 @@ function Qna({ environment }) {
         // setQueList(value.data.results);
         // this will set the data for the question list.
         // However, how their API starts, it has no data currently so use sample data instead.
+        return getProductById(productID);
+      })
+      .then((value) => {
+        setProductName(value.data.name);
       });
   }, []);
 

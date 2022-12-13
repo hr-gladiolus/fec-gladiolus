@@ -21,7 +21,11 @@ function QueView({ question, selectPhoto }) {
         {' '}
         {question.question_body}
       </ActualQue>
-      <Alist answers={question.answers} selectPhoto={(p) => selectPhoto(p)} />
+      <Alist
+        answers={question.answers}
+        selectPhoto={(p) => selectPhoto(p)}
+        key={question.question_id}
+      />
     </QueComp>
   );
 }

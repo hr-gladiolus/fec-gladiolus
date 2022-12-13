@@ -72,10 +72,11 @@ function SingleAns({ answer, selectPhoto }) {
     console.log(e);
   }
 
-  const mappedPhotos = answer.photos.map((photoUrl) => (
+  const mappedPhotos = answer.photos.map((photoUrl, i) => (
     <SinglePhoto
       src={photoUrl}
       onClick={() => selectPhoto(photoUrl)}
+      key={i}
     />
   ));
 
@@ -94,7 +95,6 @@ function SingleAns({ answer, selectPhoto }) {
       setNotReported(false);
       submitReport(answer.id)
         .then((val) => {
-          console.log(val);
         });
     }
   }

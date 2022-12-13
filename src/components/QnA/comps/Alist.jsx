@@ -49,7 +49,7 @@ function Alist({ answers, selectPhoto }) {
 
   const content = useRef(null);
   const referenceHeight = useRef(null);
-
+  console.log(answers);
   const answerKeys = Object.keys(answers);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function Alist({ answers, selectPhoto }) {
     setInnerText(innerText !== 'SEE MORE' ? 'SEE MORE' : 'COLLAPSE');
   }
 
-  const mappedAnswers = answerKeys.map((ansID) => (
+  const mappedAnswers = answerKeys.map((ansID, i) => (
     <SingleAns
       answer={answers[ansID]}
       selectPhoto={(p) => selectPhoto(p)}
