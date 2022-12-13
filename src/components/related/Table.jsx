@@ -32,12 +32,11 @@ export default function Table({ target }) {
     const obj = {};
 
     // push current product features into obj
-    if (product.features !== undefined) {
-      product.features.forEach((f) => {
-        if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
-        obj[f.feature][0] = f.value === null ? '✓' : f.value;
-      });
-    }
+
+    product.features.forEach((f) => {
+      if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
+      obj[f.feature][0] = f.value === null ? '✓' : f.value;
+    });
 
     // push target characteristics into obj
     target.features.forEach((f) => {

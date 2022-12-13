@@ -72,8 +72,8 @@ describe('Related Items', () => {
   });
 });
 
+// renderWithProviders doesn't work with these tests for some reason
 describe('Related List Cards', () => {
-  // renderWithProviders doesn't work with these tests for some reason
   it('Renders a non-cached card', async () => {
     render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
     mockAllIsIntersecting(true);
@@ -83,6 +83,7 @@ describe('Related List Cards', () => {
   });
 
   it('Can load and close the table modal', async () => {
+    // manually send API call to set current product in store
     const product = await getProduct(37312);
     store.dispatch(changeData(product));
     render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
@@ -93,8 +94,10 @@ describe('Related List Cards', () => {
       tableButton.click();
     });
 
+    // check table headers
     await waitFor(() => {
-      expect(screen.getByText('sadfadsf')).toBeInTheDocument();
+      expect(screen.getByText('Bright Future Sunglasses')).toBeInTheDocument();
+      expect(screen.getAllByText('Morning Joggers').length).toEqual(2);
     });
 
     // close modal
@@ -151,6 +154,20 @@ describe('Related List Cards', () => {
       // two prices should be shown
       expect(screen.getByText(/611\.00/i)).toBeInTheDocument();
       expect(screen.getByText(/178\.00/i)).toBeInTheDocument();
+    });
+  });
+
+  it('Renders a card that has no image', async () => {
+    render(<Provider store={store}><Card id="37312" icon="☆" offset="0" /></Provider>);
+    mockAllIsIntersecting(true);
+
+    await waitFor(() => {
+      expect(screen.getByText('Bright Future Sunglasses')).toBeInTheDocument();
+    });
+
+    // no images should be in the card carousel
+    await waitFor(() => {
+      expect(screen.queryAllByTestId('carousel-image').length).toEqual(0);
     });
   });
 });
