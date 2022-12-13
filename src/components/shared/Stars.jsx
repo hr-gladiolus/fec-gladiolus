@@ -25,8 +25,10 @@ const Inner = styled.div`
 
 export default function Stars({ rating }) {
   return (
-    <Outer>
-      <Inner rating={rating} />
-    </Outer>
+    <div>
+      <Outer>
+        <Inner rating={rating} />
+      </Outer>
+    </div>
   );
 }
