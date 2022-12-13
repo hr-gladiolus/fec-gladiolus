@@ -3,11 +3,13 @@ import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import RelatedList from '../../components/related/RelatedList.jsx';
 import store from '../../store/store';
 
 describe('Related Items', () => {
   beforeEach(() => {
+    mockAllIsIntersecting(true);
     render(<Provider store={store}><RelatedList /></Provider>);
   });
 
