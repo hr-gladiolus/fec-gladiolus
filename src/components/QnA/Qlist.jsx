@@ -20,7 +20,7 @@ const OuterDiv = styled.div`
 `;
 
 function Qlist({
-  queList, productID, productName, selectPhoto,
+  queList, product, selectPhoto,
 }) {
   const [height, setHeight] = useState('0px');
   const [numberLoaded, setNumberLoaded] = useState(2);
@@ -36,8 +36,7 @@ function Qlist({
     <SingleQue
       question={question}
       key={question.question_id}
-      productName={productName}
-      productID={productID}
+      product={product}
       selectPhoto={(p) => selectPhoto(p)}
     />
   ));
@@ -64,8 +63,7 @@ function Qlist({
       <More
         queList={queList}
         toggleAccordion={() => toggleAccordion()}
-        productName={productName}
-        productID={productID}
+        product={product}
         showMore={showMore}
       />
     </OuterDiv>

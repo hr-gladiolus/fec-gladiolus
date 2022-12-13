@@ -36,7 +36,7 @@ function Qna({ environment }) {
   // but for now I will just have name and ID be placeholders.
   // I will need the full product object and can take the name and ID from that
   const productID = useSelector((state) => state.product.productId);
-  console.log(productID);
+  const products = useSelector((state) => state.product.products);
   const [productName, setProductName] = useState('generic name');
   const [queList, setQueList] = useState([]);
   const [staticList, setStaticList] = useState([]);
@@ -69,10 +69,6 @@ function Qna({ environment }) {
         // setQueList(value.data.results);
         // this will set the data for the question list.
         // However, how their API starts, it has no data currently so use sample data instead.
-        return getProductById(productID);
-      })
-      .then((value) => {
-        setProductName(value.data.name);
       });
   }, []);
 
@@ -94,8 +90,7 @@ function Qna({ environment }) {
         { staticList.length && (
           <Qlist
             queList={queList}
-            productID={productID}
-            productName={productName}
+            product={products[productID]}
             selectPhoto={selectPhoto}
           />
         ) }

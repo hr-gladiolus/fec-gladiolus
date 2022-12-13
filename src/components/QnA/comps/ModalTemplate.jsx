@@ -20,12 +20,7 @@ const FlexForm = styled.form`
   place-content: center;
 `;
 
-const ModalTitle = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const ModalSubtitle = styled.div`
+const ModalTitles = styled.div`
   display: flex;
   justify-content: center;
 `;
@@ -131,7 +126,6 @@ function ModalTemplate({
   function photoChange(e) {
     setPhotos(e.target.value.split(', '));
     setMappedPhotos(e.target.value.split(', ').map((imgSrc, i) => <SinglePhoto src={imgSrc} />));
-    console.log(photos);
   }
 
   function handleSubmitModal(e) {
@@ -145,8 +139,8 @@ function ModalTemplate({
   return (
     <OuterFlexColumn>
       <FlexColumn>
-        <ModalTitle>{title}</ModalTitle>
-        <ModalSubtitle>{subtitle}</ModalSubtitle>
+        <ModalTitles>{title}</ModalTitles>
+        <ModalTitles>{subtitle}</ModalTitles>
         <FlexColumn>
           <FlexForm onSubmit={handleSubmitModal}>
             <Label margin="5px">

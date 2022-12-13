@@ -49,7 +49,6 @@ function Alist({ answers, selectPhoto }) {
 
   const content = useRef(null);
   const referenceHeight = useRef(null);
-  console.log(answers);
   const answerKeys = Object.keys(answers);
 
   useEffect(() => {

@@ -37,7 +37,7 @@ const MoreAnsQues = styled.button`
 `;
 
 function More({
-  queList, toggleAccordion, productName, productID, showMore,
+  queList, toggleAccordion, product, showMore,
 }) {
   const { visible, toggle } = useModal();
 
@@ -56,7 +56,7 @@ function More({
       <Modal visible={visible} toggle={toggle}>
         <ModalTemplate
           title="Ask Your Question"
-          subtitle={`About the ${productName}`}
+          subtitle={`About the ${product && product.name}`}
           firstInputLabel="Your Question"
           firstInputName="Your Question"
           secondInputName="Example: jackson11!"
@@ -65,7 +65,7 @@ function More({
           secondInputText="For privacy reasons, do not use your full name or email address"
           thirdInputText="For authentication reasons, you will not be emailed"
           isQuestion
-          identification={`${productID}`}
+          identification={`${product && product.id}`}
         />
       </Modal>
     </Comp>

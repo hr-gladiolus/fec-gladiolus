@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import HelpfulSentence from '../styles/HelpfulSentence.styled';
 import HelpfulButton from '../styles/HelpfulButton.styled';
 import FlexRow from '../styles/FlexRow.styled';
-
-const QueButtonsOuter = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import FlexColumn from '../styles/FlexColumn.styled';
 
 const AddAnswerButton = styled.button`
 width: 81px;
@@ -26,7 +22,7 @@ function QueButtons({
   helpfulness, toggle, handleYesClick, question,
 }) {
   return (
-    <QueButtonsOuter>
+    <FlexColumn>
       <FlexRow>
         <HelpfulSentence>
           Helpful?
@@ -36,7 +32,7 @@ function QueButtons({
         </HelpfulSentence>
         <AddAnswerButton onClick={toggle}>Add Answer</AddAnswerButton>
       </FlexRow>
-    </QueButtonsOuter>
+    </FlexColumn>
   );
 }
 
