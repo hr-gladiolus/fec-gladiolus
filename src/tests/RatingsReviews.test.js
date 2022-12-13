@@ -20,3 +20,16 @@ it('renders a single review', () => {
   render(<SingleReview />);
   expect(screen.getByText('sorted by')).toBeInTheDocument();
 });
+
+// add review expect place holder
+
+it('should increase not helpful number', () => {
+  render(<SingleReview />);
+  expect(screen.getByTestId('unhelpful')).toHaveTextContent('0');
+  return user.click(screen.getByRole('button', { name: 'No' }))
+    .then(() => {
+      expect(screen.getByTestId('unhelpful')).toHaveTextContent('1');
+    });
+});
+
+// something for api calls
