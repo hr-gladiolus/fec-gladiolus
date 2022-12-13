@@ -67,5 +67,15 @@ describe('Related List Cards', () => {
     await waitFor(() => {
       expect(screen.getByText('100% Cotton')).toBeInTheDocument();
     });
+
+    // close modal
+    await waitFor(() => {
+      const modalButton = screen.getByLabelText('Close');
+      modalButton.click();
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('100% Cotton')).toBeNull();
+    });
   });
 });
