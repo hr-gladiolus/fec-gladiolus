@@ -55,7 +55,7 @@ describe('Related List Cards', () => {
     });
   });
 
-  it('Loads the table modal', async () => {
+  it('Can load and close the table modal', async () => {
     render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
     mockAllIsIntersecting(true);
 
