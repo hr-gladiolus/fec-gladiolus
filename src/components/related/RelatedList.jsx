@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { getRelated } from './api.js';
+import { useSelector, useDispatch } from 'react-redux';
+import getRelated from './api.js';
 import Card from './Card.jsx';
 import getProduct from '../shared/productAPI.js';
+import { addToOutfit, removeFromOutfit } from '../../store/productReducer.js';
 
 const ListContainer = styled.div`
   display: inline-flex;
@@ -25,6 +26,7 @@ const CarouselNav = styled.button`
 
 const AddOutfit = styled.button`
   width: 200px;
+  min-width: 200px;
   height: 400px;
   border: 1px solid black;
   margin: 30px;
@@ -34,11 +36,12 @@ const AddOutfit = styled.button`
 
 export default function RelatedList() {
   const [related, setRelated] = useState([]);
-  const [outfit, setOutfit] = useState([]);
   const [relatedOffset, setRelatedOffset] = useState(0);
   const [outfitOffset, setOutfitOffset] = useState(0);
 
   const id = useSelector((state) => state.product.productId);
+  const outfit = useSelector((state) => state.product.outfit);
+  const dispatch = useDispatch();
 
   const { ref, inView, entry } = useInView({
     threshold: 0,
@@ -57,7 +60,7 @@ export default function RelatedList() {
   const relatedNav = (inc) => {
     if (relatedOffset > 0 && inc === -1) {
       setRelatedOffset(relatedOffset - 1);
-    } else if (relatedOffset <= related.length - 2 && inc === 1) {
+    } else if (relatedOffset <= related.length - 4 && inc === 1) {
       setRelatedOffset(relatedOffset + 1);
     }
   };
@@ -65,14 +68,13 @@ export default function RelatedList() {
   const outfitNav = (inc) => {
     if (outfitOffset > 0 && inc === -1) {
       setOutfitOffset(outfitOffset - 1);
-    } else if (outfitOffset <= outfit.length - 2 && inc === 1) {
+    } else if (outfitOffset <= outfit.length - 4 && inc === 1) {
       setOutfitOffset(outfitOffset + 1);
     }
   };
 
   const removeItem = (target) => {
-    const newOutfit = outfit.filter((product) => product !== target);
-    setOutfit(newOutfit);
+    dispatch(removeFromOutfit(target));
   };
 
   return (
@@ -81,10 +83,10 @@ export default function RelatedList() {
         <h1>Related Items:</h1>
         <ListContainer>
           {related.map((product) => (
-            <Card key={product} id={product} offset={relatedOffset} icon="☆" />
+            <Card key={product} id={product} offset={relatedOffset} setOffset={setRelatedOffset} icon="☆" />
           ))}
-          <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>
-          <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>
+          {relatedOffset > 0 && <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>}
+          {relatedOffset <= related.length - 5 && <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>}
         </ListContainer>
       </div>
       <div className="outfit">
@@ -93,20 +95,19 @@ export default function RelatedList() {
           <AddOutfit
             type="button"
             onClick={() => {
-              if (!outfit.includes(id)) {
-                setOutfit([id, ...outfit]);
-              }
+              dispatch(addToOutfit());
             }}
             offset={outfitOffset * -250}
             data-testid="add-outfit"
+            id="addOutfit"
           >
             Add to Outfit
           </AddOutfit>
           {outfit.map((product) => (
-            <Card key={product} id={product} offset={outfitOffset} icon="✖" remove={removeItem} />
+            <Card key={product} id={product} offset={outfitOffset} setOffset={setOutfitOffset} icon="✖" remove={removeItem} />
           ))}
-          <CarouselNav type="button" onClick={() => outfitNav(-1)} left>&lt;</CarouselNav>
-          <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>
+          {outfitOffset > 0 && <CarouselNav type="button" onClick={() => outfitNav(-1)} left>&lt;</CarouselNav>}
+          {outfitOffset <= outfit.length - 5 && <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>}
         </ListContainer>
       </div>
     </>

@@ -42,6 +42,7 @@ export default function getProduct(id) {
 
       result.average_rating = total ? (average / total).toFixed(2) : null;
       result.average_rating_tenth = Math.round(result.average_rating * 10) / 10;
+      result.total_reviews = total;
 
       return result;
     });

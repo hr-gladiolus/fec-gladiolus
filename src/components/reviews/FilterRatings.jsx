@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-// import { getProductRating, getRatings } from './api.js';
 import SingleRating from './SingleRating.jsx';
+import Stars from '../shared/Stars.jsx';
+
+const Rating = styled.div``;
 
 function FilterRatings(props) {
   const [rating, setRating] = useState();
@@ -14,23 +16,15 @@ function FilterRatings(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  // get producr rating on render
-  // useEffect(() => {
-  //   getProductRating(product)
-  //     .then((result) => {
-  //       setRating(result);
-  //     });
-  // }, [product]);
-
   // current filters component
   const currentFilters = () => (
     <div>
       <p>Current Filters</p>
-      {selectedFilters.five && <p>5 stars</p>}
-      {selectedFilters.four && <p>4 stars</p>}
-      {selectedFilters.three && <p>3 stars</p>}
-      {selectedFilters.two && <p>2 stars</p>}
-      {selectedFilters.one && <p>1 stars</p>}
+      {selectedFilters['5'] && <p>5 stars</p>}
+      {selectedFilters['4'] && <p>4 stars</p>}
+      {selectedFilters['3'] && <p>3 stars</p>}
+      {selectedFilters['2'] && <p>2 stars</p>}
+      {selectedFilters['1'] && <p>1 stars</p>}
     </div>
   );
 
@@ -53,11 +47,10 @@ function FilterRatings(props) {
 
   return (
     <div>
-      {/* rating */}
-      <p>rating (need to round)</p>
 
-      {/* star rating */}
-      <p>stars</p>
+      <Rating>{data.average_rating_tenth}</Rating>
+
+      <Stars rating={data.average_rating} />
 
       {/* current filter */}
       {filter === true && currentFilters()}
@@ -67,7 +60,7 @@ function FilterRatings(props) {
 
       {/* filters */}
       <div>
-        {['five', 'four', 'three', 'two', 'one'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
+        {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
       </div>
 
       {/* percentage of reviews that recommend */}

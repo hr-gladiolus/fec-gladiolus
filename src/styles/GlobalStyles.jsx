@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     /* Please change this color lol */
     background: ${({ theme }) => theme.bg};
     color: ${({ theme }) => theme.color};
+    font-family: Helvetica,Arial,sans-serif;
   }
 
   * {
@@ -15,8 +16,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
-  td, th {
-    border: 1px solid black;
+  @font-face {
+    font-family: Fantony;
+    src: url("./FANTONY-ROUGH.otf") format("opentype");
   }
 `;
 

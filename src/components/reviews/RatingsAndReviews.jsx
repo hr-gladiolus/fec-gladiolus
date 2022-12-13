@@ -11,20 +11,20 @@ import Modal from '../shared/Modal.jsx';
 
 function RatingsAndReviews() {
   const [filter, setFilter] = useState(false);
-  const [currentFilters, setCurrentFilters] = useState({});
   const filters = {
-    five: false,
-    four: false,
-    three: false,
-    two: false,
-    one: false,
+    5: false,
+    4: false,
+    3: false,
+    2: false,
+    1: false,
   };
   const [selectedFilters, setSelectedFilters] = useState(filters);
+  const data = useSelector((state) => state.product.productData);
 
   const { visible, toggle } = useModal();
 
   return (
-    <div>
+    <div id="#readReviews">
       <h1>Ratings & Reviews</h1>
 
       {/* filter ratings */}
@@ -34,16 +34,8 @@ function RatingsAndReviews() {
       {/* product factors */}
       <ProductFactors />
 
-      {/* number of reviews, sort selector */}
-
-      {/* serarch for keyword */}
-      <p>search for keyword</p>
-
       {/* reviews list */}
-      <ReviewsList filter={filter} currentFilters={currentFilters} />
-
-      {/* more reviews button */}
-      <button type="button">More Reviews</button>
+      {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} setFilter={setFilter} />}
 
       {/* add reviews button and modal */}
       <button type="button" onClick={toggle}>Add Review +</button>

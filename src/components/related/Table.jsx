@@ -8,6 +8,18 @@ const TableContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 20px;
+  border-radius: 10px;
+  color: ${({ theme }) => theme.color};
+
+  > table {
+    background: ${({ theme }) => theme.fg};
+    border-radius: 10px;
+    box-shadow:
+      0 0 0 5px ${({ theme }) => theme.highlight},
+      0 0 0 9px ${({ theme }) => theme.color},
+      0 15px 0 9px ${({ theme }) => theme.color};
+  }
 `;
 
 export default function Table({ target }) {
@@ -35,7 +47,7 @@ export default function Table({ target }) {
 
   return (
     <TableContainer>
-      <table>
+      <table cellSpacing="0" border="1">
         <thead>
           <tr>
             <th>{product.name}</th>
