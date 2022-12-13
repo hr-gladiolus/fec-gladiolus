@@ -105,4 +105,15 @@ describe('Related List Cards', () => {
       screen.getAllByTestId('carousel-image')[0].click();
     });
   });
+
+  it('Renders a card with a sale price', async () => {
+    render(<Provider store={store}><Card id="37610" icon="☆" offset="0" /></Provider>);
+    mockAllIsIntersecting(true);
+
+    await waitFor(() => {
+      // two prices should be shown
+      expect(screen.getByText(/611\.00/i)).toBeInTheDocument();
+      expect(screen.getByText(/178\.00/i)).toBeInTheDocument();
+    });
+  });
 });
