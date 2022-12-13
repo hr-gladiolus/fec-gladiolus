@@ -53,7 +53,7 @@ export default function ImageCarousel({ images }) {
   const [offset, setOffset] = useState(0);
 
   return (
-    <ImgContainer bg={images[index].thumbnail_url || 'https://media.tenor.com/2roX3uxz_68AAAAM/cat-space.gif'}>
+    <ImgContainer data-testid="image-carousel" bg={images[index].thumbnail_url || 'https://media.tenor.com/2roX3uxz_68AAAAM/cat-space.gif'}>
       {images.length > 1
       && (
         <Carousel>
@@ -82,6 +82,7 @@ export default function ImageCarousel({ images }) {
           {images.map((image, i) => image.thumbnail_url
           && (
             <Img
+              data-testid="carousel-image"
               key={image.thumbnail_url}
               src={image.thumbnail_url}
               offset={offset}

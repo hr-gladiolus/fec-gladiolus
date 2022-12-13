@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import RelatedList from '../../components/related/RelatedList.jsx';
 import Card from '../../components/related/Card.jsx';
@@ -88,6 +89,20 @@ describe('Related List Cards', () => {
 
     await waitFor(() => {
       expect(screen.queryByText('100% Cotton')).toBeNull();
+    });
+  });
+
+  it('Displays a secondary carousel when hovering over a card', async () => {
+    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
+    mockAllIsIntersecting(true);
+
+    await waitFor(() => {
+      userEvent.hover(screen.getByTestId('image-carousel'));
+    });
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId('carousel-image').length).toEqual(6);
+      screen.getAllByTestId('carousel-image')[0].click();
     });
   });
 });
