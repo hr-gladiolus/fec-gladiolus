@@ -29,6 +29,12 @@ export default function getProduct(id) {
       result.recommended = data.recommended;
       result.characteristics = data.characteristics;
 
+      // calculate percent of reviews that recommend product
+      const recommendYes = parseInt(data.recommended.true, 10);
+      const recommendNo = parseInt(data.recommended.false, 10);
+      const totalRecommend = recommendYes + recommendNo;
+      result.percentage = Math.round((recommendYes / totalRecommend) * 100);
+
       // calculate average rating
       const { ratings } = data;
       let total = 0;

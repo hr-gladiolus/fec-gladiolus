@@ -60,23 +60,12 @@ const Line = styled.hr`
 
 function SingleReview(props) {
   const { review } = props;
-  // this is my example review - leaving it in for future use
-  // const review = {
-  //   review_id: 1277210,
-  //   rating: 3,
-  //   summary: 'Such a great product! sdfadsfklajdsklfjdlkajsfldsafsafdsfdsdsfsdfdsfdssd',
-  //   recommend: true,
-  //   response: 'dfhkjdahskfhdaskjhjk',
-  //   body: 'wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfect wow I really loved this product. It was perfectwow I really loved this product. It was perfectwow I really loved this product. It was perfect',
-  //   date: '2022-10-25T00:00:00.000Z',
-  //   reviewer_name: 'cordelia',
-  //   helpfulness: 2,
-  //   photos: ['https://candicehern.com/WP/wp-content/uploads/2013/04/evening_dress3.jpg', 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/carriage--ball-dresses-print-collector.jpg', 'https://thegraphicsfairy.com/wp-content/uploads/2020/07/Edwardian-Fashion-Image-GraphicsFairy.jpg'],
-  // };
+
   const [showMore, setShowMore] = useState(false);
   const [helpful, setHelpful] = useState(review.helpfulness);
+  const [unhelpful, setUnhelpful] = useState(0);
+  const [clicked, setClicked] = useState(false);
 
-  // handles summary with length over 60 char
   const summaryOverflow = () => {
     const under60 = review.summary.slice(0, 61);
     const over60 = review.summary.slice(61);
@@ -88,31 +77,24 @@ function SingleReview(props) {
     );
   };
 
-  // handles show/hide button and functionality for body over 250 char
   const bodyOverflow = () => (
     <div>
       {showMore
         ? <ReviewBody>{review.body}</ReviewBody>
         : <ReviewBody>{review.body.slice(0, 251)}</ReviewBody>}
-      <ShowMoreButton
-        onClick={
-          (evt) => {
-            evt.preventDefault();
-            setShowMore(!showMore);
-          }
-        }
-      >
+      <ShowMoreButton onClick={(evt) => setShowMore(!showMore)}>
         {showMore ? 'Show Less' : 'Show More'}
       </ShowMoreButton>
     </div>
   );
 
-  const helpfulClick = () => {
-    markHelpful(review.review_id)
-      .then(() => {
-        setHelpful(helpful + 1);
-      });
-  };
+  const helpfulClick = () => !clicked && markHelpful(review.review_id)
+    .then(() => {
+      setHelpful(helpful + 1);
+      setClicked(true);
+    });
+
+  const unhelpfulClick = () => !clicked && setUnhelpful(unhelpful + 1) && setClicked(true);
 
   return (
     <Review>
@@ -148,32 +130,22 @@ function SingleReview(props) {
 
       {review.response && (
         <ResponseContainer>
-          <ResponseHeader>Response:</ResponseHeader>
+          <ResponseHeader>Response from seller:</ResponseHeader>
           <ResponseBody>{review.response}</ResponseBody>
         </ResponseContainer>
       )}
 
       <HelpfulReportContainer>
         Was this review helpful?
-        <HelpfulReportButton
-          onClick={(evt) => {
-            evt.preventDefault();
-            helpfulClick();
-          }}
-        >
-          Yes
-        </HelpfulReportButton>
+        <HelpfulReportButton onClick={(evt) => helpfulClick()}>Yes</HelpfulReportButton>
         (
         {helpful}
+        )
+        <HelpfulReportButton onClick={(evt) => unhelpfulClick()}>No</HelpfulReportButton>
+        (
+        {unhelpful}
         )  |
-        <HelpfulReportButton
-          onClick={(evt) => {
-            evt.preventDefault();
-            reportReview(review.review_id);
-          }}
-        >
-          Report
-        </HelpfulReportButton>
+        <HelpfulReportButton onClick={(evt) => reportReview(review.review_id)}>Report</HelpfulReportButton>
       </HelpfulReportContainer>
 
       <Line />

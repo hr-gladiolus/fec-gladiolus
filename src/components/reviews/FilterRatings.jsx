@@ -5,7 +5,16 @@ import { useSelector } from 'react-redux';
 import SingleRating from './SingleRating.jsx';
 import Stars from '../shared/Stars.jsx';
 
-const Rating = styled.div``;
+const Ratings = styled.div`
+  display: flex;
+`;
+
+const Rating = styled.div`
+  font-size: 40px;
+  padding-right: 10px;
+`;
+
+const Percentage = styled.div``;
 
 function FilterRatings(props) {
   const [rating, setRating] = useState();
@@ -16,7 +25,6 @@ function FilterRatings(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  // current filters component
   const currentFilters = () => (
     <div>
       <p>Current Filters</p>
@@ -28,7 +36,6 @@ function FilterRatings(props) {
     </div>
   );
 
-  // clears all filters
   const removeFilterButton = () => (
     <div>
       <button
@@ -48,22 +55,25 @@ function FilterRatings(props) {
   return (
     <div>
 
-      <Rating>{data.average_rating_tenth}</Rating>
+      <Ratings>
+        <Rating>{data.average_rating_tenth}</Rating>
 
-      <Stars rating={data.average_rating} />
+        <Stars rating={data.average_rating} />
+      </Ratings>
 
-      {/* current filter */}
       {filter === true && currentFilters()}
 
-      {/* remove all filters button */}
       {filter === true && removeFilterButton()}
 
-      {/* filters */}
       <div>
         {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
       </div>
 
-      {/* percentage of reviews that recommend */}
+      <Percentage>
+        {data.percentage}
+        {' '}
+        % of reviews recommend this product
+      </Percentage>
     </div>
   );
 }
