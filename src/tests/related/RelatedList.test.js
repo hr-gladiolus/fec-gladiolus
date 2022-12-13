@@ -25,11 +25,20 @@ describe('Related Items', () => {
     });
   });
 
-  it('Adds an item to the outfit', async () => {
+  it('Adds and removes an item to the outfit', async () => {
     await waitFor(() => {
       screen.getByTestId('add-outfit').click();
       // 6 cards should be on screen after an item is added to the outfit
       expect(screen.getAllByTestId('card').length).toEqual(6);
+    });
+
+    await waitFor(() => {
+      const tableButton = screen.getAllByTestId('card-button');
+      tableButton[tableButton.length - 1].click();
+    });
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId('card').length).toEqual(5);
     });
   });
 
@@ -74,7 +83,7 @@ describe('Related List Cards', () => {
     mockAllIsIntersecting(true);
 
     await waitFor(() => {
-      const tableButton = screen.getByTestId('show-table');
+      const tableButton = screen.getByTestId('card-button');
       tableButton.click();
     });
 
@@ -94,8 +103,7 @@ describe('Related List Cards', () => {
   });
 
   it('Displays a secondary carousel when hovering over a card', async () => {
-    const setOffset = jest.fn();
-    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" setOffset={setOffset} /></Provider>);
+    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
     mockAllIsIntersecting(true);
 
     await waitFor(() => {
@@ -117,14 +125,16 @@ describe('Related List Cards', () => {
     });
   });
 
-  it('Changes products', async () => {
+  it('Changes products when a card gets clicked', async () => {
     const setOffset = jest.fn();
+    window.scrollTo = jest.fn();
     render(<Provider store={store}><Card id="37313" icon="☆" offset="0" setOffset={setOffset} /></Provider>);
 
     await waitFor(() => {
       screen.getByTestId('change-product').click();
     });
     expect(setOffset.mock.calls.length).toEqual(1);
+    expect(window.scrollTo.mock.calls.length).toEqual(1);
   });
 
   it('Renders a card with a sale price', async () => {
