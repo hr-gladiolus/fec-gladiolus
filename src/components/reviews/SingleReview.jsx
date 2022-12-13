@@ -135,7 +135,7 @@ function SingleReview(props) {
         </ResponseContainer>
       )}
 
-      <HelpfulReportContainer>
+      <HelpfulReportContainer data-testid="unhelpful">
         Was this review helpful?
         <HelpfulReportButton onClick={(evt) => helpfulClick()}>Yes</HelpfulReportButton>
         (
