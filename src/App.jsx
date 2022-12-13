@@ -45,7 +45,7 @@ function App() {
         <Header>
           Logo here
         </Header>
-        <Overview id={id} />
+        <Overview />
         <RelatedList />
         <Qna />
         <RatingsAndReviews />

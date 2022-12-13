@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import Information from './information/Information.jsx';
 import Style from './style/Style.jsx';
 import Gallery from './gallery/Gallery.jsx';
@@ -32,11 +33,13 @@ const InvisDiv = styled.div`
   margin: 5px;
 `;
 
-function Overview({ id }) {
+function Overview() {
   const [currentProduct, setCurrentProduct] = useState({});
   const [styles, setStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState(undefined);
   const [currentPhoto, setCurrentPhoto] = useState('');
+
+  const id = useSelector((state) => state.product.productId);
 
   const handleImage = () => {
     const promises = styles.map((style) => (
@@ -65,7 +68,7 @@ function Overview({ id }) {
       .then(() => {
         handleImage();
       });
-  }, []);
+  }, [id]);
 
   const handleStyleOnClick = (Id) => {
     setCurrentStyle(styles.find((item) => item.style_id === Id));
