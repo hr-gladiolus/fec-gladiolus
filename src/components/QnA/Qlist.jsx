@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import More from './More.jsx';
 import SingleQue from './comps/SingleQue.jsx';
@@ -7,21 +7,30 @@ import Comp from './styles/Comp.styled.js';
 const Spacer = styled.div`
   margin: 0 0 10px 0;
   overflow: auto;
-  max-height: 500px;
+  max-height: 515px;
 `;
 
 const AccordionDiv = styled.div`
-  overflow: hidden;
-  max-height: ${({ height }) => height};
-  transition: max-height 1s ease;
+  height: ${({ height }) => height};
+  transition: height 1s ease;
 `;
 
-function Qlist({ queList, productID, productName }) {
-  const [height, setHeight] = useState('0px');
+const OuterDiv = styled.div`
+  position: relative;
+`;
 
-  const [showAccordion, setShowAccordion] = useState(false);
+function Qlist({
+  queList, productID, productName, selectPhoto,
+}) {
+  const [height, setHeight] = useState('0px');
+  const [numberLoaded, setNumberLoaded] = useState(2);
+  const [showMore, setShowMore] = useState(true);
 
   const content = useRef(null);
+
+  useEffect(() => {
+    setHeight(`${content.current.scrollHeight}px`);
+  });
 
   const mappedList = queList.map((question) => (
     <SingleQue
@@ -29,37 +38,37 @@ function Qlist({ queList, productID, productName }) {
       key={question.question_id}
       productName={productName}
       productID={productID}
+      selectPhoto={(p) => selectPhoto(p)}
     />
   ));
 
   function toggleAccordion() {
-    setHeight(height !== '0px' ? '0px' : `${content.current.scrollHeight}px`);
-    setShowAccordion(!showAccordion);
+    setNumberLoaded(numberLoaded + 2);
+    if (numberLoaded >= queList.length - 2) {
+      setShowMore(false);
+    }
   }
 
   return (
-    <div>
+    <OuterDiv>
       <Spacer>
         <Comp>
-          { mappedList.length > 4 ? mappedList.slice(0, 4) : mappedList }
-          { mappedList.length > 4 && (
-            <AccordionDiv
-              height={height}
-              ref={content}
-            >
-              { mappedList.slice(4) }
-            </AccordionDiv>
-          ) }
+          <AccordionDiv
+            ref={content}
+            height={height}
+          >
+            { mappedList.slice(0, numberLoaded) }
+          </AccordionDiv>
         </Comp>
       </Spacer>
       <More
         queList={queList}
         toggleAccordion={() => toggleAccordion()}
-        showAccordion={showAccordion}
         productName={productName}
         productID={productID}
+        showMore={showMore}
       />
-    </div>
+    </OuterDiv>
   );
 }
 

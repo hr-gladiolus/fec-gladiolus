@@ -42,6 +42,7 @@
         "no-unused-vars": ["off"],
         "import/extensions": ["off"],
         "no-undef": "off",
-        "react/jsx-no-bind": "off"
+        "react/jsx-no-bind": "off",
+        "react/no-array-index-key": "off"
     }
 }
