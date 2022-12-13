@@ -83,7 +83,7 @@ export default function Card({
   };
 
   return (
-    <CardContainer offset={offset} ref={ref}>
+    <CardContainer offset={offset} ref={ref} data-testid="card">
       <Button type="button" onClick={handleClick}>{icon}</Button>
       <div
         onClick={() => {
