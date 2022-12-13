@@ -39,6 +39,23 @@ describe('Related Items', () => {
       expect(screen.getByText('Morning Joggers')).toBeInTheDocument();
     });
   });
+
+  it('Has working carousel buttons', async () => {
+    // right button should be visible, left should not
+    await waitFor(() => {
+      expect(screen.getByTestId('right')).toBeInTheDocument();
+    });
+    expect(screen.queryByTestId('left')).toBeNull();
+
+    // after click, left should be visible
+    await waitFor(() => {
+      screen.getByTestId('right').click();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId('left')).toBeInTheDocument();
+    });
+  });
 });
 
 describe('Related List Cards', () => {
