@@ -68,10 +68,6 @@ function SingleAns({ answer, selectPhoto }) {
   const [notClicked, setNotClicked] = useState(true);
   const [notReported, setNotReported] = useState(true);
 
-  function handleImgClick(e) {
-    console.log(e);
-  }
-
   const mappedPhotos = answer.photos.map((photoUrl, i) => (
     <SinglePhoto
       src={photoUrl}
