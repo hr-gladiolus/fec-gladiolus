@@ -8,10 +8,13 @@ import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import RelatedList from '../../components/related/RelatedList.jsx';
 import Card from '../../components/related/Card.jsx';
 import store from '../../store/store';
+import { changeData } from '../../store/productReducer.js';
+import getProduct from '../../components/shared/productAPI.js';
+import { renderWithProviders } from '../testUtils.js';
 
 describe('Related Items', () => {
   beforeEach(() => {
-    render(<Provider store={store}><RelatedList /></Provider>);
+    renderWithProviders(<RelatedList />);
     mockAllIsIntersecting(true);
   });
 
@@ -43,7 +46,7 @@ describe('Related Items', () => {
   });
 
   it('Renders a cached card', async () => {
-    render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
+    renderWithProviders(<Card id="37313" icon="☆" offset="0" />);
     mockAllIsIntersecting(true);
     await waitFor(() => {
       expect(screen.getByText('Morning Joggers')).toBeInTheDocument();
@@ -70,6 +73,7 @@ describe('Related Items', () => {
 });
 
 describe('Related List Cards', () => {
+  // renderWithProviders doesn't work with these tests for some reason
   it('Renders a non-cached card', async () => {
     render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
     mockAllIsIntersecting(true);
@@ -79,6 +83,8 @@ describe('Related List Cards', () => {
   });
 
   it('Can load and close the table modal', async () => {
+    const product = await getProduct(37312);
+    store.dispatch(changeData(product));
     render(<Provider store={store}><Card id="37313" icon="☆" offset="0" /></Provider>);
     mockAllIsIntersecting(true);
 
@@ -88,7 +94,7 @@ describe('Related List Cards', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText('100% Cotton')).toBeInTheDocument();
+      expect(screen.getByText('sadfadsf')).toBeInTheDocument();
     });
 
     // close modal
