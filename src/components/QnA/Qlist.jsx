@@ -1,71 +1,74 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import More from './More.jsx';
 import SingleQue from './comps/SingleQue.jsx';
 import Comp from './styles/Comp.styled.js';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
-import ModalTemplate from './comps/ModalTemplate.jsx';
 
 const Spacer = styled.div`
   margin: 0 0 10px 0;
   overflow: auto;
-  max-height: 500px;
+  max-height: 515px;
 `;
 
-const TestDiv = styled.div`
-  overflow: hidden;
-  max-height: ${({ height }) => height};
-  transition: max-height 1s ease;
+const AccordionDiv = styled.div`
+  height: ${({ height }) => height};
+  transition: height 1s ease;
 `;
 
-function Qlist({ queList }) {
-  const { visible, toggle } = useModal();
+const OuterDiv = styled.div`
+  position: relative;
+`;
 
+function Qlist({
+  queList, productID, productName, selectPhoto,
+}) {
   const [height, setHeight] = useState('0px');
-
-  const [showAccordion, setShowAccordion] = useState(false);
+  const [numberLoaded, setNumberLoaded] = useState(2);
+  const [showMore, setShowMore] = useState(true);
 
   const content = useRef(null);
+
+  useEffect(() => {
+    setHeight(`${content.current.scrollHeight}px`);
+  });
 
   const mappedList = queList.map((question) => (
     <SingleQue
       question={question}
-      toggle={toggle}
       key={question.question_id}
+      productName={productName}
+      productID={productID}
+      selectPhoto={(p) => selectPhoto(p)}
     />
   ));
 
   function toggleAccordion() {
-    setHeight(height !== '0px' ? '0px' : `${content.current.scrollHeight}px`);
-    setShowAccordion(!showAccordion);
+    setNumberLoaded(numberLoaded + 2);
+    if (numberLoaded >= queList.length - 2) {
+      setShowMore(false);
+    }
   }
 
   return (
-    <div>
+    <OuterDiv>
       <Spacer>
         <Comp>
-          { mappedList.length > 2 ? mappedList.slice(0, 2) : mappedList }
-          { mappedList.length > 2 && (
-            <TestDiv
-              height={height}
-              ref={content}
-            >
-              { mappedList.slice(2) }
-            </TestDiv>
-          ) }
-          <Modal visible={visible} toggle={toggle}>
-            {/* Modal renders its children, so place content between tags */}
-            <ModalTemplate />
-          </Modal>
+          <AccordionDiv
+            ref={content}
+            height={height}
+          >
+            { mappedList.slice(0, numberLoaded) }
+          </AccordionDiv>
         </Comp>
       </Spacer>
       <More
         queList={queList}
         toggleAccordion={() => toggleAccordion()}
-        showAccordion={showAccordion}
+        productName={productName}
+        productID={productID}
+        showMore={showMore}
       />
-    </div>
+    </OuterDiv>
   );
 }
 

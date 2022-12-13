@@ -15,3 +15,8 @@ it('renders the add review modal', () => {
   render(<AddReview />);
   expect(screen.getByText('Write Your Review')).toBeInTheDocument();
 });
+
+it('renders a single review', () => {
+  render(<SingleReview />);
+  expect(screen.getByText('sorted by')).toBeInTheDocument();
+});

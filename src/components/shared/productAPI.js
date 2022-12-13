@@ -29,6 +29,12 @@ export default function getProduct(id) {
       result.recommended = data.recommended;
       result.characteristics = data.characteristics;
 
+      // calculate percent of reviews that recommend product
+      const recommendYes = parseInt(data.recommended.true, 10);
+      const recommendNo = parseInt(data.recommended.false, 10);
+      const totalRecommend = recommendYes + recommendNo;
+      result.percentage = Math.round((recommendYes / totalRecommend) * 100);
+
       // calculate average rating
       const { ratings } = data;
       let total = 0;
@@ -41,6 +47,8 @@ export default function getProduct(id) {
       }
 
       result.average_rating = total ? (average / total).toFixed(2) : null;
+      result.average_rating_tenth = Math.round(result.average_rating * 10) / 10;
+      result.total_reviews = total;
 
       return result;
     });
