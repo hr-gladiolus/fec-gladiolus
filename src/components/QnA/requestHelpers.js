@@ -2,6 +2,19 @@ import axios from 'axios';
 
 const API = require('../../config').API_TOKEN;
 
+function getQuestions(productID, page, count) {
+  return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {
+    headers: {
+      Authorization: API,
+    },
+    params: {
+      product_id: productID,
+      page,
+      count,
+    },
+  });
+}
+
 function submitQorA(isQuestion, body, name, email, id, photos) {
   let htmlParam;
   const parameters = {};
@@ -17,10 +30,10 @@ function submitQorA(isQuestion, body, name, email, id, photos) {
     bodyParams.product_id = Number(id);
   } else {
     htmlParam = `/${id}/answers`;
+    console.log(photos);
     bodyParams.photos = photos;
     parameters.question_id = id;
   }
-  console.log(photos);
   return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions${htmlParam}`, bodyParams, {
     headers: {
       Authorization: API,
@@ -61,14 +74,6 @@ function submitReport(id) {
   });
 }
 
-function getProductById(id) {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/${id}`, {
-    headers: {
-      Authorization: API,
-    },
-  });
-}
-
 export {
-  submitQorA, submitHelpful, submitReport, getProductById,
+  submitQorA, submitHelpful, submitReport, getQuestions,
 };

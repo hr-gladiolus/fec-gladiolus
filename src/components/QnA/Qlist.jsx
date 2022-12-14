@@ -11,8 +11,9 @@ const Spacer = styled.div`
 `;
 
 const AccordionDiv = styled.div`
-  height: ${({ height }) => height};
-  transition: height 1s ease;
+  height: fit-content;
+  max-height: ${({ height }) => height};
+  transition: max-height 1s ease;
 `;
 
 const OuterDiv = styled.div`
@@ -53,6 +54,7 @@ function Qlist({
       <Spacer>
         <Comp>
           <AccordionDiv
+            data-testid="accordionDiv"
             ref={content}
             height={height}
           >
@@ -61,6 +63,7 @@ function Qlist({
         </Comp>
       </Spacer>
       <More
+        data-testid="more"
         queList={queList}
         toggleAccordion={() => toggleAccordion()}
         product={product}

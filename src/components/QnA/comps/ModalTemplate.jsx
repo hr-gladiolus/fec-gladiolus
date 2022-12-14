@@ -137,7 +137,7 @@ function ModalTemplate({
   }
 
   return (
-    <OuterFlexColumn>
+    <OuterFlexColumn data-testid="modal">
       <FlexColumn>
         <ModalTitles>{title}</ModalTitles>
         <ModalTitles>{subtitle}</ModalTitles>

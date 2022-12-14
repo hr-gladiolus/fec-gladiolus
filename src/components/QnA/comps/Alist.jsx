@@ -33,6 +33,7 @@ const LoadAnswers = styled.button`
 const AccordionDiv = styled.div`
   overflow: ${({ overflow }) => overflow};
   height: ${({ height }) => height};
+
   max-height: 325px;
   transition: height 1s ease;
 `;

@@ -7,7 +7,7 @@ import Container from './styles/Container.styled.js';
 import Search from './Search.jsx';
 import Qlist from './Qlist.jsx';
 import ExpandedView from './comps/ExpandedView.jsx';
-import { getProductById } from './requestHelpers';
+import { getQuestions } from './requestHelpers';
 
 const API = require('../../config').API_TOKEN;
 
@@ -51,16 +51,7 @@ function Qna({ environment }) {
   }
 
   useEffect(() => {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {
-      headers: {
-        Authorization: API,
-      },
-      params: {
-        product_id: productID,
-        page: 1,
-        count: 100,
-      },
-    })
+    getQuestions(productID, 1, 100)
       .then((value) => {
         // value.data.results will have the real data to load once everything
         // is working and data has been submitted to the API.
