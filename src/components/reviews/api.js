@@ -19,7 +19,6 @@ export function getReviews(productId, sortOption) {
       product_id: productId,
     },
   })
-    // .then((response) => response.data.results);
     .then((response) => response.data.results);
 }
 

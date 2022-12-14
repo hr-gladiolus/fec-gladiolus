@@ -10,7 +10,13 @@ describe('Product Factors', () => {
   beforeEach(() => {
     renderWithProviders(<ProductFactors />);
   });
-  it('renders product factors', () => {
+  it('renders product factors component', () => {
     expect(screen.getByTestId('factors')).toBeInTheDocument();
+  });
+
+  it('renders individual factors', () => {
+    const app = renderWithProviders(<ProductFactors />);
+    const spy = jest.spyOn(app.singleFactor, 'singleFactor');
+    expect(spy).toHaveBeenCalled();
   });
 });
