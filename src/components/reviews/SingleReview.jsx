@@ -82,7 +82,7 @@ function SingleReview(props) {
       {showMore
         ? <ReviewBody>{review.body}</ReviewBody>
         : <ReviewBody>{review.body.slice(0, 251)}</ReviewBody>}
-      <ShowMoreButton onClick={(evt) => setShowMore(!showMore)}>
+      <ShowMoreButton onClick={(evt) => setShowMore(!showMore)} data-testid="show-more">
         {showMore ? 'Show Less' : 'Show More'}
       </ShowMoreButton>
     </div>
@@ -135,13 +135,13 @@ function SingleReview(props) {
         </ResponseContainer>
       )}
 
-      <HelpfulReportContainer data-testid="unhelpful">
+      <HelpfulReportContainer data-testid="helpful-container">
         Was this review helpful?
         <HelpfulReportButton onClick={(evt) => helpfulClick()}>Yes</HelpfulReportButton>
         (
         {helpful}
         )
-        <HelpfulReportButton onClick={(evt) => unhelpfulClick()}>No</HelpfulReportButton>
+        <HelpfulReportButton data-testid="unhelpful" onClick={(evt) => unhelpfulClick()}>No</HelpfulReportButton>
         (
         {unhelpful}
         )  |
