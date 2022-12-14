@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import Information from './information/Information.jsx';
 import Style from './style/Style.jsx';
 import Gallery from './gallery/Gallery.jsx';
 import ExpandedView from './gallery/ExpandedView.jsx';
 import Cart from './cart/Cart.jsx';
 import Details from './details/Details.jsx';
-import { getProducts, getProduct, getStyles } from './helpers/productAPI.js';
-import exampleData from './exampleData.jsx';
+import getProduct from '../shared/productAPI.js';
 
 const FlexDiv = styled.div`
   display: flex;
@@ -33,14 +33,46 @@ const InvisDiv = styled.div`
   margin: 5px;
 `;
 
-function Overview({ productId, ratings }) {
-  const [currentProduct, setCurrentProduct] = useState(exampleData.productData);
-  const [styles, setStyles] = useState(exampleData.stylesData);
-  const [currentStyle, setCurrentStyle] = useState(exampleData.stylesData[0]);
+function Overview() {
+  const [currentProduct, setCurrentProduct] = useState();
+  const [styles, setStyles] = useState([]);
+  const [currentStyle, setCurrentStyle] = useState(undefined);
   const [currentPhoto, setCurrentPhoto] = useState('');
 
-  const handleStyleOnClick = (id) => {
-    setCurrentStyle(styles.find((item) => item.style_id === id));
+  const id = useSelector((state) => state.product.productId);
+  const product = useSelector((state) => state.product.productData);
+
+  const handleImage = () => {
+    const promises = styles.map((style) => (
+      new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = style.photos[0].url;
+        img.onload = resolve();
+        img.onerror = reject();
+      })
+    ));
+    Promise.all(promises);
+  };
+
+  useEffect(() => {
+    const promises = [];
+    promises.push(
+      getProduct(id)
+        .then((res) => {
+          setCurrentProduct(res);
+          setStyles(res.styles);
+          setCurrentStyle(res.styles.find((style) => style['default?'] === true) || res.styles[0]);
+        })
+        .catch((err) => Error('Error in Overview getProduct', err)),
+    );
+    Promise.all(promises)
+      .then(() => {
+        handleImage();
+      });
+  }, [id]);
+
+  const handleStyleOnClick = (Id) => {
+    setCurrentStyle(styles.find((item) => item.style_id === Id));
   };
 
   const selectPhoto = (photo) => {
@@ -70,7 +102,8 @@ function Overview({ productId, ratings }) {
             />
             <InvisDiv>
               <Details
-                ratings={ratings}
+                ratings={currentProduct.ratings}
+                avgRating={currentProduct.average_rating}
                 id={currentProduct.id}
                 category={currentProduct.category}
                 name={currentProduct.name}
