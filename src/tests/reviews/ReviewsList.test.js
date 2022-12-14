@@ -67,6 +67,14 @@ describe('Single Review', () => {
   it('should render "show more" button when body is longer than 250 characters', () => {
     expect(screen.getByText('Show More')).toBeInTheDocument();
   });
+
+  it('should mark review helpful', () => {
+    fireEvent.click(screen.getByTestId('yes'));
+  });
+
+  it('should report review', () => {
+    fireEvent.click(screen.getByTestId('report'));
+  });
 });
 
 describe('Sort Reviews', () => {

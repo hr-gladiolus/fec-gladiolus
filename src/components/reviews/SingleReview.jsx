@@ -137,7 +137,7 @@ function SingleReview(props) {
 
       <HelpfulReportContainer data-testid="helpful-container">
         Was this review helpful?
-        <HelpfulReportButton onClick={(evt) => helpfulClick()}>Yes</HelpfulReportButton>
+        <HelpfulReportButton onClick={(evt) => helpfulClick()} data-testid="yes">Yes</HelpfulReportButton>
         (
         {helpful}
         )
@@ -145,7 +145,7 @@ function SingleReview(props) {
         (
         {unhelpful}
         )  |
-        <HelpfulReportButton onClick={(evt) => reportReview(review.review_id)}>Report</HelpfulReportButton>
+        <HelpfulReportButton onClick={(evt) => reportReview(review.review_id)} data-testid="report">Report</HelpfulReportButton>
       </HelpfulReportContainer>
 
       <Line />

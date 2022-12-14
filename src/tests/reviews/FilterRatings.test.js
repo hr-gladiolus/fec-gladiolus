@@ -19,3 +19,16 @@ describe('Filter Ratings', () => {
     expect(screen.queryByTestId('filters')).toBeNull();
   });
 });
+
+it('shows selected filters', () => {
+  renderWithProviders(<FilterRatings
+    filter
+    selectedFilters={{
+      5: true,
+      4: true,
+      3: true,
+      2: true,
+      1: true,
+    }}
+  />);
+});

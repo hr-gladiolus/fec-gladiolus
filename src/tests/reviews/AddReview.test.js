@@ -20,4 +20,24 @@ describe('Add Review', () => {
   it('has nickname input with place holder Example: jackson11!', () => {
     expect(screen.getByPlaceholderText('Example: jackson11!')).toBeInTheDocument();
   });
+
+  it('calls handleChange when recommend yes it chosen', () => {
+    fireEvent.click(screen.getByTestId('yes'));
+  });
+
+  it('calls handleChange when recommend no it chosen', () => {
+    fireEvent.click(screen.getByTestId('no'));
+  });
+
+  it('updates input value for body', () => {
+    const input = screen.getByTestId('body');
+    fireEvent.change(input, { target: { value: 'this should properly host an image and send proper url plz ' } });
+    expect(input.value).toBe('this should properly host an image and send proper url plz ');
+  });
+
+  it('updates input value for email', () => {
+    const input = screen.getByTestId('email');
+    fireEvent.change(input, { target: { value: 'jackson11@email.com' } });
+    expect(input.value).toBe('jackson11@email.com');
+  });
 });
