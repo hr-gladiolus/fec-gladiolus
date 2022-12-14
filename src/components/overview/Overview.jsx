@@ -34,12 +34,13 @@ const InvisDiv = styled.div`
 `;
 
 function Overview() {
-  const [currentProduct, setCurrentProduct] = useState({});
+  const [currentProduct, setCurrentProduct] = useState();
   const [styles, setStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState(undefined);
   const [currentPhoto, setCurrentPhoto] = useState('');
 
   const id = useSelector((state) => state.product.productId);
+  const product = useSelector((state) => state.product.productData);
 
   const handleImage = () => {
     const promises = styles.map((style) => (

@@ -2,6 +2,7 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
@@ -53,6 +54,8 @@ function Cart({ skus, id }) {
   const [currentSKU, setCurrentSKU] = useState(['', { quantity: -1 }]);
   const [qty, setQty] = useState(0);
   const [cartE, setCartE] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
