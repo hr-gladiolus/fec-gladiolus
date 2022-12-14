@@ -33,7 +33,6 @@ const LoadAnswers = styled.button`
 const AccordionDiv = styled.div`
   overflow: ${({ overflow }) => overflow};
   height: ${({ height }) => height};
-
   max-height: 325px;
   transition: height 1s ease;
 `;
@@ -44,20 +43,24 @@ const ReferencePoint = styled.div`
 `;
 
 function Alist({ answers, selectPhoto }) {
-  const [height, setHeight] = useState('100px');
+  const [height, setHeight] = useState('fit-content');
   const [overflow, setOverflow] = useState('hidden');
   const [innerText, setInnerText] = useState('SEE MORE');
+  const [loadAllAnswers, setLoadAllAnswers] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const content = useRef(null);
-  const referenceHeight = useRef(null);
+  const reference = useRef(null);
   const answerKeys = Object.keys(answers);
 
   useEffect(() => {
-    setHeight(`${referenceHeight.current.scrollHeight}px`);
+    setHeight(`${content.current.scrollHeight}px`);
   }, []);
 
   function toggleAccordion() {
-    setHeight(height !== `${referenceHeight.current.scrollHeight}px` ? `${referenceHeight.current.scrollHeight}px` : `${content.current.scrollHeight}px`);
+    setClicked(true);
+    setLoadAllAnswers(!loadAllAnswers);
+    setHeight(`${reference.current.scrollHeight}px`);
     setOverflow(overflow !== 'hidden' ? 'hidden' : 'scroll');
     setInnerText(innerText !== 'SEE MORE' ? 'SEE MORE' : 'COLLAPSE');
   }
@@ -75,15 +78,17 @@ function Alist({ answers, selectPhoto }) {
       {mappedAnswers.length !== 0 ? <Aletter>A:</Aletter>
         : <div style={{ fontSize: '13px', marginLeft: '17px' }}>There are currently no answers to this question.</div> }
       <AListStyle>
-        <ReferencePoint ref={referenceHeight}>
-          {mappedAnswers.slice(0, 2)}
+        <ReferencePoint
+          ref={reference}
+        >
+          { !loadAllAnswers ? mappedAnswers : mappedAnswers.slice(0, 2) }
         </ReferencePoint>
         <AccordionDiv
           overflow={overflow}
           height={height}
           ref={content}
         >
-          { mappedAnswers }
+          { clicked ? mappedAnswers : mappedAnswers.slice(0, 2) }
         </AccordionDiv>
         { mappedAnswers.length > 2 && (
           <LoadAnswers
