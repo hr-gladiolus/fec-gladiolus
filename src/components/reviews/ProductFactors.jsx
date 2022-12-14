@@ -84,7 +84,7 @@ function ProductFactors() {
     </SingleCharacteristic>
   );
   return (
-    <FactorContainer>
+    <FactorContainer data-testid="factors">
       <Row>
         {data.characteristics && Object.keys(data.characteristics).map((factor) => singleFactor(factor))}
       </Row>
