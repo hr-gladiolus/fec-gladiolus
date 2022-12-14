@@ -59,7 +59,7 @@ function Search({ staticList, setQueList }) {
   return (
     <Comp>
       <Searchform>
-        <Searchinput onChange={handleChange} placeholder="HAVE QUESTION? SEARCH FOR ANSWERS..." />
+        <Searchinput onChange={handleChange} placeholder="HAVE QUESTIONS? SEARCH FOR ANSWERS..." />
         <Searchbutton><SlMagnifier size="20px" /></Searchbutton>
       </Searchform>
     </Comp>
