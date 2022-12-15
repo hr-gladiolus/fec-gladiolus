@@ -3,13 +3,13 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 function SelectSize({
-  Select,
+  select,
   handleChange,
   handleSize,
 }) {
   return (
     <div>
-      <Select onChange={handleChange}>
+      <select onChange={handleChange}>
         {handleSize().length > 0 ? (
           <>
             <option>Select Size</option>
@@ -18,7 +18,7 @@ function SelectSize({
         ) : (
           <option>OUT OF STOCK</option>
         )}
-      </Select>
+      </select>
     </div>
   );
 }

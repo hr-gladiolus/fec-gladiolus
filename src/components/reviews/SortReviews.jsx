@@ -75,7 +75,7 @@ function SortReviews(props) {
       </NumberReviews>
 
       <DropdownMenu>
-        <DropdownButton onClick={(evt) => setDisplay(!display)}>
+        <DropdownButton onClick={(evt) => setDisplay(!display)} data-testid="dropdown">
           {sortOption}
           {' '}
           <IoIosArrowDown />

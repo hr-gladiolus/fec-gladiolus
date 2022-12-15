@@ -6,6 +6,7 @@ function CartButton({ Button, handleSubmit, handleSize }) {
     <div>
       {handleSize().length > 0 && (
         <Button
+          data-testid="cartClick"
           onClick={handleSubmit}
           style={{
             width: '90%',

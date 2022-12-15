@@ -113,7 +113,7 @@ function SingleReview(props) {
       {showMore
         ? <ReviewBody>{review.body}</ReviewBody>
         : <ReviewBody>{review.body.slice(0, 251)}</ReviewBody>}
-      <ShowMoreButton onClick={(evt) => setShowMore(!showMore)}>
+      <ShowMoreButton onClick={(evt) => setShowMore(!showMore)} data-testid="show-more">
         {showMore ? 'Show Less' : 'Show More'}
       </ShowMoreButton>
     </div>
@@ -168,7 +168,7 @@ function SingleReview(props) {
         </ResponseContainer>
       )}
 
-      <HelpfulReportContainer data-testid="unhelpful">
+ <HelpfulReportContainer data-testid="unhelpful">
         Was this review helpful?
         {' '}
         <HelpfulReportButton onClick={(evt) => helpfulClick()}>
@@ -181,6 +181,7 @@ function SingleReview(props) {
         {` (${unhelpful})`}
         <HelpfulReportButton onClick={(evt) => reportReview(review.review_id)}>Report</HelpfulReportButton>
       </HelpfulReportContainer>
+
 
       <Line />
     </Review>

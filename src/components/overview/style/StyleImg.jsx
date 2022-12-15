@@ -23,7 +23,7 @@ function StyleImg({
   ind,
   handleClick,
 }) {
-  const checkmark = <span>&#128504;</span>;
+  const checkmark = <span>&#10003;</span>;
   return (
     <div style={{ position: 'relative' }}>
       { (() => {

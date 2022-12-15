@@ -84,7 +84,7 @@ function Overview() {
   };
 
   return (
-    <div style={{ marginTop: '96px' }}>
+    <div data-testid="overview" style={{ marginTop: '96px' }}>
       {currentPhoto && (
         <ExpandedView
           key={currentStyle.style_id}
