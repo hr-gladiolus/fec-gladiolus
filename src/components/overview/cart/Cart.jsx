@@ -8,7 +8,7 @@ import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
 import CartButton from './CartButton.jsx';
 import SavedButton from './SavedButton.jsx';
-import { addItemToCart, getItemsInCart } from '../helpers/cartAPI.js';
+import { addItemToCart } from '../helpers/cartAPI.js';
 
 const FlexDiv = styled.div`
   display: flex;
@@ -55,8 +55,6 @@ function Cart({ skus, id }) {
   const [qty, setQty] = useState(0);
   const [cartE, setCartE] = useState(false);
 
-  const dispatch = useDispatch();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!currentSKU[0]) {
@@ -67,7 +65,7 @@ function Cart({ skus, id }) {
           alert('Item added to cart!');
         })
         .catch((err) => {
-          Error('Error in Cart handleSubmit', err);
+          throw new Error('Error in Cart handleSubmit', err);
         });
     }
   };
@@ -100,15 +98,15 @@ function Cart({ skus, id }) {
   };
 
   return (
-    <form>
+    <form data-testid="cart">
       <FlexDiv>
         <SelectSize
-          Select={Select}
+          select={Select}
           handleChange={handleChange}
           handleSize={handleSize}
         />
         <SelectQty
-          Select={Select}
+          select={Select}
           currentSKU={currentSKU}
           handleQty={handleQty}
           range={range}
@@ -121,11 +119,13 @@ function Cart({ skus, id }) {
       {
         cartE
           && (
-            <div style={{
-              color: 'red',
-              textAlign: 'center',
-              padding: '8px',
-            }}
+            <div
+              data-testid="size"
+              style={{
+                color: 'red',
+                textAlign: 'center',
+                padding: '8px',
+              }}
             >
               Please select size!
             </div>
