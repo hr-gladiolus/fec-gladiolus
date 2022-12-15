@@ -61,7 +61,7 @@ function ReviewsList(props) {
 
       <SearchBar placeholder="Search for a Keyword" />
 
-      <ReviewsListContainer>
+      <ReviewsListContainer data-testid="reviews-container">
         {currentReviews.map((review) => (
           <SingleReview
             review={review}

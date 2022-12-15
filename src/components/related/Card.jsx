@@ -83,9 +83,10 @@ export default function Card({
   };
 
   return (
-    <CardContainer offset={offset} ref={ref}>
-      <Button type="button" onClick={handleClick}>{icon}</Button>
+    <CardContainer offset={offset} ref={ref} data-testid="card">
+      <Button type="button" onClick={handleClick} data-testid="card-button">{icon}</Button>
       <div
+        data-testid="change-product"
         onClick={() => {
           // Only change if modal isn't visible
           if (!visible) {

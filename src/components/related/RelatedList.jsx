@@ -85,8 +85,8 @@ export default function RelatedList() {
           {related.map((product) => (
             <Card key={product} id={product} offset={relatedOffset} setOffset={setRelatedOffset} icon="☆" />
           ))}
-          {relatedOffset > 0 && <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>}
-          {relatedOffset <= related.length - 5 && <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>}
+          {relatedOffset > 0 && <CarouselNav data-testid="left" type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>}
+          {relatedOffset <= related.length - 5 && <CarouselNav data-testid="right" type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>}
         </ListContainer>
       </div>
       <div className="outfit">
