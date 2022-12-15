@@ -18,6 +18,12 @@ const AddAQue = styled.button`
   border-right: 1px solid rgba(0, 0, 0);
   box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
   background-color:${({ theme }) => theme.bg};
+  &:hover {
+    box-shadow: inset 0 0 7.5px #818589;
+  }
+  &:active {
+    box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
+  }
 `;
 
 const MoreAnsQues = styled.button`
@@ -34,6 +40,12 @@ const MoreAnsQues = styled.button`
   border-right: 1px solid rgba(0, 0, 0);
   box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
   background-color:${({ theme }) => theme.bg};
+  &:hover {
+    box-shadow: inset 0 0 7.5px #818589;
+  }
+  &:active {
+    box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
+  }
 `;
 
 function More({

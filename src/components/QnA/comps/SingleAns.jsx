@@ -55,6 +55,7 @@ const StaticReport = styled.div`
 const DisplayPhotos = styled.div`
   display: flex;
   flex-wrap: wrap;
+  height: fit-content;
 `;
 
 const SinglePhoto = styled.img`

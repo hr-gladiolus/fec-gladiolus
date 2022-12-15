@@ -46,21 +46,17 @@ function Alist({ answers, selectPhoto }) {
   const [height, setHeight] = useState('fit-content');
   const [overflow, setOverflow] = useState('hidden');
   const [innerText, setInnerText] = useState('SEE MORE');
-  const [loadAllAnswers, setLoadAllAnswers] = useState(false);
-  const [clicked, setClicked] = useState(false);
 
-  const content = useRef(null);
-  const reference = useRef(null);
+  const closeReference = useRef(null);
+  const openReference = useRef(null);
   let answerKeys = Object.keys(answers);
 
   useEffect(() => {
-    setHeight(`${content.current.scrollHeight}px`);
+    setHeight(`${closeReference.current.scrollHeight}px`);
   }, []);
 
   function toggleAccordion() {
-    setClicked(true);
-    setLoadAllAnswers(!loadAllAnswers);
-    setHeight(`${reference.current.scrollHeight}px`);
+    setHeight(height !== `${closeReference.current.scrollHeight}px` ? `${closeReference.current.scrollHeight}px` : `${openReference.current.scrollHeight}px`);
     setOverflow(overflow !== 'hidden' ? 'hidden' : 'scroll');
     setInnerText(innerText !== 'SEE MORE' ? 'SEE MORE' : 'COLLAPSE');
   }
@@ -96,16 +92,20 @@ function Alist({ answers, selectPhoto }) {
         : <div style={{ fontSize: '13px', marginLeft: '17px' }}>There are currently no answers to this question.</div> }
       <AListStyle>
         <ReferencePoint
-          ref={reference}
+          ref={openReference}
         >
-          { !loadAllAnswers ? mappedAnswers : mappedAnswers.slice(0, 2) }
+          { mappedAnswers }
+        </ReferencePoint>
+        <ReferencePoint
+          ref={closeReference}
+        >
+          { mappedAnswers.slice(0, 2) }
         </ReferencePoint>
         <AccordionDiv
           overflow={overflow}
           height={height}
-          ref={content}
         >
-          { clicked ? mappedAnswers : mappedAnswers.slice(0, 2) }
+          { mappedAnswers }
         </AccordionDiv>
         { mappedAnswers.length > 2 && (
           <LoadAnswers
