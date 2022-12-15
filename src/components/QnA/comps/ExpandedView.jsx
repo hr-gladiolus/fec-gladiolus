@@ -31,7 +31,7 @@ const Div = styled.div`
 
 function ExpandedView({ unselectPhoto, photo }) {
   return (
-    <Div onClick={unselectPhoto}>
+    <Div data-testid="expandedView" onClick={unselectPhoto}>
       <Img src={photo} alt={photo} />
     </Div>
   );
