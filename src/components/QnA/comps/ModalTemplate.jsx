@@ -20,9 +20,14 @@ const FlexForm = styled.form`
   place-content: center;
 `;
 
+const ModalTitlesContainer = styled.div`
+  margin: 0 0 15px 0;
+`;
+
 const ModalTitles = styled.div`
   display: flex;
   justify-content: center;
+  margin 0 0 ${({ margin }) => margin || 0} 0;
 `;
 
 const Label = styled.label`
@@ -61,8 +66,8 @@ const CharsParagraph = styled.p`
 const ThousandCharsParagraph = styled.p`
   opacity: 50%;
   color: black;
-  display: flex;
-  place-content: end;
+  position: absolute;
+  right: 0;
 `;
 
 const PhotoInput = styled.textarea`
@@ -139,8 +144,10 @@ function ModalTemplate({
   return (
     <OuterFlexColumn data-testid="modal">
       <FlexColumn>
-        <ModalTitles>{title}</ModalTitles>
-        <ModalTitles>{subtitle}</ModalTitles>
+        <ModalTitlesContainer>
+          <ModalTitles margin="5px">{title}</ModalTitles>
+          <ModalTitles>{subtitle}</ModalTitles>
+        </ModalTitlesContainer>
         <FlexColumn>
           <FlexForm onSubmit={handleSubmitModal}>
             <Label margin="5px">

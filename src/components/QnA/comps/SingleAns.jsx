@@ -62,7 +62,7 @@ const DisplayPhotos = styled.div`
 const SinglePhoto = styled.img`
   max-height: 75px;
   max-width: 75px;
-  margin: 5px 10px 5px 0;
+  margin: 0 10px 8px 0;
 `;
 
 const AnswererNameSpan = styled.span`
