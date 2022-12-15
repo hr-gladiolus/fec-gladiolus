@@ -6,11 +6,12 @@ import { useSelector } from 'react-redux';
 
 const Row = styled.button`
   display: flex;
-  width: 300px;
+  width: 100%;
   height: auto;
   flex-direction: row;
   background: transparent;
   border: none;
+  margin: 10px 0 10px 0;
 
   &:after {
   content: "";
@@ -27,11 +28,17 @@ const Row = styled.button`
 
 const StarRating = styled.div`
   float: left;
-  /* width: 15%; */
-  margin-top:10px;
-  font-size: 12px;
+  width: 15%;
+  /* margin-top:8px;
+  margin-left: 0; */
+  font-size: 15px;
   border: none;
-  padding: 10px;
+  padding: 10px 0 10px 0;
+  text-align: left;
+`;
+
+const Invisible = styled.div`
+  visibility: hidden;
 `;
 
 // div that holds bars
@@ -40,18 +47,26 @@ const Middle = styled.div`
   width: 70%;
   padding-left: 5px;
   height: 5px;
+  align: center;
+  display: block;
 `;
 
 // number of ratings on far right
 const Right = styled.div`
-  padding: 4px;
+  /* margin-top: 15px; */
+  /* margin-left: 5px; */
+  margin-left: auto;
+  margin-right: auto;
+  margin: 15px 0 0 5px;
+  float: right;
+  display: block;
 `;
 
 // grey bar background
 const BottomBar = styled.div`
   width: 100%;
   background-color: #717171;
-  text-align: center;
+  align: center;
   color: white;
 `;
 
@@ -82,7 +97,12 @@ function SingleRating(props) {
     <div>
       <Row onClick={(evt) => handleClick(number)}>
         <StarRating>
-          {number === '1' ? <u>1  star</u> : (
+          {number === '1' ? (
+            <u>
+              1  star
+              <Invisible>s</Invisible>
+            </u>
+          ) : (
             <u>{`${number} stars`}</u>
           )}
         </StarRating>

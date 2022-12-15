@@ -20,12 +20,12 @@ const FlexDiv = styled.div`
 `;
 
 const Div = styled.div`
-  background: linear-gradient(0deg, #ffae6c, hsl(240,60%,100%));
+  background: linear-gradient(0deg, #eed8b8, #ffc9b3);
   border: 1px solid lightgray;
   min-width: 400px;
   margin: 10px;
   padding: 2px;
-  box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 6px ${({ theme }) => theme.highlight};
 `;
 
 const InvisDiv = styled.div`
