@@ -34,6 +34,10 @@ const StarRating = styled.div`
   padding: 10px;
 `;
 
+const invisible = styled.div`
+  visibility: hidden;
+`;
+
 // div that holds bars
 const Middle = styled.div`
   margin-top: 20px;
@@ -82,7 +86,12 @@ function SingleRating(props) {
     <div>
       <Row onClick={(evt) => handleClick(number)}>
         <StarRating>
-          {number === '1' ? <u>1  star</u> : (
+          {number === '1' ? (
+            <u>
+              1  star
+              <invisible>s</invisible>
+            </u>
+          ) : (
             <u>{`${number} stars`}</u>
           )}
         </StarRating>

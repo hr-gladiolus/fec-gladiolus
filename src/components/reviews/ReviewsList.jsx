@@ -22,10 +22,11 @@ const SearchBar = styled.input`
   margin: 30px;
 `;
 
-const ShowMoreButton = styled.button`
+const ShowMoreButton = styled.div`
   background: white;
-  border: none;
-
+  border: black;
+  max-height: 15px;
+  width: auto;
   &:hover {
     background: pink;
   }
