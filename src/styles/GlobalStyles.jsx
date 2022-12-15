@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: Fantony;
     src: url("./FANTONY-ROUGH.otf") format("opentype");
+    font-display: swap;
   }
 `;
 
