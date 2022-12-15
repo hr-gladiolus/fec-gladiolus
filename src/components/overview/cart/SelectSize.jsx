@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const Select = styled.select`
   width: 90%;
   height: 70%;
-  background: white;
-  color: #dd8156;
+  background: #ffe3b9;
+  color: ${({ theme }) => theme.color};
   padding: 7px;
   cursor: pointer;
   font-size: 14px;

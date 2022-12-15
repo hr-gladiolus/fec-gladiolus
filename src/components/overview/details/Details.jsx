@@ -8,7 +8,7 @@ const Div = styled.div`
   border: 1px solid gray;
   background: linear-gradient(0deg, #eed8b8, #ffc9b3);
   padding: 24px 30px 20px 30px;
-  box-shadow: 3px 3px 7px #531a007d;
+  box-shadow: 3px 3px 7px ${({ theme }) => theme.highlight};
   margin: 30px 10px 20px 10px;
   max-width: 600px;
 `;
