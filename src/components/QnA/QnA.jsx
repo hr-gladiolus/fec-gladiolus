@@ -3,13 +3,25 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import More from './More.jsx';
-import Container from './styles/Container.styled.js';
 import Search from './Search.jsx';
 import Qlist from './Qlist.jsx';
 import ExpandedView from './comps/ExpandedView.jsx';
 import { getQuestions } from './requestHelpers';
 
 const API = require('../../config').API_TOKEN;
+
+const Container = styled.div`
+  display: flex;
+  place-content: center;
+  width: 53.5%;
+  min-width: 530px;
+  margin: auto;
+  flex-direction: column;
+  position: relative;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+`;
 
 const NoQues = styled.div`
   margin-bottom: 15px;

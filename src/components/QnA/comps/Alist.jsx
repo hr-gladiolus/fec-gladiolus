@@ -53,8 +53,9 @@ function Alist({ answers, selectPhoto }) {
 
   useEffect(() => {
     setTimeout(() => {
-      setHeight.bind(this, `${closeReference.current.scrollHeight}px`);
-    }, 1000);
+      console.log(closeReference.current.scrollHeight);
+      setHeight(`${closeReference.current.scrollHeight}px`);
+    }, 100);
   }, []);
 
   function toggleAccordion() {
@@ -101,13 +102,13 @@ function Alist({ answers, selectPhoto }) {
         <ReferencePoint
           ref={closeReference}
         >
-          { mappedAnswers }
+          { mappedAnswers.slice(0, 2) }
         </ReferencePoint>
         <AccordionDiv
           overflow={overflow}
           height={height}
         >
-          { mappedAnswers.slice(0, 2) }
+          { mappedAnswers }
         </AccordionDiv>
         { mappedAnswers.length > 2 && (
           <LoadAnswers

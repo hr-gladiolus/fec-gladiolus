@@ -28,6 +28,7 @@ const AnsInfo = styled.div`
   padding 0 10px 0 0;
   border: solid;
   border-width: 0 1px 0 0;
+  min-width: 208px;
 `;
 
 const ReportButton = styled.button`

@@ -22,17 +22,19 @@ function QueButtons({
   helpfulness, toggle, handleYesClick, question,
 }) {
   return (
-    <FlexColumn>
-      <FlexRow>
-        <HelpfulSentence data-testid="helpfulquestionsentence">
-          Helpful?
-          {' '}
-          <HelpfulButton data-testid="helpfulquestionbutton" onClick={handleYesClick}>Yes</HelpfulButton>
-          {` (${helpfulness})`}
-        </HelpfulSentence>
-        <AddAnswerButton onClick={toggle}>Add Answer</AddAnswerButton>
-      </FlexRow>
-    </FlexColumn>
+    <div>
+      <FlexColumn>
+        <FlexRow>
+          <HelpfulSentence data-testid="helpfulquestionsentence">
+            Helpful?
+            {' '}
+            <HelpfulButton data-testid="helpfulquestionbutton" onClick={handleYesClick}>Yes</HelpfulButton>
+            {` (${helpfulness})`}
+          </HelpfulSentence>
+          <AddAnswerButton onClick={toggle}>Add Answer</AddAnswerButton>
+        </FlexRow>
+      </FlexColumn>
+    </div>
   );
 }
 
