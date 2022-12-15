@@ -6,8 +6,6 @@ import FilterRatings from './FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
 
 const ReviewWidget = styled.div`
   display: flex;
@@ -28,6 +26,7 @@ const RightSide = styled.div`
 
 const Title = styled.div`
   font-size: 15px;
+  margin: 15px;
 `;
 
 function RatingsAndReviews() {
@@ -42,8 +41,6 @@ function RatingsAndReviews() {
   const [selectedFilters, setSelectedFilters] = useState(filters);
   const data = useSelector((state) => state.product.productData);
 
-  const { visible, toggle } = useModal();
-
   return (
     <ReviewWidget id="#readReviews">
       <LeftSide>
@@ -57,11 +54,6 @@ function RatingsAndReviews() {
 
       <RightSide>
         {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} setFilter={setFilter} />}
-
-        <button type="button" onClick={toggle}>Add Review +</button>
-        <Modal visible={visible} toggle={toggle}>
-          <AddReview />
-        </Modal>
       </RightSide>
 
     </ReviewWidget>

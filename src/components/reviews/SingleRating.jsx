@@ -11,6 +11,7 @@ const Row = styled.button`
   flex-direction: row;
   background: transparent;
   border: none;
+  margin: 10px 0;
 
   &:after {
   content: "";
@@ -27,14 +28,15 @@ const Row = styled.button`
 
 const StarRating = styled.div`
   float: left;
-  /* width: 15%; */
+  width: 15%;
   margin-top:10px;
   font-size: 12px;
   border: none;
   padding: 10px;
+  text-align: left;
 `;
 
-const invisible = styled.div`
+const Invisible = styled.div`
   visibility: hidden;
 `;
 
@@ -48,7 +50,10 @@ const Middle = styled.div`
 
 // number of ratings on far right
 const Right = styled.div`
-  padding: 4px;
+  margin-top: 15px;
+  margin-left: 5px;
+  float: right;
+  display: block;
 `;
 
 // grey bar background
@@ -89,7 +94,7 @@ function SingleRating(props) {
           {number === '1' ? (
             <u>
               1  star
-              <invisible>s</invisible>
+              <Invisible>s</Invisible>
             </u>
           ) : (
             <u>{`${number} stars`}</u>

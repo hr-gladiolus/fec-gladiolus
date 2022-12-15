@@ -5,10 +5,14 @@ import styled from 'styled-components';
 import SingleReview from './SingleReview.jsx';
 import { getReviews } from './api.js';
 import SortReviews from './SortReviews.jsx';
+import useModal from '../shared/useModal.js';
+import Modal from '../shared/Modal.jsx';
+import AddReview from './AddReview.jsx';
 
 const ReviewList = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 60px;
 `;
 
 const ReviewsListContainer = styled.div`
@@ -21,23 +25,25 @@ const SearchBar = styled.input`
   margin: 10px 0;
 `;
 
-const ShowMoreButton = styled.div`
+const ShowAddButton = styled.div`
   display: inline-block;
   font-weight: bold;
-  padding: 12px;
-  max-height: 15px;
+  font-size: 20px;
+  padding: 15px;
   width: auto;
-  place-content: center;
-  text-align: left;
+  text-align: center;
   border: 1px solid black;
-
+  margin-right: 10px;
   &:hover {
     background: pink;
   }
-
   &:active {
     background: blue;
   }
+`;
+
+const AddReviewButton = styled.div`
+
 `;
 
 function ReviewsList(props) {
@@ -48,6 +54,7 @@ function ReviewsList(props) {
   const [numberOfReviews, setNumberOfReviews] = useState();
 
   const { filter, selectedFilters, setFilter } = props;
+  const { visible, toggle } = useModal();
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
@@ -92,10 +99,15 @@ function ReviewsList(props) {
       {reviews.length > 2
       && currentReviews.length < reviews.length
       && (
-        <ShowMoreButton onClick={(evt) => showMoreReviews()}>
+        <ShowAddButton onClick={(evt) => showMoreReviews()}>
           More Reviews
-        </ShowMoreButton>
+        </ShowAddButton>
       )}
+
+      <ShowAddButton type="button" onClick={toggle}>Add Review +</ShowAddButton>
+      <Modal visible={visible} toggle={toggle}>
+        <AddReview />
+      </Modal>
 
     </div>
   );
