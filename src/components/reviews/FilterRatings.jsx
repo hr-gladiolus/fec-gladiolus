@@ -18,9 +18,10 @@ const RatingsContainer = styled.div`
 `;
 
 const Percentage = styled.div`
-  width: auto;
-  height: 10px;
-  font-size: 17px;
+  /* width: auto; */
+  height: auto;
+  /* font-size: 17px; */
+  max-width: 300px;
 `;
 
 function FilterRatings(props) {
@@ -68,9 +69,9 @@ function FilterRatings(props) {
         <Stars rating={data.average_rating} />
       </Ratings>
 
-      {filter === true && currentFilters()}
+      {filter === true && Object.values(selectedFilters).includes(true) && currentFilters()}
 
-      {filter === true && removeFilterButton()}
+      {filter === true && Object.values(selectedFilters).includes(true) && removeFilterButton()}
 
       <RatingsContainer>
         {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}

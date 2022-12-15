@@ -75,6 +75,10 @@ function Overview() {
     setCurrentPhoto('');
   };
 
+  if (!product.styles) {
+    return <div style={{ height: '100vh' }} />;
+  }
+
   return (
     <div data-testid="overview" style={{ marginTop: '96px' }}>
       {currentPhoto && (
