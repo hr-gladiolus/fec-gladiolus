@@ -25,6 +25,7 @@
     "build": "webpack --mode=production",
     "dev": "webpack serve --open",
     "test": "jest",
+    "test-reviews": "jest src/tests/reviews",
     "prepare": "husky install",
     "server": "nodemon server/index.js"
   },

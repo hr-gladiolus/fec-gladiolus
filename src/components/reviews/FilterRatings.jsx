@@ -27,7 +27,7 @@ function FilterRatings(props) {
 
   const currentFilters = () => (
     <div>
-      <p>Current Filters</p>
+      <p data-testid="filters">Current Filters</p>
       {selectedFilters['5'] && <p>5 stars</p>}
       {selectedFilters['4'] && <p>4 stars</p>}
       {selectedFilters['3'] && <p>3 stars</p>}

@@ -36,7 +36,7 @@ function Qna({ environment }) {
   // but for now I will just have name and ID be placeholders.
   // I will need the full product object and can take the name and ID from that
   const productID = useSelector((state) => state.product.productId);
-  console.log(productID);
+  // console.log(productID);
   const [productName, setProductName] = useState('generic name');
   const [queList, setQueList] = useState([]);
   const [staticList, setStaticList] = useState([]);
