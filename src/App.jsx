@@ -38,11 +38,6 @@ const Header = styled.header`
   }
 `;
 
-const Dropdown = styled.select`
-  position: absolute;
-  right: 10px;
-`;
-
 function App() {
   // we need to watch `id` in case it changes
   const id = useSelector((state) => state.product.productId);
