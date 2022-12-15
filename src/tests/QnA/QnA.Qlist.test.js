@@ -7,13 +7,14 @@ import Qlist from '../../components/QnA/Qlist.jsx';
 import store from '../../store/store';
 import testData from './testData';
 
+const testProduct = {
+  name: 'testName',
+  id: 123,
+};
+const mockFunction = jest.fn();
+
 describe('renders basic Qlist component structure', () => {
   beforeEach(() => {
-    const testProduct = {
-      name: 'testName',
-      id: 123,
-    };
-    const mockFunction = jest.fn();
     render(
       <Provider store={store}>
         <Qlist

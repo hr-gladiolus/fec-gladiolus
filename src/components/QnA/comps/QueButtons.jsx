@@ -24,10 +24,10 @@ function QueButtons({
   return (
     <FlexColumn>
       <FlexRow>
-        <HelpfulSentence>
+        <HelpfulSentence data-testid="helpfulquestionsentence">
           Helpful?
           {' '}
-          <HelpfulButton onClick={handleYesClick}>Yes</HelpfulButton>
+          <HelpfulButton data-testid="helpfulquestionbutton" onClick={handleYesClick}>Yes</HelpfulButton>
           {` (${helpfulness})`}
         </HelpfulSentence>
         <AddAnswerButton onClick={toggle}>Add Answer</AddAnswerButton>

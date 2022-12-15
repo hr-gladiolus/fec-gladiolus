@@ -51,9 +51,9 @@ function More({
             </MoreAnsQues>
           )
           : null}
-        <AddAQue onClick={toggle}>ADD QUESTION +</AddAQue>
+        <AddAQue data-testid="addaque" onClick={toggle}>ADD QUESTION +</AddAQue>
       </FlexRow>
-      <Modal visible={visible} toggle={toggle}>
+      <Modal data-testid="moremodal" visible={visible} toggle={toggle}>
         <ModalTemplate
           title="Ask Your Question"
           subtitle={`About the ${product && product.name}`}

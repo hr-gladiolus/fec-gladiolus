@@ -51,7 +51,7 @@ function Alist({ answers, selectPhoto }) {
 
   const content = useRef(null);
   const reference = useRef(null);
-  const answerKeys = Object.keys(answers);
+  let answerKeys = Object.keys(answers);
 
   useEffect(() => {
     setHeight(`${content.current.scrollHeight}px`);
@@ -64,6 +64,23 @@ function Alist({ answers, selectPhoto }) {
     setOverflow(overflow !== 'hidden' ? 'hidden' : 'scroll');
     setInnerText(innerText !== 'SEE MORE' ? 'SEE MORE' : 'COLLAPSE');
   }
+
+  answerKeys = answerKeys.sort(
+    (ans1, ans2) => (answers[ans1].helpfulness > answers[ans2].helpfulness ? -1 : 1),
+  );
+  answerKeys = answerKeys.sort(
+    (ans1, ans2) => {
+      let number;
+      if (answers[ans1].answerer_name.toLowerCase() === 'seller') {
+        number = -1;
+      } else if (answers[ans2].answerer_name.toLowerCase() === 'seller') {
+        number = 1;
+      } else {
+        number = 0;
+      }
+      return number;
+    },
+  );
 
   const mappedAnswers = answerKeys.map((ansID, i) => (
     <SingleAns
