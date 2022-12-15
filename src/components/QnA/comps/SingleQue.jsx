@@ -8,14 +8,10 @@ import useModal from '../../shared/useModal.js';
 import Modal from '../../shared/Modal.jsx';
 import ModalTemplate from './ModalTemplate.jsx';
 import { submitHelpful } from '../requestHelpers';
-
-const SingleQuest = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+import FlexRow from '../styles/FlexRow.styled';
 
 function SingleQue({
-  question, productName, productID, selectPhoto,
+  question, product, selectPhoto,
 }) {
   const { visible, toggle } = useModal();
   // set state to keep track of helpfulness to change when clicked so I don't have to rerender
@@ -36,7 +32,7 @@ function SingleQue({
     }
   }
   return (
-    <SingleQuest>
+    <FlexRow>
       <QueView question={question} selectPhoto={(p) => selectPhoto(p)} />
       <QueButtons
         helpfulness={helpfulness}
@@ -47,7 +43,7 @@ function SingleQue({
       <Modal visible={visible} toggle={toggle}>
         <ModalTemplate
           title="Submit Your Answer"
-          subtitle={`${productName}: ${question.question_body}`}
+          subtitle={`${product && product.name}: ${question.question_body}`}
           firstInputLabel="Your Answer"
           firstInputName="Your Answer"
           secondInputName="Example: jack543!"
@@ -58,7 +54,7 @@ function SingleQue({
           identification={`${question.question_id}`}
         />
       </Modal>
-    </SingleQuest>
+    </FlexRow>
   );
 }
 

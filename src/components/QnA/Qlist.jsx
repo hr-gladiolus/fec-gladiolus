@@ -11,8 +11,9 @@ const Spacer = styled.div`
 `;
 
 const AccordionDiv = styled.div`
-  height: ${({ height }) => height};
-  transition: height 1s ease;
+  height: fit-content;
+  max-height: ${({ height }) => height};
+  transition: max-height 1s ease;
 `;
 
 const OuterDiv = styled.div`
@@ -20,7 +21,7 @@ const OuterDiv = styled.div`
 `;
 
 function Qlist({
-  queList, productID, productName, selectPhoto,
+  queList, product, selectPhoto,
 }) {
   const [height, setHeight] = useState('0px');
   const [numberLoaded, setNumberLoaded] = useState(2);
@@ -36,8 +37,7 @@ function Qlist({
     <SingleQue
       question={question}
       key={question.question_id}
-      productName={productName}
-      productID={productID}
+      product={product}
       selectPhoto={(p) => selectPhoto(p)}
     />
   ));
@@ -54,6 +54,7 @@ function Qlist({
       <Spacer>
         <Comp>
           <AccordionDiv
+            data-testid="accordionDiv"
             ref={content}
             height={height}
           >
@@ -62,10 +63,10 @@ function Qlist({
         </Comp>
       </Spacer>
       <More
+        data-testid="more"
         queList={queList}
         toggleAccordion={() => toggleAccordion()}
-        productName={productName}
-        productID={productID}
+        product={product}
         showMore={showMore}
       />
     </OuterDiv>

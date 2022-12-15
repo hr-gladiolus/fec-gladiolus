@@ -3,13 +3,25 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import More from './More.jsx';
-import Container from './styles/Container.styled.js';
 import Search from './Search.jsx';
 import Qlist from './Qlist.jsx';
 import ExpandedView from './comps/ExpandedView.jsx';
-import { getProductById } from './requestHelpers';
+import { getQuestions } from './requestHelpers';
 
 const API = require('../../config').API_TOKEN;
+
+const Container = styled.div`
+  display: flex;
+  place-content: center;
+  width: 53.5%;
+  min-width: 530px;
+  margin: auto;
+  flex-direction: column;
+  position: relative;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+`;
 
 const NoQues = styled.div`
   margin-bottom: 15px;
@@ -36,8 +48,7 @@ function Qna({ environment }) {
   // but for now I will just have name and ID be placeholders.
   // I will need the full product object and can take the name and ID from that
   const productID = useSelector((state) => state.product.productId);
-  // console.log(productID);
-  const [productName, setProductName] = useState('generic name');
+  const products = useSelector((state) => state.product.products);
   const [queList, setQueList] = useState([]);
   const [staticList, setStaticList] = useState([]);
   const [currentPhoto, setCurrentPhoto] = useState('');
@@ -51,16 +62,7 @@ function Qna({ environment }) {
   }
 
   useEffect(() => {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/qa/questions', {
-      headers: {
-        Authorization: API,
-      },
-      params: {
-        product_id: productID,
-        page: 1,
-        count: 100,
-      },
-    })
+    getQuestions(productID, 1, 100)
       .then((value) => {
         // value.data.results will have the real data to load once everything
         // is working and data has been submitted to the API.
@@ -69,10 +71,6 @@ function Qna({ environment }) {
         // setQueList(value.data.results);
         // this will set the data for the question list.
         // However, how their API starts, it has no data currently so use sample data instead.
-        return getProductById(productID);
-      })
-      .then((value) => {
-        setProductName(value.data.name);
       });
   }, []);
 
@@ -94,8 +92,7 @@ function Qna({ environment }) {
         { staticList.length && (
           <Qlist
             queList={queList}
-            productID={productID}
-            productName={productName}
+            product={products[productID]}
             selectPhoto={selectPhoto}
           />
         ) }

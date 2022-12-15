@@ -21,13 +21,14 @@ const AnsText = styled.p`
 
 const AnsInfo = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 11px;
   opacity: 75%;
   margin: 0;
   padding 0 10px 0 0;
   border: solid;
   border-width: 0 1px 0 0;
+  min-width: 208px;
 `;
 
 const ReportButton = styled.button`
@@ -55,12 +56,17 @@ const StaticReport = styled.div`
 const DisplayPhotos = styled.div`
   display: flex;
   flex-wrap: wrap;
+  height: fit-content;
 `;
 
 const SinglePhoto = styled.img`
   max-height: 75px;
   max-width: 75px;
-  margin: 5px 10px 5px 0;
+  margin: 0 10px 8px 0;
+`;
+
+const AnswererNameSpan = styled.span`
+  font-weight: ${({ weight }) => weight || 'normal'};
 `;
 
 function SingleAns({ answer, selectPhoto }) {
@@ -106,7 +112,10 @@ function SingleAns({ answer, selectPhoto }) {
         </DisplayPhotos>
         <FlexRow>
           <AnsInfo>
-            {`by ${answer.answerer_name}, ${format(parseISO(answer.date), 'MMMM d, yyyy')}`}
+            by&nbsp;
+            { answer.answerer_name.toLowerCase() === 'seller' ? <AnswererNameSpan weight="bolder">{answer.answerer_name}</AnswererNameSpan> : <AnswererNameSpan>{answer.answerer_name}</AnswererNameSpan>}
+            {', '}
+            {format(parseISO(answer.date), 'MMMM d, yyyy')}
           </AnsInfo>
           <HelpfulSentence>
             Helpful?
