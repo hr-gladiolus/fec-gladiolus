@@ -39,7 +39,7 @@ function Overview() {
   const [currentStyle, setCurrentStyle] = useState(undefined);
   const [currentPhoto, setCurrentPhoto] = useState('');
 
-  const id = useSelector((state) => state.product.productId);
+  // const id = useSelector((state) => state.product.productId);
   const product = useSelector((state) => state.product.productData);
 
   const handleImage = () => {
@@ -55,21 +55,13 @@ function Overview() {
   };
 
   useEffect(() => {
-    const promises = [];
-    promises.push(
-      getProduct(id)
-        .then((res) => {
-          setCurrentProduct(res);
-          setStyles(res.styles);
-          setCurrentStyle(res.styles.find((style) => style['default?'] === true) || res.styles[0]);
-        })
-        .catch((err) => Error('Error in Overview getProduct', err)),
-    );
-    Promise.all(promises)
-      .then(() => {
-        handleImage();
-      });
-  }, [id]);
+    setCurrentProduct(product);
+    if (product.styles) {
+      setStyles(product.styles);
+      setCurrentStyle(product.styles.find((style) => style['default?'] === true) || product.styles[0]);
+      handleImage();
+    }
+  }, [product]);
 
   const handleStyleOnClick = (Id) => {
     setCurrentStyle(styles.find((item) => item.style_id === Id));
@@ -82,6 +74,10 @@ function Overview() {
   const unselectPhoto = () => {
     setCurrentPhoto('');
   };
+
+  if (!product.styles) {
+    return <div style={{ height: '100vh' }} />;
+  }
 
   return (
     <div data-testid="overview" style={{ marginTop: '96px' }}>

@@ -3,3 +3,4 @@ coverage
 .env
 src/config.js
 public/bundle.js
+public/bundle.js.gz

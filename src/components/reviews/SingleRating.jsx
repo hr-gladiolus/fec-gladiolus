@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux';
 
 const Row = styled.button`
   display: flex;
+  max-width: 300px;
   width: 100%;
   height: auto;
   flex-direction: row;
   background: transparent;
   border: none;
   margin: 10px 0 10px 0;
+  justify-content: space-between;
 
   &:after {
   content: "";
@@ -43,7 +45,7 @@ const Invisible = styled.div`
 
 // div that holds bars
 const Middle = styled.div`
-  margin-top: 20px;
+  margin-top: 15px;
   width: 70%;
   padding-left: 5px;
   height: 5px;
@@ -57,15 +59,16 @@ const Right = styled.div`
   /* margin-left: 5px; */
   margin-left: auto;
   margin-right: auto;
-  margin: 15px 0 0 5px;
+  margin: 10px 0 0 5px;
   float: right;
+  font-size: 15px;
   display: block;
 `;
 
 // grey bar background
 const BottomBar = styled.div`
   width: 100%;
-  background-color: #717171;
+  background: ${({ theme }) => theme.highlight};
   align: center;
   color: white;
 `;
@@ -74,7 +77,7 @@ const BottomBar = styled.div`
 const TopBar = styled.div`
   width: ${(props) => props.width}%;
   height: 8px;
-  background-color: #04AA6D;
+  background: ${({ theme }) => theme.color};
 `;
 
 function SingleRating(props) {

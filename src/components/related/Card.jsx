@@ -34,14 +34,39 @@ const CardContainer = styled.div`
 `;
 
 const Button = styled.button`
+  background: #9e939371;
+  backdrop-filter: blur(8px) contrast(80%);
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
   position: absolute;
   top: 10px;
   right: 10px;
+  border: 1px solid black;
   z-index: 1;
   cursor: pointer;
+  &:hover {
+    background: #e2e2e266;
+  }
+`;
+
+const Details = styled.div`
+  margin-left: 5px;
+  h5 {
+    width: fit-content;
+    text-decoration: none;
+    background-image: linear-gradient(${({ theme }) => theme.highlight}, ${({ theme }) => theme.highlight});
+    background-size: 0% 0.1em;
+    background-position-y: 100%;
+    background-position-x: 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.2s ease-in-out;
+  }
+
+  &:hover > h5 {
+    background-size: 100% 0.1em;
+    background-position-x: 0%;
+  }
 `;
 
 export default function Card({
@@ -122,25 +147,27 @@ export default function Card({
           <Table target={product} />
         </Modal>
         <ImageCarousel images={product.styles ? product.styles[0].photos : [{ thumbnail_url: 'https://media.tenor.com/2roX3uxz_68AAAAM/cat-space.gif' }]} />
-        <p>{product.category}</p>
-        <h5>{product.name}</h5>
-        {product.styles && (product.styles[0].sale_price === null ? (
-          <p>
-            $
-            {product.default_price}
-          </p>
-        ) : (
-          <p>
-            <del style={{ color: 'red' }}>
+        <Details>
+          <p style={{ 'font-size': '0.8em' }}>{product.category}</p>
+          <h5>{product.name}</h5>
+          {product.styles && (product.styles[0].sale_price === null ? (
+            <p style={{ 'font-size': '0.8em' }}>
               $
               {product.default_price}
-            </del>
-            {' '}
-            $
-            {product.styles[0].sale_price}
-          </p>
-        ))}
-        <Stars rating={product.average_rating} />
+            </p>
+          ) : (
+            <p style={{ 'font-size': '0.8em' }}>
+              <del style={{ color: 'red' }}>
+                $
+                {product.default_price}
+              </del>
+              {' '}
+              $
+              {product.styles[0].sale_price}
+            </p>
+          ))}
+          <Stars rating={product.average_rating} />
+        </Details>
       </div>
     </CardContainer>
   );

@@ -15,7 +15,7 @@ function Magnifier({
   src,
   magHeight = 125,
   magWidth = 125,
-  zoomLevel = 1.5,
+  zoomLevel = 2.5,
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [[x, y], setXY] = useState([0, 0]);

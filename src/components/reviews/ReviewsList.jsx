@@ -19,6 +19,7 @@ const ReviewsListContainer = styled.div`
   display: inline-block;
   overflow-y: scroll;
   max-height: 1000px;
+  min-width: 600px;
 `;
 
 const SearchBar = styled.input`

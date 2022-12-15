@@ -12,7 +12,7 @@ const ImgContainer = styled.div`
   overflow: hidden;
   transition: all 0.2s ease-out;
   cursor: pointer;
-
+  margin-bottom: 10px;
   &:hover > div {
     display: inline-flex;
   }
@@ -28,14 +28,20 @@ const Carousel = styled.div`
 `;
 
 const Nav = styled.button`
+  background: #9e939371;
+  backdrop-filter: blur(8px) contrast(80%);
   position: absolute;
   bottom: 10px;
   left: ${(props) => (props.left ? -20 : 160)}px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  border: 1px solid black;
   z-index: 1;
   cursor: pointer;
+  &:hover {
+    background: #e2e2e266;
+  }
 `;
 
 const Img = styled.img`

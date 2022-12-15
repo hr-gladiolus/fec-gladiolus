@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,6 +19,7 @@ const Header = styled.header`
   font-family: 'Fantony';
   background: ${({ theme }) => theme.header};
   color: ${({ theme }) => theme.fg};
+  position: relative;
   width: 100vw;
   max-width: 100%;
   font-size: 1.5em;
@@ -27,12 +29,20 @@ const Header = styled.header`
   h1 {
     font-size: 40px;
   }
+
+  select {
+    position: absolute;
+    right: 20px;
+    height: 20px;
+    top: 20px;
+  }
 `;
 
 function App() {
   // we need to watch `id` in case it changes
   const id = useSelector((state) => state.product.productId);
   const products = useSelector((state) => state.product.products);
+  const [theme, setTheme] = useState(green);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,10 +56,18 @@ function App() {
     }
   }, [id]);
 
+  const handleChange = (e) => {
+    if (e.target.value === 'green') {
+      setTheme(green);
+    } else if (e.target.value === 'purple') {
+      setTheme(purple);
+    }
+  };
+
   return (
     <div className="App">
       {/* Import the global styles */}
-      <ThemeProvider theme={green}>
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Header>
           <h1>
@@ -57,6 +75,10 @@ function App() {
             {' '}
             <i className="fa-solid fa-gift" />
           </h1>
+          <select name="theme" id="theme-selector" onChange={handleChange}>
+            <option value="green">green</option>
+            <option value="purple">purple</option>
+          </select>
         </Header>
         <Overview />
         <RelatedList />
