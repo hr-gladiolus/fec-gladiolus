@@ -32,6 +32,7 @@ export default function Table({ target }) {
     const obj = {};
 
     // push current product features into obj
+
     product.features.forEach((f) => {
       if (obj[f.feature] === undefined) obj[f.feature] = ['', ''];
       obj[f.feature][0] = f.value === null ? '✓' : f.value;
