@@ -14,7 +14,8 @@ const Rating = styled.div`
   padding-right: 10px;
 `;
 
-const RatingsContainer = styled.div``;
+const RatingsContainer = styled.div`
+`;
 
 const Percentage = styled.div`
   width: auto;
