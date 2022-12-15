@@ -24,7 +24,7 @@
     "start": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
     "dev": "webpack serve --open",
-    "test": "jest src/tests/QnA",
+    "test": "jest",
     "prepare": "husky install",
     "server": "nodemon server/index.js"
   },
