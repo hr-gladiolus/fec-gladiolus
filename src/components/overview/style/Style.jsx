@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import StyleImg from './StyleImg.jsx';
 
 const InvisDiv = styled.div`
   border-radius: 7px;
@@ -31,33 +32,40 @@ const FlexDiv = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   max-width: 350px;
+  overflow: overlay;
+  padding: 0px 10px;
 `;
 
 function Style({ styles, currentStyle, handleStyleOnClick }) {
   const [styleName, setStyleName] = useState(currentStyle.name);
-  const [checked, setChecked] = useState(false);
 
   const handleClick = (id, name) => {
     handleStyleOnClick(id);
     setStyleName(name);
-    setChecked(true);
   };
 
-  return (
-    <InvisDiv>
-      <h3 style={{ margin: '12px' }}>{`Style ▸ ${styleName}`}</h3>
-      <FlexDiv>
-        {styles.map((style) => (
-          <Img
-            key={style.style_id}
-            src={style.photos[0].thumbnail_url}
-            onClick={() => handleClick(style.style_id, style.name)}
-            alt=""
-          />
-        ))}
-      </FlexDiv>
-    </InvisDiv>
-  );
+  if (styles) {
+    let ind = -1;
+    return (
+      <InvisDiv>
+        <h3 style={{ margin: '12px' }}>{`Style ▸ ${styleName}`}</h3>
+        <FlexDiv>
+          {styles.map((style) => {
+            ind += 1;
+            return (
+              <StyleImg
+                key={style.style_id}
+                style={style}
+                ind={ind}
+                currentStyleInd={styles.indexOf(currentStyle)}
+                handleClick={handleClick}
+              />
+            );
+          })}
+        </FlexDiv>
+      </InvisDiv>
+    );
+  }
 }
 
 export default Style;

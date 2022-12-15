@@ -18,7 +18,7 @@ const FlexDiv = styled.div`
 function Information({ slogan, description, features }) {
   return (
     <FlexDiv>
-      <Div style={{ borderRight: '2px solid grey', paddingLeft: '5px' }}>
+      <Div style={{ borderRight: '2px solid black', paddingLeft: '5px' }}>
         <Description
           slogan={slogan}
           description={description}

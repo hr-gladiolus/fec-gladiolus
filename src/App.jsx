@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';

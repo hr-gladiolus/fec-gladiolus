@@ -2,6 +2,7 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
@@ -54,6 +55,8 @@ function Cart({ skus, id }) {
   const [qty, setQty] = useState(0);
   const [cartE, setCartE] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!currentSKU[0]) {
@@ -67,9 +70,6 @@ function Cart({ skus, id }) {
           Error('Error in Cart handleSubmit', err);
         });
     }
-  };
-
-  const handleSaved = (e) => {
   };
 
   const handleChange = (e) => {
@@ -94,6 +94,11 @@ function Cart({ skus, id }) {
 
   const range = (n, m) => [...Array(Math.min(n, m)).keys()];
 
+  const handleSaved = (e) => {
+    e.preventDefault();
+    document.getElementById('addOutfit').click();
+  };
+
   return (
     <form>
       <FlexDiv>
@@ -113,6 +118,19 @@ function Cart({ skus, id }) {
         <CartButton Button={Button} handleSubmit={handleSubmit} handleSize={handleSize} />
         <SavedButton Button={Button} id={id} handleSaved={handleSaved} />
       </FlexDiv>
+      {
+        cartE
+          && (
+            <div style={{
+              color: 'red',
+              textAlign: 'center',
+              padding: '8px',
+            }}
+            >
+              Please select size!
+            </div>
+          )
+      }
     </form>
   );
 }
