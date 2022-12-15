@@ -14,21 +14,29 @@ const ReviewList = styled.div`
 const ReviewsListContainer = styled.div`
   display: inline-block;
   overflow-y: scroll;
-  max-height: 500px;
-  padding: 15px;;
+  max-height: 1000px;
 `;
 
 const SearchBar = styled.input`
-  margin: 30px;
+  margin: 10px 0;
 `;
 
 const ShowMoreButton = styled.div`
-  background: white;
-  border: black;
+  display: inline-block;
+  font-weight: bold;
+  padding: 12px;
   max-height: 15px;
   width: auto;
+  place-content: center;
+  text-align: left;
+  border: 1px solid black;
+
   &:hover {
     background: pink;
+  }
+
+  &:active {
+    background: blue;
   }
 `;
 
