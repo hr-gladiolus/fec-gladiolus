@@ -33,11 +33,11 @@ function Details(
   }, []);
 
   return (
-    <Div>
+    <Div data-testid="details">
       {numOfReviews > 0 && (
         <div>
           <h5 style={{ float: 'right', marginTop: '3px' }}>
-            <a href="#readReviews" style={{ fontSize: '12px', color: '#002346' }}>
+            <a href="##readReviews" style={{ fontSize: '12px', color: '#002346' }}>
               {`Read All ${numOfReviews} Reviews`}
             </a>
           </h5>
@@ -53,7 +53,7 @@ function Details(
         </h4>
       )}
       {sale === null && (
-        <h4>{`$${price}`}</h4>
+        <h4 data-testid="price">{`$${price}`}</h4>
       )}
     </Div>
   );

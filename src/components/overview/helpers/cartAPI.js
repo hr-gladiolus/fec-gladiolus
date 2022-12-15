@@ -19,19 +19,19 @@ function addItemToCart(id, qty) {
       console.log('My item is successfully added to cart');
     })
     .catch((err) => {
-      Error('Error in cartAPI addItemToCart', err);
+      throw new Error('Error in cartAPI addItemToCart', err);
     });
 }
 
-function getItemsInCart() {
-  return instance.get('/cart')
-    .then((results) => {
-      console.log('my items in cart are: ', results.data);
-      return results.data;
-    })
-    .catch((err) => {
-      Error('Error in cartAPI getItemsInCart', err);
-    });
-}
+// function getItemsInCart() {
+//   return instance.get('/cart')
+//     .then((results) => {
+//       console.log('my items in cart are: ', results.data);
+//       return results.data;
+//     })
+//     .catch((err) => {
+//       Error('Error in cartAPI getItemsInCart', err);
+//     });
+// }
 
-module.exports = { addItemToCart, getItemsInCart };
+module.exports = { addItemToCart };

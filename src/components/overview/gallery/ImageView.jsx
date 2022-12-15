@@ -36,11 +36,12 @@ const Div = styled.div`
 
 function ImageView({ photo, handleExpand }) {
   return (
-    <Div>
+    <Div data-testid="click-view">
       <Img
         src={photo}
         alt={photo}
         onClick={handleExpand}
+        data-testid="image-view"
       />
     </Div>
   );

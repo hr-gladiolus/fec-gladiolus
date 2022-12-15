@@ -3,14 +3,14 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 function SelectQty({
-  Select,
+  select,
   currentSKU,
   handleQty,
   range,
 }) {
   return (
-    <div>
-      <Select onChange={handleQty}>
+    <div data-testid="quantity">
+      <select onChange={handleQty}>
         {currentSKU[1].quantity === -1 && (
           <option>Select Quantity</option>
         )}
@@ -22,7 +22,7 @@ function SelectQty({
             <option key={i + 1}>{qty + 1}</option>
           ))
         )}
-      </Select>
+      </select>
     </div>
   );
 }
