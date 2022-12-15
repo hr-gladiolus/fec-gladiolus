@@ -11,19 +11,19 @@ import Modal from '../shared/Modal.jsx';
 
 const ReviewWidget = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
 `;
 
 const LeftSide = styled.div`
-  flex: 30%;
-  margin: 50px;
-  margin-left: 200px;
+  flex: 1 1 0;
+  padding-left: 120px;
+  padding-bottom: 80px;
 `;
 
 const RightSide = styled.div`
-  flex: 70%;
-  margin-top: 80px;
-  margin-right: 50px;
+  flex: 2 1 0;
+  padding: 20px;
+  padding-bottom: 80px;
 `;
 
 const Title = styled.div`

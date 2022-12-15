@@ -6,12 +6,15 @@ import SingleReview from './SingleReview.jsx';
 import { getReviews } from './api.js';
 import SortReviews from './SortReviews.jsx';
 
-const ReviewsListContainer = styled.div`
+const ReviewList = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const ReviewsListContainer = styled.div`
+  display: inline-block;
   overflow-y: scroll;
   max-height: 500px;
-  float: right;
   padding: 15px;;
 `;
 
@@ -19,7 +22,13 @@ const SearchBar = styled.input`
   margin: 30px;
 `;
 
-const ShowMoreButton = styled.div`
+const ShowMoreButton = styled.button`
+  background: white;
+  border: none;
+
+  &:hover {
+    background: pink;
+  }
 `;
 
 function ReviewsList(props) {
