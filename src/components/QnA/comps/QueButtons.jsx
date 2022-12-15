@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import HelpfulSentence from '../styles/HelpfulSentence.styled';
 import HelpfulButton from '../styles/HelpfulButton.styled';
 import FlexRow from '../styles/FlexRow.styled';
-
-const QueButtonsOuter = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import FlexColumn from '../styles/FlexColumn.styled';
 
 const AddAnswerButton = styled.button`
 width: 81px;
@@ -26,17 +22,19 @@ function QueButtons({
   helpfulness, toggle, handleYesClick, question,
 }) {
   return (
-    <QueButtonsOuter>
-      <FlexRow>
-        <HelpfulSentence>
-          Helpful?
-          {' '}
-          <HelpfulButton onClick={handleYesClick}>Yes</HelpfulButton>
-          {` (${helpfulness})`}
-        </HelpfulSentence>
-        <AddAnswerButton onClick={toggle}>Add Answer</AddAnswerButton>
-      </FlexRow>
-    </QueButtonsOuter>
+    <div>
+      <FlexColumn>
+        <FlexRow>
+          <HelpfulSentence data-testid="helpfulquestionsentence">
+            Helpful?
+            {' '}
+            <HelpfulButton data-testid="helpfulquestionbutton" onClick={handleYesClick}>Yes</HelpfulButton>
+            {` (${helpfulness})`}
+          </HelpfulSentence>
+          <AddAnswerButton onClick={toggle}>Add Answer</AddAnswerButton>
+        </FlexRow>
+      </FlexColumn>
+    </div>
   );
 }
 
