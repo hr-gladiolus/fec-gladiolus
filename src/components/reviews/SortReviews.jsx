@@ -5,20 +5,20 @@ import { IoIosArrowDown } from 'react-icons/io';
 import SingleReview from './SingleReview.jsx';
 
 const SelectContainer = styled.div`
-display: flex;
-flex-direction: row;
-padding: 5px;
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
 `;
 
 const NumberReviews = styled.div`
-  padding: 5px;
+  padding: 5px 5px 5px 0;
 `;
 
 const DropdownContent = styled.div`
-  /* display: block; */
 `;
 
 const DropdownMenu = styled.div`
+  margin-top: 3px;
 `;
 const DropdownButton = styled.div`
   text-decoration: underline;

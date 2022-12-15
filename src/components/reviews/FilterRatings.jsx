@@ -14,7 +14,14 @@ const Rating = styled.div`
   padding-right: 10px;
 `;
 
-const Percentage = styled.div``;
+const RatingsContainer = styled.div`
+`;
+
+const Percentage = styled.div`
+  width: auto;
+  height: 10px;
+  font-size: 17px;
+`;
 
 function FilterRatings(props) {
   const [rating, setRating] = useState();
@@ -65,13 +72,12 @@ function FilterRatings(props) {
 
       {filter === true && removeFilterButton()}
 
-      <div>
+      <RatingsContainer>
         {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}
-      </div>
+      </RatingsContainer>
 
       <Percentage>
         {data.percentage}
-        {' '}
         % of reviews recommend this product
       </Percentage>
     </div>
