@@ -23,17 +23,4 @@ describe('testing Search component', () => {
     const linkElement = screen.getByText(/QUESTIONS & ANSWERS/i);
     expect(linkElement).toBeInTheDocument();
   });
-  test('renders the search component to the screen', async () => {
-    const searchInput = screen.findByPlaceholderText('HAVE QUESTIONS? SEARCH FOR ANSWERS...');
-    expect(await searchInput).toBeInTheDocument();
-  });
-  test('renders the Qlist component to the screen', async () => {
-    const QsForEachQuestion = screen.findAllByText(/Q:/);
-    expect(await QsForEachQuestion).toBeTruthy();
-    expect(await QsForEachQuestion).toHaveLength(2);
-  });
-  test('renders the More component', async () => {
-    const AddQuestion = screen.findByText('ADD QUESTION +');
-    expect(await AddQuestion).toBeInTheDocument();
-  });
 });

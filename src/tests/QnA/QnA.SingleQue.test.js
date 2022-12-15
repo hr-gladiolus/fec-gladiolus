@@ -66,7 +66,7 @@ describe('testing the SingleQue component', () => {
   test('it loads the helpful phrases', () => {
     const helpfuls = screen.getAllByText(/Helpful?/i);
     expect(helpfuls[0]).toBeInTheDocument();
-    expect(helpfuls).toHaveLength(6);
+    expect(helpfuls).toHaveLength(9);
   });
   test('it loads the add answers button', () => {
     const addAnswerButton = screen.getByText(/Add Answer/i);

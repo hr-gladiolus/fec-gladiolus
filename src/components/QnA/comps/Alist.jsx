@@ -53,7 +53,6 @@ function Alist({ answers, selectPhoto }) {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(closeReference.current.scrollHeight);
       setHeight(`${closeReference.current.scrollHeight}px`);
     }, 100);
   }, []);
