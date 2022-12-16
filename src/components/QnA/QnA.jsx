@@ -72,7 +72,7 @@ function Qna({ environment }) {
         // this will set the data for the question list.
         // However, how their API starts, it has no data currently so use sample data instead.
       });
-  }, []);
+  }, [productID]);
 
   const noneText = 'THERE APPEARS TO BE NO QUESTIONS FOR THIS PRODUCT, WOULD YOU LIKE TO ADD ONE?';
 
