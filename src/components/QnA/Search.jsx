@@ -6,12 +6,15 @@ import Comp from './styles/Comp.styled.js';
 const Searchbutton = styled.div`
   position: absolute;
   right: 2%;
-  top: 25%;
+  top: 28%;
 `;
 
 const Searchinput = styled.input`
   width: 100%;
-  padding: 1.95% 0% 1.95% 1.95%;
+  padding-right: 0;
+  padding-left: min(1.95%, 17.5px);
+  padding-top: min(1.95%, 17.5px);
+  padding-bottom: min(1.95%, 17.5px);
   display: inline-block;
   border-top: 1.2px solid rgba(0, 0, 0);
   border-left: 1.2px solid rgba(0, 0, 0);
@@ -19,9 +22,11 @@ const Searchinput = styled.input`
   border-right: 1.2px solid rgba(0, 0, 0, .5);
   background-color: ${({ theme }) => theme.bg};
 
+
   ::placeholder {
     color: black;
     opacity: 1;
+    font-size: 18;
   }
 `;
 
@@ -29,7 +34,7 @@ const Searchform = styled.form`
   display: flex;
   place-content: center;
   box-shadow: 2px 2px 2px rgb(0 0 0 / 0.2);
-  margin: 0 0 6px 0;
+  margin: 0;
   position: relative;
 `;
 

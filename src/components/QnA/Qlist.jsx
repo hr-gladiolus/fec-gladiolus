@@ -5,13 +5,14 @@ import SingleQue from './comps/SingleQue.jsx';
 import Comp from './styles/Comp.styled.js';
 
 const Spacer = styled.div`
-  margin: 0 0 10px 0;
+  margin: 0 0 0 0;
   overflow: auto;
   max-height: 515px;
 `;
 
 const AccordionDiv = styled.div`
-  height: fit-content;
+  overflow: hidden;
+  height: ${({ heightType }) => heightType};
   max-height: ${({ height }) => height};
   transition: max-height 1s ease;
 `;
@@ -20,16 +21,29 @@ const OuterDiv = styled.div`
   position: relative;
 `;
 
+const ReferencePoint = styled.div`
+  max-height: 0;
+  overflow: hidden;
+`;
+
 function Qlist({
   queList, product, selectPhoto,
 }) {
   const [height, setHeight] = useState('0px');
-  const [numberLoaded, setNumberLoaded] = useState(2);
+  const [numberLoaded, setNumberLoaded] = useState(0);
   const [showMore, setShowMore] = useState(true);
+  const [heightType, setHeightType] = useState('350px');
 
   const content = useRef(null);
 
   useEffect(() => {
+    if (numberLoaded === 0) {
+      setNumberLoaded(2);
+      setHeightType('fit-content');
+      setTimeout(() => {
+        setHeight(`${content.current.scrollHeight}px`);
+      }, 1200);
+    }
     setHeight(`${content.current.scrollHeight}px`);
   });
 
@@ -53,12 +67,17 @@ function Qlist({
     <OuterDiv>
       <Spacer>
         <Comp>
-          <AccordionDiv
-            data-testid="accordionDiv"
+          <ReferencePoint
             ref={content}
-            height={height}
           >
             { mappedList.slice(0, numberLoaded) }
+          </ReferencePoint>
+          <AccordionDiv
+            data-testid="accordionDiv"
+            height={height}
+            heightType={heightType}
+          >
+            { mappedList }
           </AccordionDiv>
         </Comp>
       </Spacer>

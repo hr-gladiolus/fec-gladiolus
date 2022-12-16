@@ -13,14 +13,11 @@ const API = require('../../config').API_TOKEN;
 const Container = styled.div`
   display: flex;
   place-content: center;
-  width: 53.5%;
-  min-width: 530px;
+  width: 90%;
+  min-width: 530;
   margin: auto;
   flex-direction: column;
   position: relative;
-  @media (max-width: 768px) {
-    width: 95%;
-  }
 `;
 
 const NoQues = styled.div`
@@ -72,7 +69,7 @@ function Qna({ environment }) {
         // this will set the data for the question list.
         // However, how their API starts, it has no data currently so use sample data instead.
       });
-  }, []);
+  }, [productID]);
 
   const noneText = 'THERE APPEARS TO BE NO QUESTIONS FOR THIS PRODUCT, WOULD YOU LIKE TO ADD ONE?';
 
