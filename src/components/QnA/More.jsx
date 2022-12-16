@@ -24,10 +24,10 @@ const AddAQue = styled.div`
   background-color:${({ theme }) => theme.bg};
   justify-content: center;
   &:hover {
-    box-shadow: inset 0 0 7.5px #818589;
+    background: pink;
   }
   &:active {
-    box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
+    background: blue;
   }
 `;
 
@@ -50,10 +50,10 @@ const MoreAnsQues = styled.div`
   box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
   background-color:${({ theme }) => theme.bg};
   &:hover {
-    box-shadow: inset 0 0 7.5px #818589;
+    background: pink;
   }
   &:active {
-    box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
+    background: blue;
   }
 `;
 
