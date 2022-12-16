@@ -15,15 +15,17 @@ const ReviewList = styled.div`
   margin: 60px;
 `;
 
+const SearchBar = styled.input`
+  display: inline-block;
+  margin: 10px 0;
+  position: relative;
+`;
+
 const ReviewsListContainer = styled.div`
   display: inline-block;
   overflow-y: scroll;
   max-height: 1000px;
   min-width: 600px;
-`;
-
-const SearchBar = styled.input`
-  margin: 10px 0;
 `;
 
 const ShowAddButton = styled.div`
@@ -43,16 +45,13 @@ const ShowAddButton = styled.div`
   }
 `;
 
-const AddReviewButton = styled.div`
-
-`;
-
 function ReviewsList(props) {
   const [sortOption, setSortOption] = useState('Relevant');
   const [reviews, setReviews] = useState([]);
   const [currentReviews, setCurrentReviews] = useState([]);
   const [index, setIndex] = useState(2);
   const [numberOfReviews, setNumberOfReviews] = useState();
+  const [showMore, setShowMore] = useState(0);
 
   const { filter, selectedFilters, setFilter } = props;
   const { visible, toggle } = useModal();
@@ -61,11 +60,6 @@ function ReviewsList(props) {
   const data = useSelector((state) => state.product.productData);
 
   const filterReviews = (reviewsData) => setCurrentReviews(reviewsData.filter((review) => selectedFilters[review.rating] === true));
-
-  const showMoreReviews = () => {
-    setCurrentReviews(reviews.slice(0, index));
-    setIndex(index + 2);
-  };
 
   useEffect(() => {
     getReviews(product, sortOption)
@@ -80,12 +74,16 @@ function ReviewsList(props) {
     ? filterReviews(reviews)
     : setCurrentReviews(reviews.slice(0, 2))), [filter, selectedFilters]);
 
+  useEffect(() => {
+    setCurrentReviews(reviews.slice(0, index));
+  }, [index]);
+
   return (
     <div>
 
       <SortReviews sortOption={sortOption} setSortOption={setSortOption} numberOfReviews={numberOfReviews} />
 
-      <SearchBar placeholder="Search for a Keyword" />
+      {/* <SearchBar placeholder="Search for a Keyword" /> */}
 
       <ReviewsListContainer data-testid="reviews-container">
         {currentReviews.map((review) => (
@@ -97,18 +95,20 @@ function ReviewsList(props) {
         ))}
       </ReviewsListContainer>
 
-      {reviews.length > 2
+      <div>
+        {reviews.length > 2
       && currentReviews.length < reviews.length
       && (
-        <ShowAddButton onClick={(evt) => showMoreReviews()}>
+        <ShowAddButton onClick={(evt) => setIndex(index + 2)}>
           More Reviews
         </ShowAddButton>
       )}
 
-      <ShowAddButton type="button" onClick={toggle}>Add Review +</ShowAddButton>
-      <Modal visible={visible} toggle={toggle}>
-        <AddReview />
-      </Modal>
+        <ShowAddButton type="button" onClick={toggle}>Add Review +</ShowAddButton>
+        <Modal visible={visible} toggle={toggle}>
+          <AddReview />
+        </Modal>
+      </div>
 
     </div>
   );
