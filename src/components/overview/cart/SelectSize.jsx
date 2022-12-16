@@ -10,9 +10,9 @@ const Select = styled.select`
   padding: 7px;
   cursor: pointer;
   font-size: 14px;
-  border: 1px solid gray;
+  border: 2px solid border: 2px solid ${({ theme }) => theme.header};
   margin: 20px;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 4px ${({ theme }) => theme.highlight};
 
   option {
     color: black;

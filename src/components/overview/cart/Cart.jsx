@@ -17,13 +17,14 @@ const FlexDiv = styled.div`
 `;
 
 const Button = styled.button`
+  /* background: #ffe3b9; */
   background: #ffe3b9;
   color: ${({ theme }) => theme.color};
-  border: 1px solid gray;
+  border: 2px solid ${({ theme }) => theme.header};
   margin: 10px 20px 30px 20px;
   padding: 8px;
   cursor: pointer;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 4px ${({ theme }) => theme.highlight};
   &:hover {
     color: ${({ theme }) => theme.highlight};
   }
