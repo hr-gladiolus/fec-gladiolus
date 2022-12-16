@@ -13,7 +13,7 @@ const API = require('../../config').API_TOKEN;
 const Container = styled.div`
   display: flex;
   place-content: center;
-  width: 90%;
+  width: 85%;
   min-width: 530;
   margin: auto;
   flex-direction: column;
@@ -27,6 +27,7 @@ const NoQues = styled.div`
 
 const TopQA = styled.div`
   margin-bottom: 10px;
+  margin-top: 40px;
   font-size: 14px;
 `;
 
