@@ -13,6 +13,6 @@ app.get('*.js', (req, res, next) => {
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 
-app.listen(3001);
+app.listen(3000);
 // eslint-disable-next-line no-console
 console.log('Listening on port 3000');
