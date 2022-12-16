@@ -10,6 +10,7 @@ import AddReview from './AddReview.jsx';
 const ReviewWidget = styled.div`
   display: flex;
   width: 100%;
+  margin-top: 40px;
 `;
 
 const LeftSide = styled.div`
@@ -26,7 +27,7 @@ const RightSide = styled.div`
 
 const Title = styled.div`
   font-size: 15px;
-  margin: 15px;
+  margin: 15px 0;
 `;
 
 function RatingsAndReviews() {

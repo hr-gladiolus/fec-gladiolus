@@ -12,7 +12,7 @@ import AddReview from './AddReview.jsx';
 const ReviewList = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 60px;
+  margin: 40px;
 `;
 
 const SearchBar = styled.input`
@@ -25,7 +25,7 @@ const ReviewsListContainer = styled.div`
   display: inline-block;
   overflow-y: scroll;
   max-height: 1000px;
-  min-width: 600px;
+  width: 700px;
 `;
 
 const ShowAddButton = styled.div`
@@ -38,10 +38,10 @@ const ShowAddButton = styled.div`
   border: 1px solid black;
   margin-right: 10px;
   &:hover {
-    background: pink;
+    border: 4px solid black;
   }
   &:active {
-    background: blue;
+    border: 4px solid black;
   }
 `;
 
@@ -51,7 +51,6 @@ function ReviewsList(props) {
   const [currentReviews, setCurrentReviews] = useState([]);
   const [index, setIndex] = useState(2);
   const [numberOfReviews, setNumberOfReviews] = useState();
-  const [showMore, setShowMore] = useState(0);
 
   const { filter, selectedFilters, setFilter } = props;
   const { visible, toggle } = useModal();
