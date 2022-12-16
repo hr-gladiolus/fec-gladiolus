@@ -71,7 +71,7 @@ function App() {
         <GlobalStyle />
         <Header>
           <h1>
-            Logo Here
+            CoLGeT
             {' '}
             <i className="fa-solid fa-gift" />
           </h1>
