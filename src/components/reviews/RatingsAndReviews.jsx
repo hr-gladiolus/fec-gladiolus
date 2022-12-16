@@ -9,7 +9,7 @@ import AddReview from './AddReview.jsx';
 
 const ReviewWidget = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   margin-top: 40px;
 `;
 
