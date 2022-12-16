@@ -13,14 +13,11 @@ const API = require('../../config').API_TOKEN;
 const Container = styled.div`
   display: flex;
   place-content: center;
-  width: 53.5%;
-  min-width: 530px;
+  width: 90%;
+  min-width: 530;
   margin: auto;
   flex-direction: column;
   position: relative;
-  @media (max-width: 768px) {
-    width: 95%;
-  }
 `;
 
 const NoQues = styled.div`

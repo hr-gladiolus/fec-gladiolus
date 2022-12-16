@@ -6,11 +6,15 @@ import useModal from '../shared/useModal.js';
 import Modal from '../shared/Modal.jsx';
 import ModalTemplate from './comps/ModalTemplate.jsx';
 
-const AddAQue = styled.button`
+const AddAQue = styled.div`
   display: flex;
   font-weight: bold;
   border-width: 1px;
-  padding: 2.04% 1.5%;
+  height: 18px;
+  padding-right: min(1.5%, 17.5px);
+  padding-left: min(1.5%, 17.5px);
+  padding-top: min(2.04%, 17.5px);
+  padding-bottom: min(2.04%, 17.5px);
   min-width: 127px;
   border-top: 1px solid rgba(0, 0, 0, 0.5);
   border-left: 1px solid rgba(0, 0, 0, 0.5);
@@ -18,6 +22,7 @@ const AddAQue = styled.button`
   border-right: 1px solid rgba(0, 0, 0);
   box-shadow: -2px -2px 2px rgb(0 0 0 / 0.1);
   background-color:${({ theme }) => theme.bg};
+  justify-content: center;
   &:hover {
     box-shadow: inset 0 0 7.5px #818589;
   }
@@ -26,10 +31,14 @@ const AddAQue = styled.button`
   }
 `;
 
-const MoreAnsQues = styled.button`
+const MoreAnsQues = styled.div`
   display: flex;
   font-weight: bold;
-  padding: 2.04% 1.5%;
+  height: 18px;
+  padding-right: min(1.5%, 17.5px);
+  padding-left: min(1.5%, 17.5px);
+  padding-top: min(2.04%, 17.5px);
+  padding-bottom: min(2.04%, 17.5px);
   margin-right: 2.5%;
   min-width: 216px;
   place-content: center;
