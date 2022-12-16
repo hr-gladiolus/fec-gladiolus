@@ -54,7 +54,7 @@ function Alist({ answers, selectPhoto }) {
   useEffect(() => {
     setTimeout(() => {
       setHeight(`${closeReference.current.scrollHeight}px`);
-    }, 100);
+    }, 500);
   }, []);
 
   function toggleAccordion() {
