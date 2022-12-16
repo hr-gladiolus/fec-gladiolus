@@ -14,14 +14,29 @@ const Rating = styled.div`
   padding-right: 10px;
 `;
 
+const RemoveFilters = styled.div`
+  display: inline-block;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 3px;
+  width: auto;
+  text-align: center;
+  border: 1px solid black;
+  margin: 8px 0 4px 0;
+  &:hover {
+    border: 2px solid black;
+  }
+  &:active {
+    border: 2px solid gold;
+  }
+`;
+
 const RatingsContainer = styled.div`
 `;
 
 const Percentage = styled.div`
-  /* width: auto; */
   height: auto;
-  /* font-size: 17px; */
-  max-width: 300px;
+  width: 300px;
 `;
 
 function FilterRatings(props) {
@@ -46,7 +61,7 @@ function FilterRatings(props) {
 
   const removeFilterButton = () => (
     <div>
-      <button
+      <RemoveFilters
         type="button"
         onClick={
           () => {
@@ -56,7 +71,7 @@ function FilterRatings(props) {
         }
       >
         Remove All Filters
-      </button>
+      </RemoveFilters>
     </div>
   );
 

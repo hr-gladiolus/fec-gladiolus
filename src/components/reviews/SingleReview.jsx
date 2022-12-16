@@ -40,8 +40,12 @@ const ReviewBody = styled.div`
 `;
 
 const ShowMoreButton = styled.div`
-  background-color: grey;
+  background-color: transparent;
   display: inline-block;
+  padding: 2px;
+  &:hover {
+    border: 2px solid purple;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -168,7 +172,7 @@ function SingleReview(props) {
         </ResponseContainer>
       )}
 
- <HelpfulReportContainer data-testid="unhelpful">
+      <HelpfulReportContainer data-testid="unhelpful">
         Was this review helpful?
         {' '}
         <HelpfulReportButton onClick={(evt) => helpfulClick()}>
@@ -181,7 +185,6 @@ function SingleReview(props) {
         {` (${unhelpful})`}
         <HelpfulReportButton onClick={(evt) => reportReview(review.review_id)}>Report</HelpfulReportButton>
       </HelpfulReportContainer>
-
 
       <Line />
     </Review>

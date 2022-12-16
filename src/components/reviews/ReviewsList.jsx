@@ -12,18 +12,20 @@ import AddReview from './AddReview.jsx';
 const ReviewList = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 60px;
+  margin: 40px;
+`;
+
+const SearchBar = styled.input`
+  display: inline-block;
+  margin: 10px 0;
+  position: relative;
 `;
 
 const ReviewsListContainer = styled.div`
   display: inline-block;
   overflow-y: scroll;
   max-height: 1000px;
-  min-width: 600px;
-`;
-
-const SearchBar = styled.input`
-  margin: 10px 0;
+  width: 700px;
 `;
 
 const ShowAddButton = styled.div`
@@ -36,15 +38,11 @@ const ShowAddButton = styled.div`
   border: 1px solid black;
   margin-right: 10px;
   &:hover {
-    background: pink;
+    border: 4px solid black;
   }
   &:active {
-    background: blue;
+    border: 4px solid black;
   }
-`;
-
-const AddReviewButton = styled.div`
-
 `;
 
 function ReviewsList(props) {
@@ -62,11 +60,6 @@ function ReviewsList(props) {
 
   const filterReviews = (reviewsData) => setCurrentReviews(reviewsData.filter((review) => selectedFilters[review.rating] === true));
 
-  const showMoreReviews = () => {
-    setCurrentReviews(reviews.slice(0, index));
-    setIndex(index + 2);
-  };
-
   useEffect(() => {
     getReviews(product, sortOption)
       .then((result) => {
@@ -80,12 +73,16 @@ function ReviewsList(props) {
     ? filterReviews(reviews)
     : setCurrentReviews(reviews.slice(0, 2))), [filter, selectedFilters]);
 
+  useEffect(() => {
+    setCurrentReviews(reviews.slice(0, index));
+  }, [index]);
+
   return (
     <div>
 
       <SortReviews sortOption={sortOption} setSortOption={setSortOption} numberOfReviews={numberOfReviews} />
 
-      <SearchBar placeholder="Search for a Keyword" />
+      {/* <SearchBar placeholder="Search for a Keyword" /> */}
 
       <ReviewsListContainer data-testid="reviews-container">
         {currentReviews.map((review) => (
@@ -97,18 +94,20 @@ function ReviewsList(props) {
         ))}
       </ReviewsListContainer>
 
-      {reviews.length > 2
+      <div>
+        {reviews.length > 2
       && currentReviews.length < reviews.length
       && (
-        <ShowAddButton onClick={(evt) => showMoreReviews()}>
+        <ShowAddButton onClick={(evt) => setIndex(index + 2)}>
           More Reviews
         </ShowAddButton>
       )}
 
-      <ShowAddButton type="button" onClick={toggle}>Add Review +</ShowAddButton>
-      <Modal visible={visible} toggle={toggle}>
-        <AddReview />
-      </Modal>
+        <ShowAddButton type="button" onClick={toggle}>Add Review +</ShowAddButton>
+        <Modal visible={visible} toggle={toggle}>
+          <AddReview />
+        </Modal>
+      </div>
 
     </div>
   );

@@ -14,6 +14,7 @@ const Row = styled.button`
   border: none;
   margin: 10px 0 10px 0;
   justify-content: space-between;
+  transition: transform .2s;
 
   &:after {
   content: "";
@@ -21,18 +22,13 @@ const Row = styled.button`
   clear: both;
   }
   &:hover {
-    background-color: #f5a4a4;
-  }
-  &:active {
-    color: #4e0881;
+  transform: scale(1.1);
   }
 `;
 
 const StarRating = styled.div`
   float: left;
   width: 15%;
-  /* margin-top:8px;
-  margin-left: 0; */
   font-size: 15px;
   border: none;
   padding: 10px 0 10px 0;
@@ -43,7 +39,6 @@ const Invisible = styled.div`
   visibility: hidden;
 `;
 
-// div that holds bars
 const Middle = styled.div`
   margin-top: 15px;
   width: 70%;
@@ -53,10 +48,7 @@ const Middle = styled.div`
   display: block;
 `;
 
-// number of ratings on far right
 const Right = styled.div`
-  /* margin-top: 15px; */
-  /* margin-left: 5px; */
   margin-left: auto;
   margin-right: auto;
   margin: 10px 0 0 5px;
@@ -65,7 +57,6 @@ const Right = styled.div`
   display: block;
 `;
 
-// grey bar background
 const BottomBar = styled.div`
   width: 100%;
   background: ${({ theme }) => theme.highlight};
@@ -73,7 +64,6 @@ const BottomBar = styled.div`
   color: white;
 `;
 
-// green bar on top - width dependent on number of reviews
 const TopBar = styled.div`
   width: ${(props) => props.width}%;
   height: 8px;
