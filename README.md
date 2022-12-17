@@ -2,11 +2,24 @@
 
 ## Table of Contennts
 
-* Project Overview
-* Project Details
-* Installation
-* Team Members
-* Future Optimizations
+* [Project Overview](#project-overview)
+* [Project Details](#project-details)
+* [Installation](#installation)
+* [Team Members](#team-members)
+* [Future Optimizations](#roadmap---future-optimizations)
+
+## Tech Stack
+
+![image](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![image](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![image](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![image](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![image](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![image](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
+![image](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white)
+![image](https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=white)
+![image](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
 
 ## Project Overview
 
@@ -63,7 +76,7 @@ http://localhost:3000/
 
 ## Team Members
 
-* Gerritt Broadwater - Widget
+* Gerritt Broadwater - Related Items and Outfit List
 * Linh Hoang-Watson - Widget
 * Cordelia Payson - Ratings and Reviews
 * Timothy Williams - Widget
