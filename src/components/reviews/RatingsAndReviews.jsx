@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import FilterRatings from './FilterRatings.jsx';
+import FilterRatings from './ratings/FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
-import ReviewsList from './ReviewsList.jsx';
-import AddReview from './AddReview.jsx';
+import ReviewsList from './list/ReviewsList.jsx';
+import AddReview from './list/AddReview.jsx';
 
 const ReviewWidget = styled.div`
   display: flex;
@@ -32,14 +32,16 @@ const Title = styled.div`
 
 function RatingsAndReviews() {
   const [filter, setFilter] = useState(false);
-  const filters = {
-    5: false,
-    4: false,
-    3: false,
-    2: false,
-    1: false,
-  };
-  const [selectedFilters, setSelectedFilters] = useState(filters);
+  // const filters = {
+  //   5: false,
+  //   4: false,
+  //   3: false,
+  //   2: false,
+  //   1: false,
+  // };
+  // const [selectedFilters, setSelectedFilters] = useState(filters);
+
+  const [selectedFilters, setSelectedFilters] = useState([]);
   const data = useSelector((state) => state.product.productData);
 
   return (
@@ -47,7 +49,10 @@ function RatingsAndReviews() {
       <LeftSide>
         <Title>Ratings & Reviews</Title>
 
-        <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
+        {/* <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
+        <br /> */}
+
+        <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
         <br />
 
         <ProductFactors />

@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import SingleRating from './SingleRating.jsx';
-import Stars from '../shared/Stars.jsx';
+import Stars from '../../shared/Stars.jsx';
+import CurrentFilters from './CurrentFilters.jsx';
 
 const Ratings = styled.div`
   display: flex;
@@ -42,22 +43,23 @@ const Percentage = styled.div`
 function FilterRatings(props) {
   const [rating, setRating] = useState();
 
-  const { filter, setFilter, filters } = props;
+  // const { filter, setFilter, filters } = props;
+  const { filter, setFilter } = props;
   const { selectedFilters, setSelectedFilters } = props;
 
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const currentFilters = () => (
-    <div>
-      <p data-testid="filters">Current Filters</p>
-      {selectedFilters['5'] && <p>5 stars</p>}
-      {selectedFilters['4'] && <p>4 stars</p>}
-      {selectedFilters['3'] && <p>3 stars</p>}
-      {selectedFilters['2'] && <p>2 stars</p>}
-      {selectedFilters['1'] && <p>1 stars</p>}
-    </div>
-  );
+  // const currentFilters = () => (
+  //   <div>
+  //     <p data-testid="filters">Current Filters</p>
+  //     {selectedFilters['5'] && <p>5 stars</p>}
+  //     {selectedFilters['4'] && <p>4 stars</p>}
+  //     {selectedFilters['3'] && <p>3 stars</p>}
+  //     {selectedFilters['2'] && <p>2 stars</p>}
+  //     {selectedFilters['1'] && <p>1 stars</p>}
+  //   </div>
+  // );
 
   const removeFilterButton = () => (
     <div>
@@ -66,7 +68,7 @@ function FilterRatings(props) {
         onClick={
           () => {
             setFilter(false);
-            setSelectedFilters(filters);
+            setSelectedFilters([]);
           }
         }
       >
@@ -84,9 +86,20 @@ function FilterRatings(props) {
         <Stars rating={data.average_rating} />
       </Ratings>
 
-      {filter === true && Object.values(selectedFilters).includes(true) && currentFilters()}
+      {filter === true
+      && selectedFilters.length > 0
+      && (
+        <CurrentFilters
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
+        />
+      )}
 
-      {filter === true && Object.values(selectedFilters).includes(true) && removeFilterButton()}
+      {/* {filter === true && Object.values(selectedFilters).
+      includes(true) && <CurrentFilters selectedFilters=
+        {selectedFilters} setSelectedFilters={setSelectedFilters} />} */}
+
+      {filter === true && selectedFilters.length > 0 && removeFilterButton()}
 
       <RatingsContainer>
         {['5', '4', '3', '2', '1'].map((number) => <SingleRating selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} setFilter={setFilter} number={number} key={number} />)}

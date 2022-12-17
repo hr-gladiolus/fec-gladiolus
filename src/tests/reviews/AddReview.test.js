@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom';
 import { renderWithProviders } from '../testUtils.js';
 import '@testing-library/jest-dom';
-import AddReview from '../../components/reviews/AddReview.jsx';
+import AddReview from '../../components/reviews/list/AddReview.jsx';
 
 describe('Add Review', () => {
   beforeEach(() => {

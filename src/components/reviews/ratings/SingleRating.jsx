@@ -78,13 +78,17 @@ function SingleRating(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const handleClick = (currentNumber) => {
-    setSelectedFilters({
-      ...selectedFilters,
-      [currentNumber]: !selectedFilters[currentNumber],
-    });
-    setFilter(true);
-  };
+  // const handleClick = (currentNumber) => {
+  //   setSelectedFilters({
+  //     ...selectedFilters,
+  //     [currentNumber]: !selectedFilters[currentNumber],
+  //   });
+  //   setFilter(true);
+  // };
+
+  const handleClick = (currentNumber) => !selectedFilters.includes(number)
+    && setSelectedFilters(selectedFilters.concat([currentNumber]))
+    && setFilter(true);
 
   return (
     <div>

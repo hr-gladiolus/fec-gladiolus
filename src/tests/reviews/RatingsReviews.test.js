@@ -6,7 +6,7 @@ import { renderWithProviders } from '../testUtils.js';
 import '@testing-library/jest-dom';
 import RatingsAndReviews from '../../components/reviews/RatingsAndReviews';
 import store from '../../store/store';
-import ReviewsList from '../../components/reviews/ReviewsList.jsx';
+import ReviewsList from '../../components/reviews/list/ReviewsList.jsx';
 
 describe('Ratings and Reviews', () => {
   beforeEach(() => {
