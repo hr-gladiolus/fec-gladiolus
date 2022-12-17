@@ -77,7 +77,7 @@ http://localhost:3000/
 ## Team Members
 
 * Gerritt Broadwater - Related Items and Outfit List
-* Linh Hoang-Watson - Widget
+* Linh Hoang-Watson - Product Overview
 * Cordelia Payson - Ratings and Reviews
 * Timothy Williams - Widget
 
