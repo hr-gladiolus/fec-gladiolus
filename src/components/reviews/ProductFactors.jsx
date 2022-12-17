@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const FactorContainer = styled.div`
-  float: left;
+  margin: 5px 20px 0 0;
 `;
 
 const Row = styled.div`

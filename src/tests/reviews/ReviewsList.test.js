@@ -4,9 +4,9 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom';
 import { renderWithProviders } from '../testUtils.js';
 import '@testing-library/jest-dom';
-import ReviewsList from '../../components/reviews/ReviewsList.jsx';
-import SingleReview from '../../components/reviews/SingleReview.jsx';
-import SortReviews from '../../components/reviews/SortReviews.jsx';
+import ReviewsList from '../../components/reviews/list/ReviewsList.jsx';
+import SingleReview from '../../components/reviews/list/SingleReview.jsx';
+import SortReviews from '../../components/reviews/list/SortReviews.jsx';
 import {
   testReview, partialBody, fullBody, threeTests,
 } from './testData.js';

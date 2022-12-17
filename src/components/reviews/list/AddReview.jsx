@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
+import useModal from '../../shared/useModal.js';
+import Modal from '../../shared/Modal.jsx';
 
 function AddReview() {
   // productId will be gotten through state whenever we figure it out

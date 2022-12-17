@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom';
 import { renderWithProviders } from '../testUtils.js';
 import '@testing-library/jest-dom';
-import FilterRatings from '../../components/reviews/FilterRatings.jsx';
+import FilterRatings from '../../components/reviews/ratings/FilterRatings.jsx';
 
 describe('Filter Ratings', () => {
   beforeEach(() => {

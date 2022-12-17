@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { format, parseISO } from 'date-fns';
 import { GrCheckmark } from 'react-icons/gr';
-import Stars from '../shared/Stars.jsx';
-import { markHelpful, reportReview } from './api.js';
+import Stars from '../../shared/Stars.jsx';
+import { markHelpful, reportReview } from '../api.js';
 import SingleImage from './SingleImage.jsx';
 
 const Review = styled.div`
