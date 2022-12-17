@@ -13,25 +13,74 @@ const ListContainer = styled.div`
   width: 100vw;
   max-width: 100%;
   overflow: hidden;
+  margin: 10px 0px;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, ${({ theme }) => theme.bg} 100%);
+  }
 `;
 
 const CarouselNav = styled.button`
+  background: #9e939371;
+  backdrop-filter: blur(8px) contrast(80%);
+  cursor: pointer;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
+  border: 1px solid black;
   position: absolute;
+  z-index: 2;
   top: 200px;
   left: ${(props) => (props.left ? '0px' : 'calc(100% - 1.5rem)')};
+  &:hover {
+    background: #e2e2e266;
+  }
 `;
 
 const AddOutfit = styled.button`
   width: 200px;
   min-width: 200px;
   height: 400px;
-  border: 1px solid black;
+  border: 0;
   margin: 30px;
+  cursor: pointer;
   transition: all 0.2s ease-out;
   transform: translateX(${(props) => props.offset}px);
+  border-radius: 10px;
+  background: ${({ theme }) => theme.fg};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-shadow:
+    0 0 0 5px ${({ theme }) => theme.highlight},
+    0 0 0 9px ${({ theme }) => theme.color},
+    0 15px 0 9px ${({ theme }) => theme.color};
+
+  i {
+    font-size: 2em;
+  }
+
+  h2 {
+    text-decoration: none;
+    background-image: linear-gradient(${({ theme }) => theme.highlight}, ${({ theme }) => theme.highlight});
+    background-size: 0% 0.1em;
+    background-position-y: 100%;
+    background-position-x: 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.2s ease-in-out;
+  }
+
+  &:hover > h2 {
+    background-size: 100% 0.1em;
+    background-position-x: 0%;
+  }
 `;
 
 export default function RelatedList() {
@@ -80,17 +129,17 @@ export default function RelatedList() {
   return (
     <>
       <div className="related" ref={ref}>
-        <h1>Related Items:</h1>
+        <h1 style={{ margin: '5px 20px' }}>Related Items:</h1>
         <ListContainer>
           {related.map((product) => (
             <Card key={product} id={product} offset={relatedOffset} setOffset={setRelatedOffset} icon="☆" />
           ))}
-          {relatedOffset > 0 && <CarouselNav type="button" onClick={() => relatedNav(-1)} left>&lt;</CarouselNav>}
-          {relatedOffset <= related.length - 5 && <CarouselNav type="button" onClick={() => relatedNav(1)}>&gt;</CarouselNav>}
+          {relatedOffset > 0 && <CarouselNav data-testid="left" type="button" onClick={() => relatedNav(-1)} left>&#8249;</CarouselNav>}
+          {relatedOffset <= related.length - 5 && <CarouselNav data-testid="right" type="button" onClick={() => relatedNav(1)}>&#8250;</CarouselNav>}
         </ListContainer>
       </div>
       <div className="outfit">
-        <h1>Your Outfit:</h1>
+        <h1 style={{ margin: '5px 20px' }}>Your Outfit:</h1>
         <ListContainer>
           <AddOutfit
             type="button"
@@ -101,13 +150,14 @@ export default function RelatedList() {
             data-testid="add-outfit"
             id="addOutfit"
           >
-            Add to Outfit
+            <h2>Add to Outfit</h2>
+            <i className="fa-solid fa-plus" />
           </AddOutfit>
           {outfit.map((product) => (
             <Card key={product} id={product} offset={outfitOffset} setOffset={setOutfitOffset} icon="✖" remove={removeItem} />
           ))}
           {outfitOffset > 0 && <CarouselNav type="button" onClick={() => outfitNav(-1)} left>&lt;</CarouselNav>}
-          {outfitOffset <= outfit.length - 5 && <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>}
+          {outfitOffset <= outfit.length - 4 && <CarouselNav type="button" onClick={() => outfitNav(1)}>&gt;</CarouselNav>}
         </ListContainer>
       </div>
     </>

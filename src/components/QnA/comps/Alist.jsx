@@ -43,24 +43,42 @@ const ReferencePoint = styled.div`
 `;
 
 function Alist({ answers, selectPhoto }) {
-  const [height, setHeight] = useState('100px');
+  const [height, setHeight] = useState('fit-content');
   const [overflow, setOverflow] = useState('hidden');
   const [innerText, setInnerText] = useState('SEE MORE');
 
-  const content = useRef(null);
-  const referenceHeight = useRef(null);
-  console.log(answers);
-  const answerKeys = Object.keys(answers);
+  const closeReference = useRef(null);
+  const openReference = useRef(null);
+  let answerKeys = Object.keys(answers);
 
   useEffect(() => {
-    setHeight(`${referenceHeight.current.scrollHeight}px`);
+    setTimeout(() => {
+      setHeight(`${closeReference.current.scrollHeight}px`);
+    }, 500);
   }, []);
 
   function toggleAccordion() {
-    setHeight(height !== `${referenceHeight.current.scrollHeight}px` ? `${referenceHeight.current.scrollHeight}px` : `${content.current.scrollHeight}px`);
+    setHeight(height !== `${closeReference.current.scrollHeight}px` ? `${closeReference.current.scrollHeight}px` : `${openReference.current.scrollHeight}px`);
     setOverflow(overflow !== 'hidden' ? 'hidden' : 'scroll');
     setInnerText(innerText !== 'SEE MORE' ? 'SEE MORE' : 'COLLAPSE');
   }
+
+  answerKeys = answerKeys.sort(
+    (ans1, ans2) => (answers[ans1].helpfulness > answers[ans2].helpfulness ? -1 : 1),
+  );
+  answerKeys = answerKeys.sort(
+    (ans1, ans2) => {
+      let number;
+      if (answers[ans1].answerer_name.toLowerCase() === 'seller') {
+        number = -1;
+      } else if (answers[ans2].answerer_name.toLowerCase() === 'seller') {
+        number = 1;
+      } else {
+        number = 0;
+      }
+      return number;
+    },
+  );
 
   const mappedAnswers = answerKeys.map((ansID, i) => (
     <SingleAns
@@ -75,13 +93,19 @@ function Alist({ answers, selectPhoto }) {
       {mappedAnswers.length !== 0 ? <Aletter>A:</Aletter>
         : <div style={{ fontSize: '13px', marginLeft: '17px' }}>There are currently no answers to this question.</div> }
       <AListStyle>
-        <ReferencePoint ref={referenceHeight}>
-          {mappedAnswers.slice(0, 2)}
+        <ReferencePoint
+          ref={openReference}
+        >
+          { mappedAnswers }
+        </ReferencePoint>
+        <ReferencePoint
+          ref={closeReference}
+        >
+          { mappedAnswers.slice(0, 2) }
         </ReferencePoint>
         <AccordionDiv
           overflow={overflow}
           height={height}
-          ref={content}
         >
           { mappedAnswers }
         </AccordionDiv>

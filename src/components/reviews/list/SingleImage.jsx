@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
+import useModal from '../../shared/useModal.js';
+import Modal from '../../shared/Modal.jsx';
 
 const SingleImageContainer = styled.div``;
 

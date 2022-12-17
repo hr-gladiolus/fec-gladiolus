@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
+import useModal from '../../shared/useModal.js';
+import Modal from '../../shared/Modal.jsx';
 
 function AddReview() {
   // productId will be gotten through state whenever we figure it out
@@ -46,6 +46,7 @@ function AddReview() {
         <p>Do You Recommend This Product?</p>
         <label>
           <input
+            data-testid="yes"
             type="radio"
             value={reviewInput.recommend}
             name="recommend"
@@ -60,6 +61,7 @@ function AddReview() {
         </label>
         <label>
           <input
+            data-testid="no"
             type="radio"
             value={reviewInput.recommend}
             name="recommend"
@@ -100,6 +102,7 @@ function AddReview() {
           Review
           <br />
           <input
+            data-testid="body"
             type="text"
             placeholder="Why did you like the product or not?"
             maxLength="1000"
@@ -153,6 +156,7 @@ function AddReview() {
           Email Address
           <br />
           <input
+            data-testid="email"
             type="text"
             placeholder="Example: jackson11@email.com"
             value={reviewInput.email}

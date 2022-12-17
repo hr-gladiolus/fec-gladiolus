@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const FactorContainer = styled.div`
-  float: left;
+  margin: 5px 20px 0 0;
 `;
 
 const Row = styled.div`
@@ -22,15 +22,15 @@ const SingleCharacteristic = styled.div`
 `;
 
 const CharacteristicName = styled.p`
-  padding: 5px;
+  padding: 5px 0;
 `;
 
 const Bar = styled.div`
   width: 100%;
-  background-color: #858080;
   text-align: center;
-  height: 10px;
+  height: 8px;
   position: relative;
+  background: #bab5b5;
 `;
 
 const Triangle = styled.div`
@@ -38,12 +38,13 @@ const Triangle = styled.div`
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 14px solid black;
+  border-top: 14px solid ${({ theme }) => theme.color};
   position: absolute;
   left: calc(${(props) => props.left}% - 7px) ;
 `;
 
 const LowerText = styled.div`
+  font-size: 13px;
 `;
 
 const One = styled.div`
@@ -84,7 +85,7 @@ function ProductFactors() {
     </SingleCharacteristic>
   );
   return (
-    <FactorContainer>
+    <FactorContainer data-testid="factors">
       <Row>
         {data.characteristics && Object.keys(data.characteristics).map((factor) => singleFactor(factor))}
       </Row>

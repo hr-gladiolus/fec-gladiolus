@@ -2,66 +2,51 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import FilterRatings from './FilterRatings.jsx';
+import FilterRatings from './ratings/FilterRatings.jsx';
 import ProductFactors from './ProductFactors.jsx';
-import ReviewsList from './ReviewsList.jsx';
-import AddReview from './AddReview.jsx';
-import useModal from '../shared/useModal.js';
-import Modal from '../shared/Modal.jsx';
+import ReviewsList from './list/ReviewsList.jsx';
+import AddReview from './list/AddReview.jsx';
 
 const ReviewWidget = styled.div`
   display: flex;
-  width: 80%;
+  width: 90%;
+  margin-top: 40px;
 `;
 
 const LeftSide = styled.div`
-  flex: 30%;
-  margin: 50px;
-  margin-left: 200px;
+  flex: 1 1 0;
+  padding-left: 120px;
+  padding-bottom: 80px;
 `;
 
 const RightSide = styled.div`
-  flex: 70%;
-  margin-top: 80px;
-  margin-right: 50px;
+  flex: 2 1 0;
+  padding: 20px;
+  padding-bottom: 80px;
 `;
 
 const Title = styled.div`
   font-size: 15px;
+  margin: 15px 0;
 `;
 
 function RatingsAndReviews() {
   const [filter, setFilter] = useState(false);
-  const filters = {
-    5: false,
-    4: false,
-    3: false,
-    2: false,
-    1: false,
-  };
-  const [selectedFilters, setSelectedFilters] = useState(filters);
+  const [selectedFilters, setSelectedFilters] = useState([]);
   const data = useSelector((state) => state.product.productData);
-
-  const { visible, toggle } = useModal();
 
   return (
     <ReviewWidget id="#readReviews">
       <LeftSide>
         <Title>Ratings & Reviews</Title>
 
-        <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
-        <br />
+        <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 
         <ProductFactors />
       </LeftSide>
 
       <RightSide>
         {data.total_reviews && data.total_reviews > 0 && <ReviewsList filter={filter} selectedFilters={selectedFilters} setFilter={setFilter} />}
-
-        <button type="button" onClick={toggle}>Add Review +</button>
-        <Modal visible={visible} toggle={toggle}>
-          <AddReview />
-        </Modal>
       </RightSide>
 
     </ReviewWidget>

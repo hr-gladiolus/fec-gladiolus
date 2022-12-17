@@ -85,7 +85,6 @@ function Gallery({ photos, selectPhoto }) {
     return false;
   };
 
-  // https://javascript.info/onload-onerror#other-resources
   useEffect(() => {
     const promises = photos.map((photo) => (
       new Promise((resolve, reject) => {

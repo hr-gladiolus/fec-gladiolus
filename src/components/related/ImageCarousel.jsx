@@ -12,7 +12,7 @@ const ImgContainer = styled.div`
   overflow: hidden;
   transition: all 0.2s ease-out;
   cursor: pointer;
-
+  margin-bottom: 10px;
   &:hover > div {
     display: inline-flex;
   }
@@ -28,14 +28,20 @@ const Carousel = styled.div`
 `;
 
 const Nav = styled.button`
+  background: #9e939371;
+  backdrop-filter: blur(8px) contrast(80%);
   position: absolute;
   bottom: 10px;
   left: ${(props) => (props.left ? -20 : 160)}px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  border: 1px solid black;
   z-index: 1;
   cursor: pointer;
+  &:hover {
+    background: #e2e2e266;
+  }
 `;
 
 const Img = styled.img`
@@ -53,11 +59,12 @@ export default function ImageCarousel({ images }) {
   const [offset, setOffset] = useState(0);
 
   return (
-    <ImgContainer bg={images[index].thumbnail_url || 'https://media.tenor.com/2roX3uxz_68AAAAM/cat-space.gif'}>
+    <ImgContainer data-testid="image-carousel" bg={images[index].thumbnail_url || 'https://media.tenor.com/2roX3uxz_68AAAAM/cat-space.gif'}>
       {images.length > 1
       && (
         <Carousel>
           <Nav
+            data-testid="carousel-left"
             left
             onClick={(e) => {
               e.stopPropagation();
@@ -69,6 +76,7 @@ export default function ImageCarousel({ images }) {
             &lt;
           </Nav>
           <Nav
+            data-testid="carousel-right"
             onClick={(e) => {
               e.stopPropagation();
               if (offset < images.length - 4) {
@@ -82,6 +90,7 @@ export default function ImageCarousel({ images }) {
           {images.map((image, i) => image.thumbnail_url
           && (
             <Img
+              data-testid="carousel-image"
               key={image.thumbnail_url}
               src={image.thumbnail_url}
               offset={offset}

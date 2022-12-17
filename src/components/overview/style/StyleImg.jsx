@@ -23,7 +23,7 @@ function StyleImg({
   ind,
   handleClick,
 }) {
-  const checkmark = <span>&#128504;</span>;
+  const checkmark = <span>&#10003;</span>;
   return (
     <div style={{ position: 'relative' }}>
       { (() => {
@@ -33,7 +33,7 @@ function StyleImg({
               height: '20px',
               width: '20px',
               borderRadius: '50%',
-              backgroundColor: 'orange',
+              backgroundColor: 'green',
               border: '2px solid black',
               position: 'absolute',
               right: '4px',
@@ -45,7 +45,7 @@ function StyleImg({
                 position: 'relative',
                 top: '-1px',
                 left: '2.5px',
-                color: 'black',
+                color: 'white',
               }}
               >
                 {checkmark}

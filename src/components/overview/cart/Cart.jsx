@@ -8,7 +8,7 @@ import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
 import CartButton from './CartButton.jsx';
 import SavedButton from './SavedButton.jsx';
-import { addItemToCart, getItemsInCart } from '../helpers/cartAPI.js';
+import { addItemToCart } from '../helpers/cartAPI.js';
 
 const FlexDiv = styled.div`
   display: flex;
@@ -17,36 +17,16 @@ const FlexDiv = styled.div`
 `;
 
 const Button = styled.button`
+  /* background: #ffe3b9; */
   background: #ffe3b9;
-  border: 1px solid gray;
+  color: ${({ theme }) => theme.color};
+  border: 2px solid ${({ theme }) => theme.header};
   margin: 10px 20px 30px 20px;
   padding: 8px;
   cursor: pointer;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 4px ${({ theme }) => theme.highlight};
   &:hover {
-    color: #c94e1e;
-  }
-`;
-
-const Select = styled.select`
-  width: 90%;
-  height: 70%;
-  background: white;
-  color: #dd8156;
-  padding: 7px;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid gray;
-  margin: 20px;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-
-  option {
-    color: black;
-    background: white;
-    display: flex;
-    white-space: pre;
-    min-height: 20px;
-    padding: 0px 2px 1px;
+    color: ${({ theme }) => theme.highlight};
   }
 `;
 
@@ -54,8 +34,6 @@ function Cart({ skus, id }) {
   const [currentSKU, setCurrentSKU] = useState(['', { quantity: -1 }]);
   const [qty, setQty] = useState(0);
   const [cartE, setCartE] = useState(false);
-
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +45,7 @@ function Cart({ skus, id }) {
           alert('Item added to cart!');
         })
         .catch((err) => {
-          Error('Error in Cart handleSubmit', err);
+          throw new Error('Error in Cart handleSubmit', err);
         });
     }
   };
@@ -100,15 +78,13 @@ function Cart({ skus, id }) {
   };
 
   return (
-    <form>
+    <form data-testid="cart">
       <FlexDiv>
         <SelectSize
-          Select={Select}
           handleChange={handleChange}
           handleSize={handleSize}
         />
         <SelectQty
-          Select={Select}
           currentSKU={currentSKU}
           handleQty={handleQty}
           range={range}
@@ -121,11 +97,13 @@ function Cart({ skus, id }) {
       {
         cartE
           && (
-            <div style={{
-              color: 'red',
-              textAlign: 'center',
-              padding: '8px',
-            }}
+            <div
+              data-testid="size"
+              style={{
+                color: 'red',
+                textAlign: 'center',
+                padding: '8px',
+              }}
             >
               Please select size!
             </div>

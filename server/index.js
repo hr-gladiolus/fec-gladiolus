@@ -4,6 +4,13 @@ const path = require('path');
 const { getProducts, getProduct } = require('../src/components/overview/helpers/productAPI.js');
 
 const app = express();
+
+app.get('*.js', (req, res, next) => {
+  req.url += '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use('/', express.static(path.join(__dirname, '../public')));
 
 app.listen(3000);

@@ -6,11 +6,15 @@ import { useSelector } from 'react-redux';
 
 const Row = styled.button`
   display: flex;
-  width: 300px;
+  max-width: 300px;
+  width: 100%;
   height: auto;
   flex-direction: row;
   background: transparent;
   border: none;
+  margin: 10px 0 10px 0;
+  justify-content: space-between;
+  transition: transform .2s;
 
   &:after {
   content: "";
@@ -18,48 +22,50 @@ const Row = styled.button`
   clear: both;
   }
   &:hover {
-    background-color: #f5a4a4;
-  }
-  &:active {
-    color: #4e0881;
+  transform: scale(1.1);
   }
 `;
 
 const StarRating = styled.div`
   float: left;
-  /* width: 15%; */
-  margin-top:10px;
-  font-size: 12px;
+  width: 15%;
+  font-size: 15px;
   border: none;
-  padding: 10px;
+  padding: 10px 0 10px 0;
+  text-align: left;
 `;
 
-// div that holds bars
+const Invisible = styled.div`
+  visibility: hidden;
+`;
+
 const Middle = styled.div`
-  margin-top: 20px;
+  margin-top: 15px;
   width: 70%;
   padding-left: 5px;
   height: 5px;
+  align: center;
+  display: block;
 `;
 
-// number of ratings on far right
 const Right = styled.div`
-  padding: 4px;
+  margin: 10px 0 0 5px;
+  float: right;
+  font-size: 15px;
+  display: block;
 `;
 
-// grey bar background
 const BottomBar = styled.div`
   width: 100%;
-  background-color: #717171;
-  text-align: center;
+  background: ${({ theme }) => theme.highlight};
+  align: center;
   color: white;
 `;
 
-// green bar on top - width dependent on number of reviews
 const TopBar = styled.div`
   width: ${(props) => props.width}%;
   height: 8px;
-  background-color: #04AA6D;
+  background: ${({ theme }) => theme.color};
 `;
 
 function SingleRating(props) {
@@ -70,11 +76,13 @@ function SingleRating(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  const handleClick = (currentNumber) => {
-    setSelectedFilters({
-      ...selectedFilters,
-      [currentNumber]: !selectedFilters[currentNumber],
-    });
+  const handleClick = () => {
+    if (!selectedFilters.includes(number)) {
+      const filtered = selectedFilters.concat([number]);
+      filtered.sort();
+      filtered.reverse();
+      setSelectedFilters(selectedFilters.concat([number]));
+    }
     setFilter(true);
   };
 
@@ -82,7 +90,12 @@ function SingleRating(props) {
     <div>
       <Row onClick={(evt) => handleClick(number)}>
         <StarRating>
-          {number === '1' ? <u>1  star</u> : (
+          {number === 1 ? (
+            <u>
+              1  star
+              <Invisible>s</Invisible>
+            </u>
+          ) : (
             <u>{`${number} stars`}</u>
           )}
         </StarRating>
