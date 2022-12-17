@@ -13,6 +13,7 @@ const ReviewList = styled.div`
   display: flex;
   flex-direction: column;
   margin: 40px;
+  width: 100%;
 `;
 
 const SearchBar = styled.input`
@@ -25,7 +26,8 @@ const ReviewsListContainer = styled.div`
   display: inline-block;
   overflow-y: scroll;
   max-height: 1000px;
-  width: 700px;
+  width: auto;
+  min-width: 300px;
 `;
 
 const NoRating = styled.div``;
@@ -60,11 +62,6 @@ function ReviewsList(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  // const filterReviews = (reviewsData) => {
-  //   setCurrentReviews(reviewsData.filter((review) => selectedFilters[review.rating] === true));
-  //   setIndex(2);
-  // };
-
   const filterReviews = (reviewsData) => {
     setCurrentReviews(reviewsData.filter((review) => selectedFilters.includes(review.rating)));
     setIndex(2);
@@ -96,12 +93,9 @@ function ReviewsList(props) {
 
       <ReviewsListContainer data-testid="reviews-container">
         {currentReviews.length > 0 && currentReviews.map((review) => (
-          <SingleReview
-            review={review}
-            key={review.review_id}
-            id={review.review_id}
-          />
+          <SingleReview review={review} key={review.review_id} id={review.review_id} />
         ))}
+
         {currentReviews.length === 0 && <NoRating>There Are No Available Reviews For The Selected Rating</NoRating>}
       </ReviewsListContainer>
 

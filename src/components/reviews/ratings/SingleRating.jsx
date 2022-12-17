@@ -49,8 +49,6 @@ const Middle = styled.div`
 `;
 
 const Right = styled.div`
-  margin-left: auto;
-  margin-right: auto;
   margin: 10px 0 0 5px;
   float: right;
   font-size: 15px;
@@ -78,23 +76,18 @@ function SingleRating(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
-  // const handleClick = (currentNumber) => {
-  //   setSelectedFilters({
-  //     ...selectedFilters,
-  //     [currentNumber]: !selectedFilters[currentNumber],
-  //   });
-  //   setFilter(true);
-  // };
-
-  const handleClick = (currentNumber) => !selectedFilters.includes(number)
-    && setSelectedFilters(selectedFilters.concat([currentNumber]))
-    && setFilter(true);
+  const handleClick = (currentNumber) => {
+    if (!selectedFilters.includes(number)) {
+      setSelectedFilters(selectedFilters.concat([currentNumber]));
+    }
+    setFilter(true);
+  };
 
   return (
     <div>
       <Row onClick={(evt) => handleClick(number)}>
         <StarRating>
-          {number === '1' ? (
+          {number === 1 ? (
             <u>
               1  star
               <Invisible>s</Invisible>

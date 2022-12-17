@@ -32,15 +32,6 @@ const Title = styled.div`
 
 function RatingsAndReviews() {
   const [filter, setFilter] = useState(false);
-  // const filters = {
-  //   5: false,
-  //   4: false,
-  //   3: false,
-  //   2: false,
-  //   1: false,
-  // };
-  // const [selectedFilters, setSelectedFilters] = useState(filters);
-
   const [selectedFilters, setSelectedFilters] = useState([]);
   const data = useSelector((state) => state.product.productData);
 
@@ -49,11 +40,7 @@ function RatingsAndReviews() {
       <LeftSide>
         <Title>Ratings & Reviews</Title>
 
-        {/* <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} filters={filters} />
-        <br /> */}
-
         <FilterRatings filter={filter} setFilter={setFilter} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
-        <br />
 
         <ProductFactors />
       </LeftSide>
