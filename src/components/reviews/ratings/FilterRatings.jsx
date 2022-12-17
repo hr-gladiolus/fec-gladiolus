@@ -38,6 +38,20 @@ function FilterRatings(props) {
   const product = useSelector((state) => state.product.productId);
   const data = useSelector((state) => state.product.productData);
 
+  // useEffect(() => (
+  //   <FilterButtonsContainer>
+  //     {selectedFilters.length > 0
+  //       && selectedFilters.map((number) => (
+  //         <CurrentFilters
+  //           selectedFilters={selectedFilters}
+  //           setSelectedFilters={setSelectedFilters}
+  //           key={number}
+  //           number={number}
+  //         />
+  //       ))}
+  //   </FilterButtonsContainer>
+  // ), [selectedFilters]);
+
   return (
     <div>
 

@@ -21,7 +21,6 @@ function CurrentFilters(props) {
   const { selectedFilters, setSelectedFilters, number } = props;
 
   const handleClick = () => {
-    const index = selectedFilters.indexOf(number);
     setSelectedFilters(selectedFilters.filter((filter) => filter !== number));
   };
 
