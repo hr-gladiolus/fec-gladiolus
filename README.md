@@ -6,6 +6,7 @@
 * [Project Details](#project-details)
 * [Installation](#installation)
 * [Team Members](#team-members)
+* [Performance](#performance)
 * [Future Optimizations](#roadmap---future-optimizations)
 
 ## Tech Stack
@@ -110,6 +111,9 @@ http://localhost:3000/
 * Linh Hoang-Watson - Product Overview
 * Cordelia Payson - Ratings and Reviews
 * Timothy Williams - Widget
+
+## Performance
+![image](https://user-images.githubusercontent.com/25358856/208311738-4c1f60a2-4d38-4444-a724-acd29caa8d04.png)
 
 ## Roadmap - Future Optimizations
 * Improving the overall styling and layout 
