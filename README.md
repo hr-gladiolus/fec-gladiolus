@@ -68,8 +68,9 @@ This button allows users to add items to their outfit list.
 * brief description of your widget
 
 ### Questions and Answers
-* an image/ demo of your widget
-* brief description of your widget
+A list of questions will be displayed starting at two if there are two or more questions along with the answers attached to each question loading in a maximum or two answers per question on load as well. There is a more questions button will will load in two more answers to be displayed each time it is clicked and will change to scroll if sufficiently tall. The see more answers buttons will load all available answers for a product in an accordion and will change to a scroll if sufficiently tall as well. The helpful yes buttons can be clicked and will increment, but can only be clicked once. The report answer button changes to text once clicked and reports the answer to the server. The add answer and add question buttons display a modal that allows the user to input the necessary informaiton to submit a question or answer. 
+
+https://user-images.githubusercontent.com/113811232/208348493-e29e31ed-3c2c-435b-8174-44a9f9bb8ba8.mov
 
 ### Related Items and Comparison
 ![Related Items GIF](https://user-images.githubusercontent.com/25358856/208263205-6674ac95-4a70-4bba-852b-50b99f758610.gif)
@@ -110,7 +111,7 @@ http://localhost:3000/
 * Gerritt Broadwater - Related Items and Outfit List
 * Linh Hoang-Watson - Product Overview
 * Cordelia Payson - Ratings and Reviews
-* Timothy Williams - Widget
+* Timothy Williams - Questions and Answers
 
 ## Performance
 ![image](https://user-images.githubusercontent.com/25358856/208311738-4c1f60a2-4d38-4444-a724-acd29caa8d04.png)
