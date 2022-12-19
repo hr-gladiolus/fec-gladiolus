@@ -63,10 +63,6 @@ This button allows users to add items to their outfit list.
 
 ![demo 3](https://user-images.githubusercontent.com/111917573/208265529-6a928588-cd67-4556-b8dc-a0a494f18bf5.gif)
 
-### Ratings and Reviews
-* an image/ demo of your widget
-* brief description of your widget
-
 ### Questions and Answers
 A list of questions will be displayed starting at two if there are two or more questions along with the answers attached to each question loading in a maximum or two answers per question on load as well. There is a more questions button will will load in two more answers to be displayed each time it is clicked and will change to scroll if sufficiently tall. The see more answers buttons will load all available answers for a product in an accordion and will change to a scroll if sufficiently tall as well. The helpful yes buttons can be clicked and will increment, but can only be clicked once. The report answer button changes to text once clicked and reports the answer to the server. The add answer and add question buttons display a modal that allows the user to input the necessary informaiton to submit a question or answer. 
 
@@ -76,6 +72,10 @@ https://user-images.githubusercontent.com/113811232/208348493-e29e31ed-3c2c-435b
 ![Related Items GIF](https://user-images.githubusercontent.com/25358856/208263205-6674ac95-4a70-4bba-852b-50b99f758610.gif)
 > The related items list allows users to scroll through a smooth carousel of related products and compare that product's characteristics against the current product. Users can click on a product card to navigate to that product's overview instantly. The outfit list lets a user view a list of products they would like to buy. They can add and remove products, and even scroll through a product's images to select an image they enjoy the most.
 
+### Ratings and Reviews
+This widget displays the ratings and reviews for the current product. This includes the average rating, the number of each star rating, and the ability to filter by star rating. The reviews lists can be sort by newest, helpful, and relevant. Each individual review includes a variety of information, including a title, summary, and optional pictures. Only two reviews load at a time, and more can be added by clicking the "Show More" button. On the left the individual product characteristic ratings are also available. 
+
+<img width="1282" alt="Screen Shot 2022-12-19 at 1 43 02 PM" src="https://user-images.githubusercontent.com/114250629/208497073-aa02f36b-6548-49e8-8f7a-b7b7a3f08fc7.png">
 
 ## Installation
 
