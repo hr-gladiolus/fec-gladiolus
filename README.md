@@ -121,4 +121,4 @@ http://localhost:3000/
 * Adding in image compression to improve loading times
 * Improving accessibilty
 * Including functionality for tracking user interaction of individual components
-* Add login feature that would allow the user to return to their outift or cart
+* Adding login feature that would allow the user to return to their outift or cart
